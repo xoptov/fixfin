@@ -1,0 +1,26 @@
+AppBundle\Entity\Pool:
+    type: entity
+    table: pool
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 15
+            nullable: true
+    manyToMany:
+        accounts:
+            targetEntity: AppBundle\Entity\Account
+            inversedBy: pools
+            joinTable:
+                name: pool_account
+                joinColumns:
+                    pool_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    account_id:
+                        referencedColumnName: id

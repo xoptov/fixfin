@@ -1,0 +1,44 @@
+AppBundle\Entity\MoneyTransaction:
+    type: entity
+    table: money_transaction
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        amount:
+            type: float
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+        status:
+            type: smallint
+        type:
+            type: smallint
+        external:
+            type: string
+            length: 50
+            nullable: true
+    manyToOne:
+        source:
+            targetEntity: AppBundle\Entity\Account
+            inversedBy: outcomes
+            joinColumn:
+                name: source_id
+                referencedColumnName: id
+        destination:
+            targetEntity: AppBundle\Entity\Account
+            inversedBy: incomes
+            joinColumn:
+                name: destination_id
+                referencedColumnName: id
+        ticket:
+            targetEntity: AppBundle\Entity\Ticket
+            inversedBy: payments
+            joinColumn:
+                name: ticket_id
+                referencedColumnName: id

@@ -1,0 +1,28 @@
+AppBundle\Entity\Rate:
+    type: entity
+    table: rate
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '15'
+            nullable: true
+        amount:
+            type: float
+        members:
+            type: integer
+    manyToOne:
+        pool:
+            targetEntity: AppBundle\Entity\Pool
+            joinColumn:
+                name: pool_id
+                referencedColumnName: id
+    oneToMany:
+        tickets:
+            targetEntity: AppBundle\Entity\Ticket
+            mappedBy: rate

@@ -1,0 +1,15 @@
+security:
+    login:
+        logo_name: Elfin
+        greeting: 'Добро пожаловать в Elfin'
+        note: 'Необходимо выполнить вход перед дальнейшей работой'
+        username: 'Имя пользователя'
+        password: Пароль
+        submit: Войти
+        registration: Зарегистрироваться
+        forgot_password: 'Забыли пароль?'
+        not_have_an_account: 'Вы еще не зарегистрированы в системе?'
+    register:
+        header: 'Регистрация в системе'
+        subheader: 'Создайте аккаунт и попробуйте нашу систему'
+

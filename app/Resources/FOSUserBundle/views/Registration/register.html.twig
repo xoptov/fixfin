@@ -1,0 +1,32 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name">{{ 'security.login.logo_name'|trans }}</h1>
+            </div>
+            <h3>{{ 'security.register.header'|trans }}</h3>
+            <p>{{ 'security.register.subheader'|trans }}</p>
+            {{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'novalidate': true, 'class': 'registration-form'}}) }}
+            <div class="form-group">
+                {{ form_errors(form.username) }}
+                {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Имя пользователя'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_errors(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_errors(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Пароль'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_errors(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Повтор пароля'}}) }}
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock fos_user_content %}

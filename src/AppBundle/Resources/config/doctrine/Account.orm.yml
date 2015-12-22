@@ -1,0 +1,48 @@
+AppBundle\Entity\Account:
+    type: entity
+    table: account
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        number:
+            type: string
+            length: 8
+        password:
+            type: string
+            length: 45
+            nullable: true
+        passPhrase:
+            type: string
+            length: 45
+            nullable: true
+        commission:
+            type: float
+            nullable: true
+        balance:
+            type: float
+            nullable: false
+        type:
+            type: smallint
+            nullable: false
+    oneToOne:
+        user:
+            targetEntity: AppBundle\Entity\User
+            inversedBy: account
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    manyToMany:
+        pools:
+            targetEntity: AppBundle\Entity\Pool
+            mappedBy: accounts
+    oneToMany:
+        incomes:
+            targetEntity: AppBundle\Entity\MoneyTransaction
+            mappedBy: destination
+        outcomes:
+            targetEntity: AppBundle\Entity\MoneyTransaction
+            mappedBy: source

@@ -1,0 +1,45 @@
+AppBundle\Entity\Ticket:
+    type: entity
+    table: ticket
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: '45'
+            nullable: true
+        type:
+            type: smallint
+        paidUp:
+            type: datetime
+            nullable: true
+        paid:
+            type: boolean
+    manyToOne:
+        user:
+            targetEntity: AppBundle\Entity\User
+            inversedBy: tickets
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+        rate:
+            targetEntity: AppBundle\Entity\Rate
+            inversedBy: tickets
+            joinColumn:
+                name: rate_id
+                referencedColumnName: id
+    oneToOne:
+        chiefTicket:
+            targetEntity: AppBundle\Entity\Ticket
+            joinColumn:
+                name: chief_ticket_id
+                referencedColumnName: id
+    oneToMany:
+        payments:
+            targetEntity: AppBundle\Entity\MoneyTransaction
+            mappedBy: ticket
+
