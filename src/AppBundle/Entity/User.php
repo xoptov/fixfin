@@ -22,16 +22,20 @@ class User extends BaseUser
     /** @var Account */
     private $account;
 
-    /** @var ArrayCollection */
+    /** @var Ticket[] */
     private $tickets;
 
-    /** @var Ticket */
-    private $invite;
+    /** @var User */
+    private $referrer;
+
+    /** @var User[] */
+    private $referrals;
 
     public function __construct()
     {
         parent::__construct();
         $this->tickets = new ArrayCollection();
+        $this->referrals = new ArrayCollection();
     }
 
     /**
@@ -127,5 +131,43 @@ class User extends BaseUser
     public function getAccount()
     {
         return $this->account;
+    }
+
+    /**
+     * @param User $referrer
+     * @return User
+     */
+    public function setReferrer(User $referrer)
+    {
+        $this->referrer = $referrer;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getReferrer()
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * @param User[] $referrals
+     * @return User
+     */
+    public function setReferrals($referrals)
+    {
+        $this->referrals = $referrals;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getReferrals()
+    {
+        return $this->referrals;
     }
 }

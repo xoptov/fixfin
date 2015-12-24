@@ -32,3 +32,11 @@ AppBundle\Entity\User:
         tickets:
             targetEntity: AppBundle\Entity\Ticket
             mappedBy: user
+    ManyToOne:
+        referrer:
+            targetEntity: AppBundle\Entity\User
+            inversedBy: referrals
+    oneToMany:
+        referrals:
+            targetEntity: AppBundle\Entity\User
+            mappedBy: referrer
