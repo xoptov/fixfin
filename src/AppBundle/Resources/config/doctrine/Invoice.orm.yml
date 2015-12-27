@@ -1,0 +1,37 @@
+AppBundle\Entity\Invoice:
+    type: entity
+    table: invoice
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+        amount:
+            type: float
+        paid:
+            type: float
+        status:
+            type: smallint
+    oneToMany:
+        transactions:
+            targetEntity: AppBundle\Entity\MoneyTransaction
+            mappedBy: invoice
+    manyToOne:
+        ticket:
+            targetEntity: AppBundle\Entity\Ticket
+            inversedBy: invoices
+            joinColumn:
+                name: ticket_id
+                referencedColumnName: id
+                #todo убрать когда нужны будут внутренние переводы
+                nullable: false
+    lifecycleCallbacks:
+        prePersist: [onCreate]
+        preUpdate: [onUpdate]

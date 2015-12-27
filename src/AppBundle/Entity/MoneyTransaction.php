@@ -28,14 +28,40 @@ class MoneyTransaction
     /** @var int */
     private $status;
 
+    const STATUS_NEW = 0;
+    const STATUS_SUCCESS = 1;
+    const STATUS_ERROR = 2;
+
+    /** @var string */
+    private $note;
+
     /** @var int */
     private $type;
+
+    const TYPE_RENEWAL = 1;
 
     /** @var string */
     private $external;
 
-    /** @var Ticket */
-    private $ticket;
+    /** @var Invoice */
+    private $invoice;
+
+    public function __construct()
+    {
+        $this->amount = 0;
+        $this->status = self::STATUS_NEW;
+        $this->type = self::TYPE_RENEWAL;
+    }
+
+    public function onCreate()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    public function onUpdate()
+    {
+        $this->updatedAt = new \DateTime();
+    }
 
     /**
      * @return int
@@ -138,6 +164,25 @@ class MoneyTransaction
     }
 
     /**
+     * @param string $note
+     * @return MoneyTransaction
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
      * @param integer $type
      * @return MoneyTransaction
      */
@@ -176,22 +221,22 @@ class MoneyTransaction
     }
 
     /**
-     * @param Ticket $ticket
+     * @param Invoice $invoice
      * @return MoneyTransaction
      */
-    public function setTicket(Ticket $ticket)
+    public function setInvoice(Invoice $invoice)
     {
-        $this->ticket = $ticket;
+        $this->invoice = $invoice;
 
         return $this;
     }
 
     /**
-     * @return Ticket
+     * @return Invoice
      */
-    public function getTicket()
+    public function getInvoice()
     {
-        return $this->ticket;
+        return $this->invoice;
     }
 }
 

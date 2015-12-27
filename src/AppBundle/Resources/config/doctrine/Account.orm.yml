@@ -24,10 +24,15 @@ AppBundle\Entity\Account:
             nullable: true
         balance:
             type: float
-            nullable: false
+            nullable: true
         type:
             type: smallint
-            nullable: false
+        verified:
+            type: boolean
+            nullable: true
+        blocked:
+            type: boolean
+            nullable: true
     oneToOne:
         user:
             targetEntity: AppBundle\Entity\User

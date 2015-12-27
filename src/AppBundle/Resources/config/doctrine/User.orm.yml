@@ -24,19 +24,19 @@ AppBundle\Entity\User:
             type: string
             nullable: true
             length: 13
+        avatar:
+            type: string
+            nullable: true
     oneToOne:
         account:
             targetEntity: AppBundle\Entity\Account
             mappedBy: user
+        referrer:
+            targetEntity: AppBundle\Entity\User
+            joinColumn:
+                name: referrer_id
+                referencedColumnName: id
     oneToMany:
         tickets:
             targetEntity: AppBundle\Entity\Ticket
             mappedBy: user
-    ManyToOne:
-        referrer:
-            targetEntity: AppBundle\Entity\User
-            inversedBy: referrals
-    oneToMany:
-        referrals:
-            targetEntity: AppBundle\Entity\User
-            mappedBy: referrer
