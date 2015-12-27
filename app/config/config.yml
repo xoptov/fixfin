@@ -74,3 +74,9 @@ fos_user:
     registration:
         form:
             handler: "app.registration.form.handler"
+
+sonata_block:
+    default_context: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            context: [admin]
