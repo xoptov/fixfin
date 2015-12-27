@@ -17,6 +17,9 @@ AppBundle\Entity\MoneyTransaction:
             nullable: true
         status:
             type: smallint
+        note:
+            type: string
+            nullable: true
         type:
             type: smallint
         external:
@@ -30,15 +33,20 @@ AppBundle\Entity\MoneyTransaction:
             joinColumn:
                 name: source_id
                 referencedColumnName: id
+                nullable: false
         destination:
             targetEntity: AppBundle\Entity\Account
             inversedBy: incomes
             joinColumn:
                 name: destination_id
                 referencedColumnName: id
-        ticket:
-            targetEntity: AppBundle\Entity\Ticket
-            inversedBy: payments
+                nullable: false
+        invoice:
+            targetEntity: AppBundle\Entity\Invoice
+            inversedBy: transactions
             joinColumn:
-                name: ticket_id
+                name: invoice_id
                 referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [onCreate]
+        preUpdate: [onUpdate]

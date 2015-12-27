@@ -15,7 +15,10 @@ class Ticket
     /** @var string */
     private $title;
 
-    /** @var int */
+    /**
+     * @var int
+     * @deprecated
+     */
     private $type;
 
     /** @var \DateTime */
@@ -27,8 +30,8 @@ class Ticket
     /** @var Ticket */
     private $chiefTicket;
 
-    /** @var ArrayCollection */
-    private $payments;
+    /** @var Invoice[] */
+    private $invoices;
 
     /** @var User */
     private $user;
@@ -36,9 +39,15 @@ class Ticket
     /** @var Rate */
     private $rate;
 
+    /** @var bool */
+    private $subscribed;
+
     public function __construct()
     {
-        $this->payments = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
+        $this->type = 0;
+        $this->paid = false;
+        $this->subscribed = true;
     }
 
     /**
@@ -71,6 +80,7 @@ class Ticket
     /**
      * @param integer $type
      * @return Ticket
+     * @deprecated
      */
     public function setType($type)
     {
@@ -81,6 +91,7 @@ class Ticket
 
     /**
      * @return int
+     * @deprecated
      */
     public function getType()
     {
@@ -143,5 +154,61 @@ class Ticket
     {
         return $this->chiefTicket;
     }
-}
 
+    /**
+     * @param User $user
+     * @return Ticket
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param Rate $rate
+     * @return Ticket
+     */
+    public function setRate(Rate $rate)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * @return Rate
+     */
+    public function getRate()
+    {
+        return $this->rate;
+    }
+
+    /**
+     * @param bool $subscribed
+     * @return Ticket
+     */
+    public function setSubscribed($subscribed)
+    {
+        $this->subscribed = $subscribed;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSubscribed()
+    {
+        return $this->subscribed;
+    }
+}

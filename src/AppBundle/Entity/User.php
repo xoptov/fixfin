@@ -31,13 +31,15 @@ class User extends BaseUser
     /** @var User[] */
     private $referrals;
 
+    /** @var string */
+    private $avatar;
+
     public function __construct()
     {
         parent::__construct();
         $this->tickets = new ArrayCollection();
         $this->referrals = new ArrayCollection();
     }
-
     /**
      * @param string $firstName
      * @return User
@@ -153,21 +155,21 @@ class User extends BaseUser
     }
 
     /**
-     * @param User[] $referrals
+     * @param string $avatar
      * @return User
      */
-    public function setReferrals($referrals)
+    public function setAvatar($avatar)
     {
-        $this->referrals = $referrals;
+        $this->avatar = $avatar;
 
         return $this;
     }
 
     /**
-     * @return ArrayCollection
+     * @return string
      */
-    public function getReferrals()
+    public function getAvatar()
     {
-        return $this->referrals;
+        return $this->avatar;
     }
 }

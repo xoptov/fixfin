@@ -21,6 +21,8 @@ AppBundle\Entity\Pool:
                 joinColumns:
                     pool_id:
                         referencedColumnName: id
+                        nullable: false
                 inverseJoinColumns:
                     account_id:
                         referencedColumnName: id
+                        nullable: false

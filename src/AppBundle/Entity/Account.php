@@ -32,6 +32,9 @@ class Account
     /** @var int */
     private $type;
 
+    const TYPE_SYSTEM = 1;
+    const TYPE_CUSTOMER = 2;
+
     /** @var Pool */
     private $pools;
 
@@ -40,6 +43,12 @@ class Account
 
     /** @var ArrayCollection */
     private $outcomes;
+
+    /** @var bool */
+    private $verified;
+
+    /** @var bool */
+    private $blocked;
 
     public function __construct()
     {
@@ -185,5 +194,43 @@ class Account
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @param bool $verified
+     * @return Account
+     */
+    public function setVerified($verified)
+    {
+        $this->verified = $verified;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVerified()
+    {
+        return $this->verified;
+    }
+
+    /**
+     * @param bool $blocked
+     * @return Account
+     */
+    public function setBlocked($blocked)
+    {
+        $this->blocked = $blocked;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBlocked()
+    {
+        return $this->blocked;
     }
 }
