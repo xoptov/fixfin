@@ -10,10 +10,14 @@ AppBundle\Entity\Rate:
     fields:
         name:
             type: string
-            length: '15'
+            length: '100'
             nullable: true
         amount:
             type: float
+        commission:
+            type: float
+        period:
+            type: smallint
         members:
             type: integer
     manyToOne:
