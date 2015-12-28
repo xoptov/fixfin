@@ -16,3 +16,21 @@ services:
             - "@fos_user.util.token_generator"
         scope: request
         public: false
+
+    app.admin.pool:
+        class: AppBundle\Admin\PoolAdmin
+        arguments: [~, AppBundle\Entity\Pool, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Pool }
+
+    app.admin.rate:
+        class: AppBundle\Admin\RateAdmin
+        arguments: [~, AppBundle\Entity\Rate, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Rate }
+
+    app.admin.user:
+        class: AppBundle\Admin\UserAdmin
+        arguments: [~, AppBundle\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: User }

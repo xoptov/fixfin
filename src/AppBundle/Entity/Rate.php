@@ -18,6 +18,12 @@ class Rate
     /** @var float */
     private $amount;
 
+    /** @var float */
+    private $commission;
+
+    /** @var int */
+    private $period;
+
     /** @var int */
     private $members;
 
@@ -30,6 +36,7 @@ class Rate
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+        $this->members = 0;
     }
 
     /**
@@ -76,6 +83,44 @@ class Rate
     public function getAmount()
     {
         return $this->amount;
+    }
+
+    /**
+     * @param float $commission
+     * @return Rate
+     */
+    public function setCommission($commission)
+    {
+        $this->commission = $commission;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getCommission()
+    {
+        return $this->commission;
+    }
+
+    /**
+     * @param int $period
+     * @return Rate
+     */
+    public function setPeriod($period)
+    {
+        $this->period = $period;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPeriod()
+    {
+        return $this->period;
     }
 
     /**
