@@ -18,7 +18,7 @@ class Account
     private $number;
 
     /** @var string */
-    private $password;
+    private $login;
 
     /** @var string */
     private $passPhrase;
@@ -29,11 +29,11 @@ class Account
     /** @var float */
     private $balance;
 
-    /** @var int */
-    private $type;
+    /** @var bool */
+    private $system;
 
-    const TYPE_SYSTEM = 1;
-    const TYPE_CUSTOMER = 2;
+    const STATUS_NOT_SYSTEM = 0;
+    const STATUS_SYSTEM = 1;
 
     /** @var Pool */
     private $pools;
@@ -47,14 +47,45 @@ class Account
     /** @var bool */
     private $verified;
 
+    const STATUS_NOT_VERIFIED = 0;
+    const STATUS_VERIFIED = 1;
+
     /** @var bool */
     private $blocked;
+
+    const STATUS_OPENED = 0;
+    const STATUS_BLOCKED = 1;
 
     public function __construct()
     {
         $this->pools = new ArrayCollection();
         $this->incomes = new ArrayCollection();
         $this->outcomes = new ArrayCollection();
+        $this->system = false;
+    }
+
+    public static function getSystemLabels()
+    {
+        return [
+            Account::STATUS_NOT_SYSTEM => 'entity.account.status.no',
+            Account::STATUS_SYSTEM => 'entity.account.status.yes'
+        ];
+    }
+
+    public static function getVerificationLabels()
+    {
+        return [
+            Account::STATUS_NOT_VERIFIED => 'entity.account.status.no',
+            Account::STATUS_VERIFIED => 'entity.account.status.yes'
+        ];
+    }
+
+    public static function getBlockLabels()
+    {
+        return [
+            Account::STATUS_OPENED => 'entity.account.status.no',
+            Account::STATUS_BLOCKED => 'entity.account.status.yes'
+        ];
     }
 
     /**
@@ -104,12 +135,12 @@ class Account
     }
 
     /**
-     * @param string $password
+     * @param string $login
      * @return Account
      */
-    public function setPassword($password)
+    public function setLogin($login)
     {
-        $this->password = $password;
+        $this->login = $login;
 
         return $this;
     }
@@ -117,9 +148,9 @@ class Account
     /**
      * @return string
      */
-    public function getPassword()
+    public function getLogin()
     {
-        return $this->password;
+        return $this->login;
     }
 
     /**
@@ -178,22 +209,22 @@ class Account
     }
 
     /**
-     * @param int $type
+     * @param bool $value
      * @return Account
      */
-    public function setType($type)
+    public function setSystem($value)
     {
-        $this->type = $type;
+        $this->system = $value;
 
         return $this;
     }
 
     /**
-     * @return int
+     * @return bool
      */
-    public function getType()
+    public function isSystem()
     {
-        return $this->type;
+        return $this->system;
     }
 
     /**

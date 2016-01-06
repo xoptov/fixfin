@@ -12,4 +12,78 @@ security:
     register:
         header: 'Регистрация в системе'
         subheader: 'Создайте аккаунт и попробуйте нашу систему'
-
+entity:
+    account:
+        type:
+            customer: Пользовательский
+            system: Системный
+        status:
+            no: Нет
+            yes: Да
+form:
+    account:
+        user: Пользователь
+        number: 'Номер кошелька'
+        login: Логин
+        pass_phrase: 'Секретная фраза'
+        commission: Коммиссия
+        system: Системный
+        verified: Верифицирован
+        blocked: Заблокирован
+    user:
+        username: Логин
+        password: Пароль
+        first_name: Имя
+        middle_name: Отчество
+        last_name: Фамилия
+        email: Email
+        phone: Телефон
+        account: Счёт
+        referrer: Пригласивший
+        avatar: Аватарка
+        locked: Заблокирован
+        enabled: Включен
+        status:
+            no: Нет
+            yes: Да
+    pool:
+        name: Название
+        accounts: Счета
+list:
+    account:
+        number: 'Номер счёта'
+        owner: Владелец
+        commission: 'Коммиссия за операции'
+        system: Системный
+        verified: Верифицирован
+        blocked: Заблокирован
+        balance: Баланс
+        actions: Действия
+    user:
+        username: Логин
+        account: Счёт
+        first_name: Имя
+        middle_name: Отчество
+        last_name: Фамилия
+        phone: Телефон
+        referrer: Пригласивший
+        locked: Заблокирован
+        enabled: Включен
+        actions: Действия
+show:
+    pool:
+        name: Название
+        accounts: Счета
+    user:
+        username: Логин
+        password: Пароль
+        first_name: Имя
+        middle_name: Отчество
+        last_name: Фамилия
+        email: Email
+        phone: Телефон
+        account: Счёт
+        referrer: Пригласивший
+        avatar: Аватарка
+        locked: Заблокирован
+        enabled: Включен

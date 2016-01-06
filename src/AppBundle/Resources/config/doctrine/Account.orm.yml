@@ -11,9 +11,9 @@ AppBundle\Entity\Account:
         number:
             type: string
             length: 8
-        password:
+        login:
             type: string
-            length: 45
+            length: 6
             nullable: true
         passPhrase:
             type: string
@@ -25,8 +25,8 @@ AppBundle\Entity\Account:
         balance:
             type: float
             nullable: true
-        type:
-            type: smallint
+        system:
+            type: boolean
         verified:
             type: boolean
             nullable: true
