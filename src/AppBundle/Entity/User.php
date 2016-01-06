@@ -50,16 +50,16 @@ class User extends BaseUser
     public static function getLockedLabels()
     {
         return [
-            self::STATUS_NOT_LOCKED => 'form.user.status.no',
-            self::STATUS_LOCKED => 'form.user.status.yes'
+            self::STATUS_NOT_LOCKED => 'entity.status.no',
+            self::STATUS_LOCKED => 'entity.status.yes'
         ];
     }
 
     public static function getEnabledLabels()
     {
         return [
-            self::STATUS_DISABLED => 'form.user.status.no',
-            self::STATUS_ENABLED => 'form.user.status.yes'
+            self::STATUS_DISABLED => 'entity.status.no',
+            self::STATUS_ENABLED => 'entity.status.yes'
         ];
     }
 

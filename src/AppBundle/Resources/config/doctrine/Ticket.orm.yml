@@ -8,13 +8,6 @@ AppBundle\Entity\Ticket:
             generator:
                 strategy: AUTO
     fields:
-        title:
-            type: string
-            length: 45
-            nullable: true
-        # deprecated
-        type:
-            type: smallint
         paidUp:
             type: datetime
             nullable: true

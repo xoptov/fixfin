@@ -12,20 +12,14 @@ class Ticket
     /** @var int */
     private $id;
 
-    /** @var string */
-    private $title;
-
-    /**
-     * @var int
-     * @deprecated
-     */
-    private $type;
-
     /** @var \DateTime */
     private $paidUp;
 
     /** @var bool */
     private $paid;
+
+    const STATUS_NOT_PAID = 0;
+    const STATUS_PAID = 1;
 
     /** @var Ticket */
     private $chiefTicket;
@@ -42,12 +36,30 @@ class Ticket
     /** @var bool */
     private $subscribed;
 
+    const STATUS_NOT_SUBSCRIBED = 0;
+    const STATUS_SUBSCRIBED = 1;
+
     public function __construct()
     {
         $this->invoices = new ArrayCollection();
-        $this->type = 0;
         $this->paid = false;
         $this->subscribed = true;
+    }
+
+    public static function getPaidLabels()
+    {
+        return [
+            self::STATUS_NOT_PAID => 'entity.status.no',
+            self::STATUS_PAID => 'entity.status.yes'
+        ];
+    }
+
+    public static function getSubscribedLabels()
+    {
+        return [
+            self::STATUS_NOT_SUBSCRIBED => 'entity.status.no',
+            self::STATUS_SUBSCRIBED => 'entity.status.yes'
+        ];
     }
 
     /**
@@ -56,46 +68,6 @@ class Ticket
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param string $title
-     * @return Ticket
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param integer $type
-     * @return Ticket
-     * @deprecated
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     * @deprecated
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
@@ -194,12 +166,12 @@ class Ticket
     }
 
     /**
-     * @param bool $subscribed
+     * @param bool $value
      * @return Ticket
      */
-    public function setSubscribed($subscribed)
+    public function setSubscribed($value)
     {
-        $this->subscribed = $subscribed;
+        $this->subscribed = $value;
 
         return $this;
     }

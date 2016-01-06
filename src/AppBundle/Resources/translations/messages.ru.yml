@@ -13,13 +13,9 @@ security:
         header: 'Регистрация в системе'
         subheader: 'Создайте аккаунт и попробуйте нашу систему'
 entity:
-    account:
-        type:
-            customer: Пользовательский
-            system: Системный
-        status:
-            no: Нет
-            yes: Да
+    status:
+        no: Нет
+        yes: Да
 form:
     account:
         user: Пользователь
@@ -49,6 +45,13 @@ form:
     pool:
         name: Название
         accounts: Счета
+    ticket:
+        chief_ticket: Вышестоящий
+        rate: Тариф
+        owner: Владелец
+        paid_up: 'Оплачен до'
+        paid: Оплачен
+        subscribed: Подписка
 list:
     account:
         number: 'Номер счёта'
@@ -70,6 +73,15 @@ list:
         locked: Заблокирован
         enabled: Включен
         actions: Действия
+    ticket:
+        id: Номер
+        chief_ticket: Вышестоящий
+        rate: Тариф
+        owner: Владелец
+        paid_up: 'Оплачен до'
+        paid: Оплачен
+        subscribed: Подписка
+        actions: Действия
 show:
     pool:
         name: Название
@@ -87,3 +99,11 @@ show:
         avatar: Аватарка
         locked: Заблокирован
         enabled: Включен
+    ticket:
+        id: Номер
+        chief_ticket: Вышестоящий
+        rate: Тариф
+        owner: Владелец
+        paid: Оплачен
+        paid_up: 'Оплачен до'
+        subscribed: Подписка
