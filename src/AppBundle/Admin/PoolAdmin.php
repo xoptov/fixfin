@@ -4,24 +4,70 @@ namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PoolAdmin extends Admin
 {
-    protected function configureFormFields(FormMapper $form)
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    public function setEntityManager(EntityManagerInterface $entityManager)
     {
-        $form->add('name', 'text');
+        $this->entityManager = $entityManager;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagrid)
+    protected function configureFormFields(FormMapper $form)
     {
-        $datagrid->add('name');
+        $form
+            ->add('name', 'text', array(
+                'label' => 'form.pool.name'
+            ))
+            ->add('accounts', 'sonata_type_model', array(
+                'label' => 'form.pool.accounts',
+                'choices' => null,
+                'property' => 'number',
+                'multiple' => true,
+                'expanded' => true,
+                'required' => false,
+                'btn_add' => false,
+                'query' => $this->getQueryBuilder()
+            ));
     }
 
     protected function configureListFields(ListMapper $list)
     {
-        $list->addIdentifier('id')
-            ->add('name');
+        $list
+            ->addIdentifier('id')
+            ->add('name')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array()
+                )
+            ));
+    }
+
+    protected function configureShowFields(ShowMapper $show)
+    {
+        $show
+            ->add('id', 'number')
+            ->add('name', 'text', array(
+                'label' => 'show.pool.name'
+            ))
+            ->add('accounts', 'sonata_type_model', array(
+                'label' => 'show.pool.accounts',
+                'associated_property' => 'number'
+            ));
+    }
+
+    protected function getQueryBuilder()
+    {
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb->select('a')->from('AppBundle:Account', 'a')->where('a.system = true');
+
+        return $qb;
     }
 }

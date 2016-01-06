@@ -48,5 +48,20 @@ class Pool
     {
         return $this->name;
     }
+
+    /**
+     * @return Account|ArrayCollection
+     */
+    public function getAccounts()
+    {
+        return $this->accounts;
+    }
+
+    public function addAccount(Account $account)
+    {
+        $this->accounts->add($account);
+
+        return $this;
+    }
 }
 

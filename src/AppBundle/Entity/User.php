@@ -34,12 +34,35 @@ class User extends BaseUser
     /** @var string */
     private $avatar;
 
+    const STATUS_NOT_LOCKED = 0;
+    const STATUS_LOCKED = 1;
+
+    const STATUS_DISABLED = 0;
+    const STATUS_ENABLED = 1;
+
     public function __construct()
     {
         parent::__construct();
         $this->tickets = new ArrayCollection();
         $this->referrals = new ArrayCollection();
     }
+
+    public static function getLockedLabels()
+    {
+        return [
+            self::STATUS_NOT_LOCKED => 'form.user.status.no',
+            self::STATUS_LOCKED => 'form.user.status.yes'
+        ];
+    }
+
+    public static function getEnabledLabels()
+    {
+        return [
+            self::STATUS_DISABLED => 'form.user.status.no',
+            self::STATUS_ENABLED => 'form.user.status.yes'
+        ];
+    }
+
     /**
      * @param string $firstName
      * @return User
@@ -120,7 +143,7 @@ class User extends BaseUser
      * @param Account $account
      * @return User
      */
-    public function setAccount(Account $account)
+    public function setAccount(Account $account = null)
     {
         $this->account = $account;
 

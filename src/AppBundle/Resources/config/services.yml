@@ -22,6 +22,8 @@ services:
         arguments: [~, AppBundle\Entity\Pool, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Pool }
+        calls:
+            - [setEntityManager, [@doctrine.orm.default_entity_manager]]
 
     app.admin.rate:
         class: AppBundle\Admin\RateAdmin
@@ -34,3 +36,18 @@ services:
         arguments: [~, AppBundle\Entity\User, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: User }
+        calls:
+            - [setUserManager, [@fos_user.user_manager]]
+            - [setEntityManager, [@doctrine.orm.default_entity_manager]]
+
+    app.admin.account:
+        class: AppBundle\Admin\AccountAdmin
+        arguments: [~, AppBundle\Entity\Account, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Account }
+
+    app.admin.money_transaction:
+            class: AppBundle\Admin\MoneyTransactionAdmin
+            arguments: [~, AppBundle\Entity\MoneyTransaction, ~]
+            tags:
+                - { name: sonata.admin, manager_type: orm, label: Transaction }
