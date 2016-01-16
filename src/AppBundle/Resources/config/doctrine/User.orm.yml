@@ -31,12 +31,13 @@ AppBundle\Entity\User:
         account:
             targetEntity: AppBundle\Entity\Account
             mappedBy: user
+    oneToMany:
+        tickets:
+            targetEntity: AppBundle\Entity\Ticket
+            mappedBy: user
+    manyToOne:
         referrer:
             targetEntity: AppBundle\Entity\User
             joinColumn:
                 name: referrer_id
                 referencedColumnName: id
-    oneToMany:
-        tickets:
-            targetEntity: AppBundle\Entity\Ticket
-            mappedBy: user

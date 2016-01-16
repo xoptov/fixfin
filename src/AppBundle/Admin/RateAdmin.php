@@ -30,10 +30,10 @@ class RateAdmin extends Admin
     protected function configureListFields(ListMapper $list)
     {
         $list->addIdentifier('id')
-            ->add('name')
-            ->add('pool.name')
-            ->add('amount')
-            ->add('commission')
-            ->add('period');
+            ->add('name', 'text')
+            ->add('pool.name', 'text')
+            ->add('amount', 'number')
+            ->add('commission', 'percent')
+            ->add('period', 'number');
     }
 }

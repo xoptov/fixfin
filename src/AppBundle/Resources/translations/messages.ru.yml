@@ -16,6 +16,18 @@ entity:
     status:
         no: Нет
         yes: Да
+admin:
+    title:
+        section:
+            pool: 'Пулл счетов'
+            rate: Столы
+            user: Пользователи
+            account: Счета
+            transaction: Транзакции
+            ticket: Билеты
+            invoice: Инвойсы
+        group:
+            main: Главная
 form:
     account:
         user: Пользователь

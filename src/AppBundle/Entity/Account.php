@@ -198,6 +198,8 @@ class Account
     public function setBalance($balance)
     {
         $this->balance = $balance;
+
+        return $this;
     }
 
     /**

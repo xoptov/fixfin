@@ -21,7 +21,7 @@ services:
         class: AppBundle\Admin\PoolAdmin
         arguments: [~, AppBundle\Entity\Pool, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Pool }
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.pool }
         calls:
             - [setEntityManager, [@doctrine.orm.default_entity_manager]]
 
@@ -29,13 +29,13 @@ services:
         class: AppBundle\Admin\RateAdmin
         arguments: [~, AppBundle\Entity\Rate, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Rate }
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.rate }
 
     app.admin.user:
         class: AppBundle\Admin\UserAdmin
         arguments: [~, AppBundle\Entity\User, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: User }
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.user }
         calls:
             - [setUserManager, [@fos_user.user_manager]]
             - [setEntityManager, [@doctrine.orm.default_entity_manager]]
@@ -44,16 +44,22 @@ services:
         class: AppBundle\Admin\AccountAdmin
         arguments: [~, AppBundle\Entity\Account, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Account }
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.account }
 
     app.admin.money_transaction:
             class: AppBundle\Admin\MoneyTransactionAdmin
             arguments: [~, AppBundle\Entity\MoneyTransaction, ~]
             tags:
-                - { name: sonata.admin, manager_type: orm, label: Transaction }
+                - { name: sonata.admin, manager_type: orm, label: admin.title.section.transaction }
 
     app.admin.ticket:
         class: AppBundle\Admin\TicketAdmin
         arguments: [~, AppBundle\Entity\Ticket, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Ticket }
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.ticket }
+
+    app.admin.invoice:
+        class: AppBundle\Admin\InvoiceAdmin
+        arguments: [~, AppBundle\Entity\Invoice, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.invoice }

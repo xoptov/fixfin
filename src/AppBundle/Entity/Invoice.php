@@ -56,6 +56,17 @@ class Invoice
         $this->updatedAt = new \DateTime();
     }
 
+    public static function getStatusLabels()
+    {
+        return [
+            self::STATUS_NEW => 'entity.invoice.status.new',
+            self::STATUS_PARTIAL_PAID => 'entity.invoice.status.partial_paid',
+            self::STATUS_PAID => 'entity.invoice.status.paid',
+            self::STATUS_EXPIRED => 'entity.invoice.status.expired',
+            self::STATUS_CANCELED => 'entity.invoice.status.canceled'
+        ];
+    }
+
     /**
      * @return float
      */
