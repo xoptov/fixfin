@@ -3,6 +3,8 @@ var gulpLess = require('gulp-less');
 
 var scriptsDestination = 'web/js';
 var stylesDestination = 'web/css';
+var imagesDestination = 'web/img';
+var fontsDestination = 'web/fonts';
 
 var scriptFiles = [
     'bower_components/bootstrap/dist/js/bootstrap.js',
@@ -11,14 +13,20 @@ var scriptFiles = [
 ];
 
 var lessFiles = [
-    'bower_components/bootstrap/less/bootstrap.less',
-    'bower_components/font-awesome/less/font-awesome.less',
-    'src/AppBundle/Resources/inspinia/less/style.less',
-    'src/AppBundle/Resources/less/**/*.less'
+    'src/AppBundle/Resources/less/sprites.less',
+    'src/AppBundle/Resources/less/main.less'
 ];
 
 var cssFiles = [
     'bower_components/animate.css/animate.css'
+];
+
+var imageFiles = [
+    'src/AppBundle/Resources/images/**/*.+(png|jpeg|jpg)'
+];
+
+var fontsFiles = [
+    'bower_components/bootstrap/fonts/*.*'
 ];
 
 gulp.task('scripts', function() {
@@ -37,6 +45,37 @@ gulp.task('less', function() {
         .pipe(gulp.dest(stylesDestination));
 });
 
-gulp.task('styles', ['less', 'css']);
+gulp.task('images', function(){
+    gulp.src(imageFiles)
+        .pipe(gulp.dest(imagesDestination));
+});
+
+gulp.task('fonts', function(){
+    gulp.src(fontsFiles)
+        .pipe(gulp.dest(fontsDestination));
+});
+
+gulp.task('styles', ['less', 'css', 'images', 'fonts']);
 
 gulp.task('default', ['styles', 'scripts']);
+
+gulp.task('watch', function(){
+    gulp.watch(scriptFiles, function(event){
+        console.log('File ' + event.path + ' was changed');
+        gulp.src(event.path)
+            .pipe(gulp.dest(scriptsDestination));
+    });
+
+    gulp.watch(lessFiles, function(event){
+        console.log('File ' + event.path + ' was changed');
+        gulp.src(event.path)
+            .pipe(gulpLess())
+            .pipe(gulp.dest(stylesDestination));
+    });
+
+    gulp.watch(imageFiles, function(event){
+        console.log('File ' + event.path + ' was changed');
+        gulp.src(event.path)
+            .pipe(gulp.dest(imagesDestination));
+    });
+});
