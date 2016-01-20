@@ -1,32 +1,32 @@
 var gulp = require('gulp');
 var gulpLess = require('gulp-less');
 
-var scriptsDestination = 'web/js';
-var stylesDestination = 'web/css';
-var imagesDestination = 'web/img';
-var fontsDestination = 'web/fonts';
+var scriptsDestination = './Resources/public/js';
+var stylesDestination = './Resources/public/css';
+var imagesDestination = './Resources/public/img';
+var fontsDestination = './Resources/public/fonts';
 
 var scriptFiles = [
-    'bower_components/bootstrap/dist/js/bootstrap.js',
-    'bower_components/jquery/dist/jquery.js',
-    'src/AppBundle/Resources/javascripts/**/*.js'
+    './Resources/bower_components/bootstrap/dist/js/bootstrap.js',
+    './Resources/bower_components/jquery/dist/jquery.js',
+    './Resources/javascripts/**/*.js'
 ];
 
 var lessFiles = [
-    'src/AppBundle/Resources/less/sprites.less',
-    'src/AppBundle/Resources/less/main.less'
+    './Resources/less/sprites.less',
+    './Resources/less/main.less'
 ];
 
 var cssFiles = [
-    'bower_components/animate.css/animate.css'
+    './Resources/bower_components/animate.css/animate.css'
 ];
 
 var imageFiles = [
-    'src/AppBundle/Resources/images/**/*.+(png|jpeg|jpg)'
+    './Resources/images/**/*.+(png|jpeg|jpg)'
 ];
 
 var fontsFiles = [
-    'bower_components/bootstrap/fonts/*.*'
+    './Resources/bower_components/bootstrap/fonts/*.*'
 ];
 
 gulp.task('scripts', function() {

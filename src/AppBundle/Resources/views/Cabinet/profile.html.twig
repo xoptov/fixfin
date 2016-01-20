@@ -1,5 +1,122 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block content %}
-    Profile page!
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="window">
+                <div class="header">Профиль</div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5 text-center">
+                            <div class="avatar">
+                                <span class="empty">Нет фото</span>
+                            </div>
+                            <div class="change">Изменить</div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="fullname">Иванов Иван</div>
+                            <div class="description">В системе:<span class="value">12 дней</span></div>
+                            <div class="description">Заработано:<span class="value">100 USD</span></div>
+                            <div class="description">Структура:<span class="value">50 человек</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="window">
+                <div class="header">Профиль спонсора</div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5 text-center">
+                            <div class="avatar">
+                                <span class="empty">Нет фото</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="fullname">Фамилия Имя</div>
+                            <div class="description">Телефон:<span class="value">+7 000 000 0000</span></div>
+                            <div class="description">Почта:<span class="value">test@rublic.dev</span></div>
+                            <div class="description">VK:<span class="value">vk.com/rublic</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="window m-t-30">
+                <div class="header">Редактировать профиль</div>
+                <div class="content">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-xs-4">Имя</label>
+                            <div class="col-xs-8">
+                                <input class="form-control" type="text" placeholder="Иван">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-4">Фамилия</label>
+                            <div class="col-xs-8">
+                                <input class="form-control" type="text" placeholder="Иванов">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-4">Почта</label>
+                            <div class="col-xs-8">
+                                <input class="form-control" type="text" placeholder="ivan@rublic.dev">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-4">Телефон</label>
+                            <div class="col-xs-8">
+                                <input class="form-control" type="text" placeholder="+7 000 000 0000">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-4">Кошелёк PM</label>
+                            <div class="col-xs-8">
+                                <input class="form-control" type="text" placeholder="U1234567">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-5">Дата рождения</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" placeholder="01">
+                            </div>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" placeholder="01">
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" type="text" placeholder="1970">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="window m-t-30">
+                <div class="header">Новости FinFix</div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-3 text-center news-date">20.01.16</div>
+                        <div class="col-xs-9 news-text">
+                            Новости системы FinFix как всегда очень хорошие, мы стартанули супер мега пупер систему для рефферального заработка!
+                            <div class="text-right news-continue">Читать далее</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 text-center news-all">
+                            Все новости
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -11,7 +11,7 @@ profile:
     defaults: { _controller: AppBundle:Cabinet:profile }
 
 dashboard:
-    path:     /cabinet/dushboard
+    path:     /cabinet/dashboard
     defaults: { _controller: AppBundle:Cabinet:dashboard }
 
 cloud:

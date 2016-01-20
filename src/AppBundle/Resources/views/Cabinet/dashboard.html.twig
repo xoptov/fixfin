@@ -1,7 +1,20 @@
-{% extends "::base.html.twig" %}
+{% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}AppBundle:Cabinet:dashboard{% endblock %}
-
-{% block body %}
-<h1>Welcome to the Cabinet:dashboard page</h1>
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#table_20">Стол старт 20$</a>
+        </li>
+        <li>
+            <a href="#table_60">Стол Silver 60$</a>
+        </li>
+        <li>
+            <a href="#table_160">Стол GOLD 160$</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="table_20">Стол 20$</div>
+        <div class="tab-pane" id="table_60">Стол 60$</div>
+        <div class="tab-pane" id="table_160">Стол 160$</div>
+    </div>
 {% endblock %}

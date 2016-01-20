@@ -1,9 +1,5 @@
 .idea/
 /web/bundles/
-/web/css/
-/web/js/
-/web/img/
-/web/fonts/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -15,5 +11,3 @@
 /vendor/
 /bin/
 /composer.phar
-/bower_components/
-/node_modules/
