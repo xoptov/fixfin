@@ -113,13 +113,6 @@ body {
       .form-control {
         background-color: #ecebea;
       }
-      .btn-primary {
-        background-color: #1cca5a;
-        border-radius: 0;
-        font-size: 18px;
-        border: 0;
-        color: #000000;
-      }
       .news-text {
         font-size: 12px;
       }
@@ -146,6 +139,20 @@ body {
         top: 50px;
         left: 30px;
       }
+    }
+  }
+  .btn:focus {
+    outline: none;
+  }
+  .btn-primary {
+    background-color: #1cca5a;
+    border-radius: 0;
+    font-size: 18px;
+    border: 0;
+    color: #626262;
+    &:active:focus {
+      color: #626262;
+      background-color: #1cca5a;
     }
   }
 }
@@ -179,6 +186,10 @@ body {
 
 .m-t-30 {
   margin-top: 30px;
+}
+
+.m-b-30 {
+  margin-bottom: 30px;
 }
 
 @tab-light-bg: rgba(193, 193, 193, 0.6);
@@ -231,7 +242,6 @@ body {
     background: none;
     border: 1px solid #626262;
     color: #626262;
-    border-radius: 0;
     &:active:hover {
       color: #626262;
       border: 1px solid #626262;
