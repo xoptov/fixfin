@@ -1,0 +1,60 @@
+.sprite {
+  background-image: url("../img/sprites.png");
+  display: inline-block;
+}
+.sp-logo {
+  background-image: url("../img/sprites.png");
+  display: inline-block;
+  background-position: 0 0;
+  width: 218px;
+  height: 40px;
+}
+.sp-check-checked {
+  background-image: url("../img/sprites.png");
+  display: inline-block;
+  background-position: -219px 0;
+  width: 39px;
+  height: 31px;
+}
+.sp-check {
+  background-image: url("../img/sprites.png");
+  display: inline-block;
+  background-position: -259px 0;
+  width: 39px;
+  height: 31px;
+}
+.sp-instagram {
+  background-image: url("../img/sprites.png");
+  display: inline-block;
+  background-position: -299px 0;
+  width: 30px;
+  height: 30px;
+}
+.sp-vkontakte {
+  background-image: url("../img/sprites.png");
+  display: inline-block;
+  background-position: -330px 0;
+  width: 30px;
+  height: 30px;
+}
+.sp-facebook {
+  background-image: url("../img/sprites.png");
+  display: inline-block;
+  background-position: -361px 0;
+  width: 30px;
+  height: 30px;
+}
+.sp-odnoklassniki {
+  background-image: url("../img/sprites.png");
+  display: inline-block;
+  background-position: -392px 0;
+  width: 30px;
+  height: 30px;
+}
+.sp-bell {
+  background-image: url("../img/sprites.png");
+  display: inline-block;
+  background-position: -423px 0;
+  width: 26px;
+  height: 28px;
+}

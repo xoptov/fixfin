@@ -1,5 +1,5 @@
 {
-  "name": "elfin",
+  "name": "finfix",
   "version": "1.0.0",
   "description": "System for making money",
   "main": "gulpfile.js",
@@ -11,5 +11,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maksim Khortov",
-  "license": "ISC"
+  "license": "proprietary"
 }
