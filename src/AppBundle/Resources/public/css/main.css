@@ -6840,13 +6840,6 @@ body {
 .wrapper .window .content .form-control {
   background-color: #ecebea;
 }
-.wrapper .window .content .btn-primary {
-  background-color: #1cca5a;
-  border-radius: 0;
-  font-size: 18px;
-  border: 0;
-  color: #000000;
-}
 .wrapper .window .content .news-text {
   font-size: 12px;
 }
@@ -6873,6 +6866,20 @@ body {
   top: 50px;
   left: 30px;
 }
+.wrapper .btn:focus {
+  outline: none;
+}
+.wrapper .btn-primary {
+  background-color: #1cca5a;
+  border-radius: 0;
+  font-size: 18px;
+  border: 0;
+  color: #626262;
+}
+.wrapper .btn-primary:active:focus {
+  color: #626262;
+  background-color: #1cca5a;
+}
 .footer {
   height: 60px;
   background-color: #d2d2cd;
@@ -6897,6 +6904,9 @@ body {
 }
 .m-t-30 {
   margin-top: 30px;
+}
+.m-b-30 {
+  margin-bottom: 30px;
 }
 .nav-tabs {
   border: 0;
@@ -6946,7 +6956,6 @@ body {
   background: none;
   border: 1px solid #626262;
   color: #626262;
-  border-radius: 0;
 }
 .tab-pane .btn-primary:active:hover {
   color: #626262;
