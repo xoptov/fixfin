@@ -6898,17 +6898,70 @@ body {
 .m-t-30 {
   margin-top: 30px;
 }
+.nav-tabs {
+  border: 0;
+}
 .nav-tabs li a {
   padding: 20px 50px;
   font-size: 18px;
   border-radius: 0;
   color: #000000;
   border: 0;
+  margin: 0;
+}
+.nav-tabs li a:focus,
+.nav-tabs li a:hover {
+  background-color: #e1972e;
 }
 .nav-tabs li.active a {
   border: 0;
-  background-color: #F8AC2E;
+  background-color: #f8ac2e;
 }
-.nav-tabs li.active a:focus {
-  background-color: #F8AC2E;
+.nav-tabs li.active a:focus,
+.nav-tabs li.active a:hover {
+  background-color: #f8ac2e;
+  border: 0;
+}
+.tab-even {
+  background-color: rgba(193, 193, 193, 0.6);
+}
+.tab-odd {
+  background-color: rgba(182, 182, 182, 0.6);
+}
+.tab-pane {
+  background-color: rgba(210, 210, 205, 0.6);
+  padding: 18px;
+}
+.tab-pane .table-activated {
+  font-size: 24px;
+}
+.tab-pane .table-expire {
+  font-size: 14px;
+  margin-left: 24px;
+}
+.tab-pane .btn:hover {
+  outline: none;
+}
+.tab-pane .btn-primary {
+  background: none;
+  border: 1px solid #626262;
+  color: #626262;
+  border-radius: 0;
+}
+.tab-pane .btn-primary:active:hover {
+  color: #626262;
+  border: 1px solid #626262;
+  background-color: #d2d2cd;
+}
+.tab-pane .table {
+  margin-top: 20px;
+}
+.tab-pane .table thead tr th {
+  border-bottom: 1px solid #b8b8b6;
+}
+.tab-pane .table tbody tr td:nth-of-type(odd) {
+  background-color: #d2d2cd;
+}
+.tab-pane .table tbody tr td {
+  border-top: 1px solid #b8b8b6;
 }
