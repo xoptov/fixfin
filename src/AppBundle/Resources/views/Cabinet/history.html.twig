@@ -1,7 +1,71 @@
-{% extends "::base.html.twig" %}
+{% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}AppBundle:Cabinet:history{% endblock %}
-
-{% block body %}
-<h1>Welcome to the Cabinet:history page</h1>
+{% block content %}
+    <div class="window">
+        <div class="header">
+            <h3>История транзакций</h3>
+        </div>
+        <div class="content">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Источник</th>
+                    <th>Получатель</th>
+                    <th>Сумма</th>
+                    <th>Создана</th>
+                    <th>Статус</th>
+                    <th>Инвойс</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>123</td>
+                    <td>U2362819</td>
+                    <td>U1230420</td>
+                    <td>$20</td>
+                    <td>21.01.2016 10:00:00</td>
+                    <td>Выполнена</td>
+                    <td>92</td>
+                </tr>
+                <tr>
+                    <td>123</td>
+                    <td>U2362819</td>
+                    <td>U1230420</td>
+                    <td>$20</td>
+                    <td>21.01.2016 10:00:00</td>
+                    <td>Выполнена</td>
+                    <td>92</td>
+                </tr>
+                <tr>
+                    <td>123</td>
+                    <td>U2362819</td>
+                    <td>U1230420</td>
+                    <td>$20</td>
+                    <td>21.01.2016 10:00:00</td>
+                    <td>Выполнена</td>
+                    <td>92</td>
+                </tr>
+                <tr>
+                    <td>123</td>
+                    <td>U2362819</td>
+                    <td>U1230420</td>
+                    <td>$20</td>
+                    <td>21.01.2016 10:00:00</td>
+                    <td>Выполнена</td>
+                    <td>92</td>
+                </tr>
+                <tr>
+                    <td>123</td>
+                    <td>U2362819</td>
+                    <td>U1230420</td>
+                    <td>$20</td>
+                    <td>21.01.2016 10:00:00</td>
+                    <td>Выполнена</td>
+                    <td>92</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

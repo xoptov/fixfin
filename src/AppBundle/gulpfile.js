@@ -61,20 +61,20 @@ gulp.task('default', ['styles', 'scripts']);
 
 gulp.task('watch', function(){
     gulp.watch(scriptFiles, function(event){
-        console.log('File ' + event.path + ' was changed');
+        console.log('[' + Date.now() + ']' + ' File ' + event.path + ' was changed');
         gulp.src(event.path)
             .pipe(gulp.dest(scriptsDestination));
     });
 
     gulp.watch(lessFiles, function(event){
-        console.log('File ' + event.path + ' was changed');
+        console.log('[' + Date.now() + ']' + ' File ' + event.path + ' was changed');
         gulp.src(event.path)
             .pipe(gulpLess())
             .pipe(gulp.dest(stylesDestination));
     });
 
     gulp.watch(imageFiles, function(event){
-        console.log('File ' + event.path + ' was changed');
+        console.log('[' + Date.now() + ']' + ' File ' + event.path + ' was changed');
         gulp.src(event.path)
             .pipe(gulp.dest(imagesDestination));
     });
