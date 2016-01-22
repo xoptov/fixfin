@@ -26,7 +26,9 @@
                         <div class="user-control">
                             <div class="username">ИВАНОВ ИВАН</div>
                             <div class="sp-bell notifications"></div>
-                            <div class="logout">Выход</div>
+                            <a class="logout" href="{{ path('fos_user_security_logout') }}">
+                                Выход
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -36,14 +38,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-5 col-xs-5">
-                        <ul class="menu">
-                            <li class="menu-item active">Профиль</li>
-                            <li class="menu-item">Рабочий стол</li>
-                            <li class="menu-item">Облако</li>
-                            <li class="menu-item">История</li>
-                            <li class="menu-item">Материалы</li>
-                            <li class="menu-item">Новости</li>
-                        </ul>
+                        {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
                     </div>
                     <div class="col-lg-9 col-md-8 col-sm-7 col-xs-7">
                     {% block content %}{% endblock %}
@@ -51,31 +46,31 @@
                 </div>
             </div>
         </main>
-    </div>
-    <div class="footer">
-        <div class="container">
-            <div class="row navigation">
-                <div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
-                    <div class="submenu">
-                        <div class="nav-item">Техподдержка</div>
-                        <i class="separator">|</i>
-                        <div class="nav-item">Контакты</div>
-                        <i class="separator">|</i>
-                        <div class="nav-item">Политика конфеденциальности</div>
+        <footer>
+            <div class="container">
+                <div class="row navigation">
+                    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+                        <div class="submenu">
+                            <div class="nav-item">Техподдержка</div>
+                            <i class="separator">|</i>
+                            <div class="nav-item">Контакты</div>
+                            <i class="separator">|</i>
+                            <div class="nav-item">Политика конфеденциальности</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6 text-right">
-                    <div class="social">
-                        <div class="nav-item">Мы в соцсетях</div>
-                        <i class="separator">|</i>
-                        <div class="sp-instagram nav-item"></div>
-                        <div class="sp-vkontakte nav-item"></div>
-                        <div class="sp-facebook nav-item"></div>
-                        <div class="sp-odnoklassniki nav-item"></div>
+                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6 text-right">
+                        <div class="social">
+                            <div class="nav-item">Мы в соцсетях</div>
+                            <i class="separator">|</i>
+                            <div class="sp-instagram nav-item"></div>
+                            <div class="sp-vkontakte nav-item"></div>
+                            <div class="sp-facebook nav-item"></div>
+                            <div class="sp-odnoklassniki nav-item"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
     </div>
     <script src="{{ asset('bundles/app/js/jquery.js') }}"></script>
     <script src="{{ asset('bundles/app/js/bootstrap.js') }}"></script>

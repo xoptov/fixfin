@@ -119,3 +119,12 @@ show:
         paid: Оплачен
         paid_up: 'Оплачен до'
         subscribed: Подписка
+
+menu:
+    profile: Профиль
+    dashboard: 'Рабочий стол'
+    cloud: Облако
+    history: 'История транзакций'
+    content: Материалы
+    news: Новости
+    faq: 'Вопросы и ответы'
