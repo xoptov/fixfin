@@ -30,7 +30,11 @@ AppBundle\Entity\User:
     oneToOne:
         account:
             targetEntity: AppBundle\Entity\Account
-            mappedBy: user
+            inversedBy: user
+            cascade: [persist]
+            joinColumn:
+                name: account_id
+                referencedColumnName: id
     oneToMany:
         tickets:
             targetEntity: AppBundle\Entity\Ticket

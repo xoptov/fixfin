@@ -1,7 +1,6 @@
 security:
     login:
-        logo_name: Elfin
-        greeting: 'Добро пожаловать в Elfin'
+        greeting: 'Добро пожаловать в FinFix'
         note: 'Необходимо выполнить вход перед дальнейшей работой'
         username: 'Имя пользователя'
         password: Пароль
@@ -54,6 +53,7 @@ form:
         status:
             no: Нет
             yes: Да
+        save: Сохранить
     pool:
         name: Название
         accounts: Счета

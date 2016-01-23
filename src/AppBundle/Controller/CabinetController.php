@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\Type\ProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class CabinetController extends Controller
 {
@@ -11,9 +13,18 @@ class CabinetController extends Controller
         return $this->render('AppBundle:Cabinet:index.html.twig');
     }
 
-    public function profileAction()
+    public function profileAction(Request $request)
     {
-        return $this->render('AppBundle:Cabinet:profile.html.twig');
+        $user = $this->getUser();
+        $form = $this->createForm(new ProfileType(), $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->render('AppBundle:Cabinet:profile.html.twig', array('form' => $form->createView()));
     }
 
     public function dashboardAction()

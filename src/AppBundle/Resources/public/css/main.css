@@ -6882,6 +6882,12 @@ body {
 .wrapper .window .content .table tbody tr td {
   border-top: 1px solid #b8b8b6;
 }
+.wrapper .window .content .birthday .p-l-5 {
+  padding-left: 5px;
+}
+.wrapper .window .content .birthday .p-r-5 {
+  padding-right: 5px;
+}
 .wrapper .window .avatar {
   position: relative;
   display: inline-block;
@@ -6944,6 +6950,12 @@ body {
 }
 .m-b-30 {
   margin-bottom: 30px;
+}
+.m-t-10 {
+  margin-top: 10px;
+}
+.m-l-10 {
+  margin-left: 10px;
 }
 .nav-tabs {
   border: 0;
@@ -7010,4 +7022,23 @@ body {
 }
 .tab-pane .table tbody tr td {
   border-top: 1px solid #b8b8b6;
+}
+.middle-box {
+  display: inline-block;
+  margin-top: 200px;
+  width: 324px;
+}
+.middle-box .btn:focus {
+  outline: none;
+}
+.middle-box .btn-primary {
+  background-color: #1cca5a;
+  border-radius: 0;
+  font-size: 18px;
+  border: 0;
+  color: #626262;
+}
+.middle-box .btn-primary:active:focus {
+  color: #626262;
+  background-color: #1cca5a;
 }
