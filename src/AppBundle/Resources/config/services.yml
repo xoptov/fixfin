@@ -63,3 +63,9 @@ services:
         arguments: [~, AppBundle\Entity\Invoice, SonataAdminBundle:CRUD]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.title.section.invoice }
+
+    app.form.type.pm_account:
+        class: AppBundle\Form\Type\PerfectMoneyAccountType
+        arguments: [@doctrine.orm.default_entity_manager]
+        tags:
+            - { name: form.type }

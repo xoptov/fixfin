@@ -1,11 +1,9 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-    <div class="middle-box text-center loginscreen animated fadeInDown">
+    <div class="middle-box text-center animated fadeInDown">
         <div>
-            <div>
-                <h1 class="logo-name">{{ 'security.login.logo_name'|trans }}</h1>
-            </div>
+            <div class="sp-logo"></div>
             <h3>{{ 'security.register.header'|trans }}</h3>
             <p>{{ 'security.register.subheader'|trans }}</p>
             {{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'novalidate': true, 'class': 'registration-form'}}) }}

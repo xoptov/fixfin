@@ -41,10 +41,8 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         $user1->setUsername('xoptov')
             ->setEmail('xoptov@finfix.dev')
             ->setPlainPassword('123456')
-            ->setEnabled(true);
-        /** @var Account $account */
-        $account = $this->getReference('account.1');
-        $account->setUser($user1);
+            ->setEnabled(true)
+            ->setAccount($this->getReference('account.1'));
         $userManager->updateCanonicalFields($user1);
         $userManager->updatePassword($user1);
         $this->setReference('user.1', $user1);
@@ -55,10 +53,8 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         $user2->setUsername('kostan')
             ->setEmail('kostan@finfix.dev')
             ->setPlainPassword('123456')
-            ->setEnabled(true);
-        /** @var Account $account */
-        $account = $this->getReference('account.2');
-        $account->setUser($user2);
+            ->setEnabled(true)
+            ->setAccount($this->getReference('account.2'));
         $userManager->updateCanonicalFields($user2);
         $userManager->updatePassword($user2);
         $this->setReference('user.2', $user2);
@@ -69,10 +65,8 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         $user3->setUsername('alex')
             ->setEmail('alex@finfix.dev')
             ->setPlainPassword('123456')
-            ->setEnabled(true);
-        /** @var Account $account */
-        $account = $this->getReference('account.3');
-        $account->setUser($user3);
+            ->setEnabled(true)
+            ->setAccount($this->getReference('account.3'));
         $userManager->updateCanonicalFields($user3);
         $userManager->updatePassword($user3);
         $this->setReference('user.3', $user3);
@@ -84,10 +78,8 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
             ->setEmail('oleg@finfix.dev')
             ->setPlainPassword('123456')
             ->setReferrer($user2)
-            ->setEnabled(true);
-        /** @var Account $account */
-        $account = $this->getReference('account.4');
-        $account->setUser($user4);
+            ->setEnabled(true)
+            ->setAccount($this->getReference('account.4'));
         $userManager->updateCanonicalFields($user4);
         $userManager->updatePassword($user4);
         $this->setReference('user.4', $user4);
@@ -99,10 +91,8 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
             ->setEmail('tanya@finfix.dev')
             ->setPlainPassword('123456')
             ->setReferrer($user2)
-            ->setEnabled(true);
-        /** @var Account $account */
-        $account = $this->getReference('account.5');
-        $account->setUser($user5);
+            ->setEnabled(true)
+            ->setAccount($this->getReference('account.5'));
         $userManager->updateCanonicalFields($user5);
         $userManager->updatePassword($user5);
         $this->setReference('user.5', $user5);
@@ -114,10 +104,8 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
             ->setEmail('sveta@finfix.dev')
             ->setPlainPassword('123456')
             ->setReferrer($user3)
-            ->setEnabled(true);
-        /** @var Account $account */
-        $account = $this->getReference('account.6');
-        $account->setUser($user6);
+            ->setEnabled(true)
+            ->setAccount($this->getReference('account.6'));
         $userManager->updateCanonicalFields($user6);
         $userManager->updatePassword($user6);
         $this->setReference('user.6', $user6);
@@ -129,10 +117,8 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
             ->setEmail('john@finfix.dev')
             ->setPlainPassword('123456')
             ->setReferrer($user3)
-            ->setEnabled(true);
-        /** @var Account $account */
-        $account = $this->getReference('account.7');
-        $account->setUser($user7);
+            ->setEnabled(true)
+            ->setAccount($this->getReference('account.7'));
         $userManager->updateCanonicalFields($user7);
         $userManager->updatePassword($user7);
         $this->setReference('user.7', $user7);

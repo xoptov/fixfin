@@ -49,53 +49,54 @@
             <div class="window m-t-30">
                 <div class="header">Редактировать профиль</div>
                 <div class="content">
-                    <form class="form-horizontal">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
                         <div class="form-group">
-                            <label class="control-label col-xs-4">Имя</label>
+                            {{ form_label(form.firstName, null, {'label_attr': {'class': 'control-label col-xs-4'}}) }}
                             <div class="col-xs-8">
-                                <input class="form-control" type="text" placeholder="Иван">
+                                {{ form_widget(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Иван'}}) }}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-xs-4">Фамилия</label>
+                            {{ form_label(form.lastName, null, {'label_attr': {'class': 'control-label col-xs-4'}}) }}
                             <div class="col-xs-8">
-                                <input class="form-control" type="text" placeholder="Иванов">
+                                {{ form_widget(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Иванов'}}) }}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-xs-4">Почта</label>
+                            {{ form_label(form.middleName, null, {'label_attr': {'class': 'control-label col-xs-4'}}) }}
                             <div class="col-xs-8">
-                                <input class="form-control" type="text" placeholder="ivan@rublic.dev">
+                                {{ form_widget(form.middleName, {'attr': {'class': 'form-control', 'placeholder': 'Иванов'}}) }}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-xs-4">Телефон</label>
+                            {{ form_label(form.email, null, {'label_attr': {'class': 'control-label col-xs-4'}}) }}
                             <div class="col-xs-8">
-                                <input class="form-control" type="text" placeholder="+7 000 000 0000">
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'ivanov@finfix.ru'}}) }}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-xs-4">Кошелёк PM</label>
+                            {{ form_label(form.phone, null, {'label_attr': {'class': 'control-label col-xs-4'}}) }}
                             <div class="col-xs-8">
-                                <input class="form-control" type="text" placeholder="U1234567">
+                                {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': '+7(000)000-0000'}}) }}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-xs-5">Дата рождения</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" placeholder="01">
-                            </div>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" placeholder="01">
-                            </div>
-                            <div class="col-xs-3">
-                                <input class="form-control" type="text" placeholder="1970">
+                            {{ form_label(form.account, null, {'label_attr': {'class': 'control-label col-xs-4'}}) }}
+                            <div class="col-xs-8">
+                                {{ form_widget(form.account, {'attr': {'class': 'form-control', 'placeholder': 'U0000000'}}) }}
                             </div>
                         </div>
+                        {#todo сделать смену пароля как в fosuserbundle#}
+                        {#<div class="form-group">#}
+                            {#<label class="control-label col-xs-4">Пароль</label>#}
+                            {#<div class="col-xs-8">#}
+                                {#<input class="form-control" type="text">#}
+                            {#</div>#}
+                        {#</div>#}
                         <div class="text-center">
-                            <button class="btn btn-primary">Сохранить</button>
+                            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
                         </div>
-                    </form>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
