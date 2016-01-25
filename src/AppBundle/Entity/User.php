@@ -40,6 +40,9 @@ class User extends BaseUser
     const STATUS_DISABLED = 0;
     const STATUS_ENABLED = 1;
 
+    /** @var string */
+    private $vkontakte;
+
     public function __construct()
     {
         parent::__construct();
@@ -194,5 +197,24 @@ class User extends BaseUser
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * @param string $vkontakte
+     * @return User
+     */
+    public function setVKontakte($vkontakte)
+    {
+        $this->vkontakte = $vkontakte;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVKontakte()
+    {
+        return $this->vkontakte;
     }
 }

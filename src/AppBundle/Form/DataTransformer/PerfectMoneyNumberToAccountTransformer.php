@@ -28,7 +28,7 @@ class PerfectMoneyNumberToAccountTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         if (null == $value) {
-            return $value;
+            return null;
         }
 
         $account = $this->objectManager->getRepository('AppBundle:Account')

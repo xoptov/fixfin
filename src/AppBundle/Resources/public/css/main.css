@@ -6902,6 +6902,12 @@ body {
   top: 50px;
   left: 30px;
 }
+.wrapper .window .form-group ul {
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+  color: #f44a3f;
+}
 .wrapper .btn:focus {
   outline: none;
 }
@@ -7041,4 +7047,8 @@ body {
 .middle-box .btn-primary:active:focus {
   color: #626262;
   background-color: #1cca5a;
+}
+.required:after {
+  content: '*';
+  color: #f44a3f;
 }

@@ -187,6 +187,14 @@ body {
         left: 30px;
       }
     }
+    .form-group {
+      ul {
+        margin-bottom: 0;
+        padding: 0;
+        list-style: none;
+        color: #f44a3f;
+      }
+    }
   }
   .btn:focus {
     outline: none;
@@ -348,5 +356,12 @@ body {
       color: #626262;
       background-color: #1cca5a;
     }
+  }
+}
+
+.required {
+  &:after {
+    content: '*';
+    color: #f44a3f;
   }
 }
