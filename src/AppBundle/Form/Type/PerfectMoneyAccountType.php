@@ -3,7 +3,6 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Form\DataTransformer\PerfectMoneyNumberToAccountTransformer;
-use AppBundle\Form\EventListener\AccountCreatingSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,10 +20,7 @@ class PerfectMoneyAccountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $transformer = new PerfectMoneyNumberToAccountTransformer($this->objectManager);
-        $builder->addViewTransformer($transformer);
-
-        $subscriber = new AccountCreatingSubscriber();
-        $builder->addEventSubscriber($subscriber);
+        $builder->addModelTransformer($transformer);
     }
 
     public function getParent()
