@@ -39,6 +39,6 @@ class PerfectMoneyNumberToAccountTransformer implements DataTransformerInterface
             return $account;
         }
 
-        return $value;
+        return null;
     }
 }

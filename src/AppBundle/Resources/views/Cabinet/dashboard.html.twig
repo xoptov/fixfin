@@ -192,3 +192,10 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+<script>
+    var dashboard = modulejs.require('dashboard');
+    dashboard.start();
+</script>
+{% endblock %}

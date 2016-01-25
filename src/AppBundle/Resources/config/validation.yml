@@ -13,3 +13,13 @@ AppBundle\Entity\User:
         account:
             - NotBlank:
                 groups: [Profile]
+
+AppBundle\Entity\Account:
+    properties:
+        number:
+            - Regex:
+                pattern: '/^U\d+$/'
+            - NotBlank: ~
+            - Length:
+                min: 8
+                max: 8

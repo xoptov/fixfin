@@ -33,3 +33,8 @@ news:
 faq:
     path:     /cabinet/faq
     defaults: { _controller: AppBundle:Cabinet:faq }
+
+accounts:
+    path:     /api/accounts
+    defaults: { _controller: AppBundle:API:accounts }
+    methods:  [POST]
