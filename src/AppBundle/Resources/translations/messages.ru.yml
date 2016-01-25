@@ -50,6 +50,7 @@ form:
         avatar: Аватарка
         locked: Заблокирован
         enabled: Включен
+        vkontakte: ВКонтакте
         status:
             no: Нет
             yes: Да

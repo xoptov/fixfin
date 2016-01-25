@@ -20,7 +20,7 @@ class PhoneTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         if (null == $value) {
-            return '';
+            return null;
         }
 
         $patterns = array('/[^\d]+/', '/^8/');

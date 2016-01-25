@@ -1,3 +1,15 @@
 AppBundle\Entity\User:
     constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: account
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [account]
+            groups: [Profile]
+    properties:
+        firstName:
+            - NotBlank:
+                groups: [Profile]
+        phone:
+            - NotBlank:
+                groups: [Profile]
+        account:
+            - NotBlank:
+                groups: [Profile]

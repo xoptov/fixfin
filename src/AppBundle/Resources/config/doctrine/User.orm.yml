@@ -27,6 +27,9 @@ AppBundle\Entity\User:
         avatar:
             type: string
             nullable: true
+        vkontakte:
+            type: string
+            nullable: true
     oneToOne:
         account:
             targetEntity: AppBundle\Entity\Account
