@@ -21,11 +21,17 @@ class Invoice
     /** @var \DateTime */
     private $updatedAt;
 
+    /** @var \DateTime */
+    private $expiredAt;
+
     /** @var float */
     private $amount;
 
     /** @var float */
     private $paid;
+
+    /** @var int */
+    private $period;
 
     /** @var int */
     private $status;
@@ -42,7 +48,7 @@ class Invoice
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
-        $this->paid = 0;
+        $this->paid = 0.0;
         $this->status = self::STATUS_NEW;
     }
 
@@ -60,7 +66,6 @@ class Invoice
     {
         return [
             self::STATUS_NEW => 'entity.invoice.status.new',
-            self::STATUS_PARTIAL_PAID => 'entity.invoice.status.partial_paid',
             self::STATUS_PAID => 'entity.invoice.status.paid',
             self::STATUS_EXPIRED => 'entity.invoice.status.expired',
             self::STATUS_CANCELED => 'entity.invoice.status.canceled'
@@ -87,6 +92,44 @@ class Invoice
     }
 
     /**
+     * @param float $paid
+     * @return Invoice
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
+
+    /**
+     * @param int $period
+     * @return Invoice
+     */
+    public function setPeriod($period)
+    {
+        $this->period = $period;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -100,25 +143,6 @@ class Invoice
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return float
-     */
-    public function getPaid()
-    {
-        return $this->paid;
-    }
-
-    /**
-     * @param float $paid
-     * @return Invoice
-     */
-    public function setPaid($paid)
-    {
-        $this->paid = $paid;
-
-        return $this;
     }
 
     /**
@@ -165,6 +189,33 @@ class Invoice
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $expiredAt
+     * @return Invoice
+     */
+    public function setExpiredAt(\DateTime $expiredAt)
+    {
+        $this->expiredAt = $expiredAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getExpiredAt()
+    {
+        return $this->expiredAt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExpired()
+    {
+        return $this->status === self::STATUS_EXPIRED;
     }
 
     /**

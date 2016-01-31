@@ -18,6 +18,8 @@ class LoadRateData extends AbstractFixture implements DependentFixtureInterface
             ->setAmount(20.0)
             ->setCommission(20)
             ->setPeriod(30)
+            ->setRequireQualification(true)
+            ->setRequireInvitation(3)
             ->setPool($pool);
         $manager->persist($rate);
 
@@ -26,6 +28,8 @@ class LoadRateData extends AbstractFixture implements DependentFixtureInterface
             ->setAmount(40.0)
             ->setCommission(30)
             ->setPeriod(30)
+            ->setRequireQualification(true)
+            ->setRequireInvitation(2)
             ->setPool($pool);
         $manager->persist($rate);
 
@@ -34,6 +38,8 @@ class LoadRateData extends AbstractFixture implements DependentFixtureInterface
             ->setAmount(80.0)
             ->setCommission(35)
             ->setPeriod(30)
+            ->setRequireQualification(true)
+            ->setRequireInvitation(1)
             ->setPool($pool);
         $manager->persist($rate);
 
@@ -42,6 +48,7 @@ class LoadRateData extends AbstractFixture implements DependentFixtureInterface
             ->setAmount(160.0)
             ->setCommission(40)
             ->setPeriod(45)
+            ->setRequireQualification(false)
             ->setPool($pool);
         $manager->persist($rate);
 

@@ -64,7 +64,10 @@ form:
         owner: Владелец
         paid_up: 'Оплачен до'
         paid: Оплачен
-        subscribed: Подписка
+        type:
+            subscription: 'Подписка'
+            ownership: 'Владение'
+        expired: Просрочен
 list:
     account:
         number: 'Номер счёта'
@@ -93,7 +96,8 @@ list:
         owner: Владелец
         paid_up: 'Оплачен до'
         paid: Оплачен
-        subscribed: Подписка
+        type: Тип
+        expired: Просрочен
         actions: Действия
 show:
     pool:
@@ -119,8 +123,8 @@ show:
         owner: Владелец
         paid: Оплачен
         paid_up: 'Оплачен до'
-        subscribed: Подписка
-
+        type: Тип
+        expired: Просрочен
 menu:
     profile: Профиль
     dashboard: 'Рабочий стол'

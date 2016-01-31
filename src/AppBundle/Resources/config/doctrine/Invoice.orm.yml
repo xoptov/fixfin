@@ -13,10 +13,14 @@ AppBundle\Entity\Invoice:
         updatedAt:
             type: datetime
             nullable: true
+        expiredAt:
+            type: datetime
         amount:
             type: float
         paid:
             type: float
+        period:
+            type: integer
         status:
             type: smallint
     oneToMany:
@@ -30,8 +34,7 @@ AppBundle\Entity\Invoice:
             joinColumn:
                 name: ticket_id
                 referencedColumnName: id
-                #todo убрать когда нужны будут внутренние переводы
-                nullable: false
+                nullable: false #todo убрать когда нужны будут выставление внутренних счетов
     lifecycleCallbacks:
         prePersist: [onCreate]
         preUpdate: [onUpdate]

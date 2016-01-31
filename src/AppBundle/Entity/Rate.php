@@ -27,16 +27,24 @@ class Rate
     /** @var int */
     private $members;
 
+    /** @var bool */
+    private $requireQualification;
+
+    /** @var int */
+    private $requireInvitation;
+
     /** @var Pool */
     private $pool;
 
-    /** @var ArrayCollection */
+    /** @var Ticket[] */
     private $tickets;
 
     public function __construct()
     {
-        $this->tickets = new ArrayCollection();
         $this->members = 0;
+        $this->requireQualification = false;
+        $this->requireInvitation = 0;
+        $this->tickets = new ArrayCollection();
     }
 
     /**
@@ -123,6 +131,11 @@ class Rate
         return $this->period;
     }
 
+    public function increaseMembers()
+    {
+        $this->members++;
+    }
+
     /**
      * @param integer $members
      * @return Rate
@@ -140,6 +153,44 @@ class Rate
     public function getMembers()
     {
         return $this->members;
+    }
+
+    /**
+     * @param bool $value
+     * @return Rate
+     */
+    public function setRequireQualification($value)
+    {
+        $this->requireQualification = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRequireQualification()
+    {
+        return $this->requireQualification;
+    }
+
+    /**
+     * @param int $amount
+     * @return Rate
+     */
+    public function setRequireInvitation($amount)
+    {
+        $this->requireInvitation = $amount;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequireInvitation()
+    {
+        return $this->requireInvitation;
     }
 
     /**

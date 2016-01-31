@@ -13,8 +13,14 @@ AppBundle\Entity\Ticket:
             nullable: true
         paid:
             type: boolean
-        subscribed:
+        type:
+            type: integer
+        expired:
             type: boolean
+    oneToOne:
+        qualification:
+            targetEntity: AppBundle\Entity\Qualification
+            mappedBy: ticket
     manyToOne:
         user:
             targetEntity: AppBundle\Entity\User
@@ -30,9 +36,9 @@ AppBundle\Entity\Ticket:
                 name: rate_id
                 referencedColumnName: id
                 nullable: false
-    oneToOne:
         chiefTicket:
             targetEntity: AppBundle\Entity\Ticket
+            inversedBy: subordinates
             joinColumn:
                 name: chief_ticket_id
                 referencedColumnName: id
@@ -40,5 +46,9 @@ AppBundle\Entity\Ticket:
         invoices:
             targetEntity: AppBundle\Entity\Invoice
             mappedBy: ticket
-
-
+        subordinates:
+            targetEntity: AppBundle\Entity\Ticket
+            mappedBy: chiefTicket
+    uniqueConstraints:
+        unique_ticket:
+            columns: [user_id, rate_id]

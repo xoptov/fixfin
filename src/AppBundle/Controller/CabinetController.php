@@ -27,11 +27,6 @@ class CabinetController extends Controller
         return $this->render('AppBundle:Cabinet:profile.html.twig', array('form' => $form->createView()));
     }
 
-    public function dashboardAction()
-    {
-        return $this->render('AppBundle:Cabinet:dashboard.html.twig');
-    }
-
     public function cloudAction()
     {
         return $this->render('AppBundle:Cabinet:cloud.html.twig');

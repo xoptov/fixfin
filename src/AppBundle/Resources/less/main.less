@@ -267,6 +267,12 @@ body {
 .nav-tabs {
   border: 0;
   li {
+    &:nth-of-type(odd) {
+      background-color: @tab-dark-bg;
+    }
+    &:nth-of-type(even) {
+      background-color: @tab-light-bg;
+    }
     a {
       padding: 20px 50px;
       font-size: 18px;
@@ -290,9 +296,6 @@ body {
     }
   }
 }
-
-.tab-even { background-color: @tab-light-bg; }
-.tab-odd { background-color: @tab-dark-bg; }
 
 .tab-pane {
   background-color: rgba(210, 210, 205, 0.6);
