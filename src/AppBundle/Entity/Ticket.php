@@ -18,11 +18,11 @@ class Ticket
     /** @var bool */
     private $paid;
 
-    const STATUS_NOT_PAID = 0;
-    const STATUS_PAID = 1;
-
     /** @var Ticket */
     private $chiefTicket;
+
+    /** @var Ticket[] */
+    private $subordinates;
 
     /** @var Invoice[] */
     private $invoices;
@@ -33,17 +33,28 @@ class Ticket
     /** @var Rate */
     private $rate;
 
-    /** @var bool */
-    private $subscribed;
+    /** @var int */
+    private $type;
 
-    const STATUS_NOT_SUBSCRIBED = 0;
-    const STATUS_SUBSCRIBED = 1;
+    /** @var Qualification */
+    private $qualification;
+
+    /** @var bool */
+    private $expired;
+
+    const STATUS_NOT_PAID = 0;
+    const STATUS_PAID = 1;
+
+    const TYPE_SUBSCRIPTION = 1;
+    const TYPE_OWNERSHIP = 2;
 
     public function __construct()
     {
+        $this->subordinates = new ArrayCollection();
         $this->invoices = new ArrayCollection();
         $this->paid = false;
-        $this->subscribed = true;
+        $this->type = self::TYPE_SUBSCRIPTION;
+        $this->expired = true;
     }
 
     public static function getPaidLabels()
@@ -54,11 +65,11 @@ class Ticket
         ];
     }
 
-    public static function getSubscribedLabels()
+    public static function getTypeLabels()
     {
         return [
-            self::STATUS_NOT_SUBSCRIBED => 'entity.status.no',
-            self::STATUS_SUBSCRIBED => 'entity.status.yes'
+            self::TYPE_SUBSCRIPTION => 'form.ticket.subscription',
+            self::TYPE_OWNERSHIP => 'form.ticket.ownership'
         ];
     }
 
@@ -128,6 +139,25 @@ class Ticket
     }
 
     /**
+     * @param Ticket[]|ArrayCollection $subordinates
+     * @return Ticket
+     */
+    public function setSubordinates($subordinates)
+    {
+        $this->subordinates = $subordinates;
+
+        return $this;
+    }
+
+    /**
+     * @return Ticket[]|ArrayCollection
+     */
+    public function getSubordinates()
+    {
+        return $this->subordinates;
+    }
+
+    /**
      * @param User $user
      * @return Ticket
      */
@@ -166,12 +196,50 @@ class Ticket
     }
 
     /**
+     * @param int $type
+     * @return Ticket
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param Qualification $qualification
+     * @return Ticket
+     */
+    public function setQualification(Qualification $qualification)
+    {
+        $this->qualification = $qualification;
+
+        return $this;
+    }
+
+    /**
+     * @return Qualification
+     */
+    public function getQualification()
+    {
+        return $this->qualification;
+    }
+
+    /**
      * @param bool $value
      * @return Ticket
      */
-    public function setSubscribed($value)
+    public function setExpired($value)
     {
-        $this->subscribed = $value;
+        $this->expired = $value;
 
         return $this;
     }
@@ -179,8 +247,8 @@ class Ticket
     /**
      * @return bool
      */
-    public function isSubscribed()
+    public function isExpired()
     {
-        return $this->subscribed;
+        return $this->expired;
     }
 }

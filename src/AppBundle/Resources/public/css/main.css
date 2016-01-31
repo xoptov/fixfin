@@ -6966,6 +6966,12 @@ body {
 .nav-tabs {
   border: 0;
 }
+.nav-tabs li:nth-of-type(odd) {
+  background-color: rgba(182, 182, 182, 0.6);
+}
+.nav-tabs li:nth-of-type(even) {
+  background-color: rgba(193, 193, 193, 0.6);
+}
 .nav-tabs li a {
   padding: 20px 50px;
   font-size: 18px;
@@ -6986,12 +6992,6 @@ body {
 .nav-tabs li.active a:hover {
   background-color: #f8ac2e;
   border: 0;
-}
-.tab-even {
-  background-color: rgba(193, 193, 193, 0.6);
-}
-.tab-odd {
-  background-color: rgba(182, 182, 182, 0.6);
 }
 .tab-pane {
   background-color: rgba(210, 210, 205, 0.6);

@@ -1,0 +1,34 @@
+AppBundle\Entity\Qualification:
+    type: entity
+    table: qualification
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        passed:
+            type: boolean
+        requireInvitation:
+            type: integer
+    oneToOne:
+        ticket:
+            targetEntity: AppBundle\Entity\Ticket
+            inversedBy: qualification
+            joinColumn:
+                name: ticket_id
+                referencedColumnName: id
+                nullable: flase
+    manyToMany:
+        transferredTickets:
+            targetEntity: AppBundle\Entity\Ticket
+            joinTable:
+                name: qualifications_tickets
+                joinColumns:
+                    qualification_id:
+                        referencedColumnName: id
+                        unique: true
+                inverseJoinColumns:
+                    ticket_id:
+                        referencedColumnName: id

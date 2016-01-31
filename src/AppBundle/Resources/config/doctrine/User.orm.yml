@@ -1,12 +1,17 @@
 AppBundle\Entity\User:
     type: entity
+    repositoryClass: AppBundle\Entity\UserRepository
     table: user
+    gedmo:
+        tree:
+            type: 'materializedPath'
     id:
         id:
             type: integer
             id: true
             generator:
                 strategy: AUTO
+            gedmo: [treePathSource]
     fields:
         firstName:
             type: string
@@ -30,11 +35,22 @@ AppBundle\Entity\User:
         vkontakte:
             type: string
             nullable: true
+        path:
+            type: string
+            nullable: true
+            length: 1024
+            gedmo:
+                treePath:
+                    separator: ':'
+                    endsWithSeparator: false
+        level:
+            type: integer
+            nullable: true
+            gedmo: [treeLevel]
     oneToOne:
         account:
             targetEntity: AppBundle\Entity\Account
             inversedBy: user
-            cascade: [persist]
             joinColumn:
                 name: account_id
                 referencedColumnName: id
@@ -42,9 +58,14 @@ AppBundle\Entity\User:
         tickets:
             targetEntity: AppBundle\Entity\Ticket
             mappedBy: user
+        referrals:
+            targetEntity: AppBundle\Entity\User
+            mappedBy: referrer
     manyToOne:
         referrer:
+            gedmo: [treeParent]
             targetEntity: AppBundle\Entity\User
+            inversedBy: referrals
             joinColumn:
                 name: referrer_id
                 referencedColumnName: id

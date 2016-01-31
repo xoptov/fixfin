@@ -29,8 +29,9 @@ class MoneyTransaction
     private $status;
 
     const STATUS_NEW = 0;
-    const STATUS_SUCCESS = 1;
-    const STATUS_ERROR = 2;
+    const STATUS_CANCELED = 1;
+    const STATUS_DONE = 2;
+    const STATUS_ERROR = 3;
 
     /** @var string */
     private $note;
@@ -38,7 +39,9 @@ class MoneyTransaction
     /** @var int */
     private $type;
 
-    const TYPE_RENEWAL = 1;
+    const TYPE_PROLONG = 1;
+    const TYPE_REWARD = 2;
+    const TYPE_WITHDRAWAL = 3;
 
     /** @var string */
     private $external;
@@ -48,9 +51,9 @@ class MoneyTransaction
 
     public function __construct()
     {
-        $this->amount = 0;
+        $this->amount = 0.0;
         $this->status = self::STATUS_NEW;
-        $this->type = self::TYPE_RENEWAL;
+        $this->type = self::TYPE_PROLONG;
     }
 
     public function onCreate()

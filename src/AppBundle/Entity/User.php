@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Tree\Traits\MaterializedPath;
 
 class User extends BaseUser
 {
@@ -25,23 +26,28 @@ class User extends BaseUser
     /** @var Ticket[] */
     private $tickets;
 
+    /** @var string */
+    private $avatar;
+
+    /** @var string */
+    private $vkontakte;
+
     /** @var User */
     private $referrer;
 
     /** @var User[] */
     private $referrals;
 
+    /** @var integer */
+    private $level;
+
     /** @var string */
-    private $avatar;
+    private $path;
 
     const STATUS_NOT_LOCKED = 0;
     const STATUS_LOCKED = 1;
-
     const STATUS_DISABLED = 0;
     const STATUS_ENABLED = 1;
-
-    /** @var string */
-    private $vkontakte;
 
     public function __construct()
     {
@@ -162,22 +168,22 @@ class User extends BaseUser
     }
 
     /**
-     * @param User $referrer
+     * @param ArrayCollection $tickets
      * @return User
      */
-    public function setReferrer(User $referrer)
+    public function setTickets($tickets)
     {
-        $this->referrer = $referrer;
+        $this->tickets = $tickets;
 
         return $this;
     }
 
     /**
-     * @return User
+     * @return Ticket[]|ArrayCollection
      */
-    public function getReferrer()
+    public function getTickets()
     {
-        return $this->referrer;
+        return $this->tickets;
     }
 
     /**
@@ -216,5 +222,81 @@ class User extends BaseUser
     public function getVKontakte()
     {
         return $this->vkontakte;
+    }
+
+    /**
+     * @param User $referrer
+     * @return User
+     */
+    public function setReferrer(User $referrer)
+    {
+        $this->referrer = $referrer;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getReferrer()
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * @param User[]|ArrayCollection $referrals
+     * @return User
+     */
+    public function setReferrals($referrals)
+    {
+        $this->referrals = $referrals;
+
+        return $this;
+    }
+
+    /**
+     * @return User[]|ArrayCollection
+     */
+    public function getReferrals()
+    {
+        return $this->referrals;
+    }
+
+    /**
+     * @param int $level
+     * @return User
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param string $path
+     * @return User
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }

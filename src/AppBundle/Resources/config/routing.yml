@@ -10,10 +10,6 @@ profile:
     path:     /cabinet/profile
     defaults: { _controller: AppBundle:Cabinet:profile }
 
-dashboard:
-    path:     /cabinet/dashboard
-    defaults: { _controller: AppBundle:Cabinet:dashboard }
-
 cloud:
     path:     /cabinet/cloud
     defaults: { _controller: AppBundle:Cabinet:cloud }
@@ -33,6 +29,18 @@ news:
 faq:
     path:     /cabinet/faq
     defaults: { _controller: AppBundle:Cabinet:faq }
+
+dashboard:
+    path:     /cabinet/dashboard
+    defaults: { _controller: AppBundle:Dashboard:index }
+
+dashboard_join:
+    path:     /cabinet/dashboard/join
+    defaults: { _controller: AppBundle:Dashboard:join }
+
+dashboard_prolong:
+    path:     /cabinet/dashboard/prolong
+    defaults: { _controller: AppBundle:Dashboard:prolong }
 
 accounts:
     path:     /api/accounts
