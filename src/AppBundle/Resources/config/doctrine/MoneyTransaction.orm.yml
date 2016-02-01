@@ -1,5 +1,6 @@
 AppBundle\Entity\MoneyTransaction:
     type: entity
+    repositoryClass: AppBundle\Entity\MoneyTransactionRepository
     table: money_transaction
     id:
         id:

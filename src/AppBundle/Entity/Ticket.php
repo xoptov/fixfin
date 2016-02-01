@@ -42,8 +42,8 @@ class Ticket
     /** @var bool */
     private $expired;
 
-    const STATUS_NOT_PAID = 0;
-    const STATUS_PAID = 1;
+    const STATUS_NOT_PAID = false;
+    const STATUS_PAID = true;
 
     const TYPE_SUBSCRIPTION = 1;
     const TYPE_OWNERSHIP = 2;

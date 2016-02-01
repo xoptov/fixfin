@@ -69,3 +69,14 @@ services:
         arguments: [@doctrine.orm.default_entity_manager]
         tags:
             - { name: form.type }
+
+    app.committee_service:
+        class: AppBundle\Service\Committee
+        arguments: [@doctrine.orm.default_entity_manager]
+
+    app.cashier_service:
+        class: AppBundle\Service\Cashier
+        arguments:
+            - @event_dispatcher
+            - @doctrine.orm.default_entity_manager
+            - @app.committee_service

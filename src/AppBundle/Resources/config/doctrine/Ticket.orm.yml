@@ -1,5 +1,6 @@
 AppBundle\Entity\Ticket:
     type: entity
+    repositoryClass: AppBundle\Entity\TicketRepository
     table: ticket
     id:
         id:

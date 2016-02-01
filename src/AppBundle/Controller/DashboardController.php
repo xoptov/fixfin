@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Rate;
 
 class DashboardController extends Controller
 {
@@ -21,16 +23,14 @@ class DashboardController extends Controller
     }
 
     /**
-     * 1. Необходимо проверить есть ли у referrer подходящий тикет
-     * 2. Необходимо сделать поиск по ветке у кого есть подходящий тикет
-     * 3. Необходимо привязаться к найденному тикету
+     * @return Response
      */
-    public function joinAction()
+    public function openAction(Rate $rate)
     {
-        $repo = $this->getDoctrine()->getRepository('AppBundle:User');
+        $user = $this->getUser();
+        $ticket = $this->get('app.cashier_service')->openTable($user, $rate);
 
-
-        return $this->render('AppBundle:Dashboard:join.html.twig');
+        return $this->render('AppBundle:Dashboard:open.html.twig', array('ticket' => $ticket));
     }
 
     public function prolongAction()

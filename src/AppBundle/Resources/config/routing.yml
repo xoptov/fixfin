@@ -34,9 +34,9 @@ dashboard:
     path:     /cabinet/dashboard
     defaults: { _controller: AppBundle:Dashboard:index }
 
-dashboard_join:
-    path:     /cabinet/dashboard/join
-    defaults: { _controller: AppBundle:Dashboard:join }
+dashboard_open:
+    path:     /cabinet/dashboard/open/{rate}
+    defaults: { _controller: AppBundle:Dashboard:open }
 
 dashboard_prolong:
     path:     /cabinet/dashboard/prolong

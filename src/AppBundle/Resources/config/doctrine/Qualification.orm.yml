@@ -28,7 +28,6 @@ AppBundle\Entity\Qualification:
                 joinColumns:
                     qualification_id:
                         referencedColumnName: id
-                        unique: true
                 inverseJoinColumns:
                     ticket_id:
                         referencedColumnName: id
