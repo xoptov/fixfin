@@ -124,6 +124,30 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         $this->setReference('user.7', $user7);
         $manager->persist($user7);
 
+        /** @var User $user8 */
+        $user8 = $userManager->createUser();
+        $user8->setUsername('dasha')
+            ->setEmail('dasha@finfix.dev')
+            ->setPlainPassword('123456')
+            ->setReferrer($user7)
+            ->setEnabled(true);
+        $userManager->updateCanonicalFields($user8);
+        $userManager->updatePassword($user8);
+        $this->setReference('user.8', $user8);
+        $manager->persist($user8);
+
+        /** @var User $user9 */
+        $user9 = $userManager->createUser();
+        $user9->setUsername('masha')
+            ->setEmail('masha@finfix.dev')
+            ->setPlainPassword('123456')
+            ->setReferrer($user8)
+            ->setEnabled(true);
+        $userManager->updateCanonicalFields($user9);
+        $userManager->updatePassword($user9);
+        $this->setReference('user.9', $user9);
+        $manager->persist($user9);
+
         $manager->flush();
     }
 

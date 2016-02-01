@@ -75,6 +75,17 @@ class Qualification
     }
 
     /**
+     * @param Ticket $ticket
+     * @return Qualification
+     */
+    public function addTransferredTicket(Ticket $ticket)
+    {
+        $this->transferredTickets->add($ticket);
+
+        return $this;
+    }
+
+    /**
      * @param bool $value
      * @return Qualification
      */

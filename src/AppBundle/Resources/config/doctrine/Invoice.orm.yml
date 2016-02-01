@@ -1,5 +1,6 @@
 AppBundle\Entity\Invoice:
     type: entity
+    repositoryClass: AppBundle\Entity\InvoiceRepository
     table: invoice
     id:
         id:
