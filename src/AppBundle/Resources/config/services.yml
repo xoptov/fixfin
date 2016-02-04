@@ -80,3 +80,8 @@ services:
             - @event_dispatcher
             - @doctrine.orm.default_entity_manager
             - @app.committee_service
+            - @app.banker_service
+
+    app.banker_service:
+        class: AppBundle\Service\Banker
+        arguments: [@doctrine.orm.default_entity_manager]

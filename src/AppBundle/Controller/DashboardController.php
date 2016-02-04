@@ -33,7 +33,7 @@ class DashboardController extends Controller
         return $this->render('AppBundle:Dashboard:open.html.twig', array('ticket' => $ticket));
     }
 
-    public function prolongAction()
+    public function prolongAction(Rate $rate)
     {
         return $this->render('AppBundle:Dashboard:index.html.twig');
     }

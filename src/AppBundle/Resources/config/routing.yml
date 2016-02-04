@@ -39,10 +39,23 @@ dashboard_open:
     defaults: { _controller: AppBundle:Dashboard:open }
 
 dashboard_prolong:
-    path:     /cabinet/dashboard/prolong
+    path:     /cabinet/dashboard/prolong/{rate}
     defaults: { _controller: AppBundle:Dashboard:prolong }
+
+payment_success:
+    path:     /cabinet/payment/success
+    defaults: { _controller: AppBundle:Payment:success }
+
+payment_error:
+    path:     /cabinet/payment/error
+    defaults: { _controller: AppBundle:Payment:error }
 
 accounts:
     path:     /api/accounts
     defaults: { _controller: AppBundle:API:accounts }
+    methods:  [POST]
+
+payment_callback:
+    path:     /api/payment/callback
+    defaults: { _controller: AppBundle:Payment:callback }
     methods:  [POST]

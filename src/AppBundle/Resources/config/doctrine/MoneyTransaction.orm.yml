@@ -24,9 +24,10 @@ AppBundle\Entity\MoneyTransaction:
         type:
             type: smallint
         external:
-            type: string
-            length: 50
+            type: integer
             nullable: true
+            options:
+                unsigned: true
     manyToOne:
         source:
             targetEntity: AppBundle\Entity\Account

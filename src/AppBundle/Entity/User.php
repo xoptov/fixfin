@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Tree\Traits\MaterializedPath;
 
 class User extends BaseUser
 {
