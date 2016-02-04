@@ -16,9 +16,9 @@ AppBundle\Entity\Account:
             type: string
             length: 6
             nullable: true
-        passPhrase:
+        merchantPassPhrase:
             type: string
-            length: 45
+            length: 32
             nullable: true
         commission:
             type: float

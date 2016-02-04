@@ -60,16 +60,16 @@ class Ticket
     public static function getPaidLabels()
     {
         return [
-            self::STATUS_NOT_PAID => 'entity.status.no',
-            self::STATUS_PAID => 'entity.status.yes'
+            static::STATUS_NOT_PAID => 'entity.status.no',
+            static::STATUS_PAID => 'entity.status.yes'
         ];
     }
 
     public static function getTypeLabels()
     {
         return [
-            self::TYPE_SUBSCRIPTION => 'form.ticket.subscription',
-            self::TYPE_OWNERSHIP => 'form.ticket.ownership'
+            static::TYPE_SUBSCRIPTION => 'form.ticket.subscription',
+            static::TYPE_OWNERSHIP => 'form.ticket.ownership'
         ];
     }
 
@@ -250,5 +250,21 @@ class Ticket
     public function isExpired()
     {
         return $this->expired;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSubscription()
+    {
+        return self::TYPE_SUBSCRIPTION === $this->getType();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOwnership()
+    {
+        return self::TYPE_OWNERSHIP === $this->getType();
     }
 }

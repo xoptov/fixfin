@@ -1,3 +1,7 @@
+perfect_money:
+    resource: "@PerfectMoneyBundle/Resources/config/routing.yml"
+    prefix:   /payments
+
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
 

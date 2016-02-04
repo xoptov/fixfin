@@ -2,26 +2,47 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 
 class AccountRepository extends EntityRepository
 {
-    /**
-     * @param Pool $pool
-     * @throws EntityNotFoundException
-     */
-    public function getPoorestSystemAccount(Pool $pool)
+    public function getSystemAccountQueryBuilder(Pool $pool)
     {
-        throw new EntityNotFoundException("Взвана заглушка");
+        $qb = $this->createQueryBuilder('a')
+            ->innerJoin('a.pools', 'p')
+            ->where('p = :pool')
+                ->setParameter('pool', $pool)
+            ->andWhere('a.balance IS NOT NULL')
+            ->setMaxResults(1);
+
+        return $qb;
     }
 
     /**
      * @param Pool $pool
-     * @throws EntityNotFoundException
+     * @return Account
+     */
+    public function getPoorestSystemAccount(Pool $pool)
+    {
+        $qb = $this->getSystemAccountQueryBuilder($pool)
+            ->orderBy('a.balance', 'ASC');
+
+        $query = $qb->getQuery();
+
+        return $query->getSingleResult();
+    }
+
+    /**
+     * @param Pool $pool
+     * @return Account
      */
     public function getWealthSystemAccount(Pool $pool)
     {
-        throw new EntityNotFoundException("Вызвана заглушка");
+        $qb = $this->getSystemAccountQueryBuilder($pool)
+            ->orderBy('a.balance', 'DESC');
+
+        $query = $qb->getQuery();
+
+        return $query->getSingleResult();
     }
 }

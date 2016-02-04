@@ -2,15 +2,12 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\Account;
-use AppBundle\Entity\MoneyTransaction;
 use AppBundle\Entity\Qualification;
 use AppBundle\Entity\Rate;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Ticket;
 use AppBundle\Entity\Invoice;
 use AppBundle\Event\InvoiceEvent;
-use AppBundle\Event\MoneyTransactionEvent;
 use AppBundle\Event\TicketEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,14 +23,18 @@ class Cashier
     /** @var Committee */
     private $committee;
 
+    /** @var Banker */
+    private $banker;
+
     /**
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(EventDispatcherInterface $dispatcher, EntityManagerInterface $entityManager, Committee $committee)
+    public function __construct(EventDispatcherInterface $dispatcher, EntityManagerInterface $entityManager, Committee $committee, Banker $banker)
     {
         $this->dispatcher = $dispatcher;
         $this->entityManager = $entityManager;
         $this->committee = $committee;
+        $this->banker = $banker;
     }
 
     /**
@@ -75,26 +76,6 @@ class Cashier
     }
 
     /**
-     * @param Invoice $invoice
-     * @return bool
-     */
-    public function checkInvoiceExpiration(Invoice $invoice)
-    {
-        $now = new \DateTime();
-
-        if ($now->getTimestamp() > $invoice->getExpiredAt()->getTimestamp()) {
-            $invoice->setStatus(Invoice::STATUS_EXPIRED);
-
-            $event = new InvoiceEvent($invoice);
-            $this->dispatcher->dispatch(InvoiceEvent::EXPIRED, $event);
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * @param Ticket $ticket
      * @return bool
      */
@@ -105,8 +86,22 @@ class Cashier
         if ($now->getTimestamp() > $ticket->getPaidUp()->getTimestamp()) {
             $ticket->setExpired(true);
 
-            $event = new TicketEvent($ticket);
-            $this->dispatcher->dispatch(TicketEvent::EXPIRED, $event);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param Invoice $invoice
+     * @return bool
+     */
+    public function checkInvoiceExpiration(Invoice $invoice)
+    {
+        $now = new \DateTime();
+
+        if ($now->getTimestamp() > $invoice->getExpiredAt()->getTimestamp()) {
+            $invoice->setStatus(Invoice::STATUS_EXPIRED);
 
             return false;
         }
@@ -115,56 +110,18 @@ class Cashier
     }
 
     /**
-     * @param Account $source
-     * @param Account $destination
-     * @param float $amount
-     * @return MoneyTransaction
-     */
-    private function createTransaction(Account $source, Account $destination, $amount)
-    {
-        $transaction = new MoneyTransaction();
-
-        $transaction->setSource($source)
-            ->setDestination($destination)
-            ->setAmount($amount);
-
-        $this->entityManager->persist($transaction);
-
-        return $transaction;
-    }
-
-    /**
      * @param Invoice $invoice
-     * @param Account $destination
-     * @return MoneyTransaction
+     * @return bool
      */
-    public function createProlongTransaction(Invoice $invoice, Account $destination)
+    public function checkInvoiceFullyPaid(Invoice $invoice)
     {
-        $source = $invoice->getTicket()->getUser()->getAccount();
-        $transaction = $this->createTransaction($source, $destination, $invoice->getAmount());
-        $transaction->setInvoice($invoice);
+        if ($invoice->getAmount() > $invoice->getPaid()) {
+            $invoice->setStatus(Invoice::STATUS_PARTIAL_PAID);
 
-        $event = new MoneyTransactionEvent($transaction);
-        $this->dispatcher->dispatch(MoneyTransactionEvent::CREATED, $event);
+            return false;
+        }
 
-        return $transaction;
-    }
-
-    /**
-     * @param Account $source
-     * @param Ticket $ticket
-     * @return MoneyTransaction
-     */
-    public function createRewardTransaction(Account $source, Ticket $ticket)
-    {
-        $destination = $ticket->getUser()->getAccount();
-        $rate = $ticket->getRate();
-        $amount = $rate->getAmount() * $rate->getCommission() / 100;
-
-        $transaction = $this->createTransaction($source, $destination, $amount);
-        $transaction->setType(MoneyTransaction::TYPE_REWARD);
-
-        return $transaction;
+        return true;
     }
 
     /**
@@ -213,7 +170,7 @@ class Cashier
     private function determineClosestChiefTicket(Ticket $ticket)
     {
         $referrers = $this->entityManager->getRepository('AppBundle:User')
-            ->getReferrersBranch($ticket);
+            ->getReferrers($ticket);
 
         if (count($referrers)) {
 
@@ -245,5 +202,110 @@ class Cashier
         }
 
         return $ticket;
+    }
+
+    /**
+     * @param Ticket $ticket
+     * @return Invoice|mixed
+     */
+    public function getInvoiceForProlongation(Ticket $ticket)
+    {
+        $invoice = $this->entityManager->getRepository('AppBundle:Invoice')
+            ->getActualInvoice($ticket);
+
+        if ($invoice instanceof Invoice && $this->checkInvoiceExpiration($invoice)) {
+            return $invoice;
+        }
+
+        return $this->createInvoice($ticket);
+    }
+
+    /**
+     * @param Invoice $invoice
+     * @return bool
+     */
+    public function processInvoicePaid(Invoice $invoice, $flush = true)
+    {
+        if ($this->checkInvoiceFullyPaid($invoice)) {
+
+            $this->reestablishChief($invoice->getTicket());
+            $this->reestablishSubordinates($invoice->getTicket());
+
+            if ($flush) {
+                $this->entityManager->flush();
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param Ticket $ticket
+     */
+    public function reestablishChief(Ticket $ticket)
+    {
+        $chiefTicket = $ticket->getChiefTicket();
+
+        if (!$chiefTicket) {
+            return;
+        }
+
+        if ($chiefTicket->isOwnership() || ($chiefTicket->isSubscription() && $this->checkTicketExpiration($chiefTicket))) {
+            $this->banker->createRewardTransaction($chiefTicket);
+
+            return;
+        }
+
+        // Получаем цепочку реферреров у которых есть оплаченные тикеты для данного стола
+        $referrers = $this->entityManager->getRepository('AppBundle:User')
+                    ->getReferrers($ticket);
+
+        if (count($referrers)) {
+
+            // Получаем ближний тикет для данного стола из указанной цепочки реферреров
+            $closestTicket = $this->entityManager->getRepository('AppBundle:Ticket')
+                ->getClosestTicketByRate($ticket->getRate(), $referrers);
+
+            if ($closestTicket) {
+                $ticket->setChiefTicket($closestTicket);
+
+                // Кидаем событие о том что chief тикет назначен из цепочки
+                $this->dispatcher->dispatch(TicketEvent::CHIEF_REESTABLISHED, new TicketEvent($ticket));
+                $this->banker->createRewardTransaction($closestTicket);
+
+                // Выходим до анулирования только что назначенного chief тикета
+                return;
+            }
+        }
+
+        // Если нет подходящего тикета то анулируем chief тикет у текущего тикета
+        $ticket->setChiefTicket(null);
+        $this->dispatcher->dispatch(TicketEvent::CHIEF_REMOVED, new TicketEvent($ticket));
+    }
+
+    /**
+     * @param Ticket $ticket
+     */
+    public function reestablishSubordinates(Ticket $ticket)
+    {
+        $repo = $this->entityManager->getRepository('AppBundle:Ticket');
+
+        if ($ticket->getQualification()) {
+            $lostTickets = $repo->getLostReferralsTickets($ticket);
+        } else {
+            $lostTickets = $repo->getLostReferralsTickets($ticket, false);
+        }
+
+        if (!count($lostTickets)) {
+            return;
+        }
+
+        foreach ($lostTickets as $subordinate) {
+            $subordinate->setChiefTicket($ticket);
+        }
+
+        $this->dispatcher->dispatch(TicketEvent::SUBORDINATES_REESTABLISHED, new TicketEvent($ticket));
     }
 }
