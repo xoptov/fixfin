@@ -9,8 +9,11 @@ use AppBundle\Entity\Ticket;
 use AppBundle\Entity\Invoice;
 use AppBundle\Event\InvoiceEvent;
 use AppBundle\Event\TicketEvent;
+use PerfectMoneyBundle\Model\PaymentConfirmation;
+use PerfectMoneyBundle\Model\PaymentResultInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class Cashier
 {
@@ -26,15 +29,19 @@ class Cashier
     /** @var Banker */
     private $banker;
 
+    /** @var PropertyAccessor */
+    private $accessor;
+
     /**
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(EventDispatcherInterface $dispatcher, EntityManagerInterface $entityManager, Committee $committee, Banker $banker)
+    public function __construct(EventDispatcherInterface $dispatcher, EntityManagerInterface $entityManager, Committee $committee, Banker $banker, PropertyAccessor $accessor)
     {
         $this->dispatcher = $dispatcher;
         $this->entityManager = $entityManager;
         $this->committee = $committee;
         $this->banker = $banker;
+        $this->accessor = $accessor;
     }
 
     /**
@@ -62,10 +69,13 @@ class Cashier
      */
     public function createInvoice(Ticket $ticket)
     {
+        $amount = $this->accessor->getValue($ticket, 'rate.amount');
+        $period = $this->accessor->getValue($ticket, 'rate.period');
+
         $invoice = new Invoice();
         $invoice->setTicket($ticket)
-            ->setAmount($ticket->getRate()->getAmount())
-            ->setPeriod($ticket->getRate()->getPeriod());
+            ->setAmount($amount)
+            ->setPeriod($period);
 
         $this->entityManager->persist($invoice);
 
@@ -82,8 +92,9 @@ class Cashier
     public function checkTicketExpiration(Ticket $ticket)
     {
         $now = new \DateTime();
+        $paidUpTimestamp = $this->accessor->getValue($ticket, 'paidUp.timestamp');
 
-        if ($now->getTimestamp() > $ticket->getPaidUp()->getTimestamp()) {
+        if ($now->getTimestamp() > $paidUpTimestamp) {
             $ticket->setExpired(true);
 
             return false;
@@ -99,8 +110,9 @@ class Cashier
     public function checkInvoiceExpiration(Invoice $invoice)
     {
         $now = new \DateTime();
+        $expiredAtTimestamp = $this->accessor->getValue($invoice, 'expiredAt.timestamp');
 
-        if ($now->getTimestamp() > $invoice->getExpiredAt()->getTimestamp()) {
+        if ($now->getTimestamp() > $expiredAtTimestamp) {
             $invoice->setStatus(Invoice::STATUS_EXPIRED);
 
             return false;
@@ -129,7 +141,7 @@ class Cashier
      */
     private function determineChiefTicket(Ticket $ticket)
     {
-        $referrer = $ticket->getUser()->getReferrer();
+        $referrer = $this->accessor->getValue($ticket, 'user.referrer');
         $rate = $ticket->getRate();
 
         if (!$referrer instanceof User) {
@@ -307,5 +319,20 @@ class Cashier
         }
 
         $this->dispatcher->dispatch(TicketEvent::SUBORDINATES_REESTABLISHED, new TicketEvent($ticket));
+    }
+
+    public function createProlongPaymentRequest(Ticket $ticket)
+    {
+        $invoice = $this->getInvoiceForProlongation($ticket);
+
+        return $this->banker->createPaymentRequest($invoice);
+    }
+
+    /**
+     * @param PaymentResultInterface $payment
+     */
+    public function handlePayment(PaymentResultInterface $payment)
+    {
+
     }
 }

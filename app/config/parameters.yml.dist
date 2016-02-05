@@ -19,9 +19,10 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
     perfect_money:
-        payee_name: 'FixFin ltd'
-        payment_units: 'USD'
-        status_url: ~
-        payment_url: ~
-        nopayment_url: ~
+        entry_form:     'https://perfectmoney.is/api/step1.asp'
+        payee_name:     'FixFin ltd.'
+        payment_units:  'USD'
+        status_url:     ~
+        payment_url:    ~
+        nopayment_url:  ~
         available_payment_methods: ~

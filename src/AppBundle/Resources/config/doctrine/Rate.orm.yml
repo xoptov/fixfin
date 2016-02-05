@@ -14,8 +14,12 @@ AppBundle\Entity\Rate:
             nullable: true
         amount:
             type: float
+            precision: 2
+            scale: 2
         commission:
             type: float
+            precision: 1
+            scale: 1
         period:
             type: smallint
         members:

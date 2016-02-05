@@ -15,8 +15,7 @@ class CabinetController extends Controller
 
     public function profileAction(Request $request)
     {
-        $user = $this->getUser();
-        $form = $this->createForm(new ProfileType(), $user);
+        $form = $this->createForm(ProfileType::class, $this->getUser());
 
         $form->handleRequest($request);
 

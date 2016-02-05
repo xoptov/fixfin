@@ -11,12 +11,7 @@ class PaymentController extends Controller
 
     }
 
-    public function errorAction()
-    {
-
-    }
-
-    public function callbackAction()
+    public function failedAction()
     {
 
     }

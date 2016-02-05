@@ -2,19 +2,19 @@
 
 namespace AppBundle\Service\PaymentSystem;
 
-use AppBundle\Entity\Invoice;
-use AppBundle\Model\PaymentRequest;
+use PerfectMoneyBundle\Model\PaymentRequest;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use AppBundle\Entity\Pool;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use AppBundle\Entity\Invoice;
+use AppBundle\Entity\Pool;
 
 class PerfectMoney
 {
     /** @var PropertyAccessor */
-    private $propertyAccessor;
+    private $accessor;
 
     /** @var EntityManagerInterface */
     private $entityManager;
@@ -22,9 +22,9 @@ class PerfectMoney
     /** @var array */
     private $options;
 
-    public function __construct(PropertyAccessor $propertyAccessor, EntityManagerInterface $entityManager, array $options)
+    public function __construct(PropertyAccessor $accessor, EntityManagerInterface $entityManager, array $options)
     {
-        $this->propertyAccessor = $propertyAccessor;
+        $this->accessor = $accessor;
         $this->entityManager = $entityManager;
 
         // Настройка опций для сервиса
@@ -45,7 +45,7 @@ class PerfectMoney
             ->setNoPaymentUrl($this->options['nopayment_url'])
             ->setAvailablePaymentMethods($this->options['available_payment_methods']);
 
-        $pool = $this->propertyAccessor->getValue($invoice, 'ticket.rate.pool');
+        $pool = $this->accessor->getValue($invoice, 'ticket.rate.pool');
 
         if (!$pool instanceof Pool) {
             throw new UnexpectedTypeException($pool, new PropertyPath('ticket.rate.pool'));

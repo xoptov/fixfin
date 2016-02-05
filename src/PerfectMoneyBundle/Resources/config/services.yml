@@ -1,0 +1,12 @@
+services:
+    perfect_money.token_porvider:
+        class: PerfectMoneyBundle\Service\TokenProvider
+        arguments: [@doctrine.orm.default_entity_manager]
+
+    perfect_money.form.type.payment_confirmation:
+        class: PerfectMoneyBundle\Form\Type\PaymentConfirmationType
+        arguments:
+            - @perfect_money.token_porvider
+            - @property_accessor
+        tags:
+            - { name: form.type }

@@ -1,14 +1,14 @@
 perfect_money_success:
-    path:     /success
+    path:     /perfectmoney/success
     defaults: { _controller: PerfectMoneyBundle:Default:success }
     methods:  [POST]
 
-perfect_money_error:
-    path:     /error
-    defaults: { _controller: PerfectMoneyBundle:Default:error }
+perfect_money_failed:
+    path:     /perfectmoney/error
+    defaults: { _controller: PerfectMoneyBundle:Default:failed }
     methods:  [POST]
 
 perfect_money_confirm:
-    path:     /confirm
+    path:     /perfectmoney/confirm
     defaults: { _controller: PerfectMoneyBundle:Default:confirmation }
     methods:  [POST]
