@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class RequestType extends AbstractType
+class PaymentRequestType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -47,5 +47,10 @@ class RequestType extends AbstractType
             'data_class' => 'PerfectMoneyBundle\\Model\\PaymentRequest',
             'csrf_protection' => false
         ));
+    }
+
+    public function getName()
+    {
+        return '';
     }
 }

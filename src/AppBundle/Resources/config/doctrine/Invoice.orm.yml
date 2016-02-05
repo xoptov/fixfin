@@ -18,8 +18,12 @@ AppBundle\Entity\Invoice:
             type: datetime
         amount:
             type: float
+            precision: 2
+            scale: 2
         paid:
             type: float
+            precision: 2
+            scale: 2
         period:
             type: integer
         status:

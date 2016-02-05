@@ -10,13 +10,13 @@ AppBundle\Entity\Account:
     fields:
         number:
             type: string
-            length: 8
+            length: 10
             unique: true
         login:
             type: string
             length: 6
             nullable: true
-        merchantPassPhrase:
+        passPhrase:
             type: string
             length: 32
             nullable: true
@@ -26,6 +26,8 @@ AppBundle\Entity\Account:
         balance:
             type: float
             nullable: true
+            precision: 2
+            scale: 2
         system:
             type: boolean
         verified:

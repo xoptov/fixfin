@@ -19,32 +19,32 @@ class Builder implements ContainerAwareInterface
         $translator = $this->container->get('translator');
 
         $menu->addChild($translator->trans('menu.profile'), array(
-            'route' => 'profile',
+            'route' => 'app_profile',
             'attributes' => array('class' => 'menu-item')
         ));
 
         $menu->addChild($translator->trans('menu.dashboard'), array(
-            'route' => 'dashboard',
+            'route' => 'app_dashboard',
             'attributes' => array('class' => 'menu-item')
         ));
         $menu->addChild($translator->trans('menu.cloud'), array(
-            'route' => 'cloud',
+            'route' => 'app_cloud',
             'attributes' => array('class' => 'menu-item')
         ));
         $menu->addChild($translator->trans('menu.history'), array(
-            'route' => 'history',
+            'route' => 'app_history',
             'attributes' => array('class' => 'menu-item')
         ));
         $menu->addChild($translator->trans('menu.news'), array(
-            'route' => 'news',
+            'route' => 'app_news',
             'attributes' => array('class' => 'menu-item')
         ));
 //        $menu->addChild($translator->trans('menu.content'), array(
-//            'route' => 'content',
+//            'route' => 'app_content',
 //            'attributes' => array('class' => 'menu-item')
 //        ));
 //        $menu->addChild($translator->trans('menu.faq'), array(
-//            'route' => 'faq',
+//            'route' => 'app_faq',
 //            'attributes' => array('class' => 'menu-item')
 //        ));
 

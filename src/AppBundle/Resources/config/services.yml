@@ -1,5 +1,5 @@
 services:
-    app.referrer_listener:
+    app.referrer_subscriber:
         class: AppBundle\EventListener\ReferrerSubscriber
         arguments:
             - @doctrine.orm.default_entity_manager
@@ -72,7 +72,9 @@ services:
 
     app.committee_service:
         class: AppBundle\Service\Committee
-        arguments: [@doctrine.orm.default_entity_manager]
+        arguments:
+            - @doctrine.orm.default_entity_manager
+            - @property_accessor
 
     app.cashier_service:
         class: AppBundle\Service\Cashier
@@ -81,7 +83,22 @@ services:
             - @doctrine.orm.default_entity_manager
             - @app.committee_service
             - @app.banker_service
+            - @property_accessor
 
     app.banker_service:
         class: AppBundle\Service\Banker
-        arguments: [@doctrine.orm.default_entity_manager]
+        arguments:
+            - @doctrine.orm.default_entity_manager
+            - @property_accessor
+            - @app.payment_system.perfectmoney
+
+    app.payment_system.perfectmoney:
+        class: AppBundle\Service\PaymentSystem\PerfectMoney
+        arguments:
+            - @property_accessor
+            - @doctrine.orm.default_entity_manager
+            - %perfect_money%
+
+    app.payment_subscriber:
+        class: AppBundle\EventListener\PaymentSubscriber
+        arguments: [@app.cashier_service]

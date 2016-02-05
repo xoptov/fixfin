@@ -21,7 +21,7 @@ class Account
     private $login;
 
     /** @var string */
-    private $merchantPassPhrase;
+    private $passPhrase;
 
     /** @var float */
     private $commission;
@@ -154,12 +154,12 @@ class Account
     }
 
     /**
-     * @param string $merchantPassPhrase
+     * @param string $passPhrase
      * @return Account
      */
-    public function setMerchantPassPhrase($merchantPassPhrase)
+    public function setPassPhrase($passPhrase)
     {
-        $this->merchantPassPhrase = $merchantPassPhrase;
+        $this->passPhrase = $passPhrase;
 
         return $this;
     }
@@ -167,9 +167,9 @@ class Account
     /**
      * @return string
      */
-    public function getMerchantPassPhrase()
+    public function getPassPhrase()
     {
-        return $this->merchantPassPhrase;
+        return $this->passPhrase;
     }
 
     /**

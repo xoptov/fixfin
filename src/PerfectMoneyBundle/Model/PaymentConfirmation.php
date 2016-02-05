@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Model;
+namespace PerfectMoneyBundle\Model;
 
 use PerfectMoneyBundle\Model\PaymentSuccess;
 
