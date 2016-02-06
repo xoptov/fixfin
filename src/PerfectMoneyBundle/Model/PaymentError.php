@@ -2,7 +2,7 @@
 
 namespace PerfectMoneyBundle\Model;
 
-class PaymentError implements PaymentResultInterface
+class PaymentError implements PaymentInterface
 {
     /** @var string */
     protected $payeeAccount;

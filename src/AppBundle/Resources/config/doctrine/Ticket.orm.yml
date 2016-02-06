@@ -8,16 +8,21 @@ AppBundle\Entity\Ticket:
             id: true
             generator:
                 strategy: AUTO
+            options:
+                unsigned: true
     fields:
         paidUp:
             type: datetime
             nullable: true
         paid:
             type: boolean
+            nullable: false
         type:
             type: integer
+            nullable: false
         expired:
             type: boolean
+            nullable: false
     oneToOne:
         qualification:
             targetEntity: AppBundle\Entity\Qualification
@@ -30,6 +35,8 @@ AppBundle\Entity\Ticket:
                 name: user_id
                 referencedColumnName: id
                 nullable: false
+                options:
+                    unsigned: true
         rate:
             targetEntity: AppBundle\Entity\Rate
             inversedBy: tickets
@@ -37,12 +44,16 @@ AppBundle\Entity\Ticket:
                 name: rate_id
                 referencedColumnName: id
                 nullable: false
+                options:
+                    unsigned: true
         chiefTicket:
             targetEntity: AppBundle\Entity\Ticket
             inversedBy: subordinates
             joinColumn:
                 name: chief_ticket_id
                 referencedColumnName: id
+                options:
+                    unsigned: true
     oneToMany:
         invoices:
             targetEntity: AppBundle\Entity\Invoice

@@ -33,17 +33,17 @@ class Banker
     }
 
     /**
-     * @param Account $source
-     * @param Account $destination
+     * @param Account $payeeAccount
+     * @param Account $payerAccount
      * @param float $amount
      * @return MoneyTransaction
      */
-    private function createTransaction(Account $source, Account $destination, $amount)
+    private function createTransaction(Account $payerAccount, Account $payeeAccount, $amount)
     {
         $transaction = new MoneyTransaction();
 
-        $transaction->setSource($source)
-            ->setDestination($destination)
+        $transaction->setSource($payerAccount)
+            ->setDestination($payeeAccount)
             ->setAmount($amount);
 
         $this->entityManager->persist($transaction);
@@ -52,19 +52,18 @@ class Banker
     }
 
     /**
+     * Этот метод использовать для того чтобы создать логирующую транзакцию после получения подтверждения об оплате от Payment System
      * @param Invoice $invoice
+     * @param Account $payeeAccount
      * @return MoneyTransaction
      */
-    public function createProlongTransaction(Invoice $invoice)
+    public function createProlongTransaction(Invoice $invoice, Account $payeeAccount)
     {
-        $source = $this->accessor->getValue($invoice, 'ticket.user.account');
-        $pool = $this->accessor->getValue($invoice, 'ticket.rate.pool');
+        $payerAccount = $this->accessor->getValue($invoice, 'ticket.user.account');
 
-        $destination = $this->entityManager->getRepository('AppBundle:Account')
-            ->getPoorestSystemAccount($pool);
-
-        $transaction = $this->createTransaction($source, $destination, $invoice->getAmount());
-        $transaction->setInvoice($invoice);
+        $transaction = $this->createTransaction($payerAccount, $payeeAccount, $invoice->getPaid())
+            ->setType(MoneyTransaction::TYPE_PROLONG)
+            ->setInvoice($invoice);
 
         return $transaction;
     }
@@ -75,16 +74,31 @@ class Banker
      */
     public function createRewardTransaction(Ticket $ticket)
     {
-        $destination = $this->accessor->getValue($ticket, 'user.account');
+        $payeeAccount = $this->accessor->getValue($ticket, 'user.account');
         $pool = $this->accessor->getValue($ticket, 'rate.pool');
 
-        $source = $this->entityManager->getRepository('AppBundle:Account')
+        $payerAccount = $this->entityManager->getRepository('AppBundle:Account')
             ->getWealthSystemAccount($pool);
 
         $rate = $ticket->getRate();
         $amount = $rate->getAmount() * $rate->getCommission() / 100;
 
-        $transaction = $this->createTransaction($source, $destination, $amount);
+        $transaction = $this->createTransaction($payerAccount, $payeeAccount, $amount)
+            ->setType(MoneyTransaction::TYPE_REWARD);
+
+        return $transaction;
+    }
+
+    /**
+     * @param Account $payerAccount
+     * @param Account $payeeAccount
+     * @param float $amount
+     * @return MoneyTransaction
+     */
+    public function createWithdrawalTransaction(Account $payerAccount, Account $payeeAccount, $amount)
+    {
+        $transaction = $this->createTransaction($payerAccount, $payeeAccount, $amount)
+            ->setType(MoneyTransaction::TYPE_WITHDRAWAL);
 
         return $transaction;
     }
@@ -92,6 +106,7 @@ class Banker
     /**
      * @param Invoice $invoice
      * @return PaymentRequest
+     * @todo Подумать куда лучше вынести этот метод, а может и оставить его
      */
     public function createPaymentRequest(Invoice $invoice)
     {

@@ -2,11 +2,11 @@
 
 namespace PerfectMoneyBundle\Model;
 
-interface PaymentResultInterface
+interface PaymentInterface
 {
     /**
      * @param string $payeeAccount
-     * @return PaymentResultInterface
+     * @return PaymentInterface
      */
     public function setPayeeAccount($payeeAccount);
 
@@ -17,7 +17,7 @@ interface PaymentResultInterface
 
     /**
      * @param float $paymentAmount
-     * @return PaymentResultInterface
+     * @return PaymentInterface
      */
     public function setPaymentAmount($paymentAmount);
 
@@ -28,7 +28,7 @@ interface PaymentResultInterface
 
     /**
      * @param string $paymentUnits
-     * @return PaymentResultInterface
+     * @return PaymentInterface
      */
     public function setPaymentUnits($paymentUnits);
 
@@ -39,7 +39,7 @@ interface PaymentResultInterface
 
     /**
      * @param int $paymentBatchNum
-     * @return PaymentResultInterface
+     * @return PaymentInterface
      */
     public function setPaymentBatchNum($paymentBatchNum);
 
@@ -50,7 +50,7 @@ interface PaymentResultInterface
 
     /**
      * @param string $paymentId
-     * @return PaymentResultInterface
+     * @return PaymentInterface
      */
     public function setPaymentId($paymentId);
 

@@ -1,0 +1,22 @@
+PerfectMoneyBundle\Model\PaymentError:
+    properties:
+        payeeAccount:
+            - NotBlank: ~
+        paymentAmount:
+            - NotBlank: ~
+        paymentUnits:
+            - NotBlank: ~
+        paymentId:
+            - NotBlank: ~
+
+PerfectMoneyBundle\Model\PaymentSuccess:
+    properties:
+        payerAccount:
+            - NotBlank: ~
+
+PerfectMoneyBundle\Model\PaymentConfirmation:
+    properties:
+        timestampGmt:
+            - NotBlank: ~
+        v2Hash:
+            - NotBlank: ~

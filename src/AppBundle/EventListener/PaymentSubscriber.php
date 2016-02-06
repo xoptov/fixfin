@@ -5,7 +5,6 @@ namespace AppBundle\EventListener;
 use AppBundle\Service\Cashier;
 use PerfectMoneyBundle\Event\PaymentEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use PerfectMoneyBundle\Model\PaymentConfirmation;
 
 class PaymentSubscriber implements EventSubscriberInterface
 {

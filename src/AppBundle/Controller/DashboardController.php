@@ -46,7 +46,7 @@ class DashboardController extends Controller
             ->getTicketByRate($rate, $this->getUser());
 
         if (!$ticket) {
-            return new RedirectResponse($this->generateUrl('app_dashboard_open'), array('rate' => $rate));
+            $this->redirectToRoute('app_dashboard_open', array('rate' => $rate));
         }
 
         //TODO: нужно подумать где необходимо делать валидацию, или упаковать это в сервис одного метода

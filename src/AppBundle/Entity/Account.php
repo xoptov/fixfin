@@ -21,6 +21,9 @@ class Account
     private $login;
 
     /** @var string */
+    private $password;
+
+    /** @var string */
     private $passPhrase;
 
     /** @var float */
@@ -151,6 +154,25 @@ class Account
     public function getLogin()
     {
         return $this->login;
+    }
+
+    /**
+     * @param string $password
+     * @return Account
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**

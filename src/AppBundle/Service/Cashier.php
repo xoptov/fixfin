@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\MoneyTransaction;
 use AppBundle\Entity\Qualification;
 use AppBundle\Entity\Rate;
 use AppBundle\Entity\User;
@@ -9,8 +10,8 @@ use AppBundle\Entity\Ticket;
 use AppBundle\Entity\Invoice;
 use AppBundle\Event\InvoiceEvent;
 use AppBundle\Event\TicketEvent;
-use PerfectMoneyBundle\Model\PaymentConfirmation;
-use PerfectMoneyBundle\Model\PaymentResultInterface;
+use Doctrine\ORM\NoResultException;
+use PerfectMoneyBundle\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -89,7 +90,7 @@ class Cashier
      * @param Ticket $ticket
      * @return bool
      */
-    public function checkTicketExpiration(Ticket $ticket)
+    private function checkTicketExpiration(Ticket $ticket)
     {
         $now = new \DateTime();
         $paidUpTimestamp = $this->accessor->getValue($ticket, 'paidUp.timestamp');
@@ -107,7 +108,7 @@ class Cashier
      * @param Invoice $invoice
      * @return bool
      */
-    public function checkInvoiceExpiration(Invoice $invoice)
+    private function checkInvoiceExpiration(Invoice $invoice)
     {
         $now = new \DateTime();
         $expiredAtTimestamp = $this->accessor->getValue($invoice, 'expiredAt.timestamp');
@@ -125,7 +126,7 @@ class Cashier
      * @param Invoice $invoice
      * @return bool
      */
-    public function checkInvoiceFullyPaid(Invoice $invoice)
+    private function checkInvoiceFullyPaid(Invoice $invoice)
     {
         if ($invoice->getAmount() > $invoice->getPaid()) {
             $invoice->setStatus(Invoice::STATUS_PARTIAL_PAID);
@@ -236,27 +237,22 @@ class Cashier
      * @param Invoice $invoice
      * @return bool
      */
-    public function processInvoicePaid(Invoice $invoice, $flush = true)
+    private function processInvoicePaid(Invoice $invoice, $flush = true)
     {
         if ($this->checkInvoiceFullyPaid($invoice)) {
-
             $this->reestablishChief($invoice->getTicket());
             $this->reestablishSubordinates($invoice->getTicket());
-
-            if ($flush) {
-                $this->entityManager->flush();
-            }
-
-            return true;
         }
 
-        return false;
+        if ($flush) {
+            $this->entityManager->flush();
+        }
     }
 
     /**
      * @param Ticket $ticket
      */
-    public function reestablishChief(Ticket $ticket)
+    private function reestablishChief(Ticket $ticket)
     {
         $chiefTicket = $ticket->getChiefTicket();
 
@@ -300,7 +296,7 @@ class Cashier
     /**
      * @param Ticket $ticket
      */
-    public function reestablishSubordinates(Ticket $ticket)
+    private function reestablishSubordinates(Ticket $ticket)
     {
         $repo = $this->entityManager->getRepository('AppBundle:Ticket');
 
@@ -329,10 +325,30 @@ class Cashier
     }
 
     /**
-     * @param PaymentResultInterface $payment
+     * @param PaymentInterface $payment
+     * @throws NoResultException
      */
-    public function handlePayment(PaymentResultInterface $payment)
+    public function handlePayment(PaymentInterface $payment)
     {
+        $invoice = $this->entityManager->getRepository('AppBundle:Invoice')
+            ->find($payment->getPaymentId());
 
+        $payeeAccount = $this->entityManager->getRepository('AppBundle:Account')
+            ->getAccountByNumber($payment->getPayeeAccount());
+
+        // Нам обязательно нужен инвойс
+        if (!$invoice) {
+            throw new NoResultException();
+        }
+
+        // Устанавливаем количество оплаты
+        $invoice->setPaid($payment->getPaymentAmount());
+        $this->processInvoicePaid($invoice, false);
+
+        $transaction = $this->banker->createProlongTransaction($invoice, $payeeAccount);
+        $transaction->setStatus(MoneyTransaction::STATUS_DONE)
+            ->setExternal($payment->getPaymentBatchNum());
+
+        $this->entityManager->flush();
     }
 }

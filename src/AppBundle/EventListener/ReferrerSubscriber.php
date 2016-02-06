@@ -4,17 +4,9 @@ namespace AppBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Doctrine\ORM\EntityManagerInterface;
 
 class ReferrerSubscriber implements EventSubscriberInterface
 {
-    private $em;
-
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-    }
-
     public static function getSubscribedEvents()
     {
         return array(

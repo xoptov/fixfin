@@ -12,6 +12,8 @@ AppBundle\Entity\User:
             generator:
                 strategy: AUTO
             gedmo: [treePathSource]
+            options:
+                unsigned: true
     fields:
         firstName:
             type: string
@@ -47,6 +49,8 @@ AppBundle\Entity\User:
             type: integer
             nullable: true
             gedmo: [treeLevel]
+            options:
+                unsigned: true
     oneToOne:
         account:
             targetEntity: AppBundle\Entity\Account
@@ -54,6 +58,8 @@ AppBundle\Entity\User:
             joinColumn:
                 name: account_id
                 referencedColumnName: id
+                options:
+                    unsigned: true
     oneToMany:
         tickets:
             targetEntity: AppBundle\Entity\Ticket
@@ -69,3 +75,5 @@ AppBundle\Entity\User:
             joinColumn:
                 name: referrer_id
                 referencedColumnName: id
+                options:
+                    unsigned: true
