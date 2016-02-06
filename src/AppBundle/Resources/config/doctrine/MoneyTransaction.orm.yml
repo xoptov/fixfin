@@ -8,6 +8,8 @@ AppBundle\Entity\MoneyTransaction:
             id: true
             generator:
                 strategy: AUTO
+            options:
+                unsigned: true
     fields:
         amount:
             type: float
@@ -20,14 +22,23 @@ AppBundle\Entity\MoneyTransaction:
             nullable: true
         status:
             type: smallint
+            options:
+                unsigned: true
         note:
             type: string
             nullable: true
         type:
             type: smallint
+            options:
+                unsigned: true
         external:
             type: integer
             nullable: true
+            options:
+                unsigned: true
+        attempts:
+            type: smallint
+            nullable: false
             options:
                 unsigned: true
     manyToOne:
@@ -38,6 +49,8 @@ AppBundle\Entity\MoneyTransaction:
                 name: source_id
                 referencedColumnName: id
                 nullable: false
+                options:
+                    unsigned: true
         destination:
             targetEntity: AppBundle\Entity\Account
             inversedBy: incomes
@@ -45,12 +58,16 @@ AppBundle\Entity\MoneyTransaction:
                 name: destination_id
                 referencedColumnName: id
                 nullable: false
+                options:
+                    unsigned: true
         invoice:
             targetEntity: AppBundle\Entity\Invoice
             inversedBy: transactions
             joinColumn:
                 name: invoice_id
                 referencedColumnName: id
+                options:
+                    unsigned: true
     lifecycleCallbacks:
         prePersist: [onCreate]
         preUpdate: [onUpdate]

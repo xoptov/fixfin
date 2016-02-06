@@ -49,11 +49,15 @@ class MoneyTransaction
     /** @var Invoice */
     private $invoice;
 
+    /** @var int */
+    private $attempts;
+
     public function __construct()
     {
         $this->amount = 0.0;
         $this->status = self::STATUS_NEW;
         $this->type = self::TYPE_PROLONG;
+        $this->attempts = 0;
     }
 
     public function onCreate()
@@ -241,5 +245,23 @@ class MoneyTransaction
     {
         return $this->invoice;
     }
-}
 
+    /**
+     * @param int $attempts
+     * @return MoneyTransaction
+     */
+    public function setAttempts($attempts)
+    {
+        $this->attempts = $attempts;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAttempts()
+    {
+        return $this->attempts;
+    }
+}

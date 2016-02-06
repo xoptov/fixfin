@@ -1,5 +1,6 @@
 AppBundle\Entity\Account:
     type: entity
+    repositoryClass: AppBundle\Entity\AccountRepository
     table: account
     id:
         id:
@@ -7,6 +8,8 @@ AppBundle\Entity\Account:
             id: true
             generator:
                 strategy: AUTO
+            options:
+                unsigned: true
     fields:
         number:
             type: string
@@ -15,6 +18,10 @@ AppBundle\Entity\Account:
         login:
             type: string
             length: 6
+            nullable: true
+        password:
+            type: string
+            length: 32
             nullable: true
         passPhrase:
             type: string

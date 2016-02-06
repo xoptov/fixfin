@@ -64,7 +64,7 @@ class DefaultController extends Controller
         if ($form->isValid()) {
             $this->get('event_dispatcher')->dispatch(PaymentEvent::CONFIRMED, new PaymentEvent($form->getData()));
 
-            return new Response('Payment confirmed!', Response::HTTP_ACCEPTED); //TODO: необходимо редиректить на страницу в кабинете
+            return new Response('Payment confirmed!', Response::HTTP_ACCEPTED);
         }
 
         $errors = $form->getErrors(true, false);

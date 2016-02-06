@@ -8,6 +8,8 @@ AppBundle\Entity\Invoice:
             id: true
             generator:
                 strategy: AUTO
+            options:
+                unsigned: true
     fields:
         createdAt:
             type: datetime
@@ -26,8 +28,12 @@ AppBundle\Entity\Invoice:
             scale: 2
         period:
             type: integer
+            options:
+                unsigned: true
         status:
             type: smallint
+            options:
+                unsigned: true
     oneToMany:
         transactions:
             targetEntity: AppBundle\Entity\MoneyTransaction
@@ -40,6 +46,8 @@ AppBundle\Entity\Invoice:
                 name: ticket_id
                 referencedColumnName: id
                 nullable: false #todo убрать когда нужны будут выставление внутренних счетов
+                options:
+                    unsigned: true
     lifecycleCallbacks:
         prePersist: [onCreate]
         preUpdate: [onUpdate]

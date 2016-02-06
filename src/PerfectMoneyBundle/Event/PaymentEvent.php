@@ -2,7 +2,7 @@
 
 namespace PerfectMoneyBundle\Event;
 
-use PerfectMoneyBundle\Model\PaymentResultInterface;
+use PerfectMoneyBundle\Model\PaymentInterface;
 
 class PaymentEvent
 {
@@ -10,16 +10,16 @@ class PaymentEvent
     const SUCCESS = 'perfect_money.payment.success';
     const CONFIRMED = 'perfect_money.payment.confirmed';
 
-    /** @var PaymentResultInterface */
+    /** @var PaymentInterface */
     private $result;
 
-    public function __construct(PaymentResultInterface $result)
+    public function __construct(PaymentInterface $result)
     {
         $this->result = $result;
     }
 
     /**
-     * @return PaymentResultInterface
+     * @return PaymentInterface
      */
     public function getResult()
     {

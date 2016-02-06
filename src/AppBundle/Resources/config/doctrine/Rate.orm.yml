@@ -7,6 +7,8 @@ AppBundle\Entity\Rate:
             id: true
             generator:
                 strategy: AUTO
+            options:
+                unsigned: true
     fields:
         name:
             type: string
@@ -22,12 +24,20 @@ AppBundle\Entity\Rate:
             scale: 1
         period:
             type: smallint
+            options:
+                unsigned: true
         members:
             type: integer
+            options:
+                unsigned: true
         requireQualification:
             type: boolean
+            nullable: false
         requireInvitation:
             type: integer
+            nullable: true
+            options:
+                unsigned: true
     manyToOne:
         pool:
             targetEntity: AppBundle\Entity\Pool
@@ -35,6 +45,8 @@ AppBundle\Entity\Rate:
                 name: pool_id
                 referencedColumnName: id
                 nullable: false
+                options:
+                    unsigned: true
     oneToMany:
         tickets:
             targetEntity: AppBundle\Entity\Ticket

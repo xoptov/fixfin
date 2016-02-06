@@ -7,11 +7,17 @@ AppBundle\Entity\Qualification:
             id: true
             generator:
                 strategy: AUTO
+            options:
+                unsigned: true
     fields:
         passed:
             type: boolean
+            nullable: false
         requireInvitation:
-            type: integer
+            type: smallint
+            nullable: true
+            options:
+                unsigned: true
     oneToOne:
         ticket:
             targetEntity: AppBundle\Entity\Ticket
@@ -20,6 +26,8 @@ AppBundle\Entity\Qualification:
                 name: ticket_id
                 referencedColumnName: id
                 nullable: flase
+                options:
+                    unsigned: true
     manyToMany:
         transferredTickets:
             targetEntity: AppBundle\Entity\Ticket
@@ -28,6 +36,10 @@ AppBundle\Entity\Qualification:
                 joinColumns:
                     qualification_id:
                         referencedColumnName: id
+                        options:
+                            unsigned: true
                 inverseJoinColumns:
                     ticket_id:
                         referencedColumnName: id
+                        options:
+                            unsigned: true

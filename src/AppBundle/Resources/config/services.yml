@@ -1,8 +1,6 @@
 services:
     app.referrer_subscriber:
         class: AppBundle\EventListener\ReferrerSubscriber
-        arguments:
-            - @doctrine.orm.default_entity_manager
         tags:
             - { name: kernel.event_subscriber }
 
