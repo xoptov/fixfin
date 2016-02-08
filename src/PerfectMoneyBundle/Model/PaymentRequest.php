@@ -111,6 +111,14 @@ class PaymentRequest
     }
 
     /**
+     * @return string
+     */
+    public function getPaymentId()
+    {
+        return $this->paymentId;
+    }
+
+    /**
      * @param string $statusUrl
      * @return PaymentRequest
      */

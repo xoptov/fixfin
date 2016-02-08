@@ -76,14 +76,15 @@ class Banker
     {
         $payeeAccount = $this->accessor->getValue($ticket, 'user.account');
         $pool = $this->accessor->getValue($ticket, 'rate.pool');
+        $amount = $this->accessor->getValue($ticket, 'rate.amount');
+        $commission = $this->accessor->getValue($ticket, 'rate.commission');
 
         $payerAccount = $this->entityManager->getRepository('AppBundle:Account')
             ->getWealthSystemAccount($pool);
 
-        $rate = $ticket->getRate();
-        $amount = $rate->getAmount() * $rate->getCommission() / 100;
+        $result = $amount - $amount * $commission / 100;
 
-        $transaction = $this->createTransaction($payerAccount, $payeeAccount, $amount)
+        $transaction = $this->createTransaction($payerAccount, $payeeAccount, $result)
             ->setType(MoneyTransaction::TYPE_REWARD);
 
         return $transaction;

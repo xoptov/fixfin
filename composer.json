@@ -23,7 +23,7 @@
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "~1.2.2",
-        "misd/guzzle-bundle": "~1.1.5"
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
