@@ -5,6 +5,7 @@ namespace AppBundle\Service\PaymentSystem;
 use PerfectMoneyBundle\Model\PaymentRequest;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\PropertyAccess\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPath;
@@ -48,7 +49,7 @@ class PerfectMoney
         $pool = $this->accessor->getValue($invoice, 'ticket.rate.pool');
 
         if (!$pool instanceof Pool) {
-            throw new UnexpectedTypeException($pool, new PropertyPath('ticket.rate.pool'));
+            throw new AccessException();
         }
 
         $account = $this->entityManager->getRepository('AppBundle:Account')
