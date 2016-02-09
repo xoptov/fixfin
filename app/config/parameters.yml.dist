@@ -20,6 +20,7 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
     perfect_money:
         entry_form:     'https://perfectmoney.is/api/step1.asp'
+        transfer_url:   'https://perfectmoney.is/acct/confirm.asp'
         payee_name:     'FixFin ltd.'
         payment_units:  'USD'
         status_url:     ~

@@ -4,7 +4,7 @@ namespace PerfectMoneyBundle\Tests\Handler;
 
 use PerfectMoneyBundle\Parser\ResponseParser;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
-use PerfectMoneyBundle\Model\SpentResponse;
+use PerfectMoneyBundle\Model\TransferResponse;
 
 class SpentResponseHandlerTest extends TestCase
 {
@@ -56,11 +56,11 @@ class SpentResponseHandlerTest extends TestCase
 </html>
 EOF;
         $parser = new ResponseParser();
-        /** @var SpentResponse $result */
-        $result = $parser($content, $this->map, SpentResponse::class);
+        /** @var TransferResponse $result */
+        $result = $parser($content, $this->map, TransferResponse::class);
 
         $this->assertNotInternalType('string', $result);
-        $this->assertInstanceOf('PerfectMoneyBundle\\Model\\SpentResponse', $result);
+        $this->assertInstanceOf('PerfectMoneyBundle\\Model\\TransferResponse', $result);
         $this->assertNull($result->getError());
         $this->assertEquals($result->getPayeeAccountName(), 'FixFin Inc');
         $this->assertEquals($result->getPayeeAccount(), 'U10006984');
@@ -89,10 +89,10 @@ Error: Can not login with passed AccountID and PassPhrase
 </html>
 EOF;
         $parser = new ResponseParser();
-        /** @var SpentResponse $result */
-        $result = $parser($content, $this->map, SpentResponse::class);
+        /** @var TransferResponse $result */
+        $result = $parser($content, $this->map, TransferResponse::class);
 
-        $this->assertInstanceOf('PerfectMoneyBundle\\Model\\SpentResponse', $result);
+        $this->assertInstanceOf('PerfectMoneyBundle\\Model\\TransferResponse', $result);
         $this->assertNotEmpty($result->getError());
         $this->assertNull($result->getPayeeAccountName());
         $this->assertNull($result->getPayeeAccount());
