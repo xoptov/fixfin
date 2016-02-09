@@ -114,4 +114,16 @@ class Banker
         //TODO: Здесь можно реализовать создание запроса в зависимости от платёжной системы
         return $this->perfectMoney->createPaymentRequest($invoice);
     }
+
+    public function makeRewardPayments()
+    {
+        $transactions = $this->entityManager->getRepository('AppBundle:MoneyTransaction')
+            ->getScheduledRewards();
+
+        if (!count($transactions)) {
+            return;
+        }
+
+        $this->perfectMoney->makeTransfers($transactions);
+    }
 }
