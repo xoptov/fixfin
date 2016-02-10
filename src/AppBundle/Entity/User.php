@@ -43,6 +43,12 @@ class User extends BaseUser
     /** @var string */
     private $path;
 
+    /** @var \DateTime */
+    private $createdAt;
+
+    /** @var \DateTime */
+    private $updatedAt;
+
     const STATUS_NOT_LOCKED = 0;
     const STATUS_LOCKED = 1;
     const STATUS_DISABLED = 0;
@@ -297,5 +303,31 @@ class User extends BaseUser
     public function getPath()
     {
         return $this->path;
+    }
+
+    public function onCreate()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    public function onUpdate()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

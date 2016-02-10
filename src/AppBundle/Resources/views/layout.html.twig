@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-lg-8 col-md-7 col-sm-6 col-xs-6 text-right">
                         <div class="user-control">
-                            <div class="username">ИВАНОВ ИВАН</div>
+                            <div class="username">{{ app.user.lastname }} {{ app.user.firstname }}</div>
                             <div class="sp-bell notifications"></div>
                             <a class="logout" href="{{ path('fos_user_security_logout') }}">
                                 Выход

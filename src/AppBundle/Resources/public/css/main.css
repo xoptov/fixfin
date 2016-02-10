@@ -6908,6 +6908,9 @@ body {
   list-style: none;
   color: #f44a3f;
 }
+.wrapper .window-referrer .content {
+  min-height: 177px;
+}
 .wrapper .btn:focus {
   outline: none;
 }

@@ -27,3 +27,6 @@ parameters:
         payment_url:    ~
         nopayment_url:  ~
         available_payment_methods: ~
+
+    news_in_profile: ~
+
