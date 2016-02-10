@@ -96,6 +96,7 @@ services:
             - @property_accessor
             - @doctrine.orm.default_entity_manager
             - %perfect_money%
+            - @logger
 
     app.payment_subscriber:
         class: AppBundle\EventListener\PaymentSubscriber

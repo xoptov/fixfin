@@ -265,4 +265,14 @@ class MoneyTransaction
     {
         return $this->attempts;
     }
+
+    /**
+     * @return MoneyTransaction
+     */
+    public function increaseAttempts()
+    {
+        $this->attempts++;
+
+        return $this;
+    }
 }

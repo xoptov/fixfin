@@ -3,16 +3,20 @@
 namespace AppBundle\Service\PaymentSystem;
 
 use AppBundle\Entity\MoneyTransaction;
+use GuzzleHttp\Pool as RequestsPool;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use PerfectMoneyBundle\Model\PaymentRequest;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use AppBundle\Entity\Invoice;
-use AppBundle\Entity\Pool;
+use AppBundle\Entity\Pool as AccountPool;
 use GuzzleHttp\Client;
-use GuzzleHttp\Pool as RequestsPool;
+use PerfectMoneyBundle\Parser\ResponseParser;
+use PerfectMoneyBundle\Model\TransferResponse;
+use Monolog\Logger;
 
 class PerfectMoney
 {
@@ -25,10 +29,46 @@ class PerfectMoney
     /** @var array */
     private $options;
 
-    public function __construct(PropertyAccessor $accessor, EntityManagerInterface $entityManager, array $options)
+    /** @var array */
+    private $successful;
+
+    /** @var array */
+    private $failed;
+
+    /** @var ResponseParser */
+    private $responseParser;
+
+    /** @var Client */
+    private $client;
+
+    /** @var Logger */
+    private $logger;
+
+    /** @var array */
+    private $map;
+
+    public function __construct(PropertyAccessor $accessor, EntityManagerInterface $entityManager, array $options, Logger $logger)
     {
         $this->accessor = $accessor;
         $this->entityManager = $entityManager;
+        $this->successful = array();
+        $this->failed = array();
+        $this->responseParser = new ResponseParser();
+        $this->client = new Client(array(
+            'headers' => array(
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            )
+        ));
+        $this->logger = $logger;
+
+        $this->map = array(
+            'Payee_Account_Name' => 'payeeAccountName',
+            'Payee_Account' => 'payeeAccount',
+            'Payer_Account' => 'payerAccount',
+            'PAYMENT_AMOUNT' => 'paymentAmount',
+            'PAYMENT_BATCH_NUM' => 'paymentBatchNum',
+            'PAYMENT_ID' => 'paymentId'
+        );
 
         // Настройка опций для сервиса
         $resolver = new OptionsResolver();
@@ -36,6 +76,10 @@ class PerfectMoney
         $this->options = $resolver->resolve($options);
     }
 
+    /**
+     * @param Invoice $invoice
+     * @return PaymentRequest
+     */
     public function createPaymentRequest(Invoice $invoice)
     {
         $request = new PaymentRequest();
@@ -50,7 +94,7 @@ class PerfectMoney
 
         $pool = $this->accessor->getValue($invoice, 'ticket.rate.pool');
 
-        if (!$pool instanceof Pool) {
+        if (!$pool instanceof AccountPool) {
             throw new AccessException();
         }
 
@@ -62,6 +106,9 @@ class PerfectMoney
         return $request;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -69,15 +116,18 @@ class PerfectMoney
             'payment_units' => 'USD'
         ));
 
-        $resolver->setRequired(array('status_url', 'payment_url', 'nopayment_url', 'available_payment_methods'));
+        $resolver->setRequired(array('entry_form', 'transfer_url', 'status_url', 'payment_url', 'nopayment_url', 'available_payment_methods'));
     }
 
-    public function createTransferRequest(MoneyTransaction $transaction)
+    /**
+     * @param MoneyTransaction $transaction
+     * @return Request
+     */
+    public function createFormParams(MoneyTransaction $transaction)
     {
-        //TODO: это ёбаный колхоз но я пока незнаю как сделать лучше
-        $form = array(
-            'AccountID' => $this->accessor->getValue($this->options, '[account_id]'),
-            'PassPhrase' => $this->accessor->getValue($this->options, '[pass_phrase]'),
+        $data = array(
+            'AccountID' => $this->accessor->getValue($transaction, 'source.login'),
+            'PassPhrase' => $this->accessor->getValue($transaction, 'source.password'),
             'Payer_Account' => $this->accessor->getValue($transaction, 'source.number'),
             'Payee_Account' => $this->accessor->getValue($transaction, 'destination.number'),
             'Amount' => $this->accessor->getValue($transaction, 'amount'),
@@ -85,27 +135,78 @@ class PerfectMoney
             'PAYMENT_ID' => $this->accessor->getValue($transaction, 'id')
         );
 
-        return new Request('POST', $this->options['transfer_url'], [], ['form_param' => $form]);
+        return $data;
     }
 
+    /**
+     * @param $transactions
+     * @throws \Exception
+     */
     public function makeTransfers($transactions)
     {
         $requests = array();
-
-        foreach($transactions as $transaction) {
-            $requests[] = $this->createTransferRequest($transaction);
+        foreach ($transactions as $transaction) {
+            $body = http_build_query($this->createFormParams($transaction));
+            $requests[] = new Request('POST', $this->options['transfer_url'], array(), $body);
         }
 
-        $pool = new RequestsPool(new Client(), $requests, [
-            'concurrency' => 5,
-            'fulfilled' => function($response, $index){
-                //TODO: вообщем здесь доступен $this и нужно перерисовать схему
+        $pool = new RequestsPool($this->client, $requests, array(
+            'pool_size' => 5,
+            'fulfilled' => function($response) {
+                $this->onSuccessfulResponse($response);
             },
-            'rejected' => function($reason, $index){
-                //TODO: тут нужно отмечать неудачные транзакции
+            'rejected' => function($reason) {
+                $this->onFailedReason($reason);
             }
-        ]);
+        ));
 
         $pool->promise()->wait();
+    }
+
+    /**
+     * @param Response $response
+     * @return bool
+     */
+    private function onSuccessfulResponse(Response $response)
+    {
+        $parser = $this->responseParser;
+
+        /** @var TransferResponse $transfer */
+        $transfer = $parser((string)$response->getBody(), $this->map, TransferResponse::class);
+
+        if ($transfer->getError()) {
+            // Добавляем идентификатор транзакции и текст ошибки
+            $this->failed[$transfer->getPaymentId()] = $transfer->getError();
+
+            return false;
+        }
+        // Добавляем идентификатор внутренней транзакции и нидентификатор внешней транзакции
+        $this->successful[$transfer->getPaymentId()] = $transfer->getPaymentBatchNum();
+
+        return true;
+    }
+
+    /**
+     * @param Response $response
+     */
+    private function onFailedReason(Response $response)
+    {
+        $this->logger->error((string)$response->getBody());
+    }
+
+    /**
+     * @return array
+     */
+    public function getSuccessful()
+    {
+        return $this->successful;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFailed()
+    {
+        return $this->failed;
     }
 }
