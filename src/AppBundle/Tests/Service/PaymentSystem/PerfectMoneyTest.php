@@ -35,8 +35,10 @@ class PerfectMoneyTest extends TestCase
     public function testCreatePaymentRequest()
     {
         $options = array(
-            'status_url' => 'http://fixfin.dev/payments/perfectmoney/confirm',
-            'payment_url' => 'http://fixfin.dev/payments/perfectmoney/success',
+            'entry_form'    => 'https://perfectmoney.is/api/step1.asp',
+            'transfer_url'  => 'https://perfectmoney.is/acct/confirm.asp',
+            'status_url'    => 'http://fixfin.dev/payments/perfectmoney/confirm',
+            'payment_url'   => 'http://fixfin.dev/payments/perfectmoney/success',
             'nopayment_url' => 'http://fixfin.dev/payments/perfectmoney/failed',
             'available_payment_methods' => 'account'
         );

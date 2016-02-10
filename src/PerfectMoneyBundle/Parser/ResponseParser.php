@@ -16,6 +16,11 @@ class ResponseParser
     public function __invoke($content, array $map, $class)
     {
         $response = new $class();
+
+        if (!preg_match('/^\<html\>/i', $content)) {
+            $response->setError($content);
+        }
+
         $crawler = new Crawler();
         $crawler->addHtmlContent($content);
 
