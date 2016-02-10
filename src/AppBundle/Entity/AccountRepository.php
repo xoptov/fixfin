@@ -68,4 +68,25 @@ class AccountRepository extends EntityRepository
 
         return $query->getSingleResult();
     }
+
+    /**
+     * @param Account $account
+     * @return float
+     */
+    public function getReservedAmount(Account $account)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $query = $qb->select('SUM(mt.amount)')
+            ->from('AppBundle:Account', 'a')
+            ->innerJoin('a.outcomes', 'mt')
+            ->where('a = :account')
+                ->setParameter('account', $account)
+            ->andWhere('mt.type = :type')
+                ->setParameter('type', MoneyTransaction::TYPE_REWARD)
+            ->andWhere('mt.status IN (:statuses)')
+                ->setParameter('statuses', array(MoneyTransaction::STATUS_NEW, MoneyTransaction::STATUS_RETRY))
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
 }

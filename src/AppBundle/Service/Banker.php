@@ -107,7 +107,6 @@ class Banker
     /**
      * @param Invoice $invoice
      * @return PaymentRequest
-     * @todo Подумать куда лучше вынести этот метод, а может и оставить его
      */
     public function createPaymentRequest(Invoice $invoice)
     {
@@ -115,15 +114,46 @@ class Banker
         return $this->perfectMoney->createPaymentRequest($invoice);
     }
 
-    public function makeRewardPayments()
+    public function makeRewardPayments($flush = true)
     {
-        $transactions = $this->entityManager->getRepository('AppBundle:MoneyTransaction')
-            ->getScheduledRewards();
+        // Получаем запланированные транзакции для выполнения
+        $transactions = $this->entityManager->getRepository('AppBundle:MoneyTransaction')->getScheduledRewards();
 
         if (!count($transactions)) {
-            return;
+            return null;
         }
 
         $this->perfectMoney->makeTransfers($transactions);
+
+        $successful = $this->perfectMoney->getSuccessful();
+        $failed = $this->perfectMoney->getFailed();
+
+        $reservedAmount = 0.0;
+
+        foreach ($transactions as $transaction) {
+            if (isset($successful[$transaction->getId()])) {
+                // Ставим статус выполнена и записываем номер внешней транзакции
+                $transaction->setStatus(MoneyTransaction::STATUS_DONE)
+                    ->setExternal($successful[$transaction->getId()]);
+
+                continue;
+            } elseif (isset($failed[$transaction->getId()])) {
+                if ($transaction->getAttempts() >= 3) {
+                    $transaction->setStatus(MoneyTransaction::STATUS_ERROR);
+                } else {
+                    $transaction->setStatus(MoneyTransaction::STATUS_RETRY);
+                    $reservedAmount += $transaction->getAmount();
+                }
+                // Записываем тест ошибки и увеличиваем счетчик попоток на единицу
+                $transaction->setNote($failed[$transaction->getId()])
+                    ->increaseAttempts();
+            }
+        }
+
+        if ($flush) {
+            $this->entityManager->flush();
+        }
+
+        return $reservedAmount;
     }
 }

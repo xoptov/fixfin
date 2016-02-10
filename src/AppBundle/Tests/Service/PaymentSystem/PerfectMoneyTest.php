@@ -17,6 +17,8 @@ class PerfectMoneyTest extends TestCase
 
     private $entityManager;
 
+    private $logger;
+
     public function setUp()
     {
         $this->account = new Account();
@@ -26,6 +28,8 @@ class PerfectMoneyTest extends TestCase
 
         $this->entityManager = $this->getMockWithoutInvokingTheOriginalConstructor('Doctrine\\ORM\\EntityManager');
         $this->entityManager->expects($this->once())->method('getRepository')->willReturn($repository);
+
+        $this->logger = $this->getMockWithoutInvokingTheOriginalConstructor('Monolog\Logger');
     }
 
     public function testCreatePaymentRequest()
@@ -49,7 +53,7 @@ class PerfectMoneyTest extends TestCase
         $invoice->setTicket($ticket)
             ->setAmount(65.0);
 
-        $perfectMoney = new PerfectMoney(new PropertyAccessor(), $this->entityManager, $options);
+        $perfectMoney = new PerfectMoney(new PropertyAccessor(), $this->entityManager, $options, $this->logger);
         $request = $perfectMoney->createPaymentRequest($invoice);
 
         $this->assertInstanceOf('PerfectMoneyBundle\\Model\\PaymentRequest', $request);
