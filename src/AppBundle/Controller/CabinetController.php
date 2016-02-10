@@ -23,7 +23,12 @@ class CabinetController extends Controller
             $this->getDoctrine()->getManager()->flush();
         }
 
-        return $this->render('AppBundle:Cabinet:profile.html.twig', array('form' => $form->createView()));
+        $news = $this->getDoctrine()->getRepository('AppBundle:News')->getLastNews($this->getParameter('news_in_profile'));
+        
+        return $this->render('AppBundle:Cabinet:profile.html.twig', array(
+            'form' => $form->createView(),
+            'news' => $news
+        ));
     }
 
     public function cloudAction()
@@ -33,7 +38,10 @@ class CabinetController extends Controller
 
     public function historyAction()
     {
-        return $this->render('AppBundle:Cabinet:history.html.twig');
+        $transactions = $this->getDoctrine()->getRepository('AppBundle:MoneyTransaction')
+            ->getForUser($this->getUser());
+
+        return $this->render('AppBundle:Cabinet:history.html.twig', array('transactions' => $transactions));
     }
 
     public function contentAction()
@@ -43,7 +51,9 @@ class CabinetController extends Controller
 
     public function newsAction()
     {
-        return $this->render('AppBundle:Cabinet:news.html.twig');
+        $news = $this->getDoctrine()->getRepository('AppBundle:News')->findAll();
+
+        return $this->render('AppBundle:Cabinet:news.html.twig', array('news' => $news));
     }
 
     public function faqAction()

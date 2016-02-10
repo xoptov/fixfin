@@ -51,6 +51,12 @@ AppBundle\Entity\User:
             gedmo: [treeLevel]
             options:
                 unsigned: true
+        createdAt:
+            type: datetime
+            nullable: false
+        updatedAt:
+            type: datetime
+            nullable: true
     oneToOne:
         account:
             targetEntity: AppBundle\Entity\Account
@@ -77,3 +83,6 @@ AppBundle\Entity\User:
                 referencedColumnName: id
                 options:
                     unsigned: true
+    lifecycleCallbacks:
+        prePersist: [onCreate]
+        preUpdate: [onUpdate]

@@ -6,6 +6,7 @@
             <h3>История транзакций</h3>
         </div>
         <div class="content">
+        {% if transactions is not empty %}
             <table class="table">
                 <thead>
                 <tr>
@@ -14,58 +15,35 @@
                     <th>Получатель</th>
                     <th>Сумма</th>
                     <th>Создана</th>
+                    <th>Обновлена</th>
                     <th>Статус</th>
                     <th>Инвойс</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>123</td>
-                    <td>U2362819</td>
-                    <td>U1230420</td>
-                    <td>$20</td>
-                    <td>21.01.2016 10:00:00</td>
-                    <td>Выполнена</td>
-                    <td>92</td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>U2362819</td>
-                    <td>U1230420</td>
-                    <td>$20</td>
-                    <td>21.01.2016 10:00:00</td>
-                    <td>Выполнена</td>
-                    <td>92</td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>U2362819</td>
-                    <td>U1230420</td>
-                    <td>$20</td>
-                    <td>21.01.2016 10:00:00</td>
-                    <td>Выполнена</td>
-                    <td>92</td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>U2362819</td>
-                    <td>U1230420</td>
-                    <td>$20</td>
-                    <td>21.01.2016 10:00:00</td>
-                    <td>Выполнена</td>
-                    <td>92</td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>U2362819</td>
-                    <td>U1230420</td>
-                    <td>$20</td>
-                    <td>21.01.2016 10:00:00</td>
-                    <td>Выполнена</td>
-                    <td>92</td>
-                </tr>
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.id }}</td>
+                        <td>{{ transaction.source.number }}</td>
+                        <td>{{ transaction.destination.number }}</td>
+                        <td>${{ transaction.amount }}</td>
+                        <td>{{ transaction.createdAt|date('d.m.Y H:i:s') }}</td>
+                        <td>{{ transaction.updatedAt|date('d.m.Y H:i:s') }}</td>
+                        <td>{{ transaction.status }}</td>
+                        <td>
+                            {% if transaction.invoice is not null %}
+                                {{ transaction.invoice.id }}
+                            {% else %}
+                                Без инвойса
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
+        {% else %}
+            Извените но пока Вы ненакопили историю транзакций.
+        {% endif %}
         </div>
     </div>
 {% endblock %}

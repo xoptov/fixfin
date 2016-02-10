@@ -1,7 +1,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block content %}
-    <div class="row">
+    <div class="row profile">
         <div class="col-lg-6">
             <div class="window">
                 <div class="header">Профиль</div>
@@ -14,37 +14,48 @@
                             <div class="change">Изменить</div>
                         </div>
                         <div class="col-xs-7">
-                            <div class="fullname">Иванов Иван</div>
-                            <div class="description">В системе:<span class="value">12 дней</span></div>
-                            <div class="description">Заработано:<span class="value">100 USD</span></div>
-                            <div class="description">Структура:<span class="value">50 человек</span></div>
+                            <div class="fullname">{{ app.user.lastname }} {{ app.user.firstname }}</div>
+                            <div class="description">В системе с:<span class="value">{{ app.user.createdAt|date('d.m.Y') }}</span></div>
+                            {#<div class="description">Заработано:<span class="value">100 USD</span></div>#}
+                            <div class="description">Структура:<span class="value">{{ app.user.referrals.count }} чел.</span></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="window">
-                <div class="header">Профиль спонсора</div>
+            <div class="window window-referrer">
+                <div class="header">Профиль лидера</div>
                 <div class="content">
                     <div class="row">
+                    {% if app.user.referrer is not null %}
+                        {% set referrer = app.user.referrer %}
                         <div class="col-xs-5 text-center">
                             <div class="avatar">
                                 <span class="empty">Нет фото</span>
                             </div>
                         </div>
                         <div class="col-xs-7">
-                            <div class="fullname">Фамилия Имя</div>
-                            <div class="description">Телефон:<span class="value">+7 000 000 0000</span></div>
-                            <div class="description">Почта:<span class="value">test@rublic.dev</span></div>
-                            <div class="description">VK:<span class="value">vk.com/rublic</span></div>
+                            <div class="fullname">{{ referrer.lastName }} {{ referrer.firstName }}</div>
+                        {% if referrer.phone in not null %}
+                            <div class="description">Телефон:<span class="value">{{ referrer.phone }}</span></div>
+                        {% endif %}
+                        {% if referrer.email is not null %}
+                            <div class="description">Почта:<span class="value">{{ referrer.email }}</span></div>
+                        {% endif %}
+                        {% if referrer.vKontakte is not null %}
+                            <div class="description">VK:<span class="value">{{ referrer.vKontakte }}</span></div>
+                        {% endif %}
                         </div>
+                    {% else %}
+                        <div class="col-xs-12 text-center">У Вас нет лидера</div>
+                    {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row profile">
         <div class="col-lg-6">
             <div class="window m-t-30">
                 <div class="header">Редактировать профиль</div>
@@ -123,13 +134,23 @@
             <div class="window m-t-30">
                 <div class="header">Новости FinFix</div>
                 <div class="content">
-                    <div class="row">
-                        <div class="col-xs-3 text-center news-date">20.01.16</div>
+                {% if news is not empty %}
+                    {% for item in news %}
+                    <div class="row news-item">
+                        <div class="col-xs-3 text-center news-date">{{ item.createdAt|date('d.m.Y') }}</div>
                         <div class="col-xs-9 news-text">
-                            Новости системы FinFix как всегда очень хорошие, мы стартанули супер мега пупер систему для рефферального заработка!
+                            {{ item.content }}
                             <div class="text-right news-continue">Читать далее</div>
                         </div>
                     </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            На данный момент новостей нет.
+                        </div>
+                    </div>
+                {% endif %}
                     <div class="row">
                         <div class="col-xs-12 text-center news-all">
                             Все новости

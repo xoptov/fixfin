@@ -1,0 +1,30 @@
+AppBundle\Entity\News:
+    type: entity
+    table: news
+    repositoryClass: AppBundle\Entity\NewsRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        title:
+            type: string
+            length: 50
+            unique: true
+        content:
+            type: string
+            length: 1024
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+        enabled:
+            type: boolean
+    lifecycleCallbacks:
+        prePersist: [onCreate]
+        preUpdate: [onUpdate]
