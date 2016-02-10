@@ -60,7 +60,7 @@ EOF;
         $result = $parser($content, $this->map, TransferResponse::class);
 
         $this->assertNotInternalType('string', $result);
-        $this->assertInstanceOf('PerfectMoneyBundle\\Model\\TransferResponse', $result);
+        $this->assertInstanceOf(TransferResponse::class, $result);
         $this->assertNull($result->getError());
         $this->assertEquals($result->getPayeeAccountName(), 'FixFin Inc');
         $this->assertEquals($result->getPayeeAccount(), 'U10006984');
@@ -92,7 +92,26 @@ EOF;
         /** @var TransferResponse $result */
         $result = $parser($content, $this->map, TransferResponse::class);
 
-        $this->assertInstanceOf('PerfectMoneyBundle\\Model\\TransferResponse', $result);
+        $this->assertInstanceOf(TransferResponse::class, $result);
+        $this->assertNotEmpty($result->getError());
+        $this->assertNull($result->getPayeeAccountName());
+        $this->assertNull($result->getPayeeAccount());
+        $this->assertNull($result->getPayerAccount());
+        $this->assertNull($result->getPaymentAmount());
+        $this->assertNull($result->getPaymentBatchNum());
+        $this->assertNull($result->getPaymentId());
+    }
+
+    public function testParserPlainError()
+    {
+        $content = <<<EOF
+ERROR: No values passed to API
+EOF;
+        $parser = new ResponseParser();
+        /** @var TransferResponse $result */
+        $result = $parser($content, $this->map, TransferResponse::class);
+
+        $this->assertInstanceOf(TransferResponse::class, $result);
         $this->assertNotEmpty($result->getError());
         $this->assertNull($result->getPayeeAccountName());
         $this->assertNull($result->getPayeeAccount());
