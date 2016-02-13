@@ -65,10 +65,11 @@ class Invoice
     public static function getStatusLabels()
     {
         return [
-            self::STATUS_NEW => 'entity.invoice.status.new',
-            self::STATUS_PAID => 'entity.invoice.status.paid',
-            self::STATUS_EXPIRED => 'entity.invoice.status.expired',
-            self::STATUS_CANCELED => 'entity.invoice.status.canceled'
+            self::STATUS_NEW => 'status.invoice.new',
+            self::STATUS_PARTIAL_PAID => 'status.invoice.partial_paid',
+            self::STATUS_PAID => 'status.invoice.paid',
+            self::STATUS_EXPIRED => 'status.invoice.expired',
+            self::STATUS_CANCELED => 'status.invoice.canceled'
         ];
     }
 

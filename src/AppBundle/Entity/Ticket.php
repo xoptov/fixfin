@@ -42,9 +42,6 @@ class Ticket
     /** @var bool */
     private $expired;
 
-    const STATUS_NOT_PAID = false;
-    const STATUS_PAID = true;
-
     const TYPE_SUBSCRIPTION = 1;
     const TYPE_OWNERSHIP = 2;
 
@@ -57,19 +54,11 @@ class Ticket
         $this->expired = true;
     }
 
-    public static function getPaidLabels()
-    {
-        return [
-            static::STATUS_NOT_PAID => 'entity.status.no',
-            static::STATUS_PAID => 'entity.status.yes'
-        ];
-    }
-
     public static function getTypeLabels()
     {
         return [
-            static::TYPE_SUBSCRIPTION => 'form.ticket.subscription',
-            static::TYPE_OWNERSHIP => 'form.ticket.ownership'
+            static::TYPE_SUBSCRIPTION => 'type.ticket.subscription',
+            static::TYPE_OWNERSHIP => 'type.ticket.ownership'
         ];
     }
 

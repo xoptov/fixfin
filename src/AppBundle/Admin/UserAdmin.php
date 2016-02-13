@@ -69,17 +69,23 @@ class UserAdmin extends Admin
             ))
             ->add('referrer', 'entity', array(
                 'label' => 'form.user.referrer',
-                'class' => 'AppBundle\\Entity\\User',
+                'class' => User::class,
                 'property' => 'username',
                 'required' => false
             ))
             ->add('locked', 'choice', array(
                 'label' => 'form.user.locked',
-                'choices' => User::getLockedLabels()
+                'choices' => array(
+                    'status.common.no',
+                    'status.common.yes'
+                )
             ))
             ->add('enabled', 'choice', array(
                 'label' => 'form.user.enabled',
-                'choices' => User::getEnabledLabels()
+                'choices' => array(
+                    'status.common.no',
+                    'status.common.yes'
+                )
             ));
     }
 

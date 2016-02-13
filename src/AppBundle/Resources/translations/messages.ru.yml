@@ -1,135 +1,144 @@
-security:
-    login:
-        greeting: 'Добро пожаловать в FinFix'
-        note: 'Необходимо выполнить вход перед дальнейшей работой'
-        username: 'Имя пользователя'
-        password: Пароль
-        submit: Войти
-        registration: Зарегистрироваться
-        forgot_password: 'Забыли пароль?'
-        not_have_an_account: 'Вы еще не зарегистрированы в системе?'
-    register:
-        header: 'Регистрация в системе'
-        subheader: 'Создайте аккаунт и попробуйте нашу систему'
-entity:
-    status:
-        no: Нет
-        yes: Да
-admin:
-    title:
-        section:
-            pool: 'Пулл счетов'
-            rate: Столы
-            user: Пользователи
-            account: Счета
-            transaction: Транзакции
-            ticket: Билеты
-            invoice: Инвойсы
-        group:
-            main: Главная
-form:
-    account:
-        user: Пользователь
-        number: 'Номер кошелька'
-        login: Логин
-        pass_phrase: 'Секретная фраза'
-        commission: Коммиссия
-        system: Системный
-        verified: Верифицирован
-        blocked: Заблокирован
-    user:
-        username: Логин
-        password: Пароль
-        first_name: Имя
-        middle_name: Отчество
-        last_name: Фамилия
-        email: Email
-        phone: Телефон
-        account: Счёт
-        referrer: Пригласивший
-        avatar: Аватарка
-        locked: Заблокирован
-        enabled: Включен
-        vkontakte: ВКонтакте
-        status:
-            no: Нет
-            yes: Да
-        save: Сохранить
-    pool:
-        name: Название
-        accounts: Счета
-    ticket:
-        chief_ticket: Вышестоящий
-        rate: Тариф
-        owner: Владелец
-        paid_up: 'Оплачен до'
-        paid: Оплачен
-        type:
-            subscription: 'Подписка'
-            ownership: 'Владение'
-        expired: Просрочен
-list:
-    account:
-        number: 'Номер счёта'
-        owner: Владелец
-        commission: 'Коммиссия за операции'
-        system: Системный
-        verified: Верифицирован
-        blocked: Заблокирован
-        balance: Баланс
-        actions: Действия
-    user:
-        username: Логин
-        account: Счёт
-        first_name: Имя
-        middle_name: Отчество
-        last_name: Фамилия
-        phone: Телефон
-        referrer: Пригласивший
-        locked: Заблокирован
-        enabled: Включен
-        actions: Действия
-    ticket:
-        id: Номер
-        chief_ticket: Вышестоящий
-        rate: Тариф
-        owner: Владелец
-        paid_up: 'Оплачен до'
-        paid: Оплачен
-        type: Тип
-        expired: Просрочен
-        actions: Действия
-show:
-    pool:
-        name: Название
-        accounts: Счета
-    user:
-        username: Логин
-        password: Пароль
-        first_name: Имя
-        middle_name: Отчество
-        last_name: Фамилия
-        email: Email
-        phone: Телефон
-        account: Счёт
-        referrer: Пригласивший
-        avatar: Аватарка
-        locked: Заблокирован
-        enabled: Включен
-    ticket:
-        id: Номер
-        chief_ticket: Вышестоящий
-        rate: Тариф
-        owner: Владелец
-        paid: Оплачен
-        paid_up: 'Оплачен до'
-        type: Тип
-        expired: Просрочен
-menu:
-    profile: Профиль
-    dashboard: 'Рабочий стол'
-    cloud: Облако
-    history: 'История транзакций'
-    content: Материалы
-    news: Новости
-    faq: 'Вопросы и ответы'
+security.login.greeting: "Добро пожаловать в FinFix"
+security.login.note: "Необходимо выполнить вход перед дальнейшей работой"
+security.login.username: "Имя пользователя"
+security.login.password: "Пароль"
+security.login.submit: "Войти"
+security.login.registration: "Зарегистрироваться"
+security.login.forgot_password: "Забыли пароль?"
+security.login.not_have_an_account: "Вы еще не зарегистрированы в системе?"
+security.register.header: "Регистрация в системе"
+security.register.subheader: "Создайте аккаунт и попробуйте нашу систему"
+admin.title.section.pool: "Пулл счетов"
+admin.title.section.rate: "Столы"
+admin.title.section.user: "Пользователи"
+admin.title.section.account: "Счета"
+admin.title.section.transaction: "Транзакции"
+admin.title.section.ticket: "Билеты"
+admin.title.section.invoice: "Инвойсы"
+admin.title.group.main: "Главная"
+form.account.user: "Пользователь"
+form.account.number: "Номер кошелька"
+form.account.login: "Логин"
+form.account.password: "Пароль"
+form.account.pass_phrase: "Секретная фраза"
+form.account.commission: "Коммиссия"
+form.account.system: "Системный"
+form.account.verified: "Верифицирован"
+form.account.blocked: "Заблокирован"
+form.user.username: "Логин"
+form.user.password: "Пароль"
+form.user.first_name: "Имя"
+form.user.middle_name: "Отчество"
+form.user.last_name: "Фамилия"
+form.user.email: "Email"
+form.user.phone: "Телефон"
+form.user.account: "Счёт"
+form.user.referrer: "Пригласивший"
+form.user.avatar: "Аватарка"
+form.user.locked: "Заблокирован"
+form.user.enabled: "Включен"
+form.user.vkontakte: "ВКонтакте"
+form.user.save: "Сохранить"
+form.pool.name: "Название"
+form.pool.accounts: "Счета"
+form.ticket.chief_ticket: "Вышестоящий"
+form.ticket.rate: "Тариф"
+form.ticket.owner: "Владелец"
+form.ticket.paid_up: "Оплачен до"
+form.ticket.paid: "Оплачен"
+form.ticket.expired: "Просрочен"
+form.ticket.type: "Тип"
+form.rate.name: "Название"
+form.rate.pool: "Пулл счетов"
+form.rate.amount: "Сумма"
+form.rate.commission: "Комиссия"
+form.rate.period: "Период"
+list.account.number: "Номер счёта"
+list.account.owner: "Владелец"
+list.account.commission: "Комиссия"
+list.account.system: "Системный"
+list.account.verified: "Верифицирован"
+list.account.blocked: "Заблокирован"
+list.account.balance: "Баланс"
+list.account.actions: "Действия"
+list.user.username: "Логин"
+list.user.account: "Счёт"
+list.user.first_name: "Имя"
+list.user.middle_name: "Отчество"
+list.user.last_name: "Фамилия"
+list.user.phone: "Телефон"
+list.user.referrer: "Пригласивший"
+list.user.locked: "Заблокирован"
+list.user.enabled: "Включен"
+list.user.actions: "Действия"
+list.ticket.id: "Номер"
+list.ticket.chief_ticket: "Вышестоящий"
+list.ticket.rate: "Тариф"
+list.ticket.owner: "Владелец"
+list.ticket.paid_up: "Оплачен до"
+list.ticket.paid: "Оплачен"
+list.ticket.type: "Тип"
+list.ticket.expired: "Просрочен"
+list.ticket.subscribed: "Подписка"
+list.ticket.actions: "Действия"
+list.invoice.id: "Номер"
+list.invoice.ticket: "Билет"
+list.invoice.created_at: "Дата создания"
+list.invoice.updated_at: "Дата изменения"
+list.invoice.amount: "Сумма"
+list.invoice.paid: "Оплачено"
+list.invoice.status: "Статус"
+list.rate.id: "Номер"
+list.rate.name: "Название"
+list.rate.pool: "Пулл счетов"
+list.rate.amount: "Сумма"
+list.rate.commission: "Комиссия"
+list.rate.period: "Период"
+show.pool.name: "Название"
+show.pool.accounts: "Счета"
+show.user.username: "Логин"
+show.user.password: "Пароль"
+show.user.first_name: "Имя"
+show.user.middle_name: "Отчество"
+show.user.last_name: "Фамилия"
+show.user.email: "Email"
+show.user.phone: "Телефон"
+show.user.account: "Счёт"
+show.user.referrer: "Пригласивший"
+show.user.avatar: "Аватарка"
+show.user.locked: "Заблокирован"
+show.user.enabled: "Включен"
+show.ticket.id: "Номер"
+show.ticket.chief_ticket: "Вышестоящий"
+show.ticket.rate: "Тариф"
+show.ticket.owner: "Владелец"
+show.ticket.paid: "Оплачен"
+show.ticket.paid_up: "Оплачен до"
+show.ticket.type: "Тип"
+show.ticket.expired: "Просрочен"
+menu.profile: "Профиль"
+menu.dashboard: "Рабочий стол"
+menu.cloud: "Облако"
+menu.history: "История транзакций"
+menu.content: "Материалы"
+menu.news: "Новости"
+menu.faq: "Вопросы и ответы"
+type.transaction.prolong: "Продление"
+type.transaction.reward: "Выплата"
+type.transaction.withdrawal: "Вывод"
+type.ticket.subscription: "Подписка"
+type.ticket.ownership: "Безлимитный"
+status.common.yes: "Да"
+status.common.no: "Нет"
+status.transaction.new: "Новая"
+status.transaction.canceled: "Отменена"
+status.transaction.done: "Выполнена"
+status.transaction.error: "Ошибка"
+status.transaction.retry: "Повторить"
+status.ticket.subscription: "Подписка"
+status.ticket.ownership: "Безлимит"
+status.invoice.new: "Новый"
+status.invoice.partial_paid: "Частично оплачен"
+status.invoice.paid: "Оплачен"
+status.invoice.expired: "Просрочен"
+status.invoice.canceled: "Отменён"

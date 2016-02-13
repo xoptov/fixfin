@@ -2,13 +2,13 @@
 
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\Ticket;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use AppBundle\Entity\Ticket;
 
 class TicketAdmin extends Admin
 {
@@ -36,8 +36,9 @@ class TicketAdmin extends Admin
             ->add('paid', 'boolean', array(
                 'label' => 'list.ticket.paid'
             ))
-            ->add('subscribed', 'boolean', array(
-                'label' => 'list.ticket.subscribed'
+            ->add('type', 'choice', array(
+                'label' => 'list.ticket.type',
+                'choices' => Ticket::getTypeLabels()
             ))
             ->add('_action', 'actions', array(
                 'label' => 'list.ticket.actions',
@@ -79,11 +80,14 @@ class TicketAdmin extends Admin
             ))
             ->add('paid', 'choice', array(
                 'label' => 'form.ticket.paid',
-                'choices' => Ticket::getPaidLabels()
+                'choices' => array(
+                    'status.common.no',
+                    'status.common.yes'
+                )
             ))
-            ->add('subscribed', 'choice', array(
-                'label' => 'form.ticket.subscribed',
-                'choices' => Ticket::getSubscribedLabels()
+            ->add('type', 'choice', array(
+                'label' => 'form.ticket.type',
+                'choices' => Ticket::getTypeLabels()
             ));
     }
 
@@ -111,8 +115,9 @@ class TicketAdmin extends Admin
             ->add('paid', 'boolean', array(
                 'label' => 'show.ticket.paid'
             ))
-            ->add('subscribed', 'boolean', array(
-                'label' => 'show.ticket.subscribed'
+            ->add('type', 'choice', array(
+                'label' => 'show.ticket.type',
+                'choices' => Ticket::getTypeLabels()
             ));
     }
 

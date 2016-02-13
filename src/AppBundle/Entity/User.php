@@ -49,32 +49,11 @@ class User extends BaseUser
     /** @var \DateTime */
     private $updatedAt;
 
-    const STATUS_NOT_LOCKED = 0;
-    const STATUS_LOCKED = 1;
-    const STATUS_DISABLED = 0;
-    const STATUS_ENABLED = 1;
-
     public function __construct()
     {
         parent::__construct();
         $this->tickets = new ArrayCollection();
         $this->referrals = new ArrayCollection();
-    }
-
-    public static function getLockedLabels()
-    {
-        return [
-            self::STATUS_NOT_LOCKED => 'entity.status.no',
-            self::STATUS_LOCKED => 'entity.status.yes'
-        ];
-    }
-
-    public static function getEnabledLabels()
-    {
-        return [
-            self::STATUS_DISABLED => 'entity.status.no',
-            self::STATUS_ENABLED => 'entity.status.yes'
-        ];
     }
 
     /**

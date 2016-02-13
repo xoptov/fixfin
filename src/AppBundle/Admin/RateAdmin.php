@@ -6,34 +6,59 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use AppBundle\Entity\Pool;
 
 class RateAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $form)
     {
-        $form->add('name', 'text')
+        $form
+            ->add('name', 'text', array(
+                'label' => 'form.rate.name'
+            ))
             ->add('pool', 'entity', array(
-                'class' => 'AppBundle\\Entity\\Pool',
+                'label' => 'form.rate.pool',
+                'class' => Pool::class,
                 'property' => 'name'
             ))
-            ->add('amount', 'number')
-            ->add('commission', 'number')
-            ->add('period', 'number');
+            ->add('amount', 'number', array(
+                'label' => 'form.rate.amount'
+            ))
+            ->add('commission', 'number', array(
+                'label' => 'form.rate.commission'
+            ))
+            ->add('period', 'number', array(
+                'label' => 'form.rate.period'
+            ));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagrid)
     {
-        $datagrid->add('name')
+        $datagrid
+            ->add('name')
             ->add('amount');
     }
 
     protected function configureListFields(ListMapper $list)
     {
-        $list->addIdentifier('id')
-            ->add('name', 'text')
-            ->add('pool.name', 'text')
-            ->add('amount', 'number')
-            ->add('commission', 'percent')
-            ->add('period', 'number');
+        $list
+            ->addIdentifier('id', 'number', array(
+                'label' => 'list.rate.id'
+            ))
+            ->add('name', 'text', array(
+                'label' => 'list.rate.name'
+            ))
+            ->add('pool.name', 'text', array(
+                'label' => 'list.rate.pool'
+            ))
+            ->add('amount', 'number', array(
+                'label' => 'list.rate.amount'
+            ))
+            ->add('commission', 'number', array(
+                'label' => 'list.rate.commission'
+            ))
+            ->add('period', 'number', array(
+                'label' => 'list.rate.period'
+            ));
     }
 }

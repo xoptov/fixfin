@@ -2,13 +2,13 @@
 
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\Account;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use AppBundle\Entity\User;
 
 class AccountAdmin extends Admin
 {
@@ -17,7 +17,7 @@ class AccountAdmin extends Admin
         $form->add('user', 'entity', array(
             'label' => 'form.account.user',
             'required' => false,
-            'class' => 'AppBundle\\Entity\\User',
+            'class' => User::class,
             'property' => 'username')
         )
             ->add('number', 'text', array(
@@ -36,15 +36,24 @@ class AccountAdmin extends Admin
                 'label' => 'form.account.commission'
             ))
             ->add('system', 'choice', array(
-                'choices' => Account::getSystemLabels(),
+                'choices' => array(
+                    'status.common.no',
+                    'status.common.yes'
+                ),
                 'label' => 'form.account.system'
             ))
             ->add('verified', 'choice', array(
-                'choices' => Account::getVerificationLabels(),
+                'choices' => array(
+                    'status.common.no',
+                    'status.common.yes'
+                ),
                 'label' => 'form.account.verified'
             ))
             ->add('blocked', 'choice', array(
-                'choices' => Account::getBlockLabels(),
+                'choices' => array(
+                    'status.common.no',
+                    'status.common.yes'
+                ),
                 'label' => 'form.account.blocked'
             ))
         ;
