@@ -101,3 +101,11 @@ services:
     app.payment_subscriber:
         class: AppBundle\EventListener\PaymentSubscriber
         arguments: [@app.cashier_service]
+
+    app.filter.transparent_mask:
+        class: AppBundle\Imagine\Filter\Loader\TransparentMaskFilterLoader
+        arguments:
+            - @liip_imagine
+            - %kernel.root_dir%
+        tags:
+            - {name: liip_imagine.filter.loader, loader: 'transparent_mask'}

@@ -14,29 +14,67 @@ modulejs.define('dashboard', function() {
 
 modulejs.define('profile', function() {
     return {
+        fields: {
+            $inputAccount: $('input#profile_account'),
+            $errorAccount: $('#profile_account_error'),
+            $inputAvatarFile: $('input#avatar_file'),
+            $avatarImage: $('img#user_avatar'),
+            $avatarStub: $('.avatar-empty'),
+            $changeAvatarBtn: $('.js-change-avatar')
+        },
         start: function() {
             this.initAccountInput();
+            this.initAvatarUploader();
         },
         initAccountInput: function() {
-            var $inputAccount = $('input#profile_account');
-            var $errorAccount = $('#profile_account_error');
-            $inputAccount.on('focusout', function(e){
-                var ctx = this;
+            var module = this;
+            this.fields.$inputAccount.on('focusout', function(e){
                 var number = $(this).val();
                 $.ajax('/api/accounts', {
-                    context: ctx,
                     method: 'POST',
                     data: {'number': number},
-                    success: function(data) {
-                        $errorAccount.empty();
+                    success: function() {
+                        module.fields.$errorAccount.empty();
                     },
                     error: function(xhr) {
                         var list = $('<ul><li>');
                         $(list).find('li').append(xhr.responseJSON.error);
-                        $errorAccount.html(list);
+                        module.fields.$errorAccount.html(list);
                     }
                 });
             });
+        },
+        initAvatarUploader: function() {
+            var module = this;
+            this.fields.$inputAvatarFile.on('change', function() {
+                var formData = new FormData();
+                var file = this.files[0];
+                formData.append('avatar', file, file.name);
+                $.ajax({
+                    url: '/api/avatars',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    context: module,
+                    success: function(data) {
+                        this.changeAvatarImage(data.path);
+                    },
+                    error: function(xhr) {
+                        //TODO: Высвечивать ошибку пользователю о том что не получилось загрузить фоточку
+                    }
+                });
+            });
+            this.fields.$changeAvatarBtn.on('click', function(e){
+                e.preventDefault();
+                module.fields.$inputAvatarFile.click();
+            });
+        },
+        changeAvatarImage: function(path) {
+            if(!this.fields.$avatarStub.hasClass('hidden')) this.fields.$avatarStub.addClass('hidden');
+            if(this.fields.$avatarImage.hasClass('hidden')) this.fields.$avatarImage.removeClass('hidden');
+            this.fields.$avatarImage.attr('src', path);
         }
     };
 });

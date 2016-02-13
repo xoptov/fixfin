@@ -86,6 +86,7 @@ class PerfectMoney
         $request->setPaymentId($invoice->getId())
             ->setPaymentAmount($invoice->getAmount())
             ->setPayeeName($this->options['payee_name'])
+            ->setPaymentId($invoice->getId())
             ->setPaymentUnits($this->options['payment_units'])
             ->setStatusUrl($this->options['status_url'])
             ->setPaymentUrl($this->options['payment_url'])

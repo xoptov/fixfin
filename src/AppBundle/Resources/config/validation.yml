@@ -23,3 +23,11 @@ AppBundle\Entity\Account:
             - Length:
                 min: 8
                 max: 16
+
+Symfony\Component\HttpFoundation\File\UploadedFile:
+    properties:
+        size:
+            - GreaterThan:
+                value: %upload_max_size%
+        mimeType:
+            - Regex: '/^image\/(?:jpeg|png)$/'

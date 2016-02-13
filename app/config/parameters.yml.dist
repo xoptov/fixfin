@@ -18,15 +18,23 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    base_url: 'http://fixfin.ru'
+
     perfect_money:
         entry_form:     'https://perfectmoney.is/api/step1.asp'
         transfer_url:   'https://perfectmoney.is/acct/confirm.asp'
         payee_name:     'FixFin ltd.'
-        payment_units:  'USD'
-        status_url:     ~
-        payment_url:    ~
-        nopayment_url:  ~
-        available_payment_methods: ~
+        payment_units:  USD
+        status_url:     '%base_url%/perfectmoney/confirm'
+        payment_url:    '%base_url%/perfectmoney/success'
+        nopayment_url:  '%base_url%/perfectmoney/failed'
+        available_payment_methods: account
 
-    news_in_profile: ~
+    news_in_profile:    ~
+
+    # File upload settings
+    uploads_dir:        'uploads'
+    uploads_path:       '%kernel.root_dir%/../web/%uploads_dir%'
+    upload_max_size:    524228
 

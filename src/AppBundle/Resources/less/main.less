@@ -174,17 +174,22 @@ body {
       }
     }
     .avatar {
-      position: relative;
-      display: inline-block;
-      width: 125px;
-      height: 125px;
-      border: 2px dashed;
-      border-radius: 50%;
-      background-color: #b8b8b6;
-      .empty {
-        position: absolute;
-        top: 50px;
-        left: 30px;
+      .avatar-empty {
+        position: relative;
+        display: inline-block;
+        width: 125px;
+        height: 125px;
+        border: 2px dashed;
+        border-radius: 50%;
+        background-color: #b8b8b6;
+        .title {
+          position: absolute;
+          top: 50px;
+          left: 30px;
+        }
+      }
+      #avatar_file {
+        display: none;
       }
     }
     .form-group {
@@ -250,16 +255,20 @@ body {
   }
 }
 
-.m-t-30 {
-  margin-top: 30px;
-}
-
 .m-b-30 {
   margin-bottom: 30px;
 }
 
+.m-t-30 {
+  margin-top: 30px;
+}
+
 .m-t-10 {
   margin-top: 10px;
+}
+
+.m-t-5 {
+  margin-top: 5px;
 }
 
 .m-l-10 {

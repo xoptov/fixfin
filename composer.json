@@ -9,6 +9,8 @@
     },
     "require": {
         "php": ">=5.3.9",
+        "ext-exif": "~1.4",
+        "ext-imagick": "~3.1",
         "symfony/symfony": "2.8.*",
         "doctrine/orm": "^2.4.8",
         "doctrine/doctrine-bundle": "~1.4",

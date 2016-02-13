@@ -2,16 +2,20 @@
 
 {% block content %}
     <div class="row">
-    {% if app.user.referrals.count is not empty %}
+    {% if app.user.referrals is not empty %}
         {% for referral in app.user.referrals %}
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="window m-b-30">
                     <div class="content">
                         <div class="row">
-                            <div class="col-xs-5 text-center">
-                                <div class="avatar">
-                                    <span class="empty">Нет фото</span>
+                            <div class="col-xs-5 text-center avatar">
+                            {% if referral.avatar is not empty %}
+                                <img src="{{ referral.avatar|imagine_filter('avatar_125x125') }}" width="125" height="125">
+                            {% else %}
+                                <div class="avatar-empty">
+                                    <span class="title">Нет фото</span>
                                 </div>
+                            {% endif %}
                             </div>
                             <div class="col-xs-7">
                                 <div class="fullname">{{ referral.lastname }} {{ referral.firstname }}</div>
@@ -43,10 +47,11 @@
     {% else %}
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="window m-b-30">
+                <div class="header">
+                    <h3>Облако рефераллов</h3>
+                </div>
                 <div class="content">
-                    <div class="row">
-                        К сожалению на данный момент у Вас нет приглашенных рефералов
-                    </div>
+                    К сожалению на данный момент у Вас нет приглашенных участников в структуру.
                 </div>
             </div>
         </div>
