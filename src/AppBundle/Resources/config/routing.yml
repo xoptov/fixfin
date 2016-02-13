@@ -39,7 +39,7 @@ app_dashboard_open:
     defaults: { _controller: AppBundle:Dashboard:open }
 
 app_dashboard_prolong:
-    path:     /cabinet/dashboard/prolong/{rate}
+    path:     /cabinet/dashboard/prolong/{ticket}
     defaults: { _controller: AppBundle:Dashboard:prolong }
 
 app_payment_success:
@@ -50,7 +50,12 @@ app_payment_failed:
     path:     /cabinet/payment/failed
     defaults: { _controller: AppBundle:Payment:failed }
 
-app_accounts:
+app_api_accounts:
     path:     /api/accounts
     defaults: { _controller: AppBundle:API:accounts }
     methods:  [POST]
+
+app_api_avatars:
+    path:     /api/avatars
+    defaults: { _controller: AppBundle:API:postAvatars }
+    methods:   [POST]

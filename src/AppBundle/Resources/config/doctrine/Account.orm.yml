@@ -17,7 +17,7 @@ AppBundle\Entity\Account:
             unique: true
         login:
             type: string
-            length: 6
+            length: 8
             nullable: true
         password:
             type: string

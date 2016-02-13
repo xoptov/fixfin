@@ -62,6 +62,14 @@ class PaymentRequest
     }
 
     /**
+     * @return string
+     */
+    public function getPayeeName()
+    {
+        return $this->payeeName;
+    }
+
+    /**
      * @param float $paymentAmount
      * @return PaymentRequest
      */

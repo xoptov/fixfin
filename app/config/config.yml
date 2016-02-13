@@ -91,3 +91,12 @@ stof_doctrine_extensions:
     orm:
         default:
             tree: true
+
+liip_imagine:
+    driver: imagick
+    filter_sets:
+        avatar_125x125:
+            format: png
+            filters:
+                thumbnail: { size: [125, 125], mode: outbound }
+                transparent_mask: { image: 'mask_125x125.png' }

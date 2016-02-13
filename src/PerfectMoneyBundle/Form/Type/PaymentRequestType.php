@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PaymentRequestType extends AbstractType
 {
@@ -13,7 +14,7 @@ class PaymentRequestType extends AbstractType
     {
         $builder
             ->add('PAYEE_ACCOUNT', HiddenType::class, array(
-                'property_path' => 'payeeAccount'
+                'property_path' => 'payeeAccount.number'
             ))
             ->add('PAYEE_NAME', HiddenType::class, array(
                 'property_path' => 'payeeName'
@@ -38,7 +39,8 @@ class PaymentRequestType extends AbstractType
             ))
             ->add('AVAILABLE_PAYMENT_METHODS', HiddenType::class, array(
                 'property_path' => 'availablePaymentMethods'
-            ));
+            ))
+            ->add('paying', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

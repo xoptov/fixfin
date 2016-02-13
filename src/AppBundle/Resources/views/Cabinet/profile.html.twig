@@ -7,11 +7,19 @@
                 <div class="header">Профиль</div>
                 <div class="content">
                     <div class="row">
-                        <div class="col-xs-5 text-center">
-                            <div class="avatar">
-                                <span class="empty">Нет фото</span>
+                        <div class="col-xs-5 text-center avatar">
+                        {% if app.user.avatar is not empty %}
+                            <img class="avatar-filtered" id="user_avatar" src="{{ app.user.avatar|imagine_filter('avatar_125x125') }}" width="125" height="125">
+                        {% else %}
+                            <div class="avatar-empty">
+                                <span class="title">Нет фото</span>
                             </div>
-                            <div class="change">Изменить</div>
+                            <img class="avatar-filtered hidden" id="user_avatar" width="125" height="125">
+                        {% endif %}
+                            <input type="file" id="avatar_file" accept="image/jpeg,image/png">
+                            <div class="change m-t-5">
+                                <a href="#" class="js-change-avatar">Изменить</a>
+                            </div>
                         </div>
                         <div class="col-xs-7">
                             <div class="fullname">{{ app.user.lastname }} {{ app.user.firstname }}</div>
@@ -30,10 +38,14 @@
                     <div class="row">
                     {% if app.user.referrer is not null %}
                         {% set referrer = app.user.referrer %}
-                        <div class="col-xs-5 text-center">
-                            <div class="avatar">
-                                <span class="empty">Нет фото</span>
+                        <div class="col-xs-5 text-center avatar">
+                        {% if referrer.avatar is not empty %}
+                            <img src="{{ referrer.avatar|imagine_filter('avatar_125x125') }}" width="125" height="125">
+                        {% else %}
+                            <div class="avatar-empty">
+                                <span class="title">Нет фото</span>
                             </div>
+                        {% endif %}
                         </div>
                         <div class="col-xs-7">
                             <div class="fullname">{{ referrer.lastName }} {{ referrer.firstName }}</div>
@@ -153,7 +165,7 @@
                 {% endif %}
                     <div class="row">
                         <div class="col-xs-12 text-center news-all">
-                            Все новости
+                            <a href="{{ path('app_news') }}">Все новости</a>
                         </div>
                     </div>
                 </div>

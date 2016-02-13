@@ -1,5 +1,8 @@
 .idea/
 /web/bundles/
+/web/media/
+/web/uploads/*
+!web/uploads/.gitkeep
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml

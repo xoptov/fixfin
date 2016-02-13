@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Rate;
 use PerfectMoneyBundle\Form\Type\PaymentRequestType;
+use AppBundle\Entity\Ticket;
 
 class DashboardController extends Controller
 {
@@ -37,18 +38,11 @@ class DashboardController extends Controller
     }
 
     /**
-     * @param Rate $rate
+     * @param Ticket $ticket
      * @return RedirectResponse|Response
      */
-    public function prolongAction(Rate $rate)
+    public function prolongAction(Ticket $ticket)
     {
-        $ticket = $this->getDoctrine()->getRepository('AppBundle:Ticket')
-            ->getTicketByRate($rate, $this->getUser());
-
-        if (!$ticket) {
-            $this->redirectToRoute('app_dashboard_open', array('rate' => $rate));
-        }
-
         //TODO: нужно подумать где необходимо делать валидацию, или упаковать это в сервис одного метода
         $paymentRequest = $this->get('app.cashier_service')->createProlongPaymentRequest($ticket);
 
@@ -57,7 +51,7 @@ class DashboardController extends Controller
 
         $form = $this->createForm(PaymentRequestType::class, $paymentRequest, $options);
 
-        return $this->render('AppBundle:Dashboard:index.html.twig', array('form' => $form->createView()));
+        return $this->render('AppBundle:Dashboard:prolong.html.twig', array('form' => $form->createView()));
     }
 
 }

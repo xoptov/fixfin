@@ -14,7 +14,8 @@ class AccountRepository extends EntityRepository
             ->innerJoin('a.pools', 'p')
             ->where('p = :pool')
                 ->setParameter('pool', $pool)
-            ->andWhere('a.balance IS NOT NULL')
+            ->andWhere('a.system = :system')
+                ->setParameter('system', true)
             ->setMaxResults(1);
 
         return $qb;

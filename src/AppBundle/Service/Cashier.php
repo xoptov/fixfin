@@ -68,7 +68,7 @@ class Cashier
      * @param Ticket $ticket
      * @return Invoice
      */
-    public function createInvoice(Ticket $ticket)
+    public function createInvoice(Ticket $ticket, $andFlush = false)
     {
         $amount = $this->accessor->getValue($ticket, 'rate.amount');
         $period = $this->accessor->getValue($ticket, 'rate.period');
@@ -76,9 +76,14 @@ class Cashier
         $invoice = new Invoice();
         $invoice->setTicket($ticket)
             ->setAmount($amount)
-            ->setPeriod($period);
+            ->setPeriod($period)
+            ->setExpiredAt(new \DateTime('+1 week')); //TODO: потом желательно этот хардкод убрать
 
         $this->entityManager->persist($invoice);
+
+        if ($andFlush) {
+            $this->entityManager->flush();
+        }
 
         $event = new InvoiceEvent($invoice);
         $this->dispatcher->dispatch(InvoiceEvent::CREATED, $event);
@@ -230,7 +235,7 @@ class Cashier
             return $invoice;
         }
 
-        return $this->createInvoice($ticket);
+        return $this->createInvoice($ticket, true);
     }
 
     /**

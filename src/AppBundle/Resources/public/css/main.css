@@ -6888,7 +6888,7 @@ body {
 .wrapper .window .content .birthday .p-r-5 {
   padding-right: 5px;
 }
-.wrapper .window .avatar {
+.wrapper .window .avatar .avatar-empty {
   position: relative;
   display: inline-block;
   width: 125px;
@@ -6897,10 +6897,13 @@ body {
   border-radius: 50%;
   background-color: #b8b8b6;
 }
-.wrapper .window .avatar .empty {
+.wrapper .window .avatar .avatar-empty .title {
   position: absolute;
   top: 50px;
   left: 30px;
+}
+.wrapper .window .avatar #avatar_file {
+  display: none;
 }
 .wrapper .window .form-group ul {
   margin-bottom: 0;
@@ -6954,14 +6957,17 @@ body {
 .wrapper footer .navigation .submenu {
   margin-top: 3px;
 }
-.m-t-30 {
-  margin-top: 30px;
-}
 .m-b-30 {
   margin-bottom: 30px;
 }
+.m-t-30 {
+  margin-top: 30px;
+}
 .m-t-10 {
   margin-top: 10px;
+}
+.m-t-5 {
+  margin-top: 5px;
 }
 .m-l-10 {
   margin-left: 10px;
