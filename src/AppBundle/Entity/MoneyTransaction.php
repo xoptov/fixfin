@@ -53,6 +53,26 @@ class MoneyTransaction
     /** @var int */
     private $attempts;
 
+    public static function getStatusLabels()
+    {
+        return [
+            self::STATUS_NEW => 'status.transaction.new',
+            self::STATUS_CANCELED => 'status.transaction.canceled',
+            self::STATUS_DONE => 'status.transaction.done',
+            self::STATUS_ERROR => 'status.transaction.error',
+            self::STATUS_RETRY => 'status.transaction.retry'
+        ];
+    }
+
+    public static function getTypeLabels()
+    {
+        return [
+            self::TYPE_PROLONG => 'type.transaction.prolong',
+            self::TYPE_REWARD => 'type.transaction.reward',
+            self::TYPE_WITHDRAWAL => 'type.transaction.withdrawal'
+        ];
+    }
+
     public function __construct()
     {
         $this->amount = 0.0;

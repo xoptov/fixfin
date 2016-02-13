@@ -35,9 +35,6 @@ class Account
     /** @var bool */
     private $system;
 
-    const STATUS_NOT_SYSTEM = 0;
-    const STATUS_SYSTEM = 1;
-
     /** @var Pool */
     private $pools;
 
@@ -50,14 +47,8 @@ class Account
     /** @var bool */
     private $verified;
 
-    const STATUS_NOT_VERIFIED = 0;
-    const STATUS_VERIFIED = 1;
-
     /** @var bool */
     private $blocked;
-
-    const STATUS_OPENED = 0;
-    const STATUS_BLOCKED = 1;
 
     public function __construct()
     {
@@ -65,30 +56,6 @@ class Account
         $this->incomes = new ArrayCollection();
         $this->outcomes = new ArrayCollection();
         $this->system = false;
-    }
-
-    public static function getSystemLabels()
-    {
-        return [
-            Account::STATUS_NOT_SYSTEM => 'entity.account.status.no',
-            Account::STATUS_SYSTEM => 'entity.account.status.yes'
-        ];
-    }
-
-    public static function getVerificationLabels()
-    {
-        return [
-            Account::STATUS_NOT_VERIFIED => 'entity.account.status.no',
-            Account::STATUS_VERIFIED => 'entity.account.status.yes'
-        ];
-    }
-
-    public static function getBlockLabels()
-    {
-        return [
-            Account::STATUS_OPENED => 'entity.account.status.no',
-            Account::STATUS_BLOCKED => 'entity.account.status.yes'
-        ];
     }
 
     /**
