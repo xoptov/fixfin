@@ -15,9 +15,6 @@ class Ticket
     /** @var \DateTime */
     private $paidUp;
 
-    /** @var bool */
-    private $paid;
-
     /** @var Ticket */
     private $chiefTicket;
 
@@ -49,7 +46,6 @@ class Ticket
     {
         $this->subordinates = new ArrayCollection();
         $this->invoices = new ArrayCollection();
-        $this->paid = false;
         $this->type = self::TYPE_SUBSCRIPTION;
         $this->expired = true;
     }
@@ -87,25 +83,6 @@ class Ticket
     public function getPaidUp()
     {
         return $this->paidUp;
-    }
-
-    /**
-     * @param boolean $paid
-     * @return Ticket
-     */
-    public function setPaid($paid)
-    {
-        $this->paid = $paid;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getPaid()
-    {
-        return $this->paid;
     }
 
     /**

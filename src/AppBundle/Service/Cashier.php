@@ -97,14 +97,29 @@ class Cashier
      */
     private function checkTicketExpiration(Ticket $ticket)
     {
-        $now = new \DateTime();
-        $paidUpTimestamp = $this->accessor->getValue($ticket, 'paidUp.timestamp');
+        if ($ticket->isOwnership()) {
+            $ticket->setExpired(false);
 
-        if ($now->getTimestamp() > $paidUpTimestamp) {
+            return true;
+        }
+
+        $paidUp = $ticket->getPaidUp();
+
+        if (!$paidUp instanceof \DateTime) {
             $ticket->setExpired(true);
 
             return false;
         }
+
+        $now = new \DateTime();
+
+        if ($now->getTimestamp() > $paidUp->getTimestamp()) {
+            $ticket->setExpired(true);
+
+            return false;
+        }
+
+        $ticket->setExpired(false);
 
         return true;
     }
@@ -138,6 +153,8 @@ class Cashier
 
             return false;
         }
+
+        $invoice->setStatus(Invoice::STATUS_PAID);
 
         return true;
     }
@@ -240,18 +257,35 @@ class Cashier
 
     /**
      * @param Invoice $invoice
-     * @return bool
      */
     private function processInvoicePaid(Invoice $invoice, $flush = true)
     {
         if ($this->checkInvoiceFullyPaid($invoice)) {
-            $this->reestablishChief($invoice->getTicket());
-            $this->reestablishSubordinates($invoice->getTicket());
+            $ticket = $invoice->getTicket();
+            // Тут дальше идет логика по обработки тикета и связанных c ним тикетов.
+            $this->prolongationTicket($ticket);
+            $this->reestablishChief($ticket);
+            $this->reestablishSubordinates($ticket);
         }
 
         if ($flush) {
             $this->entityManager->flush();
         }
+    }
+
+    /**
+     * @param Ticket $ticket
+     * @return Ticket
+     */
+    private function prolongationTicket(Ticket $ticket)
+    {
+        $period = $this->accessor->getValue($ticket, 'rate.period');
+        $paidUp = new \DateTime('+' . $period . ' days');
+
+        $ticket->setExpired(false)
+            ->setPaidUp($paidUp);
+
+        return $ticket;
     }
 
     /**
@@ -265,7 +299,7 @@ class Cashier
             return;
         }
 
-        if ($chiefTicket->isOwnership() || ($chiefTicket->isSubscription() && $this->checkTicketExpiration($chiefTicket))) {
+        if ($this->checkTicketExpiration($chiefTicket)) {
             $this->banker->createRewardTransaction($chiefTicket);
 
             return;
