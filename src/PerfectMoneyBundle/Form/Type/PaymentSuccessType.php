@@ -5,6 +5,7 @@ namespace PerfectMoneyBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use PerfectMoneyBundle\Model\PaymentSuccess;
 
 class PaymentSuccessType extends PaymentErrorType
 {
@@ -21,6 +22,6 @@ class PaymentSuccessType extends PaymentErrorType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefault('data_class', 'PrefectMoneyBundle\\Model\\PaymentSuccess');
+        $resolver->setDefault('data_class', PaymentSuccess::class);
     }
 }

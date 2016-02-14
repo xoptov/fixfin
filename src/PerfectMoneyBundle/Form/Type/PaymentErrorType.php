@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use PerfectMoneyBundle\Model\PaymentError;
 
 class PaymentErrorType extends AbstractType
 {
@@ -32,8 +33,9 @@ class PaymentErrorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'PerfectMoneyBundle\\Model\\PaymentError',
-            'csrf_protection' => false
+            'data_class' => PaymentError::class,
+            'csrf_protection' => false,
+            'allow_extra_fields' => true
         ));
     }
 }
