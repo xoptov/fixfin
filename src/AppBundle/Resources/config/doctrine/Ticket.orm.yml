@@ -14,9 +14,6 @@ AppBundle\Entity\Ticket:
         paidUp:
             type: datetime
             nullable: true
-        paid:
-            type: boolean
-            nullable: false
         type:
             type: integer
             nullable: false

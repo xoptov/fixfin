@@ -33,9 +33,6 @@ class TicketAdmin extends Admin
             ->add('paidUp', 'datetime', array(
                 'label' => 'list.ticket.paid_up'
             ))
-            ->add('paid', 'boolean', array(
-                'label' => 'list.ticket.paid'
-            ))
             ->add('type', 'choice', array(
                 'label' => 'list.ticket.type',
                 'choices' => Ticket::getTypeLabels()
@@ -78,13 +75,6 @@ class TicketAdmin extends Admin
                 'label' => 'form.ticket.paid_up',
                 'required' => false
             ))
-            ->add('paid', 'choice', array(
-                'label' => 'form.ticket.paid',
-                'choices' => array(
-                    'status.common.no',
-                    'status.common.yes'
-                )
-            ))
             ->add('type', 'choice', array(
                 'label' => 'form.ticket.type',
                 'choices' => Ticket::getTypeLabels()
@@ -111,9 +101,6 @@ class TicketAdmin extends Admin
             ))
             ->add('paidUp', 'datetime', array(
                 'label' => 'show.ticket.paid_up'
-            ))
-            ->add('paid', 'boolean', array(
-                'label' => 'show.ticket.paid'
             ))
             ->add('type', 'choice', array(
                 'label' => 'show.ticket.type',
