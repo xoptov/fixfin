@@ -34,7 +34,8 @@ class PaymentErrorType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => PaymentError::class,
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'allow_extra_fields' => true
         ));
     }
 }

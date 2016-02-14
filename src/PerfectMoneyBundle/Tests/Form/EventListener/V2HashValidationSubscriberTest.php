@@ -9,6 +9,8 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class V2HashValidationSubscriberTest extends TestCase
 {
+
+
     public function testPreSubmit()
     {
         /**
@@ -25,14 +27,15 @@ class V2HashValidationSubscriberTest extends TestCase
          * Фикстуры отправляемых данных в форму
          */
         $submittedData = array(
-            'PAYMENT_ID'        => '19821111',
-            'PAYEE_ACCOUNT'     => 'U9102389',
-            'PAYMENT_AMOUNT'    => '20.00',
+            'PAYMENT_ID'        => '1',
+            'PAYEE_ACCOUNT'     => 'U10006984',
+            'PAYMENT_AMOUNT'    => '0.3',
             'PAYMENT_UNITS'     => 'USD',
-            'PAYMENT_BATCH_NUM' => '20171105',
-            'PAYER_ACCOUNT'     => 'U2482738',
-            'TIMESTAMPGMT'      => '1454666616',
-            'V2_HASH'           => '2560071A5A9D9BE236596FF4B68D8467'
+            'PAYMENT_BATCH_NUM' => '120021117',
+            'PAYER_ACCOUNT'     => 'U1178220',
+            'TIMESTAMPGMT'      => '1455468796',
+            'V2_HASH'           => 'B1C616C485982A36EB796981563A8AFC',
+            'BAGGAGE_FIELDS'    => ''
         );
 
 
@@ -52,7 +55,7 @@ class V2HashValidationSubscriberTest extends TestCase
         $provider = $this->getMockBuilder('PerfectMoneyBundle\\Service\\TokenProvider')
             ->disableOriginalConstructor()
             ->getMock();
-        $provider->expects($this->any())->method('getToken')->will($this->returnValue('4EA5DD31EE8EA77F8714D66479D00902'));
+        $provider->expects($this->any())->method('getToken')->will($this->returnValue('46dfa020b4dae4ad25d369db2c213d1d'));
 
         $V2HashValidationSubscriber = new V2HashValidationSubscriber($provider, new PropertyAccessor());
 
