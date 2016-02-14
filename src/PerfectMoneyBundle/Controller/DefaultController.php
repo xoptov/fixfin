@@ -4,8 +4,6 @@ namespace PerfectMoneyBundle\Controller;
 
 use PerfectMoneyBundle\Event\PaymentEvent;
 use PerfectMoneyBundle\Form\Type\PaymentConfirmationType;
-use PerfectMoneyBundle\Form\Type\PaymentErrorType;
-use PerfectMoneyBundle\Form\Type\PaymentSuccessType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,43 +11,23 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @param Request $request
      * @return Response
      */
-    public function successAction(Request $request)
+    public function successAction()
     {
-        $form = $this->createForm(new PaymentSuccessType());
-        $form->handleRequest($request);
+        //TODO: Тут необходимо сделать через форму PaymentSuccessType со всеми проверками потаму как мы имеем v2_hash в запросе.
 
-        if ($form->isValid()) {
-            $this->get('event_dispatcher')->dispatch(PaymentEvent::SUCCESS, new PaymentEvent($form->getData()));
-
-            return new Response('Payment successful!'); //TODO: необходимо редиректить на страницу в кабинете
-        }
-
-        $errors = $form->getErrors(true, false);
-
-        return new Response((string)$errors, Response::HTTP_BAD_REQUEST);
+        return new Response('Payment successful!');
     }
 
     /**
-     * @param Request $request
      * @return Response
      */
-    public function failedAction(Request $request)
+    public function failedAction()
     {
-        $form = $this->createForm(new PaymentErrorType());
-        $form->handleRequest($request);
+        //TODO: Тут необходимо сделать через форму PaymentErrorType.
 
-        if ($form->isValid()) {
-            $this->get('event_dispatcher')->dispatch(PaymentEvent::FAILED, new PaymentEvent($form->getData()));
-
-            return new Response('Payment failed!', Response::HTTP_BAD_REQUEST); //TODO: необходимо редиректить на страницу в кабинете
-        }
-
-        $errors = $form->getErrors(true, false);
-
-        return new Response((string)$errors, Response::HTTP_BAD_REQUEST);
+        return new Response('Payment failed!', Response::HTTP_BAD_REQUEST);
     }
 
     /**

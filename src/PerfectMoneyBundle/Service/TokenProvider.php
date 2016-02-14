@@ -25,6 +25,6 @@ class TokenProvider implements TokenProviderInterface
             throw new NoResultException();
         }
 
-        return $account->getPassPhrase();
+        return md5($account->getPassPhrase());
     }
 }

@@ -55,7 +55,7 @@ class V2HashValidationSubscriber implements EventSubscriberInterface
             }
 
             // Собираем строку для хэширования
-            $tokenBody = implode(':', $tokenBody);
+            $tokenBody = strtoupper(implode(':', $tokenBody));
             $expectedHash = strtoupper(md5($tokenBody));
 
             if ($this->accessor->getValue($data, '[V2_HASH]') !== $expectedHash) {
