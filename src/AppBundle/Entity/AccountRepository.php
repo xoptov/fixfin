@@ -16,6 +16,8 @@ class AccountRepository extends EntityRepository
                 ->setParameter('pool', $pool)
             ->andWhere('a.system = :system')
                 ->setParameter('system', true)
+            ->andWhere('a.blocked = :blocked')
+                ->setParameter('blocked', false)
             ->setMaxResults(1);
 
         return $qb;

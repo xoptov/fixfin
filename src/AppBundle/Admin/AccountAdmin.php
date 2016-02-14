@@ -27,6 +27,10 @@ class AccountAdmin extends Admin
                 'label' => 'form.account.login',
                 'required' => false
             ))
+            ->add('password', 'password', array(
+                'label' => 'form.account.password',
+                'required' => false
+            ))
             ->add('passPhrase', 'password', array(
                 'required' => false,
                 'label' => 'form.account.pass_phrase'
