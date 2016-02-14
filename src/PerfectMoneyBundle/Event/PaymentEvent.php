@@ -3,8 +3,9 @@
 namespace PerfectMoneyBundle\Event;
 
 use PerfectMoneyBundle\Model\PaymentInterface;
+use Symfony\Component\EventDispatcher\Event;
 
-class PaymentEvent
+class PaymentEvent extends Event
 {
     const FAILED = 'perfect_money.payment.failed';
     const SUCCESS = 'perfect_money.payment.success';
