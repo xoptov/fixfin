@@ -45,10 +45,10 @@ services:
             - { name: sonata.admin, manager_type: orm, label: admin.title.section.account }
 
     app.admin.money_transaction:
-            class: AppBundle\Admin\MoneyTransactionAdmin
-            arguments: [~, AppBundle\Entity\MoneyTransaction, ~]
-            tags:
-                - { name: sonata.admin, manager_type: orm, label: admin.title.section.transaction }
+        class: AppBundle\Admin\MoneyTransactionAdmin
+        arguments: [~, AppBundle\Entity\MoneyTransaction, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.transaction }
 
     app.admin.ticket:
         class: AppBundle\Admin\TicketAdmin
@@ -101,6 +101,8 @@ services:
     app.payment_subscriber:
         class: AppBundle\EventListener\PaymentSubscriber
         arguments: [@app.cashier_service]
+        tags:
+            - { name: kernel.event_subscriber }
 
     app.filter.transparent_mask:
         class: AppBundle\Imagine\Filter\Loader\TransparentMaskFilterLoader
@@ -108,4 +110,4 @@ services:
             - @liip_imagine
             - %kernel.root_dir%
         tags:
-            - {name: liip_imagine.filter.loader, loader: 'transparent_mask'}
+            - { name: liip_imagine.filter.loader, loader: 'transparent_mask' }
