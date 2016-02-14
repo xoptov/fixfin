@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use PerfectMoneyBundle\Service\TokenProviderInterface;
 use PerfectMoneyBundle\Form\EventListener\V2HashValidationSubscriber;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use PerfectMoneyBundle\Model\PaymentConfirmation;
 
 class PaymentConfirmationType extends PaymentSuccessType
 {
@@ -43,7 +44,7 @@ class PaymentConfirmationType extends PaymentSuccessType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefault('data_class', 'PerfectMoneyBundle\\Model\\PaymentConfirmation');
+        $resolver->setDefault('data_class', PaymentConfirmation::class);
     }
 
     public function getName()
