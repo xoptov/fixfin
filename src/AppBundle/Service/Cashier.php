@@ -280,10 +280,18 @@ class Cashier
     private function prolongationTicket(Ticket $ticket)
     {
         $period = $this->accessor->getValue($ticket, 'rate.period');
-        $paidUp = new \DateTime('+' . $period . ' days');
 
-        $ticket->setExpired(false)
-            ->setPaidUp($paidUp);
+        $paidInterval = new \DateInterval('P'.$period.'D');
+        $now = new \DateTime();
+
+        $paidUp = $ticket->getPaidUp();
+
+        if (!$paidUp instanceof \DateTime || $paidUp->getTimestamp() < $now->getTimestamp()) {
+            $paidUp = new \DateTime();
+        }
+
+        $ticket->setPaidUp($paidUp->add($paidInterval))
+            ->setExpired(false);
 
         return $ticket;
     }
