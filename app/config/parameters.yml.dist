@@ -26,9 +26,9 @@ parameters:
         transfer_url:   'https://perfectmoney.is/acct/confirm.asp'
         payee_name:     'FixFin ltd.'
         payment_units:  USD
-        status_url:     '%base_url%/perfectmoney/confirm'
-        payment_url:    '%base_url%/perfectmoney/success'
-        nopayment_url:  '%base_url%/perfectmoney/failed'
+        status_url:     '%base_url%/payments/perfectmoney/confirm'
+        payment_url:    '%base_url%/payments/perfectmoney/success'
+        nopayment_url:  '%base_url%/payments/perfectmoney/failed'
         available_payment_methods: account
 
     news_in_profile:    ~

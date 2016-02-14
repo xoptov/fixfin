@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use PerfectMoneyBundle\Model\PaymentRequest;
 
 class PaymentRequestType extends AbstractType
 {
@@ -46,7 +47,7 @@ class PaymentRequestType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'PerfectMoneyBundle\\Model\\PaymentRequest',
+            'data_class' => PaymentRequest::class,
             'csrf_protection' => false
         ));
     }
