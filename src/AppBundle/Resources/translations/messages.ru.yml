@@ -1,3 +1,4 @@
+security.login.title: 'Аутентификация'
 security.login.greeting: "Добро пожаловать в FinFix"
 security.login.note: "Необходимо выполнить вход перед дальнейшей работой"
 security.login.username: "Имя пользователя"

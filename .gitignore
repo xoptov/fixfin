@@ -1,6 +1,7 @@
 .idea/
 /web/bundles/
-/web/media/
+/web/media/*
+!web/media/.gitkeep
 /web/uploads/*
 !web/uploads/.gitkeep
 /app/bootstrap.php.cache
