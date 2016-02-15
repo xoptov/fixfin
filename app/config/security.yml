@@ -25,12 +25,13 @@ security:
             anonymous: ~
 
     access_control:
+        - { path: ^/payments, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_ADMIN }
-        - { path: ^/cabinet, role: ROLE_USER }
         - { path: ^/api, role: ROLE_USER }
+        - { path: ^/, role: ROLE_USER }
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER

@@ -99,4 +99,22 @@ class TicketRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param Rate $rate
+     * @param User $referrer
+     * @return Ticket[]|null
+     */
+    public function getReferralsTicketsByRate(Rate $rate, User $referrer)
+    {
+        $qb = $this->createQueryBuilder('t');
+        $query = $qb->innerJoin('t.chiefTicket', 'ct')
+            ->where('t.rate = :rate')
+                ->setParameter('rate', $rate)
+            ->andWhere('ct.user = :user')
+                ->setParameter('user', $referrer)
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }

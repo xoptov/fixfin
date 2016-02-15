@@ -22,7 +22,7 @@ class LoadPoolData extends AbstractFixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return array(
-            'AppBundle\\DataFixtures\\ORM\\LoadAccountData'
+            LoadAccountData::class
         );
     }
 }

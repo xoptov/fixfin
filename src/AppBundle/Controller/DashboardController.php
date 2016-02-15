@@ -32,9 +32,9 @@ class DashboardController extends Controller
     public function openAction(Rate $rate)
     {
         $user = $this->getUser();
-        $ticket = $this->get('app.cashier_service')->openTable($user, $rate);
+        $this->get('app.cashier_service')->openTable($user, $rate);
 
-        return $this->render('AppBundle:Dashboard:open.html.twig', array('ticket' => $ticket));
+        return $this->redirectToRoute('app_dashboard');
     }
 
     /**
@@ -54,4 +54,18 @@ class DashboardController extends Controller
         return $this->render('AppBundle:Dashboard:prolong.html.twig', array('form' => $form->createView()));
     }
 
+    /**
+     * @param Rate $rate
+     * @return Response
+     */
+    public function tableAction(Rate $rate)
+    {
+        $ticket = $this->getDoctrine()->getRepository('AppBundle:Ticket')
+            ->getTicketByRate($rate, $this->getUser());
+
+        return $this->render('AppBundle:Dashboard:table.html.twig', array(
+            'rate' => $rate,
+            'ticket' => $ticket
+        ));
+    }
 }

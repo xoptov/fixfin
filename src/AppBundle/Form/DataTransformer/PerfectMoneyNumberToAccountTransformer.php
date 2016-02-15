@@ -32,7 +32,7 @@ class PerfectMoneyNumberToAccountTransformer implements DataTransformerInterface
         }
 
         $account = $this->objectManager->getRepository('AppBundle:Account')
-            ->findOneBy(array('number' => $value));
+            ->getAccountByNumber($value);
 
         if ($account instanceof Account) {
 

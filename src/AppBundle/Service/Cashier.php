@@ -183,7 +183,7 @@ class Cashier
             $qualification = $refTicket->getQualification();
 
             if ($qualification instanceof Qualification) {
-                if ($this->committee->tryPass($qualification)) {
+                if ($qualification->isPassed() || $this->committee->tryPass($qualification)) {
                     $ticket->setChiefTicket($refTicket);
 
                     return;

@@ -46,8 +46,9 @@ class Committee
      */
     public function tryPass(Qualification $qualification)
     {
-        $transferred = $this->accessor->getValue($qualification, 'transferredTickets.count');
-        if ($qualification->getRequireInvitation() <= $transferred) {
+        $transferred = $this->accessor->getValue($qualification, 'transferredTickets');
+
+        if ($qualification->getRequireInvitation() <= count($transferred)) {
             $qualification->setPassed(true);
 
             return true;

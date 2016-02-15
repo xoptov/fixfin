@@ -1,53 +1,45 @@
-app_landing:
-    path:     /
-    defaults: { _controller: AppBundle:Landing:index }
-
-app_index:
-    path:     /cabinet
-    defaults: { _controller: AppBundle:Cabinet:index }
-
 app_profile:
-    path:     /cabinet/profile
+    path:     /
     defaults: { _controller: AppBundle:Cabinet:profile }
 
 app_cloud:
-    path:     /cabinet/cloud
+    path:     /cloud
     defaults: { _controller: AppBundle:Cabinet:cloud }
 
 app_history:
-    path:     /cabinet/history
+    path:     /history
     defaults: { _controller: AppBundle:Cabinet:history }
 
 app_content:
-    path:     /cabinet/content
+    path:     /content
     defaults: { _controller: AppBundle:Cabinet:content }
 
 app_news:
-    path:     /cabinet/news
+    path:     /news
     defaults: { _controller: AppBundle:Cabinet:news }
 
 app_faq:
-    path:     /cabinet/faq
+    path:     /faq
     defaults: { _controller: AppBundle:Cabinet:faq }
 
 app_dashboard:
-    path:     /cabinet/dashboard
+    path:     /dashboard
     defaults: { _controller: AppBundle:Dashboard:index }
 
 app_dashboard_open:
-    path:     /cabinet/dashboard/open/{rate}
+    path:     /dashboard/open/{rate}
     defaults: { _controller: AppBundle:Dashboard:open }
 
 app_dashboard_prolong:
-    path:     /cabinet/dashboard/prolong/{ticket}
+    path:     /dashboard/prolong/{ticket}
     defaults: { _controller: AppBundle:Dashboard:prolong }
 
 app_payment_success:
-    path:     /cabinet/payment/success
+    path:     /payment/success
     defaults: { _controller: AppBundle:Payment:success }
 
 app_payment_failed:
-    path:     /cabinet/payment/failed
+    path:     /payment/failed
     defaults: { _controller: AppBundle:Payment:failed }
 
 app_api_accounts:
