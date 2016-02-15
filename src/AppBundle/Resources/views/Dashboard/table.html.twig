@@ -1,0 +1,79 @@
+{% if ticket %}
+<div class="row">
+{% if app.user.account is empty %}
+    <div class="col-lg-12">
+        Для продолжения работы Вам необходимо указать номер кошелька.
+    </div>
+{% else %}
+    <div class="col-lg-10 table-activated">
+    {% if ticket.expired %}
+        Стол не оплачен.
+    {% else %}
+        Стол активен до: {{ ticket.paidUp|date("d-m-Y H:i") }}.
+    {% endif %}
+    </div>
+    <div class="col-lg-2">
+        <a class="btn btn-primary" href="{{ path('app_dashboard_prolong', {'ticket': ticket.id}) }}">Продлить</a>
+    </div>
+{% endif %}
+</div>
+<div class="row">
+    <div class="col-lg-12">
+    {% if ticket.subordinates is not empty %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя Фамилия</th>
+                <th>Почта</th>
+                <th>Телефон</th>
+                <th>Кол. реф.</th>
+                <th>Квалификация</th>
+                <th>Статус</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for subordinate in ticket.subordinates %}
+            <tr>
+                <td>{{ subordinate.id }}</td>
+                {% if subordinate.user is not empty %}
+                    {% set referral = subordinate.user %}
+                    <td>{{ referral.firstname }} {{ referral.lastname }}</td>
+                    <td>{{ referral.email }}</td>
+                    <td>{{ referral.phone }}</td>
+                    <td>{{ referral.referrals|length }}</td>
+                {% else %}
+                    <td colspan="4"></td>
+                {% endif %}
+                <td>
+                {% if subordinate.qualification is not empty %}
+                    {% if subordinate.qualification.passed %}
+                        пройдена
+                    {% else %}
+                        не пройдена
+                    {% endif %}
+                {% endif %}
+                <td>
+                    {% if subordinate.expired %}
+                        стол не оплачен
+                    {% else %}
+                        стол оплачен
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        В данный момент у вас нет приглашенных участников на стол "{{ rate.name }}".
+    {% endif %}
+    </div>
+</div>
+{% else %}
+    <div class="row">
+        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8 table-activated">Стол "{{ rate.name }}" не активирован!</div>
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 text-right">
+            <a class="btn btn-primary" href="{{ path('app_dashboard_open', {'rate': rate.id}) }}">Активировать</a>
+        </div>
+    </div>
+{% endif %}

@@ -14,42 +14,46 @@ class LoadRateData extends AbstractFixture implements DependentFixtureInterface
         $pool = $this->getReference('pool.1');
 
         $rate = new Rate();
-        $rate->setName('Table 20$')
-            ->setAmount(20.0)
-            ->setCommission(20)
-            ->setPeriod(30)
+        $rate->setName('Table 0.2 USD')
+            ->setAmount(0.2)
+            ->setCommission(50)
+            ->setPeriod(1)
             ->setRequireQualification(true)
             ->setRequireInvitation(3)
             ->setPool($pool);
+        $this->setReference('rate.1', $rate);
         $manager->persist($rate);
 
         $rate = new Rate();
-        $rate->setName('Table 40$')
-            ->setAmount(40.0)
+        $rate->setName('Table 0.5 USD')
+            ->setAmount(0.4)
             ->setCommission(30)
-            ->setPeriod(30)
+            ->setPeriod(2)
             ->setRequireQualification(true)
             ->setRequireInvitation(2)
             ->setPool($pool);
+        $this->setReference('rate.2', $rate);
         $manager->persist($rate);
 
         $rate = new Rate();
-        $rate->setName('Table 80$')
-            ->setAmount(80.0)
-            ->setCommission(35)
-            ->setPeriod(30)
+        $rate->setName('Table 0.8 USD')
+            ->setAmount(0.8)
+            ->setCommission(40)
+            ->setPeriod(3)
             ->setRequireQualification(true)
             ->setRequireInvitation(1)
             ->setPool($pool);
+        $this->setReference('rate.3', $rate);
         $manager->persist($rate);
 
         $rate = new Rate();
-        $rate->setName('Table 160$')
-            ->setAmount(160.0)
-            ->setCommission(40)
-            ->setPeriod(45)
+        $rate->setName('Table 1.6 USD')
+            ->setAmount(1.6)
+            ->setCommission(45)
+            ->setPeriod(10)
             ->setRequireQualification(false)
             ->setPool($pool);
+        $this->setReference('rate.4', $rate);
         $manager->persist($rate);
 
         $manager->flush();
@@ -58,7 +62,7 @@ class LoadRateData extends AbstractFixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return array(
-            'AppBundle\\DataFixtures\\ORM\\LoadPoolData'
+            LoadPoolData::class
         );
     }
 }
