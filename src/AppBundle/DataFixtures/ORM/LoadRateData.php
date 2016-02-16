@@ -19,7 +19,7 @@ class LoadRateData extends AbstractFixture implements DependentFixtureInterface
             ->setCommission(50)
             ->setPeriod(1)
             ->setRequireQualification(true)
-            ->setRequireInvitation(3)
+            ->setRequireInvitation(2)
             ->setPool($pool);
         $this->setReference('rate.1', $rate);
         $manager->persist($rate);

@@ -1,5 +1,6 @@
 AppBundle\Entity\Rate:
     type: entity
+    repositoryClass: AppBundle\Entity\RateRepository
     table: rate
     id:
         id:

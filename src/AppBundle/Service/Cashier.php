@@ -182,14 +182,13 @@ class Cashier
             }
             $qualification = $refTicket->getQualification();
 
-            if ($qualification instanceof Qualification) {
-                if ($qualification->isPassed() || $this->committee->tryPass($qualification)) {
-                    $ticket->setChiefTicket($refTicket);
+            if ($qualification && ($qualification->isPassed() || $this->committee->tryPass($qualification))) {
+                $ticket->setChiefTicket($refTicket);
 
-                    return;
-                }
+                return;
             } else {
                 $qualification = $this->committee->create($refTicket);
+                $refTicket->setQualification($qualification);
             }
 
             $qualification->addTransferredTicket($ticket);
@@ -227,7 +226,8 @@ class Cashier
         $ticket = $this->createTicket($user, $rate);
 
         if ($rate->isRequireQualification()) {
-            $this->committee->create($ticket);
+            $qualification = $this->committee->create($ticket);
+            $ticket->setQualification($qualification);
         }
 
         $this->determineChiefTicket($ticket);
@@ -374,6 +374,7 @@ class Cashier
     /**
      * @param PaymentInterface $payment
      * @throws NoResultException
+     * @return MoneyTransaction
      */
     public function handlePayment(PaymentInterface $payment)
     {
@@ -397,5 +398,7 @@ class Cashier
             ->setExternal($payment->getPaymentBatchNum());
 
         $this->entityManager->flush();
+
+        return $transaction;
     }
 }

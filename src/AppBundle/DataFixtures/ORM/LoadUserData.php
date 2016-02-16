@@ -27,7 +27,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $admin */
         $admin = $userManager->createUser();
         $admin->setUsername('admin')
-            ->setEmail('admin@finfix.dev')
+            ->setEmail('admin@fixfin.ru')
             ->setSuperAdmin(true)
             ->setPlainPassword('123456')
             ->setEnabled(true);
@@ -39,7 +39,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $user1 */
         $user1 = $userManager->createUser();
         $user1->setUsername('xoptov')
-            ->setEmail('xoptov@finfix.dev')
+            ->setEmail('xoptov@fixfin.ru')
             ->setPlainPassword('123456')
             ->setEnabled(true)
             ->setAccount($this->getReference('account.1'));
@@ -51,7 +51,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $user2 */
         $user2 = $userManager->createUser();
         $user2->setUsername('kostan')
-            ->setEmail('kostan@finfix.dev')
+            ->setEmail('kostan@fixfin.ru')
             ->setPlainPassword('123456')
             ->setEnabled(true)
             ->setAccount($this->getReference('account.2'));
@@ -63,7 +63,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $user3 */
         $user3 = $userManager->createUser();
         $user3->setUsername('alex')
-            ->setEmail('alex@finfix.dev')
+            ->setEmail('alex@fixfin.ru')
             ->setPlainPassword('123456')
             ->setEnabled(true)
             ->setAccount($this->getReference('account.3'));
@@ -75,7 +75,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $user4 */
         $user4 = $userManager->createUser();
         $user4->setUsername('oleg')
-            ->setEmail('oleg@finfix.dev')
+            ->setEmail('oleg@fixfin.ru')
             ->setPlainPassword('123456')
             ->setReferrer($user2)
             ->setEnabled(true)
@@ -88,7 +88,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $user5 */
         $user5 = $userManager->createUser();
         $user5->setUsername('tanya')
-            ->setEmail('tanya@finfix.dev')
+            ->setEmail('tanya@fixfin.ru')
             ->setPlainPassword('123456')
             ->setReferrer($user2)
             ->setEnabled(true)
@@ -101,7 +101,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $user6 */
         $user6 = $userManager->createUser();
         $user6->setUsername('sveta')
-            ->setEmail('sveta@finfix.dev')
+            ->setEmail('sveta@fixfin.ru')
             ->setPlainPassword('123456')
             ->setReferrer($user3)
             ->setEnabled(true)
@@ -114,7 +114,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $user7 */
         $user7 = $userManager->createUser();
         $user7->setUsername('john')
-            ->setEmail('john@finfix.dev')
+            ->setEmail('john@fixfin.ru')
             ->setPlainPassword('123456')
             ->setReferrer($user3)
             ->setEnabled(true)
@@ -127,7 +127,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $user8 */
         $user8 = $userManager->createUser();
         $user8->setUsername('dasha')
-            ->setEmail('dasha@finfix.dev')
+            ->setEmail('dasha@fixfin.ru')
             ->setPlainPassword('123456')
             ->setReferrer($user7)
             ->setEnabled(true);
@@ -139,7 +139,7 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         /** @var User $user9 */
         $user9 = $userManager->createUser();
         $user9->setUsername('masha')
-            ->setEmail('masha@finfix.dev')
+            ->setEmail('masha@fixfin.ru')
             ->setPlainPassword('123456')
             ->setReferrer($user8)
             ->setEnabled(true);
@@ -147,6 +147,30 @@ class LoadUserData extends AbstractFixture implements DependentFixtureInterface,
         $userManager->updatePassword($user9);
         $this->setReference('user.9', $user9);
         $manager->persist($user9);
+
+        /** @var User $user10 */
+        $user10 = $userManager->createUser();
+        $user10->setUsername('dima')
+            ->setEmail('dima@fixfin.ru')
+            ->setPlainPassword('123456')
+            ->setReferrer($user3)
+            ->setEnabled(true);
+        $userManager->updateCanonicalFields($user10);
+        $userManager->updatePassword($user10);
+        $this->setReference('user.10', $user10);
+        $manager->persist($user10);
+
+        /** @var User $user11 */
+        $user11 = $userManager->createUser();
+        $user11->setUsername('misha')
+            ->setEmail('misha@fixfin.ru')
+            ->setPlainPassword('123456')
+            ->setReferrer($user3)
+            ->setEnabled(true);
+        $userManager->updateCanonicalFields($user11);
+        $userManager->updatePassword($user11);
+        $this->setReference('user.11', $user11);
+        $manager->persist($user11);
 
         $manager->flush();
     }
