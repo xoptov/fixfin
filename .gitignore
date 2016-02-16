@@ -6,7 +6,7 @@
 !web/uploads/.gitkeep
 /app/bootstrap.php.cache
 /app/cache/*
-/app/config/parameters.yml
+/app/config/parameters*.yml
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
