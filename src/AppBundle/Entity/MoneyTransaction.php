@@ -157,11 +157,33 @@ class MoneyTransaction
     }
 
     /**
+     * @param \DateTime $createdAt
+     * @return MoneyTransaction
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     * @return MoneyTransaction
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     /**

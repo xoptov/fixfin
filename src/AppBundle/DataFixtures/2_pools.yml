@@ -1,0 +1,5 @@
+model: AppBundle\Entity\Pool
+fixtures:
+    main_pool:
+        name: 'Main Pool'
+        accounts: [U9102389]

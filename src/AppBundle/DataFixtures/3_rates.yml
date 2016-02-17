@@ -1,0 +1,26 @@
+model: AppBundle\Entity\Rate
+fixtures:
+    rate_20:
+        name: 'Table 0.2 USD'
+        amount: 0.2
+        commission: 30
+        period: 7
+        requireQualification: true
+        requireInvitation: 2
+        pool: main_pool
+    rate_40:
+        name: 'Table 0.4 USD'
+        amount: 0.4
+        commission: 30
+        period: 7
+        requireQualification: true
+        requireInvitation: 2
+        pool: main_pool
+    rate_80:
+        name: 'Table 0.8 USD'
+        amount: 0.8
+        commission: 30
+        period: 7
+        requireQualification: true
+        requireInvitation: 2
+        pool: main_pool

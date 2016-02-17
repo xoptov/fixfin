@@ -16,7 +16,7 @@ class RateRepository extends EntityRepository
     public function getCheapestRate()
     {
         $qb = $this->createQueryBuilder('r');
-        $query = $qb->orderBy('r.amount')
+        $query = $qb->orderBy('r.amount', 'ASC')
             ->setMaxResults(1)
             ->getQuery();
 

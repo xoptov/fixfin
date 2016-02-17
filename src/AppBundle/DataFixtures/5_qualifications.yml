@@ -1,0 +1,33 @@
+model: AppBundle\Entity\Qualification
+fixtures:
+    qualification_1:
+        requireInvitation: 2
+        ticket: ticket_1
+    qualifacation_2:
+        requireInvitation: 2
+        ticket: ticket_2
+        passed: true
+        transferredTickets: [ticket_3, ticket_4]
+    qualification_3:
+        requireInvitation: 2
+        ticket: ticket_3
+    qualification_4:
+        requireInvitation: 2
+        ticket: ticket_4
+    qualification_5:
+        requireInvitation: 2
+        ticket: ticket_5
+        passed: true
+        transferredTickets: [ticket_6, ticket_7]
+    qualification_6:
+        requireInvitation: 2
+        ticket: ticket_6
+    qualification_7:
+        requireInvitation: 2
+        ticket: ticket_7
+    qualification_8:
+        requireInvitation: 2
+        ticket: ticket_8
+    qualification_9:
+        requireInvitation: 2
+        ticket: ticket_9
