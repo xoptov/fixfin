@@ -1,0 +1,127 @@
+model: AppBundle\Entity\User
+service_call:
+    user_manager:
+        service: fos_user.user_manager
+        method: updatePassword
+fixtures:
+    xoptov:
+        username: 'xoptov'
+        email: 'xoptov@fixfin.ru'
+        superAdmin: true
+        plainPassword: '123456'
+        enabled: true
+        account: U2482738
+    olyah:
+        username: 'olyah'
+        email: 'olyah@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U3386452
+        referrer: xoptov
+    svetah:
+        username: 'svetah'
+        email: 'svetah@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U8283472
+        referrer: olyah
+    kostan:
+        username: 'kostan'
+        email: 'kostan@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U9387212
+    alex:
+        username: 'alex'
+        email: 'alex@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U6482911
+    misha:
+        username: 'misha'
+        email: 'misha@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U1120394
+        referrer: alex
+    oleg:
+        username: 'oleg'
+        email: 'oleg@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U3487510
+        referrer: kostan
+    tanya:
+        username: 'tanya'
+        email: 'tanya@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U1204862
+        referrer: kostan
+    sveta:
+        username: 'sveta'
+        email: 'sveta@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U7364727
+        referrer: alex
+    john:
+        username: 'john'
+        email: 'john@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U5731290
+        referrer: alex
+    dasha:
+        username: 'dasha'
+        email: 'dasha@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        referrer: john
+    masha:
+        username: 'masha'
+        email: 'masha@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        referrer: dasha
+    stas:
+        username: 'stas'
+        email: 'stas@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        referrer: masha
+    dima:
+        username: 'dima'
+        email: 'dima@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U9283647
+        referrer: stas
+    alesha:
+        username: 'alesha'
+        email: 'alesha@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U2394882
+        referrer: dima
+    nastya:
+        username: 'nastya'
+        email: 'nastya@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U0929374
+        referrer: dima
+    vova:
+        username: 'vova'
+        email: 'vova@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U0927313
+        referrer: dima
+    gena:
+        username: 'gena'
+        email: 'gena@fixfin.ru'
+        plainPassword: '123456'
+        enabled: true
+        account: U0990283
+        referrer: dima

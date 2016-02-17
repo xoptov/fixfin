@@ -180,12 +180,15 @@ class Cashier
 
                 return;
             }
+
             $qualification = $refTicket->getQualification();
 
-            if ($qualification && ($qualification->isPassed() || $this->committee->tryPass($qualification))) {
-                $ticket->setChiefTicket($refTicket);
+            if ($qualification) {
+                if ($qualification->isPassed() || $this->committee->tryPass($qualification)) {
+                    $ticket->setChiefTicket($refTicket);
 
-                return;
+                    return;
+                }
             } else {
                 $qualification = $this->committee->create($refTicket);
                 $refTicket->setQualification($qualification);
@@ -345,12 +348,12 @@ class Cashier
      */
     private function reestablishSubordinates(Ticket $ticket)
     {
-        $repo = $this->entityManager->getRepository('AppBundle:Ticket');
+        $repository = $this->entityManager->getRepository('AppBundle:Ticket');
 
         if ($ticket->getQualification()) {
-            $lostTickets = $repo->getLostReferralsTickets($ticket);
+            $lostTickets = $repository->getLostReferralsTickets($ticket);
         } else {
-            $lostTickets = $repo->getLostReferralsTickets($ticket, false);
+            $lostTickets = $repository->getLostReferralsTickets($ticket, false);
         }
 
         if (!count($lostTickets)) {

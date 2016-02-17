@@ -42,7 +42,6 @@ AppBundle\Entity\Account:
             nullable: true
         blocked:
             type: boolean
-            nullable: true
     oneToOne:
         user:
             targetEntity: AppBundle\Entity\User

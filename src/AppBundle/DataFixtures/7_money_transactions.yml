@@ -1,0 +1,12 @@
+model: AppBundle\Entity\MoneyTransaction
+fixtures:
+    transaction_1:
+        source: U6482911
+        destination: U9102389
+        status: 2
+        amount: 0.2
+        invoice: invoice_2
+        type: 1
+        external: 39724862
+        createdAt: 'now'
+        updatedAt: 'now'

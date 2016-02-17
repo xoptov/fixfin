@@ -1,0 +1,36 @@
+model: AppBundle\Entity\Ticket
+fixtures:
+    ticket_1:
+        user: kostan
+        rate: rate_20
+    ticket_2:
+        user: alex
+        rate: rate_20
+        paidUp: '+1 week'
+        expired: false
+    ticket_3:
+        user: sveta
+        rate: rate_20
+    ticket_4:
+        user: john
+        rate: rate_20
+    ticket_5:
+        chiefTicket: ticket_2
+        user: dima
+        rate: rate_20
+    ticket_6:
+        chiefTicket: ticket_2
+        user: alesha
+        rate: rate_20
+    ticket_7:
+        chiefTicket: ticket_2
+        user: nastya
+        rate: rate_20
+    ticket_8:
+        chiefTicket: ticket_2
+        user: vova
+        rate: rate_20
+    ticket_9:
+        chiefTicket: ticket_2
+        user: gena
+        rate: rate_20

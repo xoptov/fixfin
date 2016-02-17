@@ -56,6 +56,7 @@ class Account
         $this->incomes = new ArrayCollection();
         $this->outcomes = new ArrayCollection();
         $this->system = false;
+        $this->blocked = false;
     }
 
     /**

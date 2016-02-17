@@ -1,0 +1,38 @@
+model: AppBundle\Entity\Account
+fixtures:
+    U9102389:
+        number: 'U9102389'
+        login: '129839'
+        passPhrase: 'theSecretPassPhrase'
+        system: true
+        verified: true
+    U2482738:
+        number: 'U2482738'
+    U9387212:
+        number: 'U9387212'
+    U6482911:
+        number: 'U6482911'
+    U3487510:
+        number: 'U3487510'
+    U1204862:
+        number: 'U1204862'
+    U7364727:
+        number: 'U7364727'
+    U5731290:
+        number: 'U5731290'
+    U3386452:
+        number: 'U3386452'
+    U8283472:
+        number: 'U8283472'
+    U9283647:
+        number: 'U9283647'
+    U2394882:
+        number: 'U2394882'
+    U1120394:
+        number: 'U1120394'
+    U0929374:
+        number: 'U0929374'
+    U0927313:
+        number: 'U0927313'
+    U0990283:
+        number: 'U0990283'

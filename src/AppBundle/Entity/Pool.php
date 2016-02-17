@@ -50,6 +50,17 @@ class Pool
     }
 
     /**
+     * @param Account[] $accounts
+     * @return Pool
+     */
+    public function setAccounts($accounts)
+    {
+        $this->accounts = $accounts;
+
+        return $this;
+    }
+
+    /**
      * @return Account|ArrayCollection
      */
     public function getAccounts()

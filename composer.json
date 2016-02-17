@@ -9,8 +9,8 @@
     },
     "require": {
         "php": ">=5.3.9",
-        "ext-exif": "~1.4",
-        "ext-imagick": "~3.1",
+        "ext-exif": "*",
+        "ext-imagick": "*",
         "symfony/symfony": "2.8.*",
         "doctrine/orm": "^2.4.8",
         "doctrine/doctrine-bundle": "~1.4",
@@ -24,14 +24,14 @@
         "liip/imagine-bundle": "^1.3",
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
-        "stof/doctrine-extensions-bundle": "~1.2.2",
-        "guzzlehttp/guzzle": "~6.0"
+        "stof/doctrine-extensions-bundle": "~1.2",
+        "guzzlehttp/guzzle": "~6.0",
+        "khepin/yaml-fixtures-bundle": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
         "symfony/phpunit-bridge": "~2.7",
-        "phpunit/phpunit": "~5.2.0",
-        "phpunit/phpunit-mock-objects": "~3.0.6"
+        "phpunit/phpunit": "~5.2.0"
     },
     "scripts": {
         "post-install-cmd": [
