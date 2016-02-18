@@ -18,20 +18,25 @@ AppBundle\Entity\Invoice:
             nullable: true
         expiredAt:
             type: datetime
+            nullable: false
         amount:
             type: float
             precision: 2
             scale: 2
+            nullable: false
         paid:
             type: float
             precision: 2
             scale: 2
+            nullable: false
         period:
             type: integer
+            nullable: false
             options:
                 unsigned: true
         status:
             type: smallint
+            nullable: false
             options:
                 unsigned: true
     oneToMany:

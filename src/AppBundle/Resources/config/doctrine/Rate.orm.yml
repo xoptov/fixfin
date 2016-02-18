@@ -19,16 +19,20 @@ AppBundle\Entity\Rate:
             type: float
             precision: 2
             scale: 2
+            nullable: false
         commission:
             type: float
             precision: 1
             scale: 1
+            nullable: false
         period:
             type: smallint
+            nullable: false
             options:
                 unsigned: true
         members:
             type: integer
+            nullable: false
             options:
                 unsigned: true
         requireQualification:

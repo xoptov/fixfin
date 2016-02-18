@@ -15,11 +15,14 @@ AppBundle\Entity\News:
             type: string
             length: 50
             unique: true
+            nullable: false
         content:
             type: string
             length: 1024
+            nullable: false
         createdAt:
             type: datetime
+            nullable: false
         updatedAt:
             type: datetime
             nullable: true
