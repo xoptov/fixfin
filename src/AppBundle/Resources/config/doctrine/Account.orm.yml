@@ -15,6 +15,7 @@ AppBundle\Entity\Account:
             type: string
             length: 10
             unique: true
+            nullable: false
         login:
             type: string
             length: 8
@@ -37,11 +38,13 @@ AppBundle\Entity\Account:
             scale: 2
         system:
             type: boolean
+            nullable: false
         verified:
             type: boolean
             nullable: true
         blocked:
             type: boolean
+            nullable: false
     oneToOne:
         user:
             targetEntity: AppBundle\Entity\User

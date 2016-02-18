@@ -57,6 +57,9 @@ AppBundle\Entity\User:
         updatedAt:
             type: datetime
             nullable: true
+        canInvite:
+            type: boolean
+            nullable: false
     oneToOne:
         account:
             targetEntity: AppBundle\Entity\Account

@@ -49,11 +49,15 @@ class User extends BaseUser
     /** @var \DateTime */
     private $updatedAt;
 
+    /** @var bool */
+    private $canInvite;
+
     public function __construct()
     {
         parent::__construct();
         $this->tickets = new ArrayCollection();
         $this->referrals = new ArrayCollection();
+        $this->canInvite = false;
     }
 
     /**
@@ -308,5 +312,24 @@ class User extends BaseUser
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param bool $value
+     * @return User
+     */
+    public function setCanInvite($value)
+    {
+        $this->canInvite = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanInvite()
+    {
+        return $this->canInvite;
     }
 }

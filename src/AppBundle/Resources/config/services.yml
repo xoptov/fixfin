@@ -128,3 +128,8 @@ services:
             - %kernel.root_dir%
         tags:
             - { name: liip_imagine.filter.loader, loader: 'transparent_mask' }
+
+    app.invoice_status.subscriber:
+        class: AppBundle\EventListener\InvoiceStatusSubscriber
+        tags:
+            - { name: doctrine.event_listener, event: onFlush }

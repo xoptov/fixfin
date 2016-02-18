@@ -22,7 +22,9 @@
                             </div>
                         </div>
                         <div class="col-xs-7">
+                        {% if app.user.lastname is not empty or app.user.firstname is not empty %}
                             <div class="fullname">{{ app.user.lastname }} {{ app.user.firstname }}</div>
+                        {% endif %}
                             <div class="description">В системе с:<span class="value">{{ app.user.createdAt|date('d.m.Y') }}</span></div>
                             {#<div class="description">Заработано:<span class="value">100 USD</span></div>#}
                             <div class="description">Структура:<span class="value">{{ app.user.referrals.count }} чел.</span></div>
@@ -48,7 +50,9 @@
                         {% endif %}
                         </div>
                         <div class="col-xs-7">
+                        {% if referrer.lastname is not empty or referrer.firstname is not empty %}
                             <div class="fullname">{{ referrer.lastName }} {{ referrer.firstName }}</div>
+                        {% endif %}
                         {% if referrer.phone in not null %}
                             <div class="description">Телефон:<span class="value">{{ referrer.phone }}</span></div>
                         {% endif %}
