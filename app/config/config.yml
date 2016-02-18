@@ -79,7 +79,8 @@ fos_user:
     user_class: AppBundle\Entity\User
     registration:
         form:
-            handler: "app.registration.form.handler"
+            type:    form_user_registration
+            handler: app.registration.form.handler
 
 sonata_block:
     default_context: [cms]

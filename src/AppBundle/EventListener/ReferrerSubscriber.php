@@ -24,8 +24,8 @@ class ReferrerSubscriber implements EventSubscriberInterface
 
         $request = $event->getRequest();
 
-        if ($request->query->has('referrer') && $request->hasSession()) {
-            $request->getSession()->set('referrer', $request->query->get('referrer'));
+        if ($request->query->has('ref') && $request->hasSession()) {
+            $request->getSession()->set('referrer', $request->query->get('ref'));
         }
     }
 }
