@@ -15,6 +15,23 @@ services:
         scope: request
         public: false
 
+    app.form.type.registration:
+        class: AppBundle\Form\Type\RegistrationType
+        arguments:
+            - %fos_user.model.user.class%
+        calls:
+            - [setSession, [@session]]
+        tags:
+            - { name: form.type , alias: form_user_registration }
+
+    app.form.type.user:
+        class: AppBundle\Form\Type\UserType
+        arguments:
+            - @doctrine.orm.default_entity_manager
+        tags:
+            - { name: form.type }
+
+
     app.admin.pool:
         class: AppBundle\Admin\PoolAdmin
         arguments: [~, AppBundle\Entity\Pool, ~]
