@@ -28,6 +28,12 @@
                             <div class="description">В системе с:<span class="value">{{ app.user.createdAt|date('d.m.Y') }}</span></div>
                             {#<div class="description">Заработано:<span class="value">100 USD</span></div>#}
                             <div class="description">Структура:<span class="value">{{ app.user.referrals.count }} чел.</span></div>
+                        {% if app.user.caninvite %}
+                            <div class="description">
+                                Реф. ссылка:<br/>
+                                <span class="value">{{ url('fos_user_registration_register', {'ref': app.user.username}) }}</span>
+                            </div>
+                        {% endif %}
                         </div>
                     </div>
                 </div>

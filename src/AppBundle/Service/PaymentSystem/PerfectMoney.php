@@ -17,6 +17,8 @@ use GuzzleHttp\Client;
 use PerfectMoneyBundle\Parser\ResponseParser;
 use PerfectMoneyBundle\Model\TransferResponse;
 use Monolog\Logger;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Validator\Constraints\Url;
 
 class PerfectMoney
 {
@@ -44,13 +46,19 @@ class PerfectMoney
     /** @var Logger */
     private $logger;
 
+    /** @var UrlGeneratorInterface */
+    private $router;
+
     /** @var array */
     private $map;
 
-    public function __construct(PropertyAccessor $accessor, EntityManagerInterface $entityManager, array $options, Logger $logger)
+    public function __construct(PropertyAccessor $accessor, EntityManagerInterface $entityManager, UrlGeneratorInterface $router, Logger $logger, array $options)
     {
         $this->accessor = $accessor;
         $this->entityManager = $entityManager;
+        $this->router = $router;
+        $this->logger = $logger;
+
         $this->successful = array();
         $this->failed = array();
         $this->responseParser = new ResponseParser();
@@ -59,7 +67,6 @@ class PerfectMoney
                 'Content-Type' => 'application/x-www-form-urlencoded'
             )
         ));
-        $this->logger = $logger;
 
         $this->map = array(
             'Payee_Account_Name' => 'payeeAccountName',
@@ -88,10 +95,10 @@ class PerfectMoney
             ->setPayeeName($this->options['payee_name'])
             ->setPaymentId($invoice->getId())
             ->setPaymentUnits($this->options['payment_units'])
-            ->setStatusUrl($this->options['status_url'])
-            ->setPaymentUrl($this->options['payment_url'])
-            ->setNoPaymentUrl($this->options['nopayment_url'])
-            ->setAvailablePaymentMethods($this->options['available_payment_methods']);
+            ->setAvailablePaymentMethods($this->options['available_payment_methods'])
+            ->setStatusUrl($this->router->generate($this->options['routes']['status'], [], UrlGeneratorInterface::ABSOLUTE_URL))
+            ->setPaymentUrl($this->router->generate($this->options['routes']['payment'], [], UrlGeneratorInterface::ABSOLUTE_URL))
+            ->setNoPaymentUrl($this->router->generate($this->options['routes']['no_payment'], [], UrlGeneratorInterface::ABSOLUTE_URL));
 
         $pool = $this->accessor->getValue($invoice, 'ticket.rate.pool');
 
@@ -117,7 +124,7 @@ class PerfectMoney
             'payment_units' => 'USD'
         ));
 
-        $resolver->setRequired(array('entry_form', 'transfer_url', 'status_url', 'payment_url', 'nopayment_url', 'available_payment_methods'));
+        $resolver->setRequired(array('entry_form', 'transfer_url', 'routes', 'available_payment_methods'));
     }
 
     /**

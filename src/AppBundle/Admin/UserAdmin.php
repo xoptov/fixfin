@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Doctrine\ORM\Query\Expr\Join;
 
 class UserAdmin extends Admin
 {
@@ -86,6 +87,13 @@ class UserAdmin extends Admin
                     'status.common.no',
                     'status.common.yes'
                 )
+            ))
+            ->add('canInvite', 'choice', array(
+                'label' => 'form.user.can_invite',
+                'choices' => array(
+                    'status.common.no',
+                    'status.common.yes'
+                )
             ));
     }
 
@@ -110,6 +118,9 @@ class UserAdmin extends Admin
             ))
             ->add('enabled', 'boolean', array(
                 'label' => 'list.user.enabled'
+            ))
+            ->add('canInvite', 'boolean', array(
+                'label' => 'list.user.can_invite'
             ))
             ->add('_action', 'actions', array(
                 'label' => 'list.user.actions',
@@ -153,6 +164,9 @@ class UserAdmin extends Admin
             ))
             ->add('enabled', 'boolean', array(
                 'label' => 'show.user.enabled'
+            ))
+            ->add('canInvite', 'boolean', array(
+                'label' => 'show.user.can_invite'
             ));
     }
 
@@ -186,12 +200,15 @@ class UserAdmin extends Admin
         $user = $this->getSubject();
 
         $qb = $this->entityManager->createQueryBuilder();
-        $qb->select('a')->from('AppBundle:Account', 'a');
+        $qb->select('a')
+            ->from('AppBundle:Account', 'a')
+            ->leftJoin('a.user', 'u');
 
         if ($user->getId()) {
-            $qb->where('(a.user IS NULL OR a.user = :user) AND a.system = false')->setParameter('user', $user);
+            $qb->where('a.system = false AND (u.id IS NULL OR u = :user)')
+                ->setParameter('user', $user);
         } else {
-            $qb->where('a.user IS NULL AND a.system = false');
+            $qb->where('a.system = false AND u.id IS NULL');
         }
 
         return $qb;

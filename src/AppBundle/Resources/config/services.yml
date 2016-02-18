@@ -112,8 +112,9 @@ services:
         arguments:
             - @property_accessor
             - @doctrine.orm.default_entity_manager
-            - %perfect_money%
+            - @router.default
             - @logger
+            - %perfect_money%
 
     app.payment_subscriber:
         class: AppBundle\EventListener\PaymentSubscriber
