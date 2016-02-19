@@ -1,8 +1,8 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-    <div class="middle-box text-center animated fadeInDown">
-        <div class="sp-logo"></div>
+    <div class="middle-box text-center animated fadeInDown login-form">
+        <div class="icon-logo logo"></div>
         <h3>{{ 'security.login.greeting'|trans }}</h3>
         <p>{{ 'security.login.note'|trans }}</p>
         <form class="m-t" role="form" action="{{ path("fos_user_security_check") }}" method="post">

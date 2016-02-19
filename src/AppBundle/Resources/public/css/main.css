@@ -6767,7 +6767,7 @@ body {
   display: inline-block;
   vertical-align: middle;
   margin-left: 15px;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 .header .user-control {
   margin-top: 14px;
@@ -6787,11 +6787,17 @@ body {
 .header .logout {
   font-size: 18px;
 }
+.registration-form .logo {
+  display: inline-block;
+}
 .registration-form .form-group ul {
   margin-bottom: 0;
   padding: 0;
   list-style: none;
   color: #f44a3f;
+}
+.login-form .logo {
+  display: inline-block;
 }
 .wrapper {
   height: 100%;
@@ -6804,7 +6810,7 @@ body {
   background-color: rgba(182, 182, 182, 0.6);
 }
 .wrapper .menu-item {
-  border-bottom: 1px solid #babab8;
+  border-bottom: 1px solid #b8b8b6;
   text-align: center;
   font-size: 18px;
   padding: 20px;
@@ -6840,7 +6846,7 @@ body {
 }
 .wrapper .window .content .change {
   font-size: 12px;
-  color: #727272;
+  color: #626262;
   text-decoration: underline;
 }
 .wrapper .window .content .fullname {
@@ -6872,12 +6878,12 @@ body {
   font-size: 18px;
 }
 .wrapper .window .content .news-continue {
-  color: #727272;
+  color: #626262;
   text-decoration: underline;
 }
 .wrapper .window .content .news-all {
   font-size: 14px;
-  color: #727272;
+  color: #626262;
   text-decoration: underline;
 }
 .wrapper .window .content .table thead tr th {
@@ -6944,7 +6950,7 @@ body {
   background-color: rgba(182, 182, 182, 0.6);
   position: fixed;
   bottom: 0;
-  border-top: 1px solid #babab8;
+  border-top: 1px solid #b8b8b6;
 }
 .wrapper footer .navigation {
   margin-top: 15px;
@@ -7031,7 +7037,7 @@ body {
 .tab-pane .btn-primary:active:hover {
   color: #626262;
   border: 1px solid #626262;
-  background-color: #d2d2cd;
+  background-color: #b8b8b6;
 }
 .tab-pane .table {
   margin-top: 20px;
@@ -7067,4 +7073,8 @@ body {
 .required:after {
   content: '*';
   color: #f44a3f;
+}
+.flash-message .window .content {
+  border: 1px dashed #f44a3f;
+  font-weight: bold;
 }
