@@ -43,6 +43,14 @@ AppBundle\Entity\Rate:
             nullable: true
             options:
                 unsigned: true
+    oneToOne:
+        parent:
+            targetEntity: AppBundle\Entity\Rate
+            joinColumn:
+                name: parent_id
+                referencedColumnName: id
+                options:
+                    unsigned: true
     manyToOne:
         pool:
             targetEntity: AppBundle\Entity\Pool

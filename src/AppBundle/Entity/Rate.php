@@ -39,6 +39,9 @@ class Rate
     /** @var Ticket[] */
     private $tickets;
 
+    /** @var Rate */
+    private $parent;
+
     public function __construct()
     {
         $this->members = 0;
@@ -210,6 +213,23 @@ class Rate
     public function getPool()
     {
         return $this->pool;
+    }
+
+    /**
+     * @param Rate $parent
+     * @return Rate
+     */
+    public function setParent(Rate $parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @return Rate
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }
 

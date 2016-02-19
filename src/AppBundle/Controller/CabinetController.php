@@ -24,7 +24,7 @@ class CabinetController extends Controller
         }
 
         $news = $this->getDoctrine()->getRepository('AppBundle:News')->getLastNews($this->getParameter('news_in_profile'));
-        
+
         return $this->render('AppBundle:Cabinet:profile.html.twig', array(
             'form' => $form->createView(),
             'news' => $news

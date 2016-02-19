@@ -1,10 +1,11 @@
 var gulp = require('gulp');
-var gulpLess = require('gulp-less');
+var less = require('gulp-less');
+var spritesmith = require('gulp.spritesmith');
 
-var scriptsDestination = './Resources/public/js';
-var stylesDestination = './Resources/public/css';
-var imagesDestination = './Resources/public/img';
-var fontsDestination = './Resources/public/fonts';
+var scriptsOut = './Resources/public/js';
+var stylesOut = './Resources/public/css';
+var imagesOut = './Resources/public/img';
+var fontsOut = './Resources/public/fonts';
 
 var scriptFiles = [
     './Resources/bower_components/bootstrap/dist/js/bootstrap.js',
@@ -23,60 +24,69 @@ var cssFiles = [
 ];
 
 var imageFiles = [
-    './Resources/images/**/*.+(png|jpeg|jpg)'
+    './Resources/images/**/*.+(png|jp*g)'
+];
+
+var spriteFiles = [
+    './Resources/sprites/**/*.png'
 ];
 
 var fontsFiles = [
-    './Resources/bower_components/bootstrap/fonts/*.*'
+    './Resources/bower_components/bootstrap/fonts/*.+(eot|svg|ttf|woff*)'
 ];
 
-gulp.task('scripts', function() {
-    gulp.src(scriptFiles)
-        .pipe(gulp.dest(scriptsDestination));
-});
+function compileScripts(){
+    gulp.src(scriptFiles).pipe(gulp.dest(scriptsOut));
+}
 
-gulp.task('css', function() {
-    gulp.src(cssFiles)
-        .pipe(gulp.dest(stylesDestination));
-});
+function compileCss(){
+    gulp.src(cssFiles).pipe(gulp.dest(stylesOut));
+}
 
-gulp.task('less', function() {
-    gulp.src(lessFiles)
-        .pipe(gulpLess())
-        .pipe(gulp.dest(stylesDestination));
-});
+function compileLess(){
+    gulp.src(lessFiles).pipe(less()).pipe(gulp.dest(stylesOut));
+}
 
-gulp.task('images', function(){
-    gulp.src(imageFiles)
-        .pipe(gulp.dest(imagesDestination));
-});
+function compileImages(){
+    gulp.src(imageFiles).pipe(gulp.dest(imagesOut));
+}
 
-gulp.task('fonts', function(){
-    gulp.src(fontsFiles)
-        .pipe(gulp.dest(fontsDestination));
-});
+function compileSprites(){
+    var spriteData = gulp.src(spriteFiles).pipe(spritesmith({
+        imgName: 'sprites.png',
+        imgPath: '../img/sprites.png',
+        cssName: 'sprites.css',
+        padding: 1
+    }));
 
-gulp.task('styles', ['less', 'css', 'images', 'fonts']);
+    spriteData.img.pipe(gulp.dest(imagesOut));
+    spriteData.css.pipe(gulp.dest(stylesOut));
+}
 
+function compileFonts(){
+    gulp.src(fontsFiles).pipe(gulp.dest(fontsOut));
+}
+
+function handleEvent(handler){
+    return function(event){
+        console.log('[' + Date.now() + ']' + ' File ' + event.path + ' was ' + event.type);
+        handler();
+    }
+}
+
+gulp.task('scripts', compileScripts);
+gulp.task('css', compileCss);
+gulp.task('less', compileLess);
+gulp.task('images', compileImages);
+gulp.task('sprites', compileSprites);
+gulp.task('fonts', compileFonts);
+
+gulp.task('styles', ['less', 'css', 'images', 'sprites', 'fonts']);
 gulp.task('default', ['styles', 'scripts']);
 
 gulp.task('watch', function(){
-    gulp.watch(scriptFiles, function(event){
-        console.log('[' + Date.now() + ']' + ' File ' + event.path + ' was changed');
-        gulp.src(event.path)
-            .pipe(gulp.dest(scriptsDestination));
-    });
-
-    gulp.watch(lessFiles, function(event){
-        console.log('[' + Date.now() + ']' + ' File ' + event.path + ' was changed');
-        gulp.src(event.path)
-            .pipe(gulpLess())
-            .pipe(gulp.dest(stylesDestination));
-    });
-
-    gulp.watch(imageFiles, function(event){
-        console.log('[' + Date.now() + ']' + ' File ' + event.path + ' was changed');
-        gulp.src(event.path)
-            .pipe(gulp.dest(imagesDestination));
-    });
+    gulp.watch(scriptFiles, handleEvent(compileScripts));
+    gulp.watch(lessFiles, handleEvent(compileLess));
+    gulp.watch(imageFiles, handleEvent(compileImages));
+    gulp.watch(spriteFiles, handleEvent(compileSprites))
 });
