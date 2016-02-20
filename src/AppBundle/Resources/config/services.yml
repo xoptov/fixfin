@@ -134,3 +134,10 @@ services:
         class: AppBundle\EventListener\InvoiceStatusSubscriber
         tags:
             - { name: doctrine.event_listener, event: onFlush }
+
+    app.reward_payment.subscriber:
+        class: AppBundle\EventListener\RewardPaymentSubscriber
+        arguments:
+            - @app.banker_service
+        tags:
+            - { name: kernel.event_subscriber }
