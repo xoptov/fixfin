@@ -19,8 +19,7 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    base_url: 'http://fixfin.ru'
-
+    # PerfectMoney integration settings
     perfect_money:
         entry_form:     'https://perfectmoney.is/api/step1.asp'
         transfer_url:   'https://perfectmoney.is/acct/confirm.asp'
