@@ -6761,6 +6761,7 @@ body {
 }
 .header .logo {
   vertical-align: middle;
+  display: inline-block;
 }
 .header .logo-words {
   width: 100px;
@@ -7074,7 +7075,16 @@ body {
   content: '*';
   color: #f44a3f;
 }
-.flash-message .window .content {
-  border: 1px dashed #f44a3f;
+.flash-message .content {
   font-weight: bold;
+  border-width: 1px;
+  border-style: solid;
+}
+.flash-message .warning .content {
+  border-color: #f44a3f;
+  background-color: #f4c7bd;
+}
+.flash-message .success .content {
+  border-color: #1cca5a;
+  background-color: #b1ebc6;
 }

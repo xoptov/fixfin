@@ -1,0 +1,27 @@
+{% if warnings is not empty %}
+    <div class="row flash-message">
+        <div class="col-lg-12">
+            <div class="window m-b-30 warning">
+                <div class="content">
+                {% for message in warnings %}
+                    <div class="item">{{ message }}</div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% if success is not empty %}
+    <div class="row flash-message">
+        <div class="col-lg-12">
+            <div class="window m-b-30 success">
+                <div class="content">
+                {% for message in success %}
+                    <div class="item">{{ message }}</div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
