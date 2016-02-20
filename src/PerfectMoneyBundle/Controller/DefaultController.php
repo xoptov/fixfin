@@ -31,7 +31,7 @@ class DefaultController extends Controller
         //TODO: Тут необходимо сделать через форму PaymentErrorType.
 
         $session = $this->get('session');
-        $session->getFlashBag()->add('warning', 'Произошла отмена или возникли ошибки во время выполнения платежа');
+        $session->getFlashBag()->add('warning', 'Произошла отмена или возникли ошибки во время выполнения платежа!');
 
         return $this->redirectToRoute('app_profile');
     }
