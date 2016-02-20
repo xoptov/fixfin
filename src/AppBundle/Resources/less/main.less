@@ -3,9 +3,11 @@
 @image-path: "../img";
 
 @color-red: #f44a3f;
+@color-light-red: #f4c7bd;
 @color-dark-orange: #e1972e;
 @color-orange: #f8ac2e;
 @color-green: #1cca5a;
+@color-light-green: #b1ebc6;
 @color-black: #000000;
 @color-dark-gray: #626262;
 @color-gray: #b8b8b6;
@@ -46,6 +48,7 @@ body {
   padding: 25px 0;
   .logo {
     vertical-align: middle;
+    display: inline-block;
   }
   .logo-words {
     width: 100px;
@@ -411,10 +414,21 @@ body {
 }
 
 .flash-message {
-  .window {
+  .content {
+    font-weight: bold;
+    border-width: 1px;
+    border-style: solid;
+  }
+  .warning {
     .content {
-      border: 1px dashed @color-red;
-      font-weight: bold;
+      border-color: @color-red;
+      background-color: @color-light-red;
+    }
+  }
+  .success {
+    .content {
+      border-color: @color-green;
+      background-color: @color-light-green;
     }
   }
 }

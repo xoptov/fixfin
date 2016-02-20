@@ -17,7 +17,10 @@ class DefaultController extends Controller
     {
         //TODO: Тут необходимо сделать через форму PaymentSuccessType со всеми проверками потаму как мы имеем v2_hash в запросе.
 
-        return new Response('Payment successful!');
+        $session = $this->get('session');
+        $session->getFlashBag()->add('success', 'Платёж успешно выполнен, ожидается подтверждение...');
+
+        return $this->redirectToRoute('app_profile');
     }
 
     /**
@@ -27,7 +30,10 @@ class DefaultController extends Controller
     {
         //TODO: Тут необходимо сделать через форму PaymentErrorType.
 
-        return new Response('Payment failed!', Response::HTTP_BAD_REQUEST);
+        $session = $this->get('session');
+        $session->getFlashBag()->add('warning', 'Произошла отмена или возникли ошибки во время выполнения платежа');
+
+        return $this->redirectToRoute('app_profile');
     }
 
     /**
