@@ -1,6 +1,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block content %}
+    {{ render(controller('AppBundle:Flash:messages')) }}
     {% if rates is not empty %}
     <ul class="nav nav-tabs">
     {% for rate in rates %}

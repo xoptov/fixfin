@@ -52,12 +52,16 @@ class User extends BaseUser
     /** @var bool */
     private $canInvite;
 
+    /** @var integer */
+    private $score;
+
     public function __construct()
     {
         parent::__construct();
         $this->tickets = new ArrayCollection();
         $this->referrals = new ArrayCollection();
         $this->canInvite = false;
+        $this->score = 0;
     }
 
     /**
@@ -331,5 +335,35 @@ class User extends BaseUser
     public function isCanInvite()
     {
         return $this->canInvite;
+    }
+
+    /**
+     * @param integer $score
+     * @return User
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * @param integer $value
+     * @return User
+     */
+    public function increaseScore($value)
+    {
+        $this->score += $value;
+
+        return $this;
     }
 }

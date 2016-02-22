@@ -29,6 +29,22 @@ class RateAdmin extends Admin
             ))
             ->add('period', 'number', array(
                 'label' => 'form.rate.period'
+            ))
+            ->add('score', 'number', array(
+                'label' => 'form.rate.score'
+            ))
+            ->add('requireQualification', 'choice', array(
+                'label' => 'form.rate.require_qualification',
+                'choices' => array(
+                    'status.common.no',
+                    'status.common.yes'
+                )
+            ))
+            ->add('requireInvitation', 'number', array(
+                'label' => 'form.rate.require_invitation'
+            ))
+            ->add('requireScore', 'number', array(
+                'label' => 'form.rate.require_score'
             ));
     }
 
@@ -59,6 +75,18 @@ class RateAdmin extends Admin
             ))
             ->add('period', 'number', array(
                 'label' => 'list.rate.period'
+            ))
+            ->add('score', 'number', array(
+                'label' => 'list.rate.score'
+            ))
+            ->add('requireQualification', 'boolean', array(
+                'label' => 'list.rate.require_qualification'
+            ))
+            ->add('requireInvitation', 'number', array(
+                'label' => 'list.rate.require_invitation'
+            ))
+            ->add('requireScore', 'number', array(
+                'label' => 'list.rate.require_score'
             ));
     }
 }
