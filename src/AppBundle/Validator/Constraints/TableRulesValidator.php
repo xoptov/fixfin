@@ -32,7 +32,7 @@ class TableRulesValidator extends ConstraintValidator
         $rate = $this->accessor->getValue($value, 'rate');
         $user = $this->accessor->getValue($value, 'user');
 
-        if ($rate->getRequireScore() && $rate->getRequireScore() & $user->getScore() == 0) {
+        if ($rate->getRequireScore() && ($rate->getRequireScore() & $user->getScore()) == 0) {
             $this->context->addViolation($constraint->message);
         }
     }
