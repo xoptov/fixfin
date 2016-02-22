@@ -6,6 +6,7 @@ use AppBundle\Entity\Account;
 use AppBundle\Entity\MoneyTransaction;
 use AppBundle\Entity\Invoice;
 use AppBundle\Entity\Ticket;
+use AppBundle\Model\RewardResult;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use AppBundle\Service\PaymentSystem\PerfectMoney;
@@ -114,6 +115,11 @@ class Banker
         return $this->perfectMoney->createPaymentRequest($invoice);
     }
 
+    /**
+     * @param bool $flush
+     * @return float|null
+     * @todo: Необходимо ввести сущьность RewardResult как объект и писать в неё результат работы этого метода.
+     */
     public function makeRewardPayments($flush = true)
     {
         // Получаем запланированные транзакции для выполнения
@@ -123,26 +129,27 @@ class Banker
             return null;
         }
 
+        $result = new RewardResult();
         $this->perfectMoney->makeTransfers($transactions);
 
         $successful = $this->perfectMoney->getSuccessful();
         $failed = $this->perfectMoney->getFailed();
-
-        $reservedAmount = 0.0;
 
         foreach ($transactions as $transaction) {
             if (isset($successful[$transaction->getId()])) {
                 // Ставим статус выполнена и записываем номер внешней транзакции
                 $transaction->setStatus(MoneyTransaction::STATUS_DONE)
                     ->setExternal($successful[$transaction->getId()]);
-
-                continue;
+                $result->addComplete($transaction);
             } elseif (isset($failed[$transaction->getId()])) {
                 if ($transaction->getAttempts() >= 3) {
+                    // Выставляем статус "ошибка" в транзакцию
                     $transaction->setStatus(MoneyTransaction::STATUS_ERROR);
+                    $result->addError($transaction);
                 } else {
+                    // Выставляем статус "повтор" в транзакцию
                     $transaction->setStatus(MoneyTransaction::STATUS_RETRY);
-                    $reservedAmount += $transaction->getAmount();
+                    $result->addRepeat($transaction);
                 }
                 // Записываем тест ошибки и увеличиваем счетчик попоток на единицу
                 $transaction->setNote($failed[$transaction->getId()])
@@ -154,6 +161,6 @@ class Banker
             $this->entityManager->flush();
         }
 
-        return $reservedAmount;
+        return $result;
     }
 }

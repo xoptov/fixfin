@@ -30,21 +30,29 @@ class TicketRepository extends EntityRepository
     }
 
     /**
-     * @param Rate $rate
+     * @param Ticket $ticket
      * @param User[]|ArrayCollection $users
      * @return Ticket|null
      * @throws NonUniqueResultException
      */
-    public function getClosestTicketByRate(Rate $rate, $users)
+    public function getClosestTicket(Ticket $ticket, $users)
     {
         $qb = $this->createQueryBuilder('t');
 
-        $query = $qb->innerJoin('t.user', 'u')
+        $qb->innerJoin('t.user', 'u')
             ->where('t.rate = :rate')
-                ->setParameter('rate', $rate)
+                ->setParameter('rate', $ticket->getRate())
+            ->andWhere('t.expired = :not_expired')
+                ->setParameter('not_expired', false)
             ->andWhere('u IN (:users)')
-                ->setParameter('users', $users)
-            ->orderBy('u.level', 'DESC')
+                ->setParameter('users', $users);
+
+        if ($ticket->getChiefTicket() instanceof Ticket) {
+            $qb->andWhere('t != :current')
+                ->setParameter('current', $ticket->getChiefTicket());
+        }
+
+        $query = $qb->orderBy('u.level', 'DESC')
             ->setMaxResults(1)
             ->getQuery();
 
@@ -113,6 +121,23 @@ class TicketRepository extends EntityRepository
                 ->setParameter('rate', $rate)
             ->andWhere('ct.user = :user')
                 ->setParameter('user', $referrer)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
+     * @return array
+     */
+    public function getWithExpiredDate()
+    {
+        $qb = $this->createQueryBuilder('t');
+        $query = $qb->where('t.expired = :expired')
+                ->setParameter('expired', false)
+            ->andWhere('t.type = :type')
+                ->setParameter('type', Ticket::TYPE_SUBSCRIPTION)
+            ->andWhere('t.paidUp <= :now')
+                ->setParameter('now', new \DateTime())
             ->getQuery();
 
         return $query->getResult();

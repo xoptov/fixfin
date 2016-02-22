@@ -16,10 +16,8 @@ class BankerMakeRewardsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $banker = $this->getContainer()->get('app.banker_service');
-        $reserved = $banker->makeRewardPayments();
+        $banker->makeRewardPayments();
 
-        $reserved = $reserved ? $reserved : 0;
-
-        $output->writeln('Reserved funds: ' . $reserved);
+        $output->writeln('Rewarding completed!');
     }
 }

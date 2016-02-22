@@ -89,7 +89,7 @@ class Ticket
      * @param Ticket $ticket
      * @return Ticket
      */
-    public function setChiefTicket(Ticket $ticket)
+    public function setChiefTicket(Ticket $ticket = null)
     {
         $this->chiefTicket = $ticket;
 

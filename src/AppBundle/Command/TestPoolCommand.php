@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use GuzzleHttp\Psr7\Response;
 
+//TODO: По хорошему это необходимо перенести в тесты.
 class TestPoolCommand extends Command
 {
     protected function configure()
