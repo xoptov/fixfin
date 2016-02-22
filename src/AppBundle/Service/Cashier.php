@@ -204,19 +204,25 @@ class Cashier
 
     /**
      * @param Ticket $ticket
+     * @return Ticket|null
+     * @todo: Необходимо написать тесты для этого метода.
      */
-    private function determineClosestChiefTicket(Ticket $ticket)
+    public function determineClosestChiefTicket(Ticket $ticket)
     {
         $referrers = $this->entityManager->getRepository('AppBundle:User')
             ->getReferrers($ticket);
 
         if (count($referrers)) {
-
-            $closestTicket = $this->entityManager->getRepository('AppBundle:Ticket')
-                ->getClosestTicketByRate($ticket->getRate(), $referrers);
+            $closestTicket = $this->entityManager
+                ->getRepository('AppBundle:Ticket')
+                ->getClosestTicket($ticket, $referrers);
 
             $ticket->setChiefTicket($closestTicket);
+
+            return $closestTicket;
         }
+
+        return null;
     }
 
     /**
@@ -325,7 +331,7 @@ class Cashier
 
             // Получаем ближний тикет для данного стола из указанной цепочки реферреров
             $closestTicket = $this->entityManager->getRepository('AppBundle:Ticket')
-                ->getClosestTicketByRate($ticket->getRate(), $referrers);
+                ->getClosestTicket($ticket, $referrers);
 
             if ($closestTicket) {
                 $ticket->setChiefTicket($closestTicket);
