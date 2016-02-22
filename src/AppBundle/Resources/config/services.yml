@@ -134,3 +134,25 @@ services:
         class: AppBundle\EventListener\InvoiceStatusSubscriber
         tags:
             - { name: doctrine.event_listener, event: onFlush }
+
+    app.reward_payment.subscriber:
+        class: AppBundle\EventListener\RewardPaymentSubscriber
+        arguments:
+            - @app.banker_service
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.ticket_subscriber:
+        class: AppBundle\EventListener\TicketSubscriber
+        arguments:
+            - @property_accessor
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.validator.table_rules:
+        class: AppBundle\Validator\Constraints\TableRulesValidator
+        arguments:
+            - @property_accessor
+        tags:
+            - { name: validator.constraint_validator, alias: table_rules_validator }
+

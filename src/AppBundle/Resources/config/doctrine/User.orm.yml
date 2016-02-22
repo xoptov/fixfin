@@ -60,6 +60,11 @@ AppBundle\Entity\User:
         canInvite:
             type: boolean
             nullable: false
+        score:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
     oneToOne:
         account:
             targetEntity: AppBundle\Entity\Account

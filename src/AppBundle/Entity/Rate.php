@@ -27,20 +27,23 @@ class Rate
     /** @var int */
     private $members;
 
-    /** @var bool */
-    private $requireQualification;
-
-    /** @var int */
-    private $requireInvitation;
-
     /** @var Pool */
     private $pool;
 
     /** @var Ticket[] */
     private $tickets;
 
-    /** @var Rate */
-    private $parent;
+    /** @var int */
+    private $score;
+
+    /** @var bool */
+    private $requireQualification;
+
+    /** @var int */
+    private $requireInvitation;
+
+    /** @var int */
+    private $requireScore;
 
     public function __construct()
     {
@@ -48,6 +51,7 @@ class Rate
         $this->requireQualification = false;
         $this->requireInvitation = 0;
         $this->tickets = new ArrayCollection();
+        $this->requireScore = 0;
     }
 
     /**
@@ -216,20 +220,41 @@ class Rate
     }
 
     /**
-     * @param Rate $parent
+     * @param int $score
      * @return Rate
      */
-    public function setParent(Rate $parent)
+    public function setScore($score)
     {
-        $this->parent = $parent;
+        $this->score = $score;
+
+        return $this;
     }
 
     /**
+     * @return int
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * @param int $score
      * @return Rate
      */
-    public function getParent()
+    public function setRequireScore($score)
     {
-        return $this->parent;
+        $this->requireScore = $score;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequireScore()
+    {
+        return $this->requireScore;
     }
 }
 

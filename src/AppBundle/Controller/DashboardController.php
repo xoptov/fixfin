@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Event\TicketEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,6 +10,7 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\Rate;
 use PerfectMoneyBundle\Form\Type\PaymentRequestType;
 use AppBundle\Entity\Ticket;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 
 class DashboardController extends Controller
 {
@@ -32,7 +34,26 @@ class DashboardController extends Controller
     public function openAction(Rate $rate)
     {
         $user = $this->getUser();
-        $this->get('app.cashier_service')->openTable($user, $rate);
+        $ticket = $this->get('app.cashier_service')->openTable($user, $rate, false);
+        $violations = $this->get('validator')->validate($ticket);
+        $flashBag = $this->get('session')->getFlashBag();
+
+        if ($violations->count()) {
+            /** @var ConstraintViolationInterface $violation */
+            foreach ($violations as $violation) {
+                $flashBag->add('warning', $violation->getMessage());
+            }
+
+            return $this->redirectToRoute('app_dashboard');
+        }
+
+        $flashBag->add('success', 'Стол успешно открыт!');
+
+        $event = new TicketEvent($ticket);
+        $this->get('event_dispatcher')->dispatch(TicketEvent::TABLE_OPENED, $event);
+
+        // Фиксируем изменения в БД
+        $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('app_dashboard');
     }
