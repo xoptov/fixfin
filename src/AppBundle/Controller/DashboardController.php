@@ -35,8 +35,9 @@ class DashboardController extends Controller
     {
         $user = $this->getUser();
         $ticket = $this->get('app.cashier_service')->openTable($user, $rate, false);
-        $violations = $this->get('validator')->validate($ticket);
         $flashBag = $this->get('session')->getFlashBag();
+
+        $violations = $this->get('validator')->validate($ticket);
 
         if ($violations->count()) {
             /** @var ConstraintViolationInterface $violation */
