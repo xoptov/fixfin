@@ -31,3 +31,12 @@ Symfony\Component\HttpFoundation\File\UploadedFile:
                 value: %upload_max_size%
         mimeType:
             - Regex: '/^image\/(?:jpeg|png)$/'
+
+AppBundle\Entity\Rate:
+    properties:
+        score:
+            - NotBlank: ~
+
+AppBundle\Entity\Ticket:
+    constraints:
+        - AppBundle\Validator\Constraints\TableRules: ~

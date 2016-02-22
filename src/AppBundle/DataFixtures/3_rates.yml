@@ -5,6 +5,7 @@ fixtures:
         amount: 0.2
         commission: 30
         period: 7
+        score: 1
         requireQualification: true
         requireInvitation: 2
         pool: main_pool
@@ -13,14 +14,18 @@ fixtures:
         amount: 0.4
         commission: 30
         period: 7
+        score: 2
         requireQualification: true
         requireInvitation: 2
+        requireScore: 1
         pool: main_pool
     rate_80:
         name: 'Table 0.8 USD'
         amount: 0.8
         commission: 30
         period: 7
+        score: 4
         requireQualification: true
         requireInvitation: 2
+        requireScore: 2
         pool: main_pool

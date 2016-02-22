@@ -10,6 +10,7 @@ use AppBundle\Entity\Ticket;
 use AppBundle\Entity\Invoice;
 use AppBundle\Event\InvoiceEvent;
 use AppBundle\Event\TicketEvent;
+use AppBundle\Exception\ScoreRuleException;
 use Doctrine\ORM\NoResultException;
 use PerfectMoneyBundle\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
