@@ -10,6 +10,7 @@ use AppBundle\Entity\Ticket;
 use AppBundle\Entity\Invoice;
 use AppBundle\Event\InvoiceEvent;
 use AppBundle\Event\TicketEvent;
+use AppBundle\Exception\DuplicateConfirmException;
 use AppBundle\Exception\ScoreRuleException;
 use Doctrine\ORM\NoResultException;
 use PerfectMoneyBundle\Model\PaymentInterface;
@@ -296,8 +297,8 @@ class Cashier
 
         $paidUp = $ticket->getPaidUp();
 
-        if (!$paidUp instanceof \DateTime || $paidUp->getTimestamp() < $now->getTimestamp()) {
-            $paidUp = new \DateTime();
+        if (!$paidUp instanceof \DateTime || ($paidUp->getTimestamp() < $now->getTimestamp())) {
+            $paidUp = $now;
         }
 
         $ticket->setPaidUp($paidUp->add($paidInterval))
@@ -384,12 +385,17 @@ class Cashier
     /**
      * @param PaymentInterface $payment
      * @throws NoResultException
-     * @return MoneyTransaction
+     * @throws DuplicateConfirmException
+     * @return MoneyTransaction|null
      */
     public function handlePayment(PaymentInterface $payment)
     {
         $invoice = $this->entityManager->getRepository('AppBundle:Invoice')
             ->find($payment->getPaymentId());
+
+        if ($invoice->getStatus() === Invoice::STATUS_PAID) {
+            throw new DuplicateConfirmException('Получен дубликат подтверждения об оплате');
+        }
 
         $payeeAccount = $this->entityManager->getRepository('AppBundle:Account')
             ->getAccountByNumber($payment->getPayeeAccount());
