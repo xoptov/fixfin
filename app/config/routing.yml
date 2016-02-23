@@ -1,36 +1,29 @@
 perfect_money:
     resource: "@PerfectMoneyBundle/Resources/config/routing.yml"
     prefix:   /payments
-    schemes: [https]
+
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
-    schemes: [https]
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-    schemes: [https]
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
     prefix: /register
-    schemes: [https]
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /resetting
-    schemes: [https]
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
-    schemes: [https]
 
 admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
     prefix: /admin
-    schemes: [https]
 
 _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
-    schemes: [https]
