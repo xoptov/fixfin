@@ -79,6 +79,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.title.section.invoice }
 
+    app.admin.issue:
+        class: AppBundle\Admin\IssueAdmin
+        arguments: [~, AppBundle\Entity\Issue, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.issue }
+
     app.form.type.pm_account:
         class: AppBundle\Form\Type\PerfectMoneyAccountType
         arguments: [@doctrine.orm.default_entity_manager]

@@ -1,26 +1,26 @@
 app_profile:
     path:     /
-    defaults: { _controller: AppBundle:Cabinet:profile }
+    defaults: { _controller: AppBundle:Default:profile }
 
 app_cloud:
     path:     /cloud
-    defaults: { _controller: AppBundle:Cabinet:cloud }
+    defaults: { _controller: AppBundle:Default:cloud }
 
 app_history:
     path:     /history
-    defaults: { _controller: AppBundle:Cabinet:history }
-
-app_content:
-    path:     /content
-    defaults: { _controller: AppBundle:Cabinet:content }
+    defaults: { _controller: AppBundle:Default:history }
 
 app_news:
     path:     /news
-    defaults: { _controller: AppBundle:Cabinet:news }
+    defaults: { _controller: AppBundle:Default:news }
 
 app_faq:
     path:     /faq
-    defaults: { _controller: AppBundle:Cabinet:faq }
+    defaults: { _controller: AppBundle:Default:faq }
+
+app_support:
+    path:     /support
+    defaults: { _controller: AppBundle:Default:support }
 
 app_dashboard:
     path:     /dashboard
@@ -42,4 +42,4 @@ app_api_accounts:
 app_api_avatars:
     path:     /api/avatars
     defaults: { _controller: AppBundle:API:postAvatars }
-    methods:   [POST]
+    methods:  [POST]

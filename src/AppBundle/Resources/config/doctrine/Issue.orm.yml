@@ -1,0 +1,26 @@
+AppBundle\Entity\Issue:
+    type: entity
+    table: issue
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        subject:
+            type: string
+            nullable: false
+        body:
+            type: text
+            nullable: false
+        email:
+            type: string
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+    lifecycleCallbacks:
+        prePersist: [onCreate]
