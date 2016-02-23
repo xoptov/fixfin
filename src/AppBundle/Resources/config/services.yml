@@ -124,7 +124,9 @@ services:
 
     app.payment_subscriber:
         class: AppBundle\EventListener\PaymentSubscriber
-        arguments: [@app.cashier_service]
+        arguments:
+            - @app.cashier_service
+            - @logger
         tags:
             - { name: kernel.event_subscriber }
 

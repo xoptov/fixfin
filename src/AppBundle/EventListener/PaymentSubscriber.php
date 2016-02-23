@@ -2,7 +2,10 @@
 
 namespace AppBundle\EventListener;
 
+use AppBundle\Exception\DuplicateConfirmException;
 use AppBundle\Service\Cashier;
+use Doctrine\ORM\NoResultException;
+use Monolog\Logger;
 use PerfectMoneyBundle\Event\PaymentEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -10,6 +13,9 @@ class PaymentSubscriber implements EventSubscriberInterface
 {
     /** @var Cashier */
     private $cashier;
+
+    /** @var Logger */
+    private $logger;
 
     public static function getSubscribedEvents()
     {
@@ -21,9 +27,10 @@ class PaymentSubscriber implements EventSubscriberInterface
     /**
      * @param Cashier $cashier
      */
-    public function __construct(Cashier $cashier)
+    public function __construct(Cashier $cashier, Logger $logger)
     {
         $this->cashier = $cashier;
+        $this->logger = $logger;
     }
 
     /**
@@ -31,6 +38,12 @@ class PaymentSubscriber implements EventSubscriberInterface
      */
     public function onConfirmed(PaymentEvent $event)
     {
-        $this->cashier->handlePayment($event->getResult());
+        try {
+            $this->cashier->handlePayment($event->getResult());
+        } catch (NoResultException $e) {
+            $this->logger->error($e->getMessage());
+        } catch (DuplicateConfirmException $e) {
+            $this->logger->error($e->getMessage());
+        }
     }
 }
