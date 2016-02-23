@@ -40,3 +40,13 @@ AppBundle\Entity\Rate:
 AppBundle\Entity\Ticket:
     constraints:
         - AppBundle\Validator\Constraints\TableRules: ~
+
+AppBundle\Entity\Issue:
+    properties:
+        subject:
+            - NotBlank: ~
+        body:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+            - Email: ~
