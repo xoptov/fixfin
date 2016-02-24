@@ -316,4 +316,62 @@ class CashierTest extends KernelTestCase
 
         $services['entityManager']->rollback();
     }
+
+    public function testProlongationTicket()
+    {
+        $now = new \DateTime();
+
+        $rate = new Rate();
+        $rate->setPeriod(7);
+
+        $ticket = new Ticket();
+        $ticket->setRate($rate);
+
+        $cashier = new Cashier($this->mockDispatcher, $this->mockEntityManager, $this->mockCommittee, $this->mockBanker, new PropertyAccessor());
+
+        $reflection = new \ReflectionClass(get_class($cashier));
+
+        $method = $reflection->getMethod('prolongationTicket');
+        $method->setAccessible(true);
+
+        // Сначала тестируем просроченный тикет
+        $paidUp = clone $now;
+        $paidUp->modify('-10 days');
+        $ticket->setPaidUp($paidUp);
+
+        $target = clone $now;
+        $target->modify('+7 days');
+
+        $method->invoke($cashier, $ticket);
+        $this->assertEquals($target->getTimestamp(), $ticket->getPaidUp()->getTimestamp());
+
+        // Теперь тестируем не просроченный тикет
+        $paidUp = clone $now;
+        $paidUp->modify('+10 days');
+        $ticket->setPaidUp($paidUp);
+
+        $target = clone $now;
+        $target->modify('+17 days');
+
+        $method->invoke($cashier, $ticket);
+        $this->assertEquals($target->getTimestamp(), $ticket->getPaidUp()->getTimestamp());
+    }
+
+    public function testForIssue41()
+    {
+        $services = $this->prepareHandlePaymentServices();
+
+        $services['entityManager']->beginTransaction();
+
+        $paymentConfirm = new PaymentConfirmation();
+        $paymentConfirm->setPayerAccount('U3487510')
+            ->setPayeeAccount('U9102389')
+            ->setPaymentAmount(0.2)
+            ->setPaymentBatchNum(rand(1000000, 9999999))
+            ->setPaymentId(4);
+
+        $services['cashier']->handlePayment($paymentConfirm);
+
+        $services['entityManager']->rollback();
+    }
 }
