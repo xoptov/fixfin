@@ -273,6 +273,7 @@ class Cashier
     {
         if ($this->checkInvoiceFullyPaid($invoice)) {
             $ticket = $invoice->getTicket();
+
             // Тут дальше идет логика по обработки тикета и связанных c ним тикетов.
             $this->prolongationTicket($ticket);
             $this->reestablishChief($ticket);
@@ -296,12 +297,13 @@ class Cashier
         $now = new \DateTime();
 
         $paidUp = $ticket->getPaidUp();
-
         if (!$paidUp instanceof \DateTime || ($paidUp->getTimestamp() < $now->getTimestamp())) {
             $paidUp = $now;
         }
 
-        $ticket->setPaidUp($paidUp->add($paidInterval))
+        // Issue-41 поспособствовало этому куску кода
+        $newPaidUp = clone $paidUp;
+        $ticket->setPaidUp($newPaidUp->add($paidInterval))
             ->setExpired(false);
 
         return $ticket;
