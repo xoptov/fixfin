@@ -1,0 +1,27 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="middle-box text-center animated fadeInDown registration-form">
+        <div>
+            <div class="icon-logo logo"></div>
+            <h3>{{ 'resetting.request.header'|trans }}</h3>
+            <p>{{ 'resetting.request.subheader'|trans }}</p>
+            <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="resetting-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" name="username" required="required" placeholder="{{ 'resetting.request.username'|trans }}"/>
+                    {% if invalid_username is defined %}
+                        <ul>
+                            <li>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</li>
+                        </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    <button class="btn btn-primary block full-width" type="submit">
+                        {{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock fos_user_content %}
+

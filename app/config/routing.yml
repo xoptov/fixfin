@@ -16,6 +16,11 @@ fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /resetting
 
+fos_user_registration_confirmed:
+    path:   /profile
+    defaults: { _controller: AppBundle:Default:profile }
+    methods: [GET]
+
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 

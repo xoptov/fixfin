@@ -1,1 +1,10 @@
-{{ form(form) }}
+{% extends 'FOSUserBundle::layout.html.twig' %}
+
+{% block fos_user_content %}
+    <div class="middle-box text-center animated fadeInDown login-form">
+        <div class="icon-logo logo"></div>
+        <h3>{{ 'ticket.prolong.header'|trans }}</h3>
+        <p>{{ 'ticket.prolong.subheader'|trans }}</p>
+        {{ form(form) }}
+    </div>
+{% endblock %}
