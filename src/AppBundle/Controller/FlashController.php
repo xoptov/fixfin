@@ -20,6 +20,10 @@ class FlashController extends Controller
             $success = $flashBag->get('success');
         }
 
+        if ($flashBag->has('fos_user_success')) {
+            $success = $flashBag->get('fos_user_success');
+        }
+
         return $this->render('AppBundle:Flash:messages.html.twig', array(
             'warnings' => $warnings,
             'success' => $success

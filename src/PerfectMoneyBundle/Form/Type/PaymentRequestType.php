@@ -41,7 +41,12 @@ class PaymentRequestType extends AbstractType
             ->add('AVAILABLE_PAYMENT_METHODS', HiddenType::class, array(
                 'property_path' => 'availablePaymentMethods'
             ))
-            ->add('paying', SubmitType::class);
+            ->add('paying', SubmitType::class, array(
+                'label' => 'form.prolong.paying',
+                'attr' => array(
+                    'class' => 'btn btn-primary'
+                )
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
