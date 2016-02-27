@@ -43,6 +43,8 @@ class Banker
     {
         $transaction = new MoneyTransaction();
 
+        $amount = round($amount, 2, PHP_ROUND_HALF_DOWN); // Округляем вещественное число до сотых.
+
         $transaction->setSource($payerAccount)
             ->setDestination($payeeAccount)
             ->setAmount($amount);
