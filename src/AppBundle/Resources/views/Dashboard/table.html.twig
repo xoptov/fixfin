@@ -47,11 +47,11 @@
                 {% else %}
                     <td colspan="4"></td>
                 {% endif %}
-                <td>
+                <td class="text-center">
                 {% if subordinate.qualification is not empty %}
                     {{ qualification_status(subordinate.qualification.passed) }}
                 {% endif %}
-                <td>{{ ticket_expiration(subordinate.expired) }}</td>
+                <td class="text-center">{{ ticket_expiration(subordinate.expired) }}</td>
             </tr>
             {% endfor %}
             </tbody>
