@@ -150,12 +150,11 @@ class PerfectMoney
     }
 
     /**
-     * @param $transactions
+     * @param array $transactions
      * @throws \Exception
      */
-    public function makeTransfers($transactions)
+    public function makeTransfers(array $transactions)
     {
-
         $requests = array();
         $this->scheduledTransactions = $transactions;
 
