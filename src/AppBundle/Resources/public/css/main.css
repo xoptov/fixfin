@@ -7091,10 +7091,14 @@ body {
 .status-new {
   color: #626262;
 }
-.status-canceled {
+.status-canceled,
+.expired,
+.in-progress {
   color: #e1972e;
 }
-.status-done {
+.status-done,
+.not-expired,
+.passed {
   color: #1cca5a;
 }
 .status-error {
