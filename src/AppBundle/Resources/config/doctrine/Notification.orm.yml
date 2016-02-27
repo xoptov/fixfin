@@ -1,0 +1,37 @@
+AppBundle\Entity\Notification:
+    type: entity
+    table: notification
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        content:
+            type: string
+            length: 100
+            nullable: false
+        viewed:
+            type: boolean
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+        updatedAt:
+            type: datetime
+            nullable: true
+    manyToOne:
+        user:
+            targetEntity: AppBundle\Entity\User
+            inversedBy: notifications
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+                options:
+                    unsigned: true
+    lifecycleCallbacks:
+        prePersist: [onCreate]
+        preUpdate: [onUpdate]

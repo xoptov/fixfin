@@ -18,7 +18,6 @@ use PerfectMoneyBundle\Parser\ResponseParser;
 use PerfectMoneyBundle\Model\TransferResponse;
 use Monolog\Logger;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Validator\Constraints\Url;
 
 class PerfectMoney
 {
@@ -147,7 +146,7 @@ class PerfectMoney
     }
 
     /**
-     * @param $transactions
+     * @param MoneyTransaction[] $transactions
      * @throws \Exception
      */
     public function makeTransfers($transactions)

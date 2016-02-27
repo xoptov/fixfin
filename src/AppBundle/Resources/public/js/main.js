@@ -30,7 +30,7 @@ modulejs.define('profile', function() {
             var module = this;
             this.fields.$inputAccount.on('focusout', function(e){
                 var number = $(this).val();
-                $.ajax('/api/accounts', {
+                $.ajax('/api/account', {
                     method: 'POST',
                     data: {'number': number},
                     success: function() {
@@ -51,7 +51,7 @@ modulejs.define('profile', function() {
                 var file = this.files[0];
                 formData.append('avatar', file, file.name);
                 $.ajax({
-                    url: '/api/avatars',
+                    url: '/api/avatar',
                     method: 'POST',
                     data: formData,
                     processData: false,
