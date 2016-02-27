@@ -415,6 +415,8 @@ class Cashier
         $transaction->setStatus(MoneyTransaction::STATUS_DONE)
             ->setExternal($payment->getPaymentBatchNum());
 
+        $this->banker->processRewardTransaction($transaction);
+
         $this->entityManager->flush();
 
         return $transaction;
