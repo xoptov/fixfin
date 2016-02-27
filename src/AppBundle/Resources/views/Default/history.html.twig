@@ -1,5 +1,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
+{% from 'AppBundle::helpers.html.twig' import transaction_status %}
+
 {% block content %}
     <div class="window">
         <div class="header">
@@ -28,8 +30,8 @@
                         <td>{{ transaction.destination.number }}</td>
                         <td>${{ transaction.amount }}</td>
                         <td>{{ transaction.createdAt|date('d.m.Y H:i:s') }}</td>
-                        <td>{{ transaction.updatedAt|date('d.m.Y H:i:s') }}</td>
-                        <td>{{ transaction.status }}</td>
+                        <td>{% if transaction.updatedAt is not empty %}{{ transaction.updatedAt|date('d.m.Y H:i:s') }}{% endif %}</td>
+                        <td class="text-center">{{ transaction_status(transaction.status) }}</td>
                         <td>
                             {% if transaction.invoice is not null %}
                                 {{ transaction.invoice.id }}
