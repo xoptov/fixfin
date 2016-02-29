@@ -1,0 +1,15 @@
+<div class="icon-bell notifications js-notify-popover" data-content="
+{% if notifications is not empty %}
+<ul>
+{% for notify in notifications %}
+    <li data-target='{{ notify.id }}'>{{ notify.createdAt|date('d.m.Y') }} - {{ notify.content }}</li>
+{% endfor %}
+</ul>
+{% else %}
+Нет новых нотификацый
+{% endif %}
+">
+    {% if notifications is not empty %}
+        <div class="counter js-notify-counter">{{ notifications|length }}</div>
+    {% endif %}
+</div>

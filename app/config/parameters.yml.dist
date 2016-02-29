@@ -31,7 +31,8 @@ parameters:
             no_payment: perfect_money_failed
         available_payment_methods: account
 
-    news_in_profile:    ~
+    news_in_profile:    3
+    notify_show_limit:  5
 
     # File upload settings
     uploads_dir:        'uploads'

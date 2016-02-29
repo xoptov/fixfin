@@ -55,11 +55,15 @@ class User extends BaseUser
     /** @var integer */
     private $score;
 
+    /** @var Notification[] */
+    private $notifications;
+
     public function __construct()
     {
         parent::__construct();
         $this->tickets = new ArrayCollection();
         $this->referrals = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
         $this->canInvite = false;
         $this->score = 0;
     }
@@ -365,5 +369,24 @@ class User extends BaseUser
         $this->score += $value;
 
         return $this;
+    }
+
+    /**
+     * @param Notification[]\ArrayCollection $notifications
+     * @return User
+     */
+    public function setNotifications($notifications)
+    {
+        $this->notifications = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * @return Notification[]|ArrayCollection
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
     }
 }

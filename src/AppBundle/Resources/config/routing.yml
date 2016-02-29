@@ -34,12 +34,22 @@ app_dashboard_prolong:
     path:     /dashboard/prolong/{ticket}
     defaults: { _controller: AppBundle:Dashboard:prolong }
 
-app_api_accounts:
-    path:     /api/accounts
-    defaults: { _controller: AppBundle:API:accounts }
+app_api_post_account:
+    path:     /api/account
+    defaults: { _controller: AppBundle:API:postAccount }
     methods:  [POST]
 
-app_api_avatars:
-    path:     /api/avatars
-    defaults: { _controller: AppBundle:API:postAvatars }
+app_api_post_avatar:
+    path:     /api/avatar
+    defaults: { _controller: AppBundle:API:postAvatar }
     methods:  [POST]
+
+app_api_get_notifications:
+    path:     /api/notifications
+    defaults: { _controller: AppBundle:API:getNotifications }
+    methods:  [GET]
+
+app_api_get_notification:
+    path:     /api/notification/{notification}
+    defaults: { _controller: AppBundle:API:getNotification }
+    methods:  [GET]

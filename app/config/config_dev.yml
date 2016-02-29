@@ -47,3 +47,6 @@ monolog:
 khepin_yaml_fixtures:
     resources:
         - AppBundle
+
+sonata_notification:
+    backend: sonata.notification.backend.runtime

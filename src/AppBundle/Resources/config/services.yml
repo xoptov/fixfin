@@ -12,6 +12,7 @@ services:
             - "@fos_user.user_manager"
             - "@fos_user.mailer"
             - "@fos_user.util.token_generator"
+            - "@sonata.notification.backend"
         scope: request
         public: false
 
@@ -161,4 +162,12 @@ services:
             - @property_accessor
         tags:
             - { name: validator.constraint_validator, alias: table_rules_validator }
+
+    app.notification.consumer:
+        class: AppBundle\Notification\Consumer\NotificationConsumer
+        arguments:
+            - @doctrine.orm.default_entity_manager
+            - @property_accessor
+        tags:
+            - { name: sonata.notification.consumer, type: notification }
 
