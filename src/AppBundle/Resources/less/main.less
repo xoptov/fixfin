@@ -69,9 +69,53 @@ body {
   }
   .notifications {
     margin: 0 34px;
+    cursor: pointer;
+    .counter {
+      display: inline-block;
+      position: relative;
+      top: 19px;
+      left: 10px;
+      width: 20px;
+      height: 19px;
+      background: #f44a3f;
+      text-align: center;
+      font-weight: bold;
+      color: #ffffff;
+    }
   }
   .logout {
     font-size: 18px;
+  }
+  .popover.bottom {
+    background-color: #ecebea;
+    .arrow {
+      &:after {
+        border-bottom-color: #ecebea;
+      }
+    }
+    .popover-content {
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        li {
+          margin-bottom: 10px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+          cursor: pointer;
+          font-weight: bold;
+          &.viewed {
+            cursor: default;
+            font-weight: normal;
+          }
+          &:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+          }
+        }
+      }
+    }
   }
 }
 

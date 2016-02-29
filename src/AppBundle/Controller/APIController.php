@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Account;
+use AppBundle\Entity\Notification;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,7 +17,7 @@ class APIController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function accountsAction(Request $request)
+    public function postAccountAction(Request $request)
     {
         $newAccount = new Account();
         $newAccount->setNumber($request->request->get('number'));
@@ -51,7 +52,7 @@ class APIController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function postAvatarsAction(Request $request)
+    public function postAvatarAction(Request $request)
     {
         /** @var UploadedFile $uploadedFile */
         $uploadedFile = $request->files->get('avatar');
@@ -78,5 +79,50 @@ class APIController extends Controller
         $webPath = $this->get('liip_imagine.cache.manager')->getBrowserPath($uploadedUri, 'avatar_125x125');
 
         return new JsonResponse(['path' => $webPath]);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getNotificationsAction()
+    {
+        $user = $this->getUser();
+        $limit = $this->getParameter('notify_show_limit');
+
+        $notifications = $this->getDoctrine()->getRepository('AppBundle:Notification')
+            ->getLastUnread($user, $limit);
+
+        $results = array();
+
+        /** @var Notification $notification */
+        foreach ($notifications as $notification){
+            $results[] = array(
+                'id' => $notification->getId(),
+                'created' => $notification->getCreatedAt()->format('d.m.Y'),
+                'content' => $notification->getContent()
+            );
+        }
+
+        return new JsonResponse([
+            'count' => count($results),
+            'items' => $results
+        ]);
+    }
+
+    /**
+     * @param Notification $notification
+     * @return JsonResponse
+     */
+    public function getNotificationAction(Notification $notification)
+    {
+        //TODO: Необходимо помечать нотификацию как прочитанную и возвращать эту нотификацию обратно.
+        $notification->setViewed(true);
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse([
+            'id' => $notification->getId(),
+            'content' => $notification->getContent(),
+            'viewed' => $notification->isViewed()
+        ]);
     }
 }

@@ -46,6 +46,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -63,6 +65,7 @@ doctrine:
                 prefix: Gedmo\Tree\Entity
                 dir:    "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                 is_bundle: false
+            SonataNotificationBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -81,6 +81,9 @@ AppBundle\Entity\User:
         referrals:
             targetEntity: AppBundle\Entity\User
             mappedBy: referrer
+        notifications:
+            targetEntity: AppBundle\Entity\Notification
+            mappedBy: user
     manyToOne:
         referrer:
             gedmo: [treeParent]

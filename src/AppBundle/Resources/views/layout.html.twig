@@ -25,7 +25,7 @@
                     <div class="col-lg-8 col-md-7 col-sm-6 col-xs-6 text-right">
                         <div class="user-control">
                             <div class="username">{{ app.user.lastname }} {{ app.user.firstname }}</div>
-                            <div class="icon-bell notifications"></div>
+                            {{ render(controller('AppBundle:Default:notifications')) }}
                             <a class="logout" href="{{ path('fos_user_security_logout') }}">
                                 Выход
                             </a>
@@ -77,6 +77,12 @@
     <script src="{{ asset('bundles/app/js/bootstrap.js') }}"></script>
     <script src="{{ asset('bundles/app/js/modulejs.js') }}"></script>
     <script src="{{ asset('bundles/app/js/main.js') }}"></script>
-    {% block javascripts %}{% endblock %}
+    <script>
+        var notifyPopover = modulejs.require('notifyPopover');
+        notifyPopover.start({button: '.js-notify-popover', counter: '.js-notify-counter'});
+    </script>
+    {% block javascripts %}
+
+    {% endblock %}
 </body>
 </html>
