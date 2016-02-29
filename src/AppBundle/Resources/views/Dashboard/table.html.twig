@@ -1,3 +1,5 @@
+{% from 'AppBundle::helpers.html.twig' import qualification_status, ticket_expiration %}
+
 {% if ticket %}
 <div class="row">
 {% if app.user.account is empty %}
@@ -45,21 +47,11 @@
                 {% else %}
                     <td colspan="4"></td>
                 {% endif %}
-                <td>
+                <td class="text-center">
                 {% if subordinate.qualification is not empty %}
-                    {% if subordinate.qualification.passed %}
-                        пройдена
-                    {% else %}
-                        не пройдена
-                    {% endif %}
+                    {{ qualification_status(subordinate.qualification.passed) }}
                 {% endif %}
-                <td>
-                    {% if subordinate.expired %}
-                        стол не оплачен
-                    {% else %}
-                        стол оплачен
-                    {% endif %}
-                </td>
+                <td class="text-center">{{ ticket_expiration(subordinate.expired) }}</td>
             </tr>
             {% endfor %}
             </tbody>

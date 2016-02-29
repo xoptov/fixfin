@@ -7128,3 +7128,22 @@ body {
   border-color: #1cca5a;
   background-color: #b1ebc6;
 }
+.status-new {
+  color: #626262;
+}
+.status-canceled,
+.expired,
+.in-progress {
+  color: #e1972e;
+}
+.status-done,
+.not-expired,
+.passed {
+  color: #1cca5a;
+}
+.status-error {
+  color: #f44a3f;
+}
+.status-unknown {
+  color: #626262;
+}

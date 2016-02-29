@@ -1,0 +1,31 @@
+{% macro transaction_status(status) %}
+    {% if status is constant('AppBundle\\Entity\\MoneyTransaction::STATUS_NEW') %}
+        <i class="glyphicon glyphicon-hourglass status-new" title="{{ 'status.transaction.new'|trans }}"></i>
+    {% elseif status is constant('AppBundle\\Entity\\MoneyTransaction::STATUS_CANCELED')%}
+        <i class="glyphicon glyphicon glyphicon-trash status-canceled" title="{{ 'status.transaction.canceled'|trans }}"></i>
+    {% elseif status is constant('AppBundle\\Entity\\MoneyTransaction::STATUS_DONE') %}
+        <i class="glyphicon glyphicon-ok status-done" title="{{ 'status.transaction.done'|trans }}"></i>
+    {% elseif status is constant('AppBundle\\Entity\\MoneyTransaction::STATUS_ERROR') %}
+        <i class="glyphicon glyphicon-ban-circle status-error" title="{{ 'status.transaction.error'|trans }}"></i>
+    {% elseif status is constant('AppBundle\\Entity\\MoneyTransaction::STATUS_RETRY') %}
+        <i class="glyphicon glyphicon-repeat status-retry" title="{{ 'status.transaction.retry'|trans }}"></i>
+    {% else %}
+        <i class="glyphicon glyphicon-question-sign status-unknown" title="{{ 'status.transaction.unknown'|trans }}"></i>
+    {% endif %}
+{% endmacro %}
+
+{% macro ticket_expiration(status) %}
+    {% if status == true %}
+        <i class="glyphicon glyphicon-time expired" title="{{ 'status.ticket.expired'|trans }}"></i>
+    {% else %}
+        <i class="glyphicon glyphicon-ok not-expired" title="{{ 'status.ticket.not_expired'|trans }}"></i>
+    {% endif %}
+{% endmacro %}
+
+{% macro qualification_status(status) %}
+    {% if status == true %}
+        <i class="glyphicon glyphicon-ok passed" title="{{ 'status.qualification.passed'|trans }}"></i>
+    {% else %}
+        <i class="glyphicon glyphicon-minus in-progress" title="{{ 'status.qualification.in_progress'|trans }}"></i>
+    {% endif %}
+{% endmacro %}

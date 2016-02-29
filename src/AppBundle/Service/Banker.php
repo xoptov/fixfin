@@ -43,6 +43,8 @@ class Banker
     {
         $transaction = new MoneyTransaction();
 
+        $amount = round($amount, 2, PHP_ROUND_HALF_DOWN); // Округляем вещественное число до сотых.
+
         $transaction->setSource($payerAccount)
             ->setDestination($payeeAccount)
             ->setAmount($amount);
@@ -117,8 +119,7 @@ class Banker
 
     /**
      * @param bool $flush
-     * @return float|null
-     * @todo: Необходимо ввести сущьность RewardResult как объект и писать в неё результат работы этого метода.
+     * @return null|RewardResult
      */
     public function makeRewardPayments($flush = true)
     {
@@ -129,19 +130,53 @@ class Banker
             return null;
         }
 
-        $result = new RewardResult();
+        $result = $this->makeTransfers($transactions);
+
+        if ($flush) {
+            $this->entityManager->flush();
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param MoneyTransaction $transaction
+     * @return null|RewardResult
+     */
+    public function processRewardTransaction(MoneyTransaction $transaction)
+    {
+        if ($transaction->getType() != MoneyTransaction::TYPE_REWARD) {
+            return null;
+        }
+
+        return $this->makeTransfers($transaction);
+    }
+
+    /**
+     * @param mixed $transactions
+     * @return RewardResult
+     */
+    public function makeTransfers($transactions)
+    {
+        if (!is_array($transactions)) {
+            $transactions = [$transactions];
+        }
+
         $this->perfectMoney->makeTransfers($transactions);
 
-        $successful = $this->perfectMoney->getSuccessful();
-        $failed = $this->perfectMoney->getFailed();
+        $success = $this->perfectMoney->getSuccessful();
+        $fail = $this->perfectMoney->getFailed();
 
+        $result = new RewardResult();
+
+        /** @var MoneyTransaction $transaction */
         foreach ($transactions as $transaction) {
-            if (isset($successful[$transaction->getId()])) {
+            if (isset($success[$transaction->getId()])) {
                 // Ставим статус выполнена и записываем номер внешней транзакции
                 $transaction->setStatus(MoneyTransaction::STATUS_DONE)
-                    ->setExternal($successful[$transaction->getId()]);
+                    ->setExternal($success[$transaction->getId()]);
                 $result->addComplete($transaction);
-            } elseif (isset($failed[$transaction->getId()])) {
+            } elseif (isset($fail[$transaction->getId()])) {
                 if ($transaction->getAttempts() >= 3) {
                     // Выставляем статус "ошибка" в транзакцию
                     $transaction->setStatus(MoneyTransaction::STATUS_ERROR);
@@ -152,13 +187,9 @@ class Banker
                     $result->addRepeat($transaction);
                 }
                 // Записываем тест ошибки и увеличиваем счетчик попоток на единицу
-                $transaction->setNote($failed[$transaction->getId()])
+                $transaction->setNote($fail[$transaction->getId()])
                     ->increaseAttempts();
             }
-        }
-
-        if ($flush) {
-            $this->entityManager->flush();
         }
 
         return $result;

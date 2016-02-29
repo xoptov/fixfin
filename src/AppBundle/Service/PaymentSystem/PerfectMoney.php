@@ -18,6 +18,7 @@ use PerfectMoneyBundle\Parser\ResponseParser;
 use PerfectMoneyBundle\Model\TransferResponse;
 use Monolog\Logger;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use GuzzleHttp\Exception\TransferException;
 
 class PerfectMoney
 {
@@ -29,6 +30,9 @@ class PerfectMoney
 
     /** @var array */
     private $options;
+
+    /** @var MoneyTransaction[] */
+    private $scheduledTransactions;
 
     /** @var array */
     private $successful;
@@ -146,24 +150,26 @@ class PerfectMoney
     }
 
     /**
-     * @param MoneyTransaction[] $transactions
+     * @param array $transactions
      * @throws \Exception
      */
-    public function makeTransfers($transactions)
+    public function makeTransfers(array $transactions)
     {
         $requests = array();
-        foreach ($transactions as $transaction) {
+        $this->scheduledTransactions = $transactions;
+
+        foreach ($this->scheduledTransactions as $idx => $transaction) {
             $body = http_build_query($this->createFormParams($transaction));
-            $requests[] = new Request('POST', $this->options['transfer_url'], array(), $body);
+            $requests[$idx] = new Request('POST', $this->options['transfer_url'], array(), $body);
         }
 
         $pool = new RequestsPool($this->client, $requests, array(
             'pool_size' => 5,
-            'fulfilled' => function($response) {
-                $this->onSuccessfulResponse($response);
+            'fulfilled' => function($response, $idx) {
+                $this->onSuccessfulResponse($response, $idx);
             },
-            'rejected' => function($reason) {
-                $this->onFailedReason($reason);
+            'rejected' => function($reason, $idx) {
+                $this->onFailedReason($reason, $idx);
             }
         ));
 
@@ -174,7 +180,7 @@ class PerfectMoney
      * @param Response $response
      * @return bool
      */
-    private function onSuccessfulResponse(Response $response)
+    private function onSuccessfulResponse(Response $response, $idx)
     {
         $parser = $this->responseParser;
 
@@ -183,22 +189,24 @@ class PerfectMoney
 
         if ($transfer->getError()) {
             // Добавляем идентификатор транзакции и текст ошибки
-            $this->failed[$transfer->getPaymentId()] = $transfer->getError();
+            $this->failed[$this->scheduledTransactions[$idx]->getId()] = $transfer->getError();
 
             return false;
         }
+
         // Добавляем идентификатор внутренней транзакции и нидентификатор внешней транзакции
-        $this->successful[$transfer->getPaymentId()] = $transfer->getPaymentBatchNum();
+        $this->successful[$this->scheduledTransactions[$idx]->getId()] = $transfer->getPaymentBatchNum();
 
         return true;
     }
 
     /**
-     * @param Response $response
+     * Это ошибки связанные с соединением
+     * @param TransferException $reason
      */
-    private function onFailedReason(Response $response)
+    private function onFailedReason(TransferException $reason, $idx)
     {
-        $this->logger->error((string)$response->getBody());
+        $this->logger->error($reason->getMessage());
     }
 
     /**

@@ -12,14 +12,17 @@ class DefaultController extends Controller
     public function profileAction(Request $request)
     {
         $form = $this->createForm(ProfileType::class, $this->getUser());
-
+        $entityManager = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
+            $bag = $this->get('session')->getFlashBag();
+            $bag->add('success', 'Профиль успешно изменён!');
         }
 
-        $news = $this->getDoctrine()->getRepository('AppBundle:News')->getLastNews($this->getParameter('news_in_profile'));
+        $news = $entityManager->getRepository('AppBundle:News')
+            ->getLastNews($this->getParameter('news_in_profile'));
 
         return $this->render('AppBundle:Default:profile.html.twig', array(
             'form' => $form->createView(),

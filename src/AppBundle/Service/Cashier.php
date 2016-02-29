@@ -278,6 +278,13 @@ class Cashier
             $this->prolongationTicket($ticket);
             $this->reestablishChief($ticket);
             $this->reestablishSubordinates($ticket);
+
+            $chiefTicket = $ticket->getChiefTicket();
+
+            if ($chiefTicket instanceof Ticket && $chiefTicket->isExpired() == false) {
+                $transaction = $this->banker->createRewardTransaction($chiefTicket);
+                $this->banker->processRewardTransaction($transaction);
+            }
         }
 
         if ($flush) {
@@ -321,8 +328,6 @@ class Cashier
         }
 
         if ($this->checkTicketExpiration($chiefTicket)) {
-            $this->banker->createRewardTransaction($chiefTicket);
-
             return;
         }
 
@@ -341,7 +346,6 @@ class Cashier
 
                 // Кидаем событие о том что chief тикет назначен из цепочки
                 $this->dispatcher->dispatch(TicketEvent::CHIEF_REESTABLISHED, new TicketEvent($ticket));
-                $this->banker->createRewardTransaction($closestTicket);
 
                 // Выходим до анулирования только что назначенного chief тикета
                 return;
