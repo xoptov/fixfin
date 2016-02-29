@@ -4,7 +4,7 @@ modulejs.define('dashboard', function() {
             this.initTabs();
         },
         initTabs: function() {
-            $('.nav-tabs a').on('click', function(e){
+            $('.nav-tabs a').on('click', function(e) {
                 e.preventDefault();
                 $(this).tab('show');
             });
@@ -28,7 +28,7 @@ modulejs.define('profile', function() {
         },
         initAccountInput: function() {
             var module = this;
-            this.fields.$inputAccount.on('focusout', function(e){
+            this.fields.$inputAccount.on('focusout', function(e) {
                 var number = $(this).val();
                 $.ajax('/api/account', {
                     method: 'POST',
@@ -66,7 +66,7 @@ modulejs.define('profile', function() {
                     }
                 });
             });
-            this.fields.$changeAvatarBtn.on('click', function(e){
+            this.fields.$changeAvatarBtn.on('click', function(e) {
                 e.preventDefault();
                 module.fields.$inputAvatarFile.click();
             });
@@ -75,6 +75,32 @@ modulejs.define('profile', function() {
             if(!this.fields.$avatarStub.hasClass('hidden')) this.fields.$avatarStub.addClass('hidden');
             if(this.fields.$avatarImage.hasClass('hidden')) this.fields.$avatarImage.removeClass('hidden');
             this.fields.$avatarImage.attr('src', path);
+        }
+    };
+});
+
+modulejs.define('notifyPopover', function() {
+    return {
+        start: function (options) {
+            var $counter = $(options.counter);
+            var $popover = $(options.button);
+            $popover.popover({html: true, placement: 'bottom'});
+            $popover.on('inserted.bs.popover', function(){
+                $('.popover-content li').on('click', function(){
+                    $.ajax({
+                        url: '/api/notification/' + $(this).data('target'),
+                        method: 'GET',
+                        dataType: 'json',
+                        context: this,
+                        success: function() {
+                            $(this).addClass('viewed');
+                            var unread = parseInt($counter.text()) - 1;
+                            unread == 0 ? $counter.remove() : $counter.text(unread);
+                            $(this).off('click');
+                        }
+                    });
+                });
+            });
         }
     };
 });

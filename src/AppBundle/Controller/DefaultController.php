@@ -72,4 +72,16 @@ class DefaultController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    public function notificationsAction()
+    {
+        $limit = $this->getParameter('notify_show_limit');
+
+        $notifications = $this->getDoctrine()->getRepository('AppBundle:Notification')
+            ->getLastUnread($this->getUser(), $limit);
+
+        return $this->render('AppBundle:Default:notifications.html.twig', array(
+            'notifications' => $notifications
+        ));
+    }
 }

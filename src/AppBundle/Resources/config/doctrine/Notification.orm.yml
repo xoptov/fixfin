@@ -1,5 +1,6 @@
 AppBundle\Entity\Notification:
     type: entity
+    repositoryClass: AppBundle\Entity\NotificationRepository
     table: notification
     id:
         id:

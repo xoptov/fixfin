@@ -82,6 +82,34 @@ class APIController extends Controller
     }
 
     /**
+     * @return JsonResponse
+     */
+    public function getNotificationsAction()
+    {
+        $user = $this->getUser();
+        $limit = $this->getParameter('notify_show_limit');
+
+        $notifications = $this->getDoctrine()->getRepository('AppBundle:Notification')
+            ->getLastUnread($user, $limit);
+
+        $results = array();
+
+        /** @var Notification $notification */
+        foreach ($notifications as $notification){
+            $results[] = array(
+                'id' => $notification->getId(),
+                'created' => $notification->getCreatedAt()->format('d.m.Y'),
+                'content' => $notification->getContent()
+            );
+        }
+
+        return new JsonResponse([
+            'count' => count($results),
+            'items' => $results
+        ]);
+    }
+
+    /**
      * @param Notification $notification
      * @return JsonResponse
      */

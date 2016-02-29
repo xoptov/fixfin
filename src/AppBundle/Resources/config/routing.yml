@@ -44,6 +44,11 @@ app_api_post_avatar:
     defaults: { _controller: AppBundle:API:postAvatar }
     methods:  [POST]
 
+app_api_get_notifications:
+    path:     /api/notifications
+    defaults: { _controller: AppBundle:API:getNotifications }
+    methods:  [GET]
+
 app_api_get_notification:
     path:     /api/notification/{notification}
     defaults: { _controller: AppBundle:API:getNotification }
