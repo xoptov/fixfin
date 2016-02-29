@@ -2,15 +2,15 @@
 
 namespace AppBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use AppBundle\Entity\Invoice;
 use AppBundle\Entity\User;
 
-class InvoiceStatusSubscriber implements EventSubscriberInterface
+class InvoiceStatusSubscriber implements EventSubscriber
 {
-    public static function getSubscribedEvents()
+    public function getSubscribedEvents()
     {
         return array(
             Events::onFlush => 'onFlush'
