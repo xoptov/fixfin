@@ -33,7 +33,7 @@ AppBundle\Entity\Account:
             nullable: true
         balance:
             type: float
-            nullable: true
+            nullable: false
             precision: 2
             scale: 2
         system:

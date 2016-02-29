@@ -52,6 +52,7 @@ class Account
 
     public function __construct()
     {
+        $this->balance = 0.0;
         $this->pools = new ArrayCollection();
         $this->incomes = new ArrayCollection();
         $this->outcomes = new ArrayCollection();
@@ -182,12 +183,34 @@ class Account
     }
 
     /**
-     * @param float $balance
+     * @param float $value
      * @return Account
      */
-    public function setBalance($balance)
+    public function setBalance($value)
     {
-        $this->balance = $balance;
+        $this->balance = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param $value
+     * @return Account
+     */
+    public function increaseBalance($value)
+    {
+        $this->balance += $value;
+
+        return $this;
+    }
+
+    /**
+     * @param $value
+     * @return Account
+     */
+    public function reduceBalance($value)
+    {
+        $this->balance -= $value;
 
         return $this;
     }

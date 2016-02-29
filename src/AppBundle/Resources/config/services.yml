@@ -141,7 +141,12 @@ services:
     app.invoice_status.subscriber:
         class: AppBundle\EventListener\InvoiceStatusSubscriber
         tags:
-            - { name: doctrine.event_listener, event: onFlush }
+            - { name: doctrine.event_subscriber }
+
+    app.transaction_done.subscriber:
+        class: AppBundle\EventListener\MoneyTransactionSubscriber
+        tags:
+            - { name: doctrine.event_subscriber }
 
     app.ticket_subscriber:
         class: AppBundle\EventListener\TicketSubscriber
