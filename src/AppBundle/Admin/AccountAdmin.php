@@ -78,8 +78,9 @@ class AccountAdmin extends Admin
             ->add('system', 'boolean', array(
                 'label' => 'list.account.system'
             ))
-            ->add('balance', 'number', array(
-                'label' => 'list.account.balance'
+            ->add('balance', 'currency', array(
+                'label' => 'list.account.balance',
+                'currency' => '$'
             ))
             ->add('verified', 'boolean', array(
                 'label' => 'list.account.verified'
@@ -94,6 +95,33 @@ class AccountAdmin extends Admin
                     'edit' => array()
                 )
             ));
+    }
+
+    protected function configureShowFields(ShowMapper $show)
+    {
+        $show->add('number', 'number', array(
+                'label' => 'show.account.number'
+            ))
+            ->add('user.username', 'text', array(
+                'label' => 'show.account.owner'
+            ))
+            ->add('commission', 'number', array(
+                'label' => 'show.account.commission'
+            ))
+            ->add('system', 'boolean', array(
+                'label' => 'show.account.system'
+            ))
+            ->add('balance', 'currency', array(
+                'label' => 'show.account.balance',
+                'currency' => '$'
+            ))
+            ->add('verified', 'boolean', array(
+                'label' => 'show.account.verified'
+            ))
+            ->add('blocked', 'boolean', array(
+                'label' => 'show.account.blocked'
+            ))
+        ;
     }
 
     protected function configureRoutes(RouteCollection $collection)
