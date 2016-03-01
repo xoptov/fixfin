@@ -31,16 +31,19 @@ class MoneyTransactionAdmin extends Admin
             ->add('destination.number', 'text', array(
                 'label' => 'list.transaction.payee'
             ))
-            ->add('amount', 'number', array(
-                'label' => 'list.transaction.amount'
+            ->add('amount', 'currency', array(
+                'label' => 'list.transaction.amount',
+                'currency' => '$'
             ))
             ->add('type', 'choice', array(
                 'label' => 'list.transaction.type',
-                'choices' => MoneyTransaction::getTypeLabels()
+                'choices' => MoneyTransaction::getTypeLabels(),
+                'catalogue' => 'messages'
             ))
             ->add('status', 'choice', array(
                 'label' => 'list.transaction.status',
-                'choices' => MoneyTransaction::getStatusLabels()
+                'choices' => MoneyTransaction::getStatusLabels(),
+                'catalogue' => 'messages'
             ));
     }
 
@@ -56,16 +59,19 @@ class MoneyTransactionAdmin extends Admin
             ->add('destination.number', 'text', array(
                 'label' => 'show.transaction.payee'
             ))
-            ->add('amount', 'number', array(
-                'label' => 'show.transaction.amount'
+            ->add('amount', 'currency', array(
+                'label' => 'show.transaction.amount',
+                'currency' => '$'
             ))
             ->add('type', 'choice', array(
                 'label' => 'show.transaction.type',
-                'choices' => MoneyTransaction::getTypeLabels()
+                'choices' => MoneyTransaction::getTypeLabels(),
+                'catalogue' => 'messages'
             ))
             ->add('status', 'choice', array(
                 'label' => 'show.transaction.status',
-                'choices' => MoneyTransaction::getStatusLabels()
+                'choices' => MoneyTransaction::getStatusLabels(),
+                'catalogue' => 'messages'
             ))
             ->add('note', 'text', array(
                 'label' => 'show.transaction.note'

@@ -35,7 +35,8 @@ class TicketAdmin extends Admin
             ))
             ->add('type', 'choice', array(
                 'label' => 'list.ticket.type',
-                'choices' => Ticket::getTypeLabels()
+                'choices' => Ticket::getTypeLabels(),
+                'catalogue' => 'messages'
             ))
             ->add('_action', 'actions', array(
                 'label' => 'list.ticket.actions',

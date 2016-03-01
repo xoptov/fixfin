@@ -24,15 +24,18 @@ class InvoiceAdmin extends Admin
             ->add('updatedAt', 'datetime', array(
                 'label' => 'list.invoice.updated_at'
             ))
-            ->add('amount', 'number', array(
-                'label' => 'list.invoice.amount'
+            ->add('amount', 'currency', array(
+                'label' => 'list.invoice.amount',
+                'currency' => '$'
             ))
-            ->add('paid', 'number', array(
-                'label' => 'list.invoice.paid'
+            ->add('paid', 'currency', array(
+                'label' => 'list.invoice.paid',
+                'currency' => '$'
             ))
             ->add('status', 'choice', array(
                 'label' => 'list.invoice.status',
-                'choices' => Invoice::getStatusLabels()
+                'choices' => Invoice::getStatusLabels(),
+                'catalogue' => 'messages'
             ))
         ;
     }

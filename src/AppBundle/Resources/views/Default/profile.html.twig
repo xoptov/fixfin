@@ -9,32 +9,34 @@
                 <div class="content">
                     <div class="row">
                         <div class="col-xs-5 text-center avatar">
-                        {% if app.user.avatar is not empty %}
-                            <img class="avatar-filtered" id="user_avatar" src="{{ app.user.avatar|imagine_filter('avatar_125x125') }}" width="125" height="125">
-                        {% else %}
-                            <div class="avatar-empty">
-                                <span class="title">Нет фото</span>
-                            </div>
-                            <img class="avatar-filtered hidden" id="user_avatar" width="125" height="125">
-                        {% endif %}
+                            {% if app.user.avatar is not empty %}
+                                <img class="avatar-filtered" id="user_avatar" src="{{ app.user.avatar|imagine_filter('avatar_125x125') }}" width="125" height="125">
+                            {% else %}
+                                <div class="avatar-empty">
+                                    <span class="title">Нет фото</span>
+                                </div>
+                                <img class="avatar-filtered hidden" id="user_avatar" width="125" height="125">
+                            {% endif %}
                             <input type="file" id="avatar_file" accept="image/jpeg,image/png">
                             <div class="change m-t-5">
                                 <a href="#" class="js-change-avatar">Изменить</a>
                             </div>
                         </div>
                         <div class="col-xs-7">
-                        {% if app.user.lastname is not empty or app.user.firstname is not empty %}
-                            <div class="fullname">{{ app.user.lastname }} {{ app.user.firstname }}</div>
-                        {% endif %}
+                            {% if app.user.lastname is not empty or app.user.firstname is not empty %}
+                                <div class="fullname">{{ app.user.lastname }} {{ app.user.firstname }}</div>
+                            {% endif %}
                             <div class="description">В системе с:<span class="value">{{ app.user.createdAt|date('d.m.Y') }}</span></div>
-                            {#<div class="description">Заработано:<span class="value">100 USD</span></div>#}
+                            {% if app.user.account is not empty %}
+                                <div class="description">Заработано:<span class="value">{{ app.user.account.balance }} USD</span></div>
+                            {% endif %}
                             <div class="description">Структура:<span class="value">{{ app.user.referrals.count }} чел.</span></div>
-                        {% if app.user.caninvite %}
-                            <div class="description">
-                                Реф. ссылка:<br/>
-                                <span class="value">{{ url('fos_user_registration_register', {'ref': app.user.username}) }}</span>
-                            </div>
-                        {% endif %}
+                            {% if app.user.caninvite %}
+                                <div class="description">
+                                    Реф. ссылка:<br/>
+                                    <span class="value">{{ url('fos_user_registration_register', {'ref': app.user.username}) }}</span>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

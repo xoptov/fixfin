@@ -67,8 +67,9 @@ class RateAdmin extends Admin
             ->add('pool.name', 'text', array(
                 'label' => 'list.rate.pool'
             ))
-            ->add('amount', 'number', array(
-                'label' => 'list.rate.amount'
+            ->add('amount', 'currency', array(
+                'label' => 'list.rate.amount',
+                'currency' => '$'
             ))
             ->add('commission', 'number', array(
                 'label' => 'list.rate.commission'

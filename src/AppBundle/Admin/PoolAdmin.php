@@ -39,9 +39,14 @@ class PoolAdmin extends Admin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('id')
-            ->add('name')
+            ->addIdentifier('id', null, array(
+                'label' => 'list.pool.id'
+            ))
+            ->add('name', null, array(
+                'label' => 'list.pool.name'
+            ))
             ->add('_action', 'actions', array(
+                'label' => 'list.pool.actions',
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
