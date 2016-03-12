@@ -25,6 +25,7 @@ modulejs.define('profile', function() {
         start: function() {
             this.initAccountInput();
             this.initAvatarUploader();
+            this.initClipboard();
         },
         initAccountInput: function() {
             var module = this;
@@ -75,6 +76,9 @@ modulejs.define('profile', function() {
             if(!this.fields.$avatarStub.hasClass('hidden')) this.fields.$avatarStub.addClass('hidden');
             if(this.fields.$avatarImage.hasClass('hidden')) this.fields.$avatarImage.removeClass('hidden');
             this.fields.$avatarImage.attr('src', path);
+        },
+        initClipboard: function() {
+            var clipboard = new Clipboard('.js-ref-link');
         }
     };
 });
