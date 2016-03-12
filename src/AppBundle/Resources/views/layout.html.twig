@@ -77,12 +77,10 @@
     <script src="{{ asset('bundles/app/js/bootstrap.js') }}"></script>
     <script src="{{ asset('bundles/app/js/modulejs.js') }}"></script>
     <script src="{{ asset('bundles/app/js/main.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/clipboard.js') }}"></script>
     <script>
-        var notifyPopover = modulejs.require('notifyPopover');
-        notifyPopover.start({button: '.js-notify-popover', counter: '.js-notify-counter'});
+        modulejs.require('notifyPopover').start({button: '.js-notify-popover', counter: '.js-notify-counter'});
     </script>
-    {% block javascripts %}
-
-    {% endblock %}
+    {% block javascripts %}{% endblock %}
 </body>
 </html>

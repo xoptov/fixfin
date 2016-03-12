@@ -11,6 +11,7 @@ var scriptFiles = [
     './Resources/bower_components/bootstrap/dist/js/bootstrap.js',
     './Resources/bower_components/jquery/dist/jquery.js',
     './Resources/bower_components/modulejs/dist/modulejs.js',
+    './Resources/bower_components/clipboard/dist/clipboard.js',
     './Resources/javascripts/**/*.js'
 ];
 
