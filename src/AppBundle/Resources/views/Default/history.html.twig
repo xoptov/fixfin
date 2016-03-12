@@ -17,7 +17,6 @@
                     <th>Получатель</th>
                     <th>Сумма</th>
                     <th>Создана</th>
-                    <th>Обновлена</th>
                     <th>Статус</th>
                     <th>Инвойс</th>
                 </tr>
@@ -25,18 +24,26 @@
                 <tbody>
                 {% for transaction in transactions %}
                     <tr>
-                        <td>{{ transaction.id }}</td>
+                        <td class="text-center">
+                            {% if transaction.destination == app.user.account %}
+                                <i class="glyphicon glyphicon-arrow-down direction-income" title="Входящий"></i>
+                            {% elseif transaction.source == app.user.account %}
+                                <i class="glyphicon glyphicon-arrow-up direction-outcome" title="Исходящий"></i>
+                            {% else %}
+                                <i class="glyphicon glyphicon-question-sign direction-unknown" title="Неизвестно"></i>
+                            {% endif %}
+                            {{ transaction.id }}
+                        </td>
                         <td>{{ transaction.source.number }}</td>
                         <td>{{ transaction.destination.number }}</td>
                         <td>${{ transaction.amount }}</td>
                         <td>{{ transaction.createdAt|date('d.m.Y H:i:s') }}</td>
-                        <td>{% if transaction.updatedAt is not empty %}{{ transaction.updatedAt|date('d.m.Y H:i:s') }}{% endif %}</td>
                         <td class="text-center">{{ transaction_status(transaction.status) }}</td>
-                        <td>
+                        <td class="text-center">
                             {% if transaction.invoice is not null %}
                                 {{ transaction.invoice.id }}
                             {% else %}
-                                Без инвойса
+                                <i class="glyphicon glyphicon-minus status-unknown"></i>
                             {% endif %}
                         </td>
                     </tr>

@@ -7128,9 +7128,6 @@ body {
   border-color: #1cca5a;
   background-color: #b1ebc6;
 }
-.status-new {
-  color: #626262;
-}
 .status-canceled,
 .expired,
 .in-progress {
@@ -7138,12 +7135,16 @@ body {
 }
 .status-done,
 .not-expired,
-.passed {
+.passed,
+.direction-income {
   color: #1cca5a;
 }
-.status-error {
+.status-error,
+.direction-outcome {
   color: #f44a3f;
 }
-.status-unknown {
+.status-new,
+.status-unknown,
+.direction-unknown {
   color: #626262;
 }
