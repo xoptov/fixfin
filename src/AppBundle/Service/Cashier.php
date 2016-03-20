@@ -389,17 +389,17 @@ class Cashier
         $invoice = $this->entityManager->getRepository('AppBundle:Invoice')
             ->find($payment->getPaymentId());
 
+        // Нам обязательно нужен инвойс.
+        if (!$invoice) {
+            throw new NoResultException();
+        }
+
         if ($invoice->getStatus() === Invoice::STATUS_PAID) {
             throw new DuplicateConfirmException('Получен дубликат подтверждения об оплате');
         }
 
         $payeeAccount = $this->entityManager->getRepository('AppBundle:Account')
             ->getAccountByNumber($payment->getPayeeAccount());
-
-        // Нам обязательно нужен инвойс.
-        if (!$invoice) {
-            throw new NoResultException();
-        }
 
         // Устанавливаем количество оплаты.
         $invoice->setPaid($payment->getPaymentAmount());
