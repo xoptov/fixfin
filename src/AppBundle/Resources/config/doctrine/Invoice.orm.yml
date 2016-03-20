@@ -50,7 +50,23 @@ AppBundle\Entity\Invoice:
             joinColumn:
                 name: ticket_id
                 referencedColumnName: id
-                nullable: false #todo убрать когда нужны будут выставление внутренних счетов
+                nullable: true
+                options:
+                    unsigned: true
+        user:
+            targetEntity: AppBundle\Entity\User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+                nullable: false
+                options:
+                    unsigned: true
+        rate:
+            targetEntity: AppBundle\Entity\Rate
+            joinColumn:
+                name: rate_id
+                referencedColumnName: id
+                nullable: false
                 options:
                     unsigned: true
     lifecycleCallbacks:

@@ -12,6 +12,12 @@ class Invoice
     /** @var int */
     private $id;
 
+    /** @var User */
+    private $user;
+
+    /** @var Rate */
+    private $rate;
+
     /** @var Ticket */
     private $ticket;
 
@@ -166,11 +172,41 @@ class Invoice
     }
 
     /**
-     * @return Ticket
+     * @param User $user
+     * @return Invoice
      */
-    public function getTicket()
+    public function setUser(User $user)
     {
-        return $this->ticket;
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param Rate $rate
+     * @return Invoice
+     */
+    public function setRate(Rate $rate)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * @return Rate
+     */
+    public function getRate()
+    {
+        return $this->rate;
     }
 
     /**
@@ -182,6 +218,14 @@ class Invoice
         $this->ticket = $ticket;
 
         return $this;
+    }
+
+    /**
+     * @return Ticket
+     */
+    public function getTicket()
+    {
+        return $this->ticket;
     }
 
     /**
