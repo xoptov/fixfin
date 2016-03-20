@@ -103,7 +103,7 @@ class PerfectMoney
             ->setPaymentUrl($this->router->generate($this->options['routes']['payment'], [], UrlGeneratorInterface::ABSOLUTE_URL))
             ->setNoPaymentUrl($this->router->generate($this->options['routes']['no_payment'], [], UrlGeneratorInterface::ABSOLUTE_URL));
 
-        $pool = $this->accessor->getValue($invoice, 'ticket.rate.pool');
+        $pool = $this->accessor->getValue($invoice, 'rate.pool');
 
         if (!$pool instanceof AccountPool) {
             throw new AccessException();

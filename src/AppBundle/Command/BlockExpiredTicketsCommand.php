@@ -41,7 +41,7 @@ class BlockExpiredTicketsCommand extends ContainerAwareCommand
 
             for ($i = self::FIRST; $i < count($subordinates); $i++) {
                 if ($i == self::FIRST) {
-                    $closestChiefTicket = $cashier->determineClosestChiefTicket($subordinates[$i]);
+                    $closestChiefTicket = $cashier->determineChainChief($subordinates[$i]);
                 }
                 $subordinates[$i]->setChiefTicket($closestChiefTicket);
             }

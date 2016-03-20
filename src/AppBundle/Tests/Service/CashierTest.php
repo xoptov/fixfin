@@ -130,64 +130,7 @@ class CashierTest extends KernelTestCase
         $services['entityManager']->rollback();
     }
 
-    // Далее проверяем привязку тикета по ирархической цепочке если нельзя привязаться к тикету прямого лидера
-    public function testOpenTableForChainChiefTicket()
-    {
-        $services = $this->prepareOpenTableServices();
-
-        $services['entityManager']->beginTransaction();
-
-        $user = $services['entityManager']
-            ->getRepository('AppBundle:User')
-            ->findOneBy(array('username' => 'dasha'));
-
-        /** @var Rate $rate */
-        $rate = $services['entityManager']
-            ->getRepository('AppBundle:Rate')
-            ->getCheapestRate();
-
-        $chainReferrer = $services['entityManager']
-            ->getRepository('AppBundle:User')
-            ->findOneBy(array('username' => 'alex'));
-
-        $ticket = $services['cashier']->openTable($user, $rate);
-
-        $this->assertAttributeInstanceOf(Ticket::class, 'chiefTicket', $ticket);
-        $this->assertEquals($chainReferrer, $ticket->getChiefTicket()->getUser());
-
-        $services['entityManager']->rollback();
-    }
-
-    // Проверка на добавление в квалификацию тикета
-    public function testOpenTableForAppendQualification()
-    {
-        $services = $this->prepareOpenTableServices();
-
-        $services['entityManager']->beginTransaction();
-
-        $user = $services['entityManager']
-            ->getRepository('AppBundle:User')
-            ->findOneBy(array('username' => 'oleg'));
-
-        /** @var Rate $rate */
-        $rate = $services['entityManager']
-            ->getRepository('AppBundle:Rate')
-            ->getCheapestRate();
-
-        $directTicket = $services['entityManager']
-            ->getRepository('AppBundle:Ticket')
-            ->getTicketByRate($rate, $user->getReferrer());
-
-        $ticket = $services['cashier']->openTable($user, $rate);
-
-        $this->assertAttributeEmpty('chiefTicket', $ticket);
-        $this->assertAttributeInstanceOf(Qualification::class, 'qualification', $directTicket);
-        $this->assertContains($ticket, $directTicket->getQualification()->getTransferredTickets());
-
-        $services['entityManager']->rollback();
-    }
-
-    // Проверка на привязку тикета к тикету реферерра с пройденной квалификацией
+    // Проверка на пустой chief тикет при открытии стола.
     public function testOpenTableForDirectChiefTicket()
     {
         $services = $this->prepareOpenTableServices();
@@ -203,15 +146,9 @@ class CashierTest extends KernelTestCase
             ->getRepository('AppBundle:Rate')
             ->getCheapestRate();
 
-        $directTicket = $services['entityManager']
-            ->getRepository('AppBundle:Ticket')
-            ->getTicketByRate($rate, $user->getReferrer());
-
         $ticket = $services['cashier']->openTable($user, $rate);
 
-        $this->assertAttributeInstanceOf(Ticket::class, 'chiefTicket', $ticket);
-        $this->assertAttributeEquals($directTicket, 'chiefTicket', $ticket);
-        $this->assertNotContains($ticket, $directTicket->getQualification()->getTransferredTickets());
+        $this->assertAttributeEmpty('chiefTicket', $ticket);
 
         $services['entityManager']->rollback();
     }

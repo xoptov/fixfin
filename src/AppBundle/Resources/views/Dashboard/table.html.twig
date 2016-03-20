@@ -1,27 +1,26 @@
 {% from 'AppBundle::helpers.html.twig' import qualification_status, ticket_expiration %}
 
-{% if ticket %}
 <div class="row">
-{% if app.user.account is empty %}
-    <div class="col-lg-12">
-        Для продолжения работы Вам необходимо указать номер кошелька.
-    </div>
-{% else %}
-    <div class="col-lg-10 table-activated">
-    {% if ticket.expired %}
-        Стол не оплачен.
+    {% if app.user.score >= rate.requireScore %}
+        <div class="col-lg-10">
+            {% if ticket is not empty and ticket.expired == false %}
+                Стол активен до: {{ ticket.paidUp|date("d-m-Y H:i") }}.
+            {% else %}
+                Стол не оплачен.
+            {% endif %}
+        </div>
+        <div class="col-lg-2">
+            <a class="btn btn-primary" href="{{ path('app_dashboard_payment', {'rate': rate.id}) }}">Оплатить</a>
+        </div>
     {% else %}
-        Стол активен до: {{ ticket.paidUp|date("d-m-Y H:i") }}.
+        <div class="col-lg-12">
+            У вас недостаточно открытых столов чтобы работать на данном столе!
+        </div>
     {% endif %}
-    </div>
-    <div class="col-lg-2">
-        <a class="btn btn-primary" href="{{ path('app_dashboard_prolong', {'ticket': ticket.id}) }}">Продлить</a>
-    </div>
-{% endif %}
 </div>
-<div class="row">
-    <div class="col-lg-12">
-    {% if ticket.subordinates is not empty %}
+
+{% if ticket is not empty and ticket.subordinates is not empty %}
+    <div class="row">
         <table class="table">
             <thead>
             <tr>
@@ -36,36 +35,26 @@
             </thead>
             <tbody>
             {% for subordinate in ticket.subordinates %}
-            <tr>
-                <td>{{ subordinate.id }}</td>
-                {% if subordinate.user is not empty %}
-                    {% set referral = subordinate.user %}
-                    <td>{{ referral.firstname }} {{ referral.lastname }}</td>
-                    <td>{{ referral.email }}</td>
-                    <td>{{ referral.phone }}</td>
-                    <td>{{ referral.referrals|length }}</td>
-                {% else %}
-                    <td colspan="4"></td>
-                {% endif %}
-                <td class="text-center">
-                {% if subordinate.qualification is not empty %}
-                    {{ qualification_status(subordinate.qualification.passed) }}
-                {% endif %}
-                <td class="text-center">{{ ticket_expiration(subordinate.expired) }}</td>
-            </tr>
+                <tr>
+                    <td>{{ subordinate.id }}</td>
+                    {% if subordinate.user is not empty %}
+                        {% set referral = subordinate.user %}
+                        <td>{{ referral.firstname }} {{ referral.lastname }}</td>
+                        <td>{{ referral.email }}</td>
+                        <td>{{ referral.phone }}</td>
+                        <td>{{ referral.referrals|length }}</td>
+                    {% else %}
+                        <td colspan="4"></td>
+                    {% endif %}
+                    <td class="text-center">
+                        {% if subordinate.qualification is not empty %}
+                            {{ qualification_status(subordinate.qualification.passed) }}
+                        {% endif %}
+                    </td>
+                    <td class="text-center">{{ ticket_expiration(subordinate.expired) }}</td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>
-    {% else %}
-        В данный момент у вас нет приглашенных участников на стол "{{ rate.name }}".
-    {% endif %}
-    </div>
-</div>
-{% else %}
-    <div class="row">
-        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8 table-activated">Стол "{{ rate.name }}" не активирован!</div>
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 text-right">
-            <a class="btn btn-primary" href="{{ path('app_dashboard_open', {'rate': rate.id}) }}">Активировать</a>
-        </div>
     </div>
 {% endif %}

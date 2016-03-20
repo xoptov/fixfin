@@ -2,8 +2,8 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\Qualification;
 use AppBundle\Entity\Ticket;
+use AppBundle\Entity\Qualification;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 

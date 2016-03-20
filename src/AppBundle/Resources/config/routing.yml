@@ -26,13 +26,9 @@ app_dashboard:
     path:     /dashboard
     defaults: { _controller: AppBundle:Dashboard:index }
 
-app_dashboard_open:
-    path:     /dashboard/open/{rate}
-    defaults: { _controller: AppBundle:Dashboard:open }
-
-app_dashboard_prolong:
-    path:     /dashboard/prolong/{ticket}
-    defaults: { _controller: AppBundle:Dashboard:prolong }
+app_dashboard_payment:
+    path:     /dashboard/payment/{rate}
+    defaults: { _controller: AppBundle:Dashboard:paymentTable }
 
 app_api_post_account:
     path:     /api/account

@@ -31,47 +31,30 @@ class DashboardController extends Controller
      * @param Rate $rate
      * @return Response
      */
-    public function openAction(Rate $rate)
+    public function paymentTableAction(Rate $rate)
     {
+        /** @var User $user */
         $user = $this->getUser();
-        $ticket = $this->get('app.cashier_service')->openTable($user, $rate, false);
-        $flashBag = $this->get('session')->getFlashBag();
 
-        $violations = $this->get('validator')->validate($ticket);
+        if (!$user->getAccount()) {
+            $flashBag = $this->get('session')->getFlashBag();
+            $flashBag->add('warning', 'Для оплаты стола необходимо указать счёт Perfect Money в профиле!');
 
-        if ($violations->count()) {
-            /** @var ConstraintViolationInterface $violation */
-            foreach ($violations as $violation) {
-                $flashBag->add('warning', $violation->getMessage());
-            }
-
-            return $this->redirectToRoute('app_dashboard');
+            return $this->redirectToRoute('app_profile');
         }
 
-        $flashBag->add('success', 'Стол успешно открыт!');
+        // Получаем новый или уже имеющийся инвойс на оплату.
+        $invoice = $this->get('app.cashier_service')->getInvoiceForPayment($user, $rate);
 
-        $event = new TicketEvent($ticket);
-        $this->get('event_dispatcher')->dispatch(TicketEvent::TABLE_OPENED, $event);
-
-        // Фиксируем изменения в БД
-        $this->getDoctrine()->getManager()->flush();
-
-        return $this->redirectToRoute('app_dashboard');
-    }
-
-    /**
-     * @param Ticket $ticket
-     * @return RedirectResponse|Response
-     */
-    public function prolongAction(Ticket $ticket)
-    {
-        //TODO: нужно подумать где необходимо делать валидацию, или упаковать это в сервис одного метода
-        $paymentRequest = $this->get('app.cashier_service')->createProlongPaymentRequest($ticket);
-
+        // Создаем запрос на оплату.
+        $paymentRequest = $this->get('app.banker_service')->createPaymentRequest($invoice);
         $pmOptions = $this->getParameter('perfect_money');
         $options = array('action' => $this->get('property_accessor')->getValue($pmOptions, '[entry_form]'));
 
+        // Генерируем форму для отправки в Perfect Money.
         $form = $this->createForm(PaymentRequestType::class, $paymentRequest, $options);
+
+        $this->getDoctrine()->getManager()->flush();
 
         return $this->render('AppBundle:Dashboard:prolong.html.twig', array('form' => $form->createView()));
     }
