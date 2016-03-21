@@ -1,0 +1,120 @@
+model: AppBundle\Entity\Invoice
+fixtures:
+    invoice_1:
+        user: xoptov
+        rate: rate_20
+        expiredAt: '+6 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_2:
+        user: olyah
+        rate: rate_20
+        expiredAt: '+6 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_3:
+        user: svetah
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        period: 7
+    invoice_4:
+        user: kostan
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_5:
+        user: oleg
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_6:
+        user: tanya
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_7:
+        user: alex
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_8:
+        user: misha
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_9:
+        user: sveta
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_10:
+        user: john
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_11:
+        user: dima
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_12:
+        user: alesha
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_13:
+        user: nastya
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_14:
+        user: vova
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2
+    invoice_15:
+        user: gena
+        rate: rate_20
+        expiredAt: '+7 days'
+        amount: 0.2
+        paid: 0.2
+        period: 7
+        status: 2

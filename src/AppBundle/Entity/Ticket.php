@@ -124,6 +124,25 @@ class Ticket
     }
 
     /**
+     * @param Invoice[]|ArrayCollection $invoices
+     * @return $this
+     */
+    public function setInvoices($invoices)
+    {
+        $this->invoices = $invoices;
+
+        return $this;
+    }
+
+    /**
+     * @return Invoice[]|ArrayCollection
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
+    }
+
+    /**
      * @param User $user
      * @return Ticket
      */

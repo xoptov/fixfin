@@ -1,0 +1,92 @@
+model: AppBundle\Entity\Ticket
+fixtures:
+    ticket_1:
+        paidUp: '+6 days'
+        invoices: [invoice_1]
+        user: xoptov
+        rate: rate_20
+        expired: false
+    ticket_2:
+        paidUp: '+6 days'
+        invoices: [invoice_2]
+        user: olyah
+        rate: rate_20
+        expired: false
+    ticket_3:
+        paidUp: '+7 days'
+        invoices: [invoice_4]
+        user: kostan
+        rate: rate_20
+        expired: false
+    ticket_4:
+        paidUp: '+7 days'
+        invoices: [invoice_5]
+        user: oleg
+        rate: rate_20
+        expired: false
+    ticket_5:
+        paidUp: '+7 days'
+        invoices: [invoice_6]
+        user: tanya
+        rate: rate_20
+        expired: false
+    ticket_6:
+        paidUp: '+7 days'
+        invoices: [invoice_7]
+        user: alex
+        rate: rate_20
+        expired: false
+    ticket_7:
+        paidUp: '+7 days'
+        invoices: [invoice_8]
+        user: misha
+        rate: rate_20
+        expired: false
+    ticket_8:
+        paidUp: '+7 days'
+        invoices: [invoice_9]
+        user: sveta
+        rate: rate_20
+        expired: false
+    ticket_9:
+        paidUp: '+7 days'
+        invoices: [invoice_10]
+        user: john
+        rate: rate_20
+        expired: false
+        chiefTicket: ticket_6
+    ticket_10:
+        paidUp: '+7 days'
+        invoices: [invoice_11]
+        user: dima
+        rate: rate_20
+        expired: false
+        chiefTicket: ticket_9
+    ticket_11:
+        paidUp: '+7 days'
+        invoices: [invoice_12]
+        user: alesha
+        rate: rate_20
+        expired: false
+        chiefTicket: ticket_9
+    ticket_12:
+        paidUp: '+7 days'
+        invoices: [invoice_13]
+        user: nastya
+        rate: rate_20
+        expired: false
+        chiefTicket: ticket_9
+    ticket_13:
+        paidUp: '+7 days'
+        invoices: [invoice_14]
+        user: vova
+        rate: rate_20
+        expired: false
+        chiefTicket: ticket_10
+    ticket_14:
+        paidUp: '+7 days'
+        invoices: [invoice_15]
+        user: gena
+        rate: rate_20
+        expired: false
+        chiefTicket: ticket_10

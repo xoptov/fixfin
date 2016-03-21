@@ -36,6 +36,11 @@ AppBundle\Entity\Account:
             nullable: false
             precision: 2
             scale: 2
+        profit:
+            type: float
+            nullable: false
+            precision: 2
+            scale: 2
         system:
             type: boolean
             nullable: false

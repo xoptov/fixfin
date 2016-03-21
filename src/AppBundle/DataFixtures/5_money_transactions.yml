@@ -1,0 +1,116 @@
+model: AppBundle\Entity\MoneyTransaction
+fixtures:
+    transaction_1:
+        source: U2482738
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_1
+    transaction_2:
+        source: U3386452
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_2
+    transaction_3:
+        source: U9387212
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_4
+    transaction_4:
+        source: U3487510
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_5
+    transaction_5:
+        source: U1204862
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_6
+    transaction_6:
+        source: U6482911
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_7
+    transaction_7:
+        source: U1120394
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_8
+    transaction_8:
+        source: U7364727
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_9
+    transaction_9:
+        source: U5731290
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_10
+    transaction_10_rewind:
+        source: U9102389
+        destination: U6482911
+        amount: 0.05
+        status: 2
+    transaction_11:
+        source: U9283647
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_11
+    transaction_12_rewind:
+        source: U9102389
+        destination: U6482911
+        amount: 0.05
+        status: 2
+    transaction_13:
+        source: U2394882
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_12
+    transaction_14_rewind:
+        source: U9102389
+        destination: U5731290
+        amount: 0.05
+        status: 2
+    transaction_15:
+        source: U0929374
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_13
+    transaction_16_rewind:
+        source: U9102389
+        destination: U5731290
+        amount: 0.05
+        status: 2
+    transaction_17:
+        source: U0927313
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_14
+    transaction_18_rewind:
+        source: U9102389
+        destination: U9283647
+        amount: 0.05
+        status: 2
+    transaction_19:
+        source: U0990283
+        destination: U9102389
+        amount: 0.2
+        status: 2
+        invoice: invoice_15
+    transaction_20_rewind:
+        source: U9102389
+        destination: U9283647
+        amount: 0.05
+        status: 2
