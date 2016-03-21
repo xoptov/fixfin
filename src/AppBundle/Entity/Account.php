@@ -32,6 +32,9 @@ class Account
     /** @var float */
     private $balance;
 
+    /** @var float */
+    private $profit;
+
     /** @var bool */
     private $system;
 
@@ -53,6 +56,7 @@ class Account
     public function __construct()
     {
         $this->balance = 0.0;
+        $this->profit = 0.0;
         $this->pools = new ArrayCollection();
         $this->incomes = new ArrayCollection();
         $this->outcomes = new ArrayCollection();
@@ -221,6 +225,36 @@ class Account
     public function getBalance()
     {
         return $this->balance;
+    }
+
+    /**
+     * @param float $value
+     * @return Account
+     */
+    public function setProfit($value)
+    {
+        $this->profit = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param float $value
+     * @return Account
+     */
+    public function increaseProfit($value)
+    {
+        $this->profit += $value;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getProfit()
+    {
+        return $this->profit;
     }
 
     /**

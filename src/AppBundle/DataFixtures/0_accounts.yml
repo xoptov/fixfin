@@ -3,9 +3,11 @@ fixtures:
     U9102389:
         number: 'U9102389'
         login: '129839'
+        password: 'thePassword'
         passPhrase: 'theSecretPassPhrase'
         system: true
         verified: true
+        commission: 1.99
     U2482738:
         number: 'U2482738'
     U9387212:

@@ -59,7 +59,8 @@ class MoneyTransactionSubscriber implements EventSubscriber
             $amount = $transaction->getAmount();
 
             // Актуализируем балансы счетов.
-            $payee->increaseBalance($amount);
+            $payee->increaseBalance($amount)
+                ->increaseProfit($amount);
             $payer->reduceBalance($amount);
 
             $metadata = $this->entityManager->getClassMetadata(Account::class);
