@@ -62,93 +62,26 @@ class CashierTest extends KernelTestCase
 
     public function testCreateInvoice()
     {
-        $rate = new Rate();
-        $rate->setAmount(20)
-            ->setPeriod(30);
+        $services = $this->prepareHandlePaymentServices();
+        $services['entityManager']->beginTransaction();
 
-        $ticket = new Ticket();
-        $ticket->setRate($rate);
+        $rate = $services['entityManager']->getRepository('AppBundle:Rate')
+            ->getCheapestRate();
 
-        $this->mockDispatcher->expects($this->exactly(2))->method('dispatch')->withAnyParameters();
-        $this->mockEntityManager->expects($this->exactly(2))->method('persist')->withAnyParameters();
+        $user = $services['entityManager']
+            ->getRepository('AppBundle:User')
+            ->findOneByUsername('dasha');
 
-        $accessor = new PropertyAccessor();
+        $this->mockDispatcher->expects($this->exactly(1))->method('dispatch')->withAnyParameters();
 
-        $cashier = new Cashier($this->mockDispatcher, $this->mockEntityManager, $this->mockCommittee, $this->mockBanker, $accessor);
-        $invoice = $cashier->createInvoice($ticket);
+        $invoice = $services['cashier']->createInvoice($user, $rate);
 
         $this->assertInstanceOf(Invoice::class, $invoice);
-        $this->assertEquals($ticket, $invoice->getTicket());
         $this->assertAttributeSame($rate->getAmount(), 'amount', $invoice);
         $this->assertAttributeSame($rate->getPeriod(), 'period', $invoice);
 
         $expiredDate = new \DateTime('+1 week');
         $this->assertAttributeEquals($expiredDate, 'expiredAt', $invoice);
-
-        $this->mockEntityManager->expects($this->once())->method('flush')->withAnyParameters();
-        $cashier->createInvoice($ticket, true);
-
-    }
-
-    private function prepareOpenTableServices()
-    {
-        self::bootKernel();
-
-        $entityManager = self::$kernel->getContainer()->get('doctrine.orm.default_entity_manager');
-        $accessor = new PropertyAccessor();
-        $committee = new Committee($entityManager, $accessor);
-        $cashier = new Cashier($this->mockDispatcher, $entityManager, $committee, $this->mockBanker, $accessor);
-
-        return array('cashier' => $cashier, 'entityManager' => $entityManager);
-    }
-
-    // Ну тут проверка на правильное создание тикета для стола
-    public function testOpenTableForValidCreatingTicket()
-    {
-        $services = $this->prepareOpenTableServices();
-
-        $services['entityManager']->beginTransaction();
-
-        $user = $services['entityManager']
-            ->getRepository('AppBundle:User')
-            ->findOneBy(array('username' => 'xoptov'));
-
-        /** @var Rate $rate */
-        $rate = $services['entityManager']
-            ->getRepository('AppBundle:Rate')
-            ->getCheapestRate();
-
-        $ticket = $services['cashier']->openTable($user, $rate);
-
-        $this->assertInstanceOf(Ticket::class, $ticket);
-        $this->assertAttributeEquals($user, 'user', $ticket);
-        $this->assertAttributeEquals($rate, 'rate', $ticket);
-        $this->assertInstanceOf(Qualification::class, $ticket->getQualification());
-        $this->assertAttributeEquals($rate->getRequireInvitation(), 'requireInvitation', $ticket->getQualification());
-        $this->assertNull($ticket->getChiefTicket());
-
-        $services['entityManager']->rollback();
-    }
-
-    // Проверка на пустой chief тикет при открытии стола.
-    public function testOpenTableForDirectChiefTicket()
-    {
-        $services = $this->prepareOpenTableServices();
-
-        $services['entityManager']->beginTransaction();
-
-        $user = $services['entityManager']
-            ->getRepository('AppBundle:User')
-            ->findOneBy(array('username' => 'misha'));
-
-        /** @var Rate $rate */
-        $rate = $services['entityManager']
-            ->getRepository('AppBundle:Rate')
-            ->getCheapestRate();
-
-        $ticket = $services['cashier']->openTable($user, $rate);
-
-        $this->assertAttributeEmpty('chiefTicket', $ticket);
 
         $services['entityManager']->rollback();
     }
@@ -160,98 +93,13 @@ class CashierTest extends KernelTestCase
         $entityManager = self::$kernel->getContainer()->get('doctrine.orm.default_entity_manager');
         $accessor = new PropertyAccessor();
         $banker = self::$kernel->getContainer()->get('app.banker_service');
-        $cashier = new Cashier($this->mockDispatcher, $entityManager, $this->mockCommittee, $banker, $accessor);
+        $committee = self::$kernel->getContainer()->get('app.committee_service');
+        $cashier = new Cashier($this->mockDispatcher, $entityManager, $committee, $banker, $accessor);
 
         return array(
             'entityManager' => $entityManager,
             'cashier' => $cashier
         );
-    }
-
-    // Тут тестируется только продление тикета которые несодержит приглашенных людей в структуру и сам без лидера.
-    public function testHandlePaymentFromKostan()
-    {
-        $services = $this->prepareHandlePaymentServices();
-
-        $services['entityManager']->beginTransaction();
-
-        $user = $services['entityManager']
-            ->getRepository('AppBundle:User')
-            ->findOneBy(array('username' => 'kostan'));
-
-        /** @var Rate $rate */
-        $rate = $services['entityManager']
-            ->getRepository('AppBundle:Rate')
-            ->getCheapestRate();
-
-        $ticket = $services['entityManager']
-            ->getRepository('AppBundle:Ticket')
-            ->getTicketByRate($rate, $user);
-
-        $payeeAccount = $services['entityManager']
-            ->getRepository('AppBundle:Account')
-            ->getPoorestSystemAccount($rate->getPool());
-
-        /** @var Invoice $invoice */
-        $invoice = $services['entityManager']
-            ->getRepository('AppBundle:Invoice')
-            ->getActualInvoice($ticket);
-
-        $paymentConfirm = new PaymentConfirmation();
-        $paymentConfirm
-            ->setPayeeAccount($payeeAccount->getNumber())
-            ->setPaymentAmount($invoice->getAmount())
-            ->setPaymentId($invoice->getId())
-            ->setPaymentBatchNum(rand(1000000, 9999999));
-
-        $transaction = $services['cashier']->handlePayment($paymentConfirm);
-
-        $this->assertInstanceOf(MoneyTransaction::class, $transaction);
-
-        $services['entityManager']->rollback();
-    }
-
-    // Тут тестируется полный процесс с привязкой тикетов рефераллов если они невходят в квалификацию.
-    public function testHandlePaymentFromDima()
-    {
-        $services = $this->prepareHandlePaymentServices();
-
-        $services['entityManager']->beginTransaction();
-
-        $user = $services['entityManager']
-            ->getRepository('AppBundle:User')
-            ->findOneBy(array('username' => 'dima'));
-
-        /** @var Rate $rate */
-        $rate = $services['entityManager']
-            ->getRepository('AppBundle:Rate')
-            ->getCheapestRate();
-
-        $ticket = $services['entityManager']
-            ->getRepository('AppBundle:Ticket')
-            ->getTicketByRate($rate, $user);
-
-        $payeeAccount = $services['entityManager']
-            ->getRepository('AppBundle:Account')
-            ->getPoorestSystemAccount($rate->getPool());
-
-        /** @var Invoice $invoice */
-        $invoice = $services['entityManager']
-            ->getRepository('AppBundle:Invoice')
-            ->getActualInvoice($ticket);
-
-        $paymentConfirm = new PaymentConfirmation();
-        $paymentConfirm
-            ->setPayeeAccount($payeeAccount->getNumber())
-            ->setPaymentAmount($invoice->getAmount())
-            ->setPaymentId($invoice->getId())
-            ->setPaymentBatchNum(rand(1000000, 9999999));
-
-        $transaction = $services['cashier']->handlePayment($paymentConfirm);
-
-        $this->assertInstanceOf(MoneyTransaction::class, $transaction);
-
-        $services['entityManager']->rollback();
     }
 
     public function testProlongationTicket()
@@ -301,11 +149,11 @@ class CashierTest extends KernelTestCase
         $services['entityManager']->beginTransaction();
 
         $paymentConfirm = new PaymentConfirmation();
-        $paymentConfirm->setPayerAccount('U3487510')
+        $paymentConfirm->setPayerAccount('U8283472')
             ->setPayeeAccount('U9102389')
             ->setPaymentAmount(0.2)
             ->setPaymentBatchNum(rand(1000000, 9999999))
-            ->setPaymentId(4);
+            ->setPaymentId(3);
 
         $services['cashier']->handlePayment($paymentConfirm);
 

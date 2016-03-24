@@ -71,19 +71,16 @@ class PerfectMoneyTest extends TestCase
         $rate = new Rate();
         $rate->setPool($pool);
 
-        $ticket = new Ticket();
-        $ticket->setRate($rate);
-
         $invoice = new Invoice();
-        $invoice->setTicket($ticket)
-            ->setAmount(65.0);
+        $invoice->setRate($rate)
+            ->setAmount(20.0);
 
         $perfectMoney = new PerfectMoney(new PropertyAccessor(), $this->entityManager, $this->router, $this->logger, $options);
         $request = $perfectMoney->createPaymentRequest($invoice);
 
         $this->assertInstanceOf('PerfectMoneyBundle\\Model\\PaymentRequest', $request);
         $this->assertNull($request->getPaymentId());
-        $this->assertEquals(65.0, $request->getPaymentAmount());
+        $this->assertEquals(20.0, $request->getPaymentAmount());
         $this->assertEquals($this->account, $request->getPayeeAccount());
         $this->assertEquals($options['routes']['status'], $request->getStatusUrl());
         $this->assertEquals($options['routes']['payment'], $request->getPaymentUrl());
