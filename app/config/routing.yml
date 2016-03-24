@@ -17,7 +17,7 @@ fos_user_resetting:
     prefix: /resetting
 
 fos_user_registration_confirmed:
-    path:   /profile
+    path:   /
     defaults: { _controller: AppBundle:Default:profile }
     methods: [GET]
 
