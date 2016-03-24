@@ -46,6 +46,9 @@ class DashboardController extends Controller
         // Получаем новый или уже имеющийся инвойс на оплату.
         $invoice = $this->get('app.cashier_service')->getInvoiceForPayment($user, $rate);
 
+        // Сохраняем сейчас инвойс в БД для получения актуального ID иначе нихуя неработает.
+        $this->getDoctrine()->getManager()->flush();
+
         // Создаем запрос на оплату.
         $paymentRequest = $this->get('app.banker_service')->createPaymentRequest($invoice);
         $pmOptions = $this->getParameter('perfect_money');
@@ -53,8 +56,6 @@ class DashboardController extends Controller
 
         // Генерируем форму для отправки в Perfect Money.
         $form = $this->createForm(PaymentRequestType::class, $paymentRequest, $options);
-
-        $this->getDoctrine()->getManager()->flush();
 
         return $this->render('AppBundle:Dashboard:prolong.html.twig', array('form' => $form->createView()));
     }
