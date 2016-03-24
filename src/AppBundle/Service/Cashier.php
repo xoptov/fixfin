@@ -283,7 +283,11 @@ class Cashier
             // Тут дальше идет логика по обработки тикета и связанных c ним тикетов.
             $this->prolongationTicket($ticket);
             $this->reestablishChief($ticket);
-            $this->reestablishSubordinates($ticket);
+
+            // Если тикет не новый то пытаемся восстановить его подчененных.
+            if ($ticket->getId()) {
+                $this->reestablishSubordinates($ticket);
+            }
 
             $chiefTicket = $ticket->getChiefTicket();
 
@@ -406,6 +410,7 @@ class Cashier
         $this->processInvoicePaid($invoice, false);
 
         $transaction = $this->banker->createProlongTransaction($invoice, $payeeAccount);
+
         $transaction->setStatus(MoneyTransaction::STATUS_DONE)
             ->setExternal($payment->getPaymentBatchNum());
 
