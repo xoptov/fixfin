@@ -27,7 +27,7 @@ class Notification
 
     const TYPE_COMMON = 0;
     const TYPE_NEW_REFERRAL = 1;
-    const TYPE_REFERRAL_TABLE_OPENED = 2;
+    const TYPE_REFERRAL_TICKET_CREATED = 2;
     const TYPE_TICKET_EXPIRED = 3;
     const TYPE_REWARDING = 4;
 

@@ -12,7 +12,6 @@ class TicketEvent extends Event
     const CHIEF_REESTABLISHED = 'ticket.chief_reestablished';
     const CHIEF_REMOVED = 'ticket.chief_removed';
     const SUBORDINATES_REESTABLISHED = 'ticket.subordinates_reestablished';
-    const TABLE_OPENED = 'ticket.table_opened';
 
     /** @var Ticket */
     private $ticket;

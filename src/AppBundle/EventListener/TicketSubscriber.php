@@ -27,14 +27,14 @@ class TicketSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            TicketEvent::TABLE_OPENED => 'onTableOpened'
+            TicketEvent::CREATED => 'onTicketCreated'
         );
     }
 
     /**
      * @param TicketEvent $event
      */
-    public function onTableOpened(TicketEvent $event)
+    public function onTicketCreated(TicketEvent $event)
     {
         /**
          * @var User $user
