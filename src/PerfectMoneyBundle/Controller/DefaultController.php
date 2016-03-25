@@ -18,7 +18,7 @@ class DefaultController extends Controller
         //TODO: Тут необходимо сделать через форму PaymentSuccessType со всеми проверками потаму как мы имеем v2_hash в запросе.
 
         $session = $this->get('session');
-        $session->getFlashBag()->add('success', 'Платёж успешно выполнен, ожидается подтверждение...');
+        $session->getFlashBag()->add('success', 'Платёж успешно выполнен, рабочий стол активирован...');
 
         return $this->redirectToRoute('app_profile');
     }

@@ -27,8 +27,8 @@
                                 <div class="fullname">{{ app.user.lastname }} {{ app.user.firstname }}</div>
                             {% endif %}
                             <div class="description">В системе с:<span class="value">{{ app.user.createdAt|date('d.m.Y') }}</span></div>
-                            {% if app.user.account is not empty and app.user.account.balance > 0 %}
-                                <div class="description">Заработано:<span class="value">{{ app.user.account.balance }} USD</span></div>
+                            {% if app.user.account is not empty and app.user.account.profit > 0 %}
+                                <div class="description">Заработано:<span class="value">{{ app.user.account.profit }} USD</span></div>
                             {% endif %}
                             <div class="description">Структура:<span class="value">{{ app.user.referrals.count }} чел.</span></div>
                         </div>

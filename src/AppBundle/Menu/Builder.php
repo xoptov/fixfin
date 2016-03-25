@@ -39,14 +39,6 @@ class Builder implements ContainerAwareInterface
             'route' => 'app_news',
             'attributes' => array('class' => 'menu-item')
         ));
-//        $menu->addChild($translator->trans('menu.content'), array(
-//            'route' => 'app_content',
-//            'attributes' => array('class' => 'menu-item')
-//        ));
-//        $menu->addChild($translator->trans('menu.faq'), array(
-//            'route' => 'app_faq',
-//            'attributes' => array('class' => 'menu-item')
-//        ));
 
         return $menu;
     }

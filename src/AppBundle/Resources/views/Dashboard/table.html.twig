@@ -3,58 +3,109 @@
 <div class="row">
     {% if app.user.score >= rate.requireScore %}
         <div class="col-lg-10">
-            {% if ticket is not empty and ticket.expired == false %}
-                Стол активен до: {{ ticket.paidUp|date("d-m-Y H:i") }}.
-            {% else %}
-                Стол не оплачен.
-            {% endif %}
+            <h4>
+                {% if ticket is not empty and ticket.expired == false %}
+                    Стол активен до: {{ ticket.paidUp|date("d-m-Y H:i") }}.
+                {% else %}
+                    Стол не оплачен.
+                {% endif %}
+            </h4>
         </div>
         <div class="col-lg-2">
-            <a class="btn btn-primary" href="{{ path('app_dashboard_payment', {'rate': rate.id}) }}">Оплатить</a>
+            <a class="btn btn-primary" href="{{ path('app_dashboard_payment', {'rate': rate.id}) }}">
+                {% if ticket is empty %}
+                    Оплатить
+                {% else %}
+                    Продлить
+                {% endif %}
+            </a>
         </div>
     {% else %}
         <div class="col-lg-12">
-            У вас недостаточно открытых столов чтобы работать на данном столе!
+            <h4>У вас недостаточно открытых столов чтобы работать на данном столе!</h4>
         </div>
     {% endif %}
 </div>
 
-{% if ticket is not empty and ticket.subordinates is not empty %}
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Имя Фамилия</th>
-                <th>Почта</th>
-                <th>Телефон</th>
-                <th>Кол. реф.</th>
-                <th>Квалификация</th>
-                <th>Статус</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for subordinate in ticket.subordinates %}
+{% if ticket is not empty %}
+    {% if ticket.qualification is defined and ticket.qualification.transferredTickets is not empty %}
+        <div class="row">
+            <h4>Квалификация</h4>
+            <table>
+                <thead>
                 <tr>
-                    <td>{{ subordinate.id }}</td>
-                    {% if subordinate.user is not empty %}
-                        {% set referral = subordinate.user %}
-                        <td>{{ referral.firstname }} {{ referral.lastname }}</td>
-                        <td>{{ referral.email }}</td>
-                        <td>{{ referral.phone }}</td>
-                        <td>{{ referral.referrals|length }}</td>
-                    {% else %}
-                        <td colspan="4"></td>
-                    {% endif %}
-                    <td class="text-center">
-                        {% if subordinate.qualification is not empty %}
-                            {{ qualification_status(subordinate.qualification.passed) }}
-                        {% endif %}
-                    </td>
-                    <td class="text-center">{{ ticket_expiration(subordinate.expired) }}</td>
+                    <th>ID</th>
+                    <th>Имя Фамилия</th>
+                    <th>Почта</th>
+                    <th>Телефон</th>
+                    <th>Кол. реф.</th>
+                    <th>Квалификация</th>
+                    <th>Статус</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                {% for subordinate in ticket.qualification.transferredTickets %}
+                    <tr>
+                        <td>{{ subordinate.id }}</td>
+                        {% if subordinate.user is not empty %}
+                            {% set referral = subordinate.user %}
+                            <td>{{ referral.firstname }} {{ referral.lastname }}</td>
+                            <td>{{ referral.email }}</td>
+                            <td>{{ referral.phone }}</td>
+                            <td>{{ referral.referrals|length }}</td>
+                        {% else %}
+                            <td colspan="4"></td>
+                        {% endif %}
+                        <td class="text-center">
+                            {% if subordinate.qualification is not empty %}
+                                {{ qualification_status(subordinate.qualification.passed) }}
+                            {% endif %}
+                        </td>
+                        <td class="text-center">{{ ticket_expiration(subordinate.expired) }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+    {% if ticket.subordinates is not empty %}
+        <div class="row">
+            <h4>Активные рефералы</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Имя Фамилия</th>
+                    <th>Почта</th>
+                    <th>Телефон</th>
+                    <th>Кол. реф.</th>
+                    <th>Квалификация</th>
+                    <th>Статус</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for subordinate in ticket.subordinates %}
+                    <tr>
+                        <td>{{ subordinate.id }}</td>
+                        {% if subordinate.user is not empty %}
+                            {% set referral = subordinate.user %}
+                            <td>{{ referral.firstname }} {{ referral.lastname }}</td>
+                            <td>{{ referral.email }}</td>
+                            <td>{{ referral.phone }}</td>
+                            <td>{{ referral.referrals|length }}</td>
+                        {% else %}
+                            <td colspan="4"></td>
+                        {% endif %}
+                        <td class="text-center">
+                            {% if subordinate.qualification is not empty %}
+                                {{ qualification_status(subordinate.qualification.passed) }}
+                            {% endif %}
+                        </td>
+                        <td class="text-center">{{ ticket_expiration(subordinate.expired) }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 {% endif %}
