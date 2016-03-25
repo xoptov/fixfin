@@ -132,6 +132,8 @@ class Banker
 
         $result = $this->makeTransfers($transactions);
 
+        // TODO: вот сюда надо втулить диспечеризацию события о том что трансфер обработан.
+
         if ($flush) {
             $this->entityManager->flush();
         }
