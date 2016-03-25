@@ -15,7 +15,7 @@ security:
         referrer: "Кто пригласил"
 registration:
     flash:
-        user_created: "Поздравляем! Ваш аккаунт подтвержден."
+        user_created: "Поздравляем! Спасибо за регистрацию в нашей системе!"
 resetting:
     request:
         header: "Сброс пароля"
