@@ -5,13 +5,9 @@
         <div class="col-lg-10">
             <h4>
                 {% if ticket is empty %}
-                    <span class="status-unknown">Стол не оплачен.</span>
+                    <span>Стол не оплачен.</span>
                 {% else %}
-                    {% if ticket.expired %}
-                        <span class="status-error">Стол просрочен.</span>
-                    {% else %}
-                        <span class="not-expired">Стол активен до: {{ ticket.paidUp|date("d-m-Y H:i") }}.</span>
-                    {% endif %}
+                    {{ ticket_expiration(ticket, false) }}
                 {% endif %}
             </h4>
         </div>
@@ -66,7 +62,7 @@
                                     {{ qualification_status(subordinate.qualification.passed) }}
                                 {% endif %}
                             </td>
-                            <td class="text-center">{{ ticket_expiration(subordinate.expired) }}</td>
+                            <td class="text-center">{{ ticket_expiration(subordinate, true) }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -108,7 +104,7 @@
                                     {{ qualification_status(subordinate.qualification.passed) }}
                                 {% endif %}
                             </td>
-                            <td class="text-center">{{ ticket_expiration(subordinate.expired) }}</td>
+                            <td class="text-center">{{ ticket_expiration(subordinate, true) }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
