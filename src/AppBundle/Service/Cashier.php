@@ -291,7 +291,7 @@ class Cashier
 
             $chiefTicket = $ticket->getChiefTicket();
 
-            if ($chiefTicket instanceof Ticket && $chiefTicket->isExpired() == false) {
+            if ($chiefTicket instanceof Ticket && $this->checkTicketExpiration($chiefTicket)) {
                 $transaction = $this->banker->createRewardTransaction($chiefTicket);
                 $this->banker->processRewardTransaction($transaction);
             }
