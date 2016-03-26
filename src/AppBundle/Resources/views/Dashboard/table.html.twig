@@ -12,13 +12,11 @@
             </h4>
         </div>
         <div class="col-lg-2">
-            <a class="btn btn-primary" href="{{ path('app_dashboard_payment', {'rate': rate.id}) }}">
-                {% if ticket is empty %}
-                    Оплатить
-                {% elseif ticket.type is constant('TYPE_SUBSCRIPTION', ticket) %}
-                    Продлить
-                {% endif %}
-            </a>
+            {% if ticket is empty %}
+                <a class="btn btn-primary" href="{{ path('app_dashboard_payment', {'rate': rate.id}) }}">Оплатить</a>
+            {% elseif ticket.type is constant('TYPE_SUBSCRIPTION', ticket) %}
+                <a class="btn btn-primary" href="{{ path('app_dashboard_payment', {'rate': rate.id}) }}">Продлить</a>
+            {% endif %}
         </div>
     {% else %}
         <div class="col-lg-12">
