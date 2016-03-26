@@ -19,7 +19,7 @@
         {% if ticket.type is constant('TYPE_OWNERSHIP', ticket) %}
             <i class="glyphicon glyphicon-certificate not-expired" title="{{ 'status.ticket.ownership'|trans }}"></i>
         {% elseif ticket.expired == false %}
-            <i class="glyphicon glyphicon-ok not-expired" title="{{ 'status.ticket.not_expired'|trans({paidUp: ticket.paidUp|date("d-m-Y H:i")}) }}"></i>
+            <i class="glyphicon glyphicon-ok not-expired" title="{{ 'status.ticket.not_expired'|trans({'%paidUp%': ticket.paidUp|date("d-m-Y H:i")}) }}"></i>
         {% else %}
             <i class="glyphicon glyphicon-time expired" title="{{ 'status.ticket.expired'|trans }}"></i>
         {% endif %}
@@ -27,7 +27,7 @@
         {% if ticket.type is constant('TYPE_OWNERSHIP', ticket) %}
             <span class="no-expired">{{ 'status.ticket.ownership'|trans }}</span>
         {% elseif ticket.expired == false %}
-            <span class="not-expired">{{ 'status.ticket.not_expired'|trans({paidUp: ticket.paidUp|date("d-m-Y H:i")}) }}</span>
+            <span class="not-expired">{{ 'status.ticket.not_expired'|trans({'%paidUp%': ticket.paidUp|date("d-m-Y H:i")}) }}</span>
         {% else %}
             <span class="expired">{{ 'status.ticket.expired'|trans }}</span>
         {% endif %}

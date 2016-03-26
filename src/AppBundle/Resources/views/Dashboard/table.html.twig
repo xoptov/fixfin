@@ -15,7 +15,7 @@
             <a class="btn btn-primary" href="{{ path('app_dashboard_payment', {'rate': rate.id}) }}">
                 {% if ticket is empty %}
                     Оплатить
-                {% else %}
+                {% elseif ticket.type is constant('TYPE_SUBSCRIPTION', ticket) %}
                     Продлить
                 {% endif %}
             </a>
