@@ -228,7 +228,7 @@ status:
         subscription: "Подписка"
         ownership: "Безлимит"
         expired: "Просрочен"
-        not_expired: "Активен"
+        not_expired: "Активен до: %paidUp%"
     invoice:
         new: "Новый"
         partial_paid: "Частично оплачен"
