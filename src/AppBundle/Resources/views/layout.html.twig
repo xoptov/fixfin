@@ -55,7 +55,9 @@
                                 <a href="{{ path('app_support') }}">Техподдержка</a>
                             </div>
                             <i class="separator">|</i>
-                            <div class="nav-item">Политика конфеденциальности</div>
+                            <div class="nav-item">
+                                <a href="#" class="js-privacy-policy">Политика конфеденциальности</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6 text-right">
@@ -71,6 +73,20 @@
             </div>
         </footer>
     </div>
+    {# Далее поперли ёбаные модальные окна #}
+    <div class="modal fade" id="modal-privacy-policy">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Политика конфеденциальности</h4>
+                </div>
+                <div class="modal-body">
+                    {% include 'AppBundle::privacy.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="{{ asset('bundles/app/js/jquery.js') }}"></script>
     <script src="{{ asset('bundles/app/js/bootstrap.js') }}"></script>
     <script src="{{ asset('bundles/app/js/modulejs.js') }}"></script>
@@ -78,6 +94,7 @@
     <script src="{{ asset('bundles/app/js/clipboard.js') }}"></script>
     <script>
         modulejs.require('notifyPopover').start({button: '.js-notify-popover', counter: '.js-notify-counter'});
+        modulejs.require('privacyModal').start();
     </script>
     {% block javascripts %}{% endblock %}
 </body>
