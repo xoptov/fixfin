@@ -108,3 +108,15 @@ modulejs.define('notifyPopover', function() {
         }
     };
 });
+
+modulejs.define('privacyModal', function() {
+    return {
+        start: function() {
+            var $modal = $('#modal-privacy-policy');
+            $('.js-privacy-policy').on('click', function(e) {
+                e.preventDefault();
+                $modal.modal('show');
+            });
+        }
+    };
+});
