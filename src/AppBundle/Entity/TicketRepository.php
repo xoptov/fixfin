@@ -94,7 +94,7 @@ class TicketRepository extends EntityRepository
     public function getLostReferralsTickets(Ticket $ticket, $excludeTransferred = true)
     {
         $qb = $this->getReferralsTicketsQueryBuilder($ticket);
-        $qb->andWhere('t.chiefTicket != :ticket')
+        $qb->andWhere('(t.chiefTicket != :ticket OR t.chiefTicket IS NULL)')
             ->setParameter('ticket', $ticket);
 
         if ($excludeTransferred && $ticket->getQualification()) {
