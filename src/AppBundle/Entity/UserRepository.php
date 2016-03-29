@@ -19,7 +19,9 @@ class UserRepository extends MaterializedPathRepository
             ->andWhere('t.rate = :rate')
                 ->setParameter('rate', $ticket->getRate())
             ->andWhere('t.expired = :expired')
-                ->setParameter('expired', false);
+                ->setParameter('expired', false)
+            ->andWhere('materialized_path_entity != :user')
+                ->setParameter('user', $ticket->getUser());
 
         $directReferrer = $ticket->getUser()->getReferrer();
 
