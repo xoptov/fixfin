@@ -195,6 +195,13 @@ class Cashier
             $qualification = $refTicket->getQualification();
 
             if ($qualification) {
+
+                // Проверяем является ли текущий тикет квалификационным.
+                if ($qualification->getTransferredTickets()->contains($ticket)) {
+                    return null;
+                }
+
+                // Проверка на прохождение квалификации.
                 if ($qualification->isPassed() || $this->committee->tryPass($qualification)) {
                     $ticket->setChiefTicket($refTicket);
 
