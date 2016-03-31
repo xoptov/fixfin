@@ -11,7 +11,7 @@ Icon classes can be used entirely standalone. They are named after their origina
 */
 .icon-bell {
   background-image: url(../img/sprites.png);
-  background-position: -173px -41px;
+  background-position: 0px -73px;
   width: 26px;
   height: 28px;
 }
@@ -48,6 +48,12 @@ Icon classes can be used entirely standalone. They are named after their origina
 .icon-vkontakte {
   background-image: url(../img/sprites.png);
   background-position: -142px -41px;
+  width: 30px;
+  height: 30px;
+}
+.icon-youtube {
+  background-image: url(../img/sprites.png);
+  background-position: -173px -41px;
   width: 30px;
   height: 30px;
 }
