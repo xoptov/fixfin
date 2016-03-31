@@ -1,7 +1,13 @@
+layout:
+    title: "FixFin - Международная справедливая реферальная система"
+    logo_words: "Справедливая Реферальная Система"
+    support: "Техподдержка"
+    confidencial_policy: "Политика конфеденциальности"
+    social_networks: "Мы в соцсетях"
 security:
     login:
-        title: 'Аутентификация'
-        greeting: "Добро пожаловать в FinFix"
+        title: "Аутентификация"
+        greeting: "Добро пожаловать в FixFin"
         note: "Необходимо выполнить вход перед дальнейшей работой"
         username: "Имя пользователя"
         password: "Пароль"
