@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FinFix</title>
+    <title>{{ 'layout.title'|trans }}</title>
     <link href="{{ asset('bundles/app/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/app/css/sprites.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/app/css/main.css') }}" rel="stylesheet">
@@ -16,11 +16,7 @@
                 <div class="row header">
                     <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6">
                         <div class="icon-logo logo"></div>
-                        <div class="logo-words">
-                            Справедливая
-                            Реферральная
-                            Система
-                        </div>
+                        <div class="logo-words">{{ 'layout.logo_words'|trans }}</div>
                     </div>
                     <div class="col-lg-8 col-md-7 col-sm-6 col-xs-6 text-right">
                         <div class="user-control">
@@ -52,17 +48,17 @@
                     <div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
                         <div class="submenu">
                             <div class="nav-item">
-                                <a href="{{ path('app_support') }}">Техподдержка</a>
+                                <a href="{{ path('app_support') }}">{{ 'layout.support'|trans }}</a>
                             </div>
                             <i class="separator">|</i>
                             <div class="nav-item">
-                                <a href="#" class="js-privacy-policy">Политика конфеденциальности</a>
+                                <a href="#" class="js-privacy-policy">{{ 'layout.confidencial_policy'|trans }}</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6 text-right">
                         <div class="social">
-                            <div class="nav-item">Мы в соцсетях</div>
+                            <div class="nav-item">{{ 'layout.social_networks'|trans }}</div>
                             <i class="separator">|</i>
                             <a class="icon-instagram nav-item" href="https://www.instagram.com/fixfinref" target="_blank"></a>
                             <a class="icon-vkontakte nav-item" href="https://vk.com/club53373292" target="_blank"></a>
@@ -73,13 +69,12 @@
             </div>
         </footer>
     </div>
-    {# Далее поперли ёбаные модальные окна #}
     <div class="modal fade" id="modal-privacy-policy">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Политика конфеденциальности</h4>
+                    <h4 class="modal-title">{{ 'layout.confidencial_policy'|trans }}</h4>
                 </div>
                 <div class="modal-body">
                     {% include 'AppBundle::privacy.html.twig' %}
