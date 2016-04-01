@@ -49,3 +49,8 @@ app_api_get_notification:
     path:     /api/notification/{notification}
     defaults: { _controller: AppBundle:API:getNotification }
     methods:  [GET]
+
+app_search_referrers:
+    path:     /api/search/referrers
+    defaults: { _controller: AppBundle:API:searchReferrers }
+    methods:  [GET]

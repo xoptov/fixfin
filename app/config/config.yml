@@ -104,3 +104,10 @@ liip_imagine:
             filters:
                 thumbnail: { size: [125, 125], mode: outbound }
                 transparent_mask: { image: 'mask_125x125.png' }
+
+jms_serializer:
+    metadata:
+        directories:
+            FOSUB:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "@AppBundle/Resources/config/serializer/FOSUB"

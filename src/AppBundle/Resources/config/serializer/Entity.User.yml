@@ -1,0 +1,13 @@
+AppBundle\Entity\User:
+    exclusion_policy: ALL
+    exclude: false
+    properties:
+        firstName:
+            expose: true
+            type: string
+        middleName:
+            expose: true
+            type: string
+        lastName:
+            expose: true
+            type: string

@@ -120,3 +120,27 @@ modulejs.define('privacyModal', function() {
         }
     };
 });
+
+modulejs.define('referrerSearch', function() {
+    $('.js-referrer-search').selectize({
+        maxItems: 1,
+        valueField: 'username',
+        labelField: 'username',
+        searchField: 'username',
+        load: function(query, callback) {
+            if (!query.length) return callback();
+            $.ajax({
+                url: '/api/search/referrers',
+                method: 'GET',
+                data: {query: encodeURIComponent(query)},
+                dataType: 'json',
+                success: function(resp) {
+                    callback(resp.data)
+                },
+                error: function(xhr) {
+                    callback();
+                }
+            });
+        }
+    });
+});

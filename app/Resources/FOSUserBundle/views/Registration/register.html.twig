@@ -7,25 +7,25 @@
             <h3>{{ 'security.register.header'|trans }}</h3>
             <p>{{ 'security.register.subheader'|trans }}</p>
             {{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'novalidate': true, 'class': 'registration-form'}}) }}
-            <div class="form-group">
+            <div class="form-group text-left">
                 {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Логин'}}) }}
                 {{ form_errors(form.username) }}
             </div>
-            <div class="form-group">
+            <div class="form-group text-left">
                 {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
                 {{ form_errors(form.email) }}
             </div>
-            <div class="form-group">
+            <div class="form-group text-left">
                 {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Пароль'}}) }}
                 {{ form_errors(form.plainPassword.first) }}
             </div>
-            <div class="form-group">
+            <div class="form-group text-left">
                 {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Повтор пароля'}}) }}
                 {{ form_errors(form.plainPassword.second) }}
             </div>
             {% if form.referrer is defined %}
-            <div class="form-group">
-                {{ form_widget(form.referrer, {'attr': {'class': 'form-control', 'placeholder': 'Ник пригласившего'}}) }}
+            <div class="form-group text-left">
+                {{ form_widget(form.referrer, {'attr': {'class': 'form-control js-referrer-search', 'placeholder': 'Ник пригласившего'}}) }}
                 {{ form_errors(form.referrer) }}
             </div>
             {% endif %}
@@ -34,3 +34,13 @@
         </div>
     </div>
 {% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/modulejs.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/selectize.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/main.js') }}"></script>
+    <script>
+        modulejs.require('referrerSearch');
+    </script>
+{% endblock %}
