@@ -32,4 +32,28 @@ class UserRepository extends MaterializedPathRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param string $username
+     * @return array
+     */
+    public function searchReferrers($query)
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        $qb->where($qb->expr()->like('u.username', $qb->expr()->literal($query.'%')))
+        ->setMaxResults(20)
+        ->orderBy('u.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getLastUsers()
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        $qb->setMaxResults(20)->orderBy('u.createdAt');
+
+        return $qb->getQuery()->getResult();
+    }
 }

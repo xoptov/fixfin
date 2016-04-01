@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Khepin\YamlFixturesBundle\KhepinYamlFixturesBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
             new PerfectMoneyBundle\PerfectMoneyBundle(),
             new AppBundle\AppBundle(),
         );

@@ -125,4 +125,25 @@ class APIController extends Controller
             'viewed' => $notification->isViewed()
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function searchReferrersAction(Request $request)
+    {
+        $query = $request->get('query');
+
+        if ($query) {
+            $users = $this->getDoctrine()->getRepository('AppBundle:User')
+                ->searchReferrers($query);
+        } else {
+            $users = $this->getDoctrine()->getRepository('AppBundle:User')
+                ->getLastUsers();
+        }
+
+        $json = $this->get('serializer')->serialize(['data' => $users], 'json');
+
+        return new Response($json, Response::HTTP_OK, array('Content-Type' => 'application/json'));
+    }
 }
