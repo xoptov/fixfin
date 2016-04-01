@@ -6,7 +6,7 @@
 {% endfor %}
 </ul>
 {% else %}
-Нет новых нотификацый
+{{ 'status.notifications.empty'|trans }}
 {% endif %}
 ">
     {% if notifications is not empty %}

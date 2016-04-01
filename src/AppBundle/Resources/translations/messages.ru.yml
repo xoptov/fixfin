@@ -38,6 +38,7 @@ admin:
             ticket: "Билеты"
             invoice: "Инвойсы"
             issue: "Запросы в техподдержку"
+            news: "Новости"
         group:
             main: "Главная"
 form:
@@ -95,6 +96,10 @@ form:
         send: "Отправить"
     prolong:
         paying: "Оплатить"
+    news:
+        title: "Заголовок"
+        content: "Содержание"
+        enabled: "Включена"
 list:
     account:
         number: "Номер счёта"
@@ -163,6 +168,12 @@ list:
         amount: "Количество"
         type: "Тип"
         status: "Статус"
+    news:
+        id: "Номер"
+        title: "Заголовок"
+        created_at: "Дата создания"
+        updated_at: "Дата изменения"
+        enabled: "Включена"
 show:
     pool:
         name: "Название"
@@ -203,6 +214,13 @@ show:
         balance: "Баланс"
         verified: "Верифицирован"
         blocked: "Заблокирован"
+    news:
+        id: "Номер"
+        title: "Заголовок"
+        content: "Содержание"
+        created_at: "Дата создания"
+        updated_at: "Дата обновления"
+        enabled: "Включена"
 menu:
     profile: "Профиль"
     dashboard: "Рабочий стол"
@@ -244,6 +262,8 @@ status:
     qualification:
         passed: "Пройдена"
         in_progress: "В процессе прохождения"
+    notifications:
+        empty: "Нет новых нотификаций"
 ticket:
     prolong:
         header: "Продление стола"
