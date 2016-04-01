@@ -86,6 +86,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.title.section.issue }
 
+    app.admin.news:
+        class: AppBundle\Admin\NewsAdmin
+        arguments: [~, AppBundle\Entity\News, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.news }
+
     app.form.type.pm_account:
         class: AppBundle\Form\Type\PerfectMoneyAccountType
         arguments: [@doctrine.orm.default_entity_manager]
