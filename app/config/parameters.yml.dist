@@ -38,4 +38,4 @@ parameters:
     uploads_dir:        'uploads'
     uploads_path:       '%kernel.root_dir%/../web/%uploads_dir%'
     upload_max_size:    524228
-
+    default_username:   'sokol'

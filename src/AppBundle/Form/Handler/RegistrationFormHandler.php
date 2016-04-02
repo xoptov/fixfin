@@ -18,6 +18,9 @@ class RegistrationFormHandler extends BaseRegistrationFormHandler
     /** @var BackendInterface */
     private $notificationBackend;
 
+    /** @var string */
+    private $defaultUsername;
+
     public function __construct(FormInterface $form, Request $request, UserManagerInterface $userManager, MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator, BackendInterface $notificationBackend)
     {
         parent::__construct($form, $request, $userManager, $mailer, $tokenGenerator);
@@ -26,35 +29,51 @@ class RegistrationFormHandler extends BaseRegistrationFormHandler
     }
 
     /**
+     * @param $username
+     */
+    public function setDefaultUsername($username)
+    {
+        $this->defaultUsername = $username;
+    }
+
+    /**
      * @param UserInterface $user
      * @param bool $confirmation
      */
     public function onSuccess(UserInterface $user, $confirmation)
     {
-        $referrer = null;
         $session = $this->request->getSession();
 
+        // Пробуем назначить лидера из сессии.
         /** @var User $user */
-        if ($user->getReferrer()) {
-            $referrer = $user->getReferrer();
-        } elseif ($session->has('referrer')) {
+        if (!$user->getReferrer() && $session->has('referrer')) {
             /** @var User $referrer */
-            $referrer = $this->userManager->findUserByUsernameOrEmail($session->get('referrer'));
-            if ($referrer instanceof UserInterface) {
-                /** @var User $user */
-                $user->setReferrer($referrer);
-            }
+            $this->tryDetermineReferrer($user, $session->get('referrer'));
+        }
+
+        // Если лидер из сессии неназначен то пробуем назначить лидера по умолчанию.
+        if (!$user->getReferrer()) {
+            $this->tryDetermineReferrer($user, $this->defaultUsername);
         }
 
         parent::onSuccess($user, $confirmation);
 
-        if ($referrer instanceof User) {
+        if ($user->getReferrer() instanceof User) {
             // Нотификация для лидера о том что зарегистрирован новый реферал
             $this->notificationBackend->createAndPublish('notification', array(
-                'userId' => $referrer->getId(),
+                'userId' => $user->getReferrer()->getId(),
                 'type' => Notification::TYPE_NEW_REFERRAL,
                 'content' => 'В структуру добавлен новый реферал.'
             ));
+        }
+    }
+
+    public function tryDetermineReferrer(User $user, $username) {
+        $referrer = $this->userManager->findUserByUsernameOrEmail($username);
+
+        if ($referrer) {
+            /** @var User $user */
+            $user->setReferrer($referrer);
         }
     }
 }
