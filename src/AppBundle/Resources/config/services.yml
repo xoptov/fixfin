@@ -13,6 +13,8 @@ services:
             - "@fos_user.mailer"
             - "@fos_user.util.token_generator"
             - "@sonata.notification.backend"
+        calls:
+            - [setDefaultUsername, [%default_username%]]
         scope: request
         public: false
 
