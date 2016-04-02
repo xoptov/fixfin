@@ -1,33 +1,33 @@
-app_profile:
+app_index:
     path:     /
+    defaults: { _controller: AppBundle:Default:index }
+
+app_profile:
+    path:     /cabinet/profile
     defaults: { _controller: AppBundle:Default:profile }
 
 app_cloud:
-    path:     /cloud
+    path:     /cabinet/cloud
     defaults: { _controller: AppBundle:Default:cloud }
 
 app_history:
-    path:     /history
+    path:     /cabinet/history
     defaults: { _controller: AppBundle:Default:history }
 
 app_news:
-    path:     /news
+    path:     /cabinet/news
     defaults: { _controller: AppBundle:Default:news }
 
-app_faq:
-    path:     /faq
-    defaults: { _controller: AppBundle:Default:faq }
-
 app_support:
-    path:     /support
+    path:     /cabinet/support
     defaults: { _controller: AppBundle:Default:support }
 
 app_dashboard:
-    path:     /dashboard
+    path:     /cabinet/dashboard
     defaults: { _controller: AppBundle:Dashboard:index }
 
 app_dashboard_payment:
-    path:     /dashboard/payment/{rate}
+    path:     /cabinet/dashboard/payment/{rate}
     defaults: { _controller: AppBundle:Dashboard:paymentTable }
 
 app_api_post_account:
