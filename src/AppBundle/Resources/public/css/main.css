@@ -7303,6 +7303,19 @@ body {
   font-weight: bold;
   float: right;
 }
+.wrapper .window .content .description .value .table {
+  padding: 2px 4px;
+  font-weight: normal;
+}
+.wrapper .window .content .description .value .table-ownership {
+  background-color: #b8b8b6;
+}
+.wrapper .window .content .description .value .table-open {
+  background-color: #1cca5a;
+}
+.wrapper .window .content .description .value .table-expired {
+  background-color: #f8ac2e;
+}
 .wrapper .window .content .form-control {
   background-color: #ecebea;
 }
