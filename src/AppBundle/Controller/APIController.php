@@ -134,13 +134,8 @@ class APIController extends Controller
     {
         $query = $request->get('query');
 
-        if ($query) {
-            $users = $this->getDoctrine()->getRepository('AppBundle:User')
-                ->searchReferrers($query);
-        } else {
-            $users = $this->getDoctrine()->getRepository('AppBundle:User')
-                ->getLastUsers();
-        }
+        $users = $this->getDoctrine()->getRepository('AppBundle:User')
+            ->searchReferrers($query);
 
         $json = $this->get('serializer')->serialize(['data' => $users], 'json');
 

@@ -28,9 +28,7 @@ class AddReferrerFieldListener
         $form = $event->getForm();
 
         if (!$this->session->has('referrer')) {
-            $form->add('referrer', UserType::class, array(
-                'constraints' => new NotBlank(),
-            ));
+            $form->add('referrer', UserType::class);
         }
     }
 }

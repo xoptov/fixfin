@@ -34,7 +34,7 @@ class UserRepository extends MaterializedPathRepository
     }
 
     /**
-     * @param string $username
+     * @param string $query
      * @return array
      */
     public function searchReferrers($query)
@@ -42,7 +42,7 @@ class UserRepository extends MaterializedPathRepository
         $qb = $this->createQueryBuilder('u');
 
         $qb->where($qb->expr()->like('u.username', $qb->expr()->literal($query.'%')))
-        ->setMaxResults(20)
+            ->setMaxResults(20)
         ->orderBy('u.createdAt', 'DESC');
 
         return $qb->getQuery()->getResult();
