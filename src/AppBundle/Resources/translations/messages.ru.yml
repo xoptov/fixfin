@@ -66,6 +66,7 @@ form:
         locked: "Заблокирован"
         enabled: "Включен"
         can_invite: "Реф.ссылка"
+        score: "Очки"
         vkontakte: "ВКонтакте"
         save: "Сохранить"
     pool:
@@ -121,6 +122,7 @@ list:
         locked: "Заблокирован"
         enabled: "Включен"
         can_invite: "Реф.ссылка"
+        score: "Очки"
         actions: "Действия"
     ticket:
         id: "Номер"
@@ -192,6 +194,7 @@ show:
         locked: "Заблокирован"
         enabled: "Включен"
         can_invite: "Реф.ссылка"
+        score: "Очки"
     ticket:
         id: "Номер"
         chief_ticket: "Вышестоящий"

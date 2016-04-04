@@ -2,65 +2,65 @@
 
 {% block content %}
     <div class="row">
-    {% if app.user.referrals is not empty %}
-        {% for referral in app.user.referrals %}
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="window m-b-30">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-xs-5 text-center avatar">
-                            {% if referral.avatar is not empty %}
-                                <img src="{{ referral.avatar|imagine_filter('avatar_125x125') }}" width="125" height="125">
-                            {% else %}
-                                <div class="avatar-empty">
-                                    <span class="title">Нет фото</span>
+        {% if app.user.referrals is not empty %}
+            {% for referral in app.user.referrals %}
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="window m-b-30">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-xs-5 text-center avatar">
+                                    {% if referral.avatar is not empty %}
+                                        <img src="{{ referral.avatar|imagine_filter('avatar_125x125') }}" width="125" height="125">
+                                    {% else %}
+                                        <div class="avatar-empty">
+                                            <span class="title">Нет фото</span>
+                                        </div>
+                                    {% endif %}
                                 </div>
-                            {% endif %}
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="fullname">{{ referral.lastname }} {{ referral.firstname }}</div>
-                                <div class="description">
-                                    В системе с:
-                                    <span class="value">{{ referral.createdAt|date('d.m.Y') }}</span>
-                                </div>
-                                <div class="description">
-                                    Структура:
-                                    <span class="value">{{ referral.referrals.count }} чел.</span>
-                                </div>
-                                {% if referral.tickets is not empty %}
+                                <div class="col-xs-7">
+                                    <div class="fullname">{{ referral.lastname }} {{ referral.firstname }}</div>
                                     <div class="description">
-                                        Столы:
-                                        <span class="value">
-                                        {% for ticket in referral.tickets %}
-                                            {{ ticket.rate.name }}
-                                        {% endfor %}
-                                        </span>
+                                        В системе с:
+                                        <span class="value">{{ referral.createdAt|date('d.m.Y') }}</span>
                                     </div>
-                                {% endif %}
+                                    <div class="description">
+                                        Структура:
+                                        <span class="value">{{ referral.referrals.count }} чел.</span>
+                                    </div>
+                                    {% if referral.tickets is not empty %}
+                                        <div class="description">
+                                            <div>Столы:</div>
+                                            <div class="value">
+                                                {% for ticket in referral.tickets %}
+                                                    {% if ticket.type is constant('TYPE_OWNERSHIP', ticket) %}
+                                                        <span class="table table-ownership" title="{{ 'status.ticket.ownership'|trans }}">{{ ticket.rate.name }}</span>
+                                                    {% elseif ticket.expired %}
+                                                        <span class="table table-expired" title="{{ 'status.ticket.expired'|trans }}">{{ ticket.rate.name }}</span>
+                                                    {% else %}
+                                                        <span class="table table-open" title="{{ 'status.ticket.not_expired'|trans({'%paidUp%': ticket.paidUp}) }}">{{ ticket.rate.name }}</span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="window m-b-30">
-                <div class="header">
-                    <h3>Облако рефераллов</h3>
+            {% endfor %}
+        {% else %}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="window m-b-30">
+                    <div class="header">
+                        <h3>Облако рефераллов</h3>
+                    </div>
+                    <div class="content">
+                        К сожалению на данный момент у Вас нет приглашенных участников в структуру.
+                    </div>
                 </div>
-                <div class="content">
-                    К сожалению на данный момент у Вас нет приглашенных участников в структуру.
-                </div>
             </div>
-        </div>
-    {% endif %}
+        {% endif %}
     </div>
-    {#todo: тут видемо предпологается адская пагинация#}
-    {#<div class="row">#}
-        {#<div class="col-lg-12 text-center">#}
-            {#<button class="btn btn-primary">Ещё профили</button>#}
-        {#</div>#}
-    {#</div>#}
 {% endblock %}
