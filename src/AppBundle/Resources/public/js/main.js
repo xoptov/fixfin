@@ -29,12 +29,18 @@ modulejs.define('profile', function() {
         },
         initAccountInput: function() {
             var module = this;
+            var currentNumber = this.fields.$inputAccount.val();
             this.fields.$inputAccount.on('focusout', function(e) {
-                var number = $(this).val();
+                e.preventDefault();
+                var newNumber = $(this).val();
+                if (currentNumber === newNumber) {
+                    return;
+                }
+                currentNumber = newNumber;
                 $.ajax({
                     url: '/api/account',
                     method: 'POST',
-                    data: {'number': number},
+                    data: {'number': newNumber},
                     success: function() {
                         module.fields.$errorAccount.empty();
                     },
