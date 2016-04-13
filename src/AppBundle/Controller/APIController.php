@@ -30,11 +30,18 @@ class APIController extends Controller
             return new JsonResponse(['error' => $error], Response::HTTP_BAD_REQUEST);
         }
 
+        /** @var Account $currentAccount */
+        $currentAccount = $this->getUser()->getAccount();
+
+        if ($currentAccount instanceof Account && $currentAccount->getNumber() === $newAccount->getNumber()) {
+            return new JsonResponse(['id' => $currentAccount->getId()]);
+        }
+
         $account = $this->getDoctrine()->getRepository('AppBundle:Account')
             ->findOneBy(array('number' => $newAccount->getNumber()));
 
         if ($account instanceof Account) {
-            if ($account->getUser() === $this->getUser() || null === $account->getUser()) {
+            if (null === $account->getUser()) {
                 return new JsonResponse(['id' => $account->getId()]);
             } else {
                 return new JsonResponse(['error' => 'Счет испольуется другим пользователем.'], Response::HTTP_BAD_REQUEST);
