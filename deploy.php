@@ -28,6 +28,7 @@ task('deploy', [
     'deploy:writable',
     'deploy:assets',
     'deploy:vendors',
+    'deploy:migrate',
     'deploy:cache:warmup',
     'deploy:symlink',
     'cleanup',

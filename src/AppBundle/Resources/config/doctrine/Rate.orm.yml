@@ -59,9 +59,9 @@ AppBundle\Entity\Rate:
             joinColumn:
                 name: pool_id
                 referencedColumnName: id
-                nullable: false
                 options:
                     unsigned: true
+                onDelete: "SET NULL"
     oneToMany:
         tickets:
             targetEntity: AppBundle\Entity\Ticket

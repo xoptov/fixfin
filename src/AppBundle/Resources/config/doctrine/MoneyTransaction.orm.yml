@@ -55,6 +55,7 @@ AppBundle\Entity\MoneyTransaction:
                 nullable: false
                 options:
                     unsigned: true
+                onDelete: CASCADE
         destination:
             targetEntity: AppBundle\Entity\Account
             inversedBy: incomes
@@ -64,6 +65,7 @@ AppBundle\Entity\MoneyTransaction:
                 nullable: false
                 options:
                     unsigned: true
+                onDelete: CASCADE
         invoice:
             targetEntity: AppBundle\Entity\Invoice
             inversedBy: transactions
@@ -72,6 +74,7 @@ AppBundle\Entity\MoneyTransaction:
                 referencedColumnName: id
                 options:
                     unsigned: true
+                onDelete: "SET NULL"
     lifecycleCallbacks:
         prePersist: [onCreate]
         preUpdate: [onUpdate]
