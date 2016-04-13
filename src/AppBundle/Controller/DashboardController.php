@@ -51,6 +51,9 @@ class DashboardController extends Controller
 
         // Создаем запрос на оплату.
         $paymentRequest = $this->get('app.banker_service')->createPaymentRequest($invoice);
+
+        //TODO: Необходимо реализовать валидацию на созданный запрос.
+
         $pmOptions = $this->getParameter('perfect_money');
         $options = array('action' => $this->get('property_accessor')->getValue($pmOptions, '[entry_form]'));
 

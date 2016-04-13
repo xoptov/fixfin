@@ -3,6 +3,7 @@
 namespace AppBundle\Service\PaymentSystem;
 
 use AppBundle\Entity\MoneyTransaction;
+use Doctrine\ORM\NoResultException;
 use GuzzleHttp\Pool as RequestsPool;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
@@ -109,10 +110,12 @@ class PerfectMoney
             throw new AccessException();
         }
 
-        $account = $this->entityManager->getRepository('AppBundle:Account')
-            ->getPoorestSystemAccount($pool);
-
-        $request->setPayeeAccount($account);
+        try {
+            $account = $this->entityManager->getRepository('AppBundle:Account')->getPoorestSystemAccount($pool);
+            $request->setPayeeAccount($account);
+        } catch (NoResultException $e) {
+            $this->logger->warning($e, ['pool' => $pool->getId()]);
+        }
 
         return $request;
     }
