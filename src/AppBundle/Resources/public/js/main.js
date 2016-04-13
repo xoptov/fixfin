@@ -31,7 +31,8 @@ modulejs.define('profile', function() {
             var module = this;
             this.fields.$inputAccount.on('focusout', function(e) {
                 var number = $(this).val();
-                $.ajax('/api/account', {
+                $.ajax({
+                    url: '/api/account',
                     method: 'POST',
                     data: {'number': number},
                     success: function() {

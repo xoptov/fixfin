@@ -77,13 +77,14 @@ class Banker
      */
     public function createRewardTransaction(Ticket $ticket)
     {
-        $payeeAccount = $this->accessor->getValue($ticket, 'user.account');
         $pool = $this->accessor->getValue($ticket, 'rate.pool');
-        $amount = $this->accessor->getValue($ticket, 'rate.amount');
-        $commission = $this->accessor->getValue($ticket, 'rate.commission');
-
+        
         $payerAccount = $this->entityManager->getRepository('AppBundle:Account')
             ->getWealthSystemAccount($pool);
+
+        $payeeAccount = $this->accessor->getValue($ticket, 'user.account');
+        $amount = $this->accessor->getValue($ticket, 'rate.amount');
+        $commission = $this->accessor->getValue($ticket, 'rate.commission');
 
         $result = $amount - $amount * $commission / 100;
 

@@ -12,6 +12,7 @@ use AppBundle\Event\TicketEvent;
 use AppBundle\Exception\DuplicateConfirmException;
 use Doctrine\ORM\NoResultException;
 use PerfectMoneyBundle\Model\PaymentInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -33,16 +34,20 @@ class Cashier
     /** @var PropertyAccessor */
     private $accessor;
 
+    /** @var LoggerInterface */
+    private $logger;
+
     /**
      * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(EventDispatcherInterface $dispatcher, EntityManagerInterface $entityManager, Committee $committee, Banker $banker, PropertyAccessor $accessor)
+    public function __construct(EventDispatcherInterface $dispatcher, EntityManagerInterface $entityManager, Committee $committee, Banker $banker, PropertyAccessor $accessor, LoggerInterface $logger)
     {
         $this->dispatcher = $dispatcher;
         $this->entityManager = $entityManager;
         $this->committee = $committee;
         $this->banker = $banker;
         $this->accessor = $accessor;
+        $this->logger = $logger;
     }
 
     /**
@@ -299,8 +304,12 @@ class Cashier
             $chiefTicket = $ticket->getChiefTicket();
 
             if ($chiefTicket instanceof Ticket && $this->checkTicketExpiration($chiefTicket)) {
-                $transaction = $this->banker->createRewardTransaction($chiefTicket);
-                $this->banker->processRewardTransaction($transaction);
+                try {
+                    $transaction = $this->banker->createRewardTransaction($chiefTicket);
+                    $this->banker->processRewardTransaction($transaction);
+                } catch (NoResultException $e) {
+                    $this->logger->warning('Ошибка формирования выплаты вознаграждения лидеру', ['invoice' => $invoice->getId()]);
+                }
             }
         }
 

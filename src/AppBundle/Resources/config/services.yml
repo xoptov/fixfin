@@ -7,21 +7,21 @@ services:
     app.registration.form.handler:
         class: AppBundle\Form\Handler\RegistrationFormHandler
         arguments:
-            - "@fos_user.registration.form"
-            - "@request"
-            - "@fos_user.user_manager"
-            - "@fos_user.mailer"
-            - "@fos_user.util.token_generator"
-            - "@sonata.notification.backend"
+            - @fos_user.registration.form
+            - @request
+            - @fos_user.user_manager
+            - @fos_user.mailer
+            - @fos_user.util.token_generator
+            - @sonata.notification.backend
         calls:
-            - [setDefaultUsername, [%default_username%]]
+            - [setDefaultUsername, ["%default_username%"]]
         scope: request
         public: false
 
     app.form.type.registration:
         class: AppBundle\Form\Type\RegistrationType
         arguments:
-            - %fos_user.model.user.class%
+            - "%fos_user.model.user.class%"
         calls:
             - [setSession, [@session]]
         tags:
@@ -96,7 +96,9 @@ services:
 
     app.form.type.pm_account:
         class: AppBundle\Form\Type\PerfectMoneyAccountType
-        arguments: [@doctrine.orm.default_entity_manager]
+        arguments:
+            - @doctrine.orm.default_entity_manager
+            - @logger
         tags:
             - { name: form.type }
 
@@ -114,6 +116,7 @@ services:
             - @app.committee_service
             - @app.banker_service
             - @property_accessor
+            - @logger
 
     app.banker_service:
         class: AppBundle\Service\Banker
@@ -129,7 +132,7 @@ services:
             - @doctrine.orm.default_entity_manager
             - @router.default
             - @logger
-            - %perfect_money%
+            - "%perfect_money%"
 
     app.payment_subscriber:
         class: AppBundle\EventListener\PaymentSubscriber
@@ -143,7 +146,7 @@ services:
         class: AppBundle\Imagine\Filter\Loader\TransparentMaskFilterLoader
         arguments:
             - @liip_imagine
-            - %kernel.root_dir%
+            - "%kernel.root_dir%"
         tags:
             - { name: liip_imagine.filter.loader, loader: 'transparent_mask' }
 

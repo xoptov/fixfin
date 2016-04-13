@@ -33,8 +33,8 @@ class APIController extends Controller
         $account = $this->getDoctrine()->getRepository('AppBundle:Account')
             ->findOneBy(array('number' => $newAccount->getNumber()));
 
-        if ($account) {
-            if ($account->getUser() == $this->getUser() || null === $account->getUser()) {
+        if ($account instanceof Account) {
+            if ($account->getUser() === $this->getUser() || null === $account->getUser()) {
                 return new JsonResponse(['id' => $account->getId()]);
             } else {
                 return new JsonResponse(['error' => 'Счет испольуется другим пользователем.'], Response::HTTP_BAD_REQUEST);
