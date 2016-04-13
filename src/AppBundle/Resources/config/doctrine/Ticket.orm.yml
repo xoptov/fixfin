@@ -34,6 +34,7 @@ AppBundle\Entity\Ticket:
                 nullable: false
                 options:
                     unsigned: true
+                onDelete: CASCADE
         rate:
             targetEntity: AppBundle\Entity\Rate
             inversedBy: tickets
@@ -43,6 +44,7 @@ AppBundle\Entity\Ticket:
                 nullable: false
                 options:
                     unsigned: true
+                onDelete: CASCADE
         chiefTicket:
             targetEntity: AppBundle\Entity\Ticket
             inversedBy: subordinates
@@ -51,6 +53,7 @@ AppBundle\Entity\Ticket:
                 referencedColumnName: id
                 options:
                     unsigned: true
+                onDelete: "SET NULL"
     oneToMany:
         invoices:
             targetEntity: AppBundle\Entity\Invoice

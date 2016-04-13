@@ -26,9 +26,11 @@ AppBundle\Entity\Pool:
                         nullable: false
                         options:
                             unsigned: true
+                        onDelete: CASCADE
                 inverseJoinColumns:
                     account_id:
                         referencedColumnName: id
                         nullable: false
                         options:
                             unsigned: true
+                        onDelete: CASCADE

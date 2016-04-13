@@ -74,6 +74,7 @@ AppBundle\Entity\User:
                 referencedColumnName: id
                 options:
                     unsigned: true
+                onDelete: "SET NULL"
     oneToMany:
         tickets:
             targetEntity: AppBundle\Entity\Ticket
@@ -94,6 +95,7 @@ AppBundle\Entity\User:
                 referencedColumnName: id
                 options:
                     unsigned: true
+                onDelete: "SET NULL"
     lifecycleCallbacks:
         prePersist: [onCreate]
         preUpdate: [onUpdate]

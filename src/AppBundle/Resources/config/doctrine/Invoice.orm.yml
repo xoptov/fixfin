@@ -53,6 +53,7 @@ AppBundle\Entity\Invoice:
                 nullable: true
                 options:
                     unsigned: true
+                onDelete: CASCADE
         user:
             targetEntity: AppBundle\Entity\User
             joinColumn:
@@ -61,6 +62,7 @@ AppBundle\Entity\Invoice:
                 nullable: false
                 options:
                     unsigned: true
+                onDelete: CASCADE
         rate:
             targetEntity: AppBundle\Entity\Rate
             joinColumn:
@@ -69,6 +71,7 @@ AppBundle\Entity\Invoice:
                 nullable: false
                 options:
                     unsigned: true
+                onDelete: CASCADE
     lifecycleCallbacks:
         prePersist: [onCreate]
         preUpdate: [onUpdate]
