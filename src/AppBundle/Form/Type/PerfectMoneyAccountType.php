@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Form\DataTransformer\PerfectMoneyNumberToAccountTransformer;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,14 +13,17 @@ class PerfectMoneyAccountType extends AbstractType
 {
     private $objectManager;
 
-    public function __construct(ObjectManager $objectManager)
+    private $logger;
+
+    public function __construct(ObjectManager $objectManager, LoggerInterface $logger)
     {
         $this->objectManager = $objectManager;
+        $this->logger = $logger;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new PerfectMoneyNumberToAccountTransformer($this->objectManager);
+        $transformer = new PerfectMoneyNumberToAccountTransformer($this->objectManager, $this->logger);
         $builder->addModelTransformer($transformer);
     }
 

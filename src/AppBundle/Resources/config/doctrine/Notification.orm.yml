@@ -33,6 +33,7 @@ AppBundle\Entity\Notification:
                 referencedColumnName: id
                 options:
                     unsigned: true
+                onDelete: CASCADE
     lifecycleCallbacks:
         prePersist: [onCreate]
         preUpdate: [onUpdate]

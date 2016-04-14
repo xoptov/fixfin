@@ -28,6 +28,7 @@ AppBundle\Entity\Qualification:
                 nullable: flase
                 options:
                     unsigned: true
+                onDelete: CASCADE
     manyToMany:
         transferredTickets:
             targetEntity: AppBundle\Entity\Ticket
@@ -38,8 +39,10 @@ AppBundle\Entity\Qualification:
                         referencedColumnName: id
                         options:
                             unsigned: true
+                        onDelete: CASCADE
                 inverseJoinColumns:
                     ticket_id:
                         referencedColumnName: id
                         options:
                             unsigned: true
+                        onDelete: CASCADE

@@ -94,6 +94,10 @@ class UserAdmin extends Admin
                     'status.common.no',
                     'status.common.yes'
                 )
+            ))
+            ->add('score', 'number', array(
+                'label' => 'form.user.score',
+                'required' => false
             ));
     }
 
@@ -122,11 +126,15 @@ class UserAdmin extends Admin
             ->add('canInvite', 'boolean', array(
                 'label' => 'list.user.can_invite'
             ))
+            ->add('score', 'text', array(
+                'label' => 'list.user.score'
+            ))
             ->add('_action', 'actions', array(
                 'label' => 'list.user.actions',
                 'actions' => array(
                     'show' => array(),
-                    'edit' => array()
+                    'edit' => array(),
+                    'delete' => array()
                 )
             ));
     }
@@ -167,12 +175,10 @@ class UserAdmin extends Admin
             ))
             ->add('canInvite', 'boolean', array(
                 'label' => 'show.user.can_invite'
+            ))
+            ->add('score', 'text', array(
+                'label' => 'show.user.score'
             ));
-    }
-
-    public function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('delete');
     }
 
     public function prePersist($object)

@@ -8,6 +8,7 @@ use AppBundle\Entity\Rate;
 use AppBundle\Entity\Ticket;
 use AppBundle\Service\Cashier;
 use Doctrine\ORM\EntityManager;
+use Monolog\Logger;
 use PerfectMoneyBundle\Model\PaymentConfirmation;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -34,6 +35,9 @@ class CashierTest extends KernelTestCase
     /** @var \PHPUnit_Framework_MockObject_MockObject */
     private $mockAccessor;
 
+    /** @var \PHPUnit_Framework_MockObject_MockObject */
+    private $mockLogger;
+
     public function setUp()
     {
         $this->mockDispatcher = $this->getMockWithoutInvokingTheOriginalConstructor(EventDispatcher::class);
@@ -41,6 +45,7 @@ class CashierTest extends KernelTestCase
         $this->mockCommittee = $this->getMockWithoutInvokingTheOriginalConstructor(Committee::class);
         $this->mockBanker = $this->getMockWithoutInvokingTheOriginalConstructor(Banker::class);
         $this->mockAccessor = $this->getMockWithoutInvokingTheOriginalConstructor(PropertyAccessor::class);
+        $this->mockLogger = $this->getMockWithoutInvokingTheOriginalConstructor(Logger::class);
     }
 
     public function testCreateTicket()
@@ -48,7 +53,7 @@ class CashierTest extends KernelTestCase
         $this->mockDispatcher->expects($this->once())->method('dispatch')->withAnyParameters();
         $this->mockEntityManager->expects($this->once())->method('persist')->withAnyParameters();
 
-        $cashier = new Cashier($this->mockDispatcher, $this->mockEntityManager, $this->mockCommittee, $this->mockBanker, $this->mockAccessor);
+        $cashier = new Cashier($this->mockDispatcher, $this->mockEntityManager, $this->mockCommittee, $this->mockBanker, $this->mockAccessor, $this->mockLogger);
 
         $user = new User();
         $rate = new Rate();
@@ -94,7 +99,7 @@ class CashierTest extends KernelTestCase
         $accessor = new PropertyAccessor();
         $banker = self::$kernel->getContainer()->get('app.banker_service');
         $committee = self::$kernel->getContainer()->get('app.committee_service');
-        $cashier = new Cashier($this->mockDispatcher, $entityManager, $committee, $banker, $accessor);
+        $cashier = new Cashier($this->mockDispatcher, $entityManager, $committee, $banker, $accessor, $this->mockLogger);
 
         return array(
             'entityManager' => $entityManager,
@@ -112,7 +117,7 @@ class CashierTest extends KernelTestCase
         $ticket = new Ticket();
         $ticket->setRate($rate);
 
-        $cashier = new Cashier($this->mockDispatcher, $this->mockEntityManager, $this->mockCommittee, $this->mockBanker, new PropertyAccessor());
+        $cashier = new Cashier($this->mockDispatcher, $this->mockEntityManager, $this->mockCommittee, $this->mockBanker, new PropertyAccessor(), $this->mockLogger);
 
         $reflection = new \ReflectionClass(get_class($cashier));
 
