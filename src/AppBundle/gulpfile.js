@@ -12,13 +12,14 @@ var scriptFiles = [
     './Resources/bower_components/jquery/dist/jquery.js',
     './Resources/bower_components/modulejs/dist/modulejs.js',
     './Resources/bower_components/clipboard/dist/clipboard.js',
-    './REsources/bower_components/selectize/dist/js/standalone/selectize.js',
+    './Resources/bower_components/selectize/dist/js/standalone/selectize.js',
     './Resources/javascripts/**/*.js'
 ];
 
 var lessFiles = [
     './Resources/less/sprites.less',
-    './Resources/less/main.less'
+    './Resources/less/cabinet.less',
+    './Resources/less/landing.less'
 ];
 
 var cssFiles = [
@@ -26,7 +27,7 @@ var cssFiles = [
 ];
 
 var imageFiles = [
-    './Resources/images/**/*.+(png|jp*g)'
+    './Resources/images/**/*.+(png|jp*g|svg)'
 ];
 
 var spriteFiles = [
@@ -34,7 +35,8 @@ var spriteFiles = [
 ];
 
 var fontsFiles = [
-    './Resources/bower_components/bootstrap/fonts/*.+(eot|svg|ttf|woff*)'
+    './Resources/bower_components/bootstrap/fonts/*.+(eot|svg|ttf|woff*)',
+    './Resources/fonts/*.+(eot|svg|ttf|woff*)'
 ];
 
 function compileScripts(){

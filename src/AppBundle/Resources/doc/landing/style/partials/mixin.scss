@@ -1,0 +1,57 @@
+@mixin background($img) {
+	background-image: url("../img/" + $img);
+	background-repeat: no-repeat;
+ 	-webkit-background-size: cover;
+    	-moz-background-size: cover;
+    		-o-background-size: cover;    
+    			background-size: cover; 
+}
+@mixin border($color) {
+	border: solid 1px $color;
+}
+@mixin placeholder($color) {
+	&::-webkit-input-placeholder {color:$color;}
+	&::-moz-placeholder          {color:$color;}
+	&:-moz-placeholder           {color:$color;}
+	&:-ms-input-placeholder      {color:$color;}	
+}
+@mixin button($color, $bgcolor, $width, $height) {
+	@include border($color);
+	background-color: $bgcolor;
+	width: $width;
+	color: $color;
+	line-height: $height;
+	transition: all 0.1s linear 0s;
+
+}
+@mixin respond-to($media) {
+	@if $media == extra-small-screens {
+		@media only screen and (max-width: $extra-small - 1px) { @content; }
+	}
+	@else if $media == custom-screens {
+		@media only screen and (max-width: $small - 1px) { @content; }
+	}
+	@else if $media == small-screens {
+    	@media only screen and (max-width: $medium - 1px) { @content; }
+  	}
+  	@else if $media == medium-screens {
+    	@media only screen and (max-width: $large - 1px) { @content; }
+  	}
+  	@else if $media == large-screens {
+    	@media only screen and (min-width: $large) { @content; }
+  	}
+}
+@mixin inline-list($padding1, $padding2, $margin1, $margin2) {
+	list-style: none;
+	padding: 0px;
+	margin-top: $margin1;
+	margin-bottom: $margin2;
+
+	li {
+		display: inline-block;
+		float: none;
+		vertical-align: top;
+		margin: 0px;
+		padding: $padding1 $padding2;
+	}
+}
