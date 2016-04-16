@@ -7170,12 +7170,27 @@ body {
   height: 100%;
 }
 body {
-  font-size: 22px;
-  color: #1c2840;
-  background-color: #e9eae2;
-  text-align: center;
-  background-image: url("../img/background_1366.jpg");
-  background-position: top center;
+  background-color: #d2d2cd;
+}
+@media (max-width: 767px) {
+  body {
+    background-image: url("../img/background_640.jpg");
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  body {
+    background-image: url("../img/background_800.jpg");
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  body {
+    background-image: url("../img/background_1024.jpg");
+  }
+}
+@media (min-width: 1200px) {
+  body {
+    background-image: url("../img/background_1920.jpg");
+  }
 }
 h1 {
   font-size: 36px;
@@ -7239,26 +7254,8 @@ header .sprite-logo {
   padding: 0;
   padding-left: 10px;
 }
-.small--gray {
-  padding: 22px 0 0 0;
-  font-size: 15px;
-}
 .social {
   padding-top: 4px;
-}
-.social p {
-  padding: 0 40px 0 0;
-  margin: 0 0 0 0;
-  text-align: left;
-  display: inline-block;
-  position: relative;
-}
-.social p:after {
-  content: "|";
-  display: block;
-  position: absolute;
-  right: 20px;
-  top: 0;
 }
 .wrapper {
   overflow: hidden;
@@ -7280,6 +7277,7 @@ header .sprite-logo {
 }
 .link {
   position: absolute;
+  font-size: 22px;
 }
 .link:after {
   display: block;
@@ -7470,8 +7468,6 @@ header .sprite-logo {
   background-position: -889px -314px;
   width: 22px;
   height: 41px;
-  background-repeat: no-repeat;
-  background-position: left top;
 }
 .notice {
   padding: 10px 60px 10px 25px;
@@ -7491,6 +7487,13 @@ header .sprite-logo {
   background-position: -298px 0px;
   width: 288px;
   height: 188px;
+  display: inline-block;
+}
+.sprite-peoples {
+  background-image: url(../img/sprites.png);
+  background-position: 0px 0px;
+  width: 297px;
+  height: 235px;
   display: inline-block;
 }
 .sprite-logo-big {
