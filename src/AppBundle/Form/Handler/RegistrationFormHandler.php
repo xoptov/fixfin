@@ -69,6 +69,7 @@ class RegistrationFormHandler extends BaseRegistrationFormHandler
     }
 
     public function tryDetermineReferrer(User $user, $username) {
+        /** @var User $referrer */
         $referrer = $this->userManager->findUserByUsernameOrEmail($username);
 
         if ($referrer) {

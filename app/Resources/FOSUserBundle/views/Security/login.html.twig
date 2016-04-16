@@ -2,7 +2,7 @@
 
 {% block fos_user_content %}
     <div class="middle-box text-center animated fadeInDown login-form">
-        <a class="icon-logo logo" href="http://fixfin.ru"></a>
+        <a class="icon-logo logo" href="{{ path('app_index') }}"></a>
         <h3>{{ 'security.login.greeting'|trans }}</h3>
         <p>{{ 'security.login.note'|trans }}</p>
         <form class="m-t" role="form" action="{{ path("fos_user_security_check") }}" method="post">

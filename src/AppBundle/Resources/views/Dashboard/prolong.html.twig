@@ -2,7 +2,7 @@
 
 {% block fos_user_content %}
     <div class="middle-box text-center animated fadeInDown login-form">
-        <a class="icon-logo logo" href="http://fixfin.ru"></a>
+        <a class="icon-logo logo" href="{{ path('app_index') }}"></a>
         <h3>{{ 'ticket.prolong.header'|trans }}</h3>
         <p>{{ 'ticket.prolong.subheader'|trans }}</p>
         {{ form(form) }}

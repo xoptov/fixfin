@@ -37,7 +37,7 @@
                         <div class="row m-t-10">
                             <div class="col-xs-12 text-center">
                                 <strong>Реф.ссылка:</strong>&nbsp;
-                                <span class="value">{{ url('app_profile', {'ref': app.user.username}) }}</span>&nbsp;
+                                <span class="value">{{ url('app_index', {'ref': app.user.username}) }}</span>&nbsp;
                                 <button class="btn btn-xs js-ref-link" data-clipboard-text="{{ url('fos_user_registration_register', {'ref': app.user.username}) }}" title="Скопировать в буфер">
                                     <i class="glyphicon glyphicon-copy"></i>
                                 </button>

@@ -3,7 +3,7 @@
 {% block fos_user_content %}
     <div class="middle-box text-center animated fadeInDown registration-form">
         <div>
-            <a class="icon-logo logo" href="http://fixfin.ru"></a>
+            <a class="icon-logo logo" href="{{ path('app_index') }}"></a>
             <h3>{{ 'resetting.request.header'|trans }}</h3>
             <p>{{ 'resetting.request.subheader'|trans }}</p>
             <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="resetting-form">
