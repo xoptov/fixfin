@@ -3,7 +3,7 @@
 {% block fos_user_content %}
     <div class="middle-box text-center animated fadeInDown registration-form">
         <div>
-            <a class="icon-logo logo" href="http://fixfin.ru"></a>
+            <a class="icon-logo logo" href="{{ path('app_index') }}"></a>
             <h3>{{ 'security.register.header'|trans }}</h3>
             <p>{{ 'security.register.subheader'|trans }}</p>
             {{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'novalidate': true, 'class': 'registration-form'}}) }}

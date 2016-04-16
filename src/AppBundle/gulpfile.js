@@ -13,13 +13,12 @@ var scriptFiles = [
     './Resources/bower_components/modulejs/dist/modulejs.js',
     './Resources/bower_components/clipboard/dist/clipboard.js',
     './Resources/bower_components/selectize/dist/js/standalone/selectize.js',
-    './Resources/javascripts/**/*.js'
+    './Resources/assets/javascripts/**/*.js'
 ];
 
 var lessFiles = [
-    './Resources/less/sprites.less',
-    './Resources/less/cabinet.less',
-    './Resources/less/landing.less'
+    './Resources/assets/less/cabinet.less',
+    './Resources/assets/less/landing.less'
 ];
 
 var cssFiles = [
@@ -27,16 +26,16 @@ var cssFiles = [
 ];
 
 var imageFiles = [
-    './Resources/images/**/*.+(png|jp*g|svg)'
+    './Resources/assets/images/**/*.+(png|jp*g|svg)'
 ];
 
 var spriteFiles = [
-    './Resources/sprites/**/*.png'
+    './Resources/assets/sprites/**/*.png'
 ];
 
 var fontsFiles = [
     './Resources/bower_components/bootstrap/fonts/*.+(eot|svg|ttf|woff*)',
-    './Resources/fonts/*.+(eot|svg|ttf|woff*)'
+    './Resources/assets/fonts/*.+(eot|svg|ttf|woff*)'
 ];
 
 function compileScripts(){
@@ -59,12 +58,12 @@ function compileSprites(){
     var spriteData = gulp.src(spriteFiles).pipe(spritesmith({
         imgName: 'sprites.png',
         imgPath: '../img/sprites.png',
-        cssName: 'sprites.css',
+        cssName: 'sprites.less',
         padding: 1
     }));
 
     spriteData.img.pipe(gulp.dest(imagesOut));
-    spriteData.css.pipe(gulp.dest(stylesOut));
+    spriteData.css.pipe(gulp.dest('./Resources/assets/less/'));
 }
 
 function compileFonts(){

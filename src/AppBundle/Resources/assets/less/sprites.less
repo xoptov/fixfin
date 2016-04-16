@@ -1,0 +1,356 @@
+/*
+LESS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: @icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
+*/
+@arrow-bl-name: 'arrow_bl';
+@arrow-bl-x: 384px;
+@arrow-bl-y: 314px;
+@arrow-bl-offset-x: -384px;
+@arrow-bl-offset-y: -314px;
+@arrow-bl-width: 140px;
+@arrow-bl-height: 128px;
+@arrow-bl-total-width: 1224px;
+@arrow-bl-total-height: 582px;
+@arrow-bl-image: '../img/sprites.png';
+@arrow-bl: 384px 314px -384px -314px 140px 128px 1224px 582px '../img/sprites.png' 'arrow_bl';
+@arrow-bl-active-name: 'arrow_bl_active';
+@arrow-bl-active-x: 243px;
+@arrow-bl-active-y: 314px;
+@arrow-bl-active-offset-x: -243px;
+@arrow-bl-active-offset-y: -314px;
+@arrow-bl-active-width: 140px;
+@arrow-bl-active-height: 128px;
+@arrow-bl-active-total-width: 1224px;
+@arrow-bl-active-total-height: 582px;
+@arrow-bl-active-image: '../img/sprites.png';
+@arrow-bl-active: 243px 314px -243px -314px 140px 128px 1224px 582px '../img/sprites.png' 'arrow_bl_active';
+@arrow-br-name: 'arrow_br';
+@arrow-br-x: 525px;
+@arrow-br-y: 314px;
+@arrow-br-offset-x: -525px;
+@arrow-br-offset-y: -314px;
+@arrow-br-width: 139px;
+@arrow-br-height: 84px;
+@arrow-br-total-width: 1224px;
+@arrow-br-total-height: 582px;
+@arrow-br-image: '../img/sprites.png';
+@arrow-br: 525px 314px -525px -314px 139px 84px 1224px 582px '../img/sprites.png' 'arrow_br';
+@arrow-br-active-name: 'arrow_br_active';
+@arrow-br-active-x: 665px;
+@arrow-br-active-y: 314px;
+@arrow-br-active-offset-x: -665px;
+@arrow-br-active-offset-y: -314px;
+@arrow-br-active-width: 139px;
+@arrow-br-active-height: 84px;
+@arrow-br-active-total-width: 1224px;
+@arrow-br-active-total-height: 582px;
+@arrow-br-active-image: '../img/sprites.png';
+@arrow-br-active: 665px 314px -665px -314px 139px 84px 1224px 582px '../img/sprites.png' 'arrow_br_active';
+@arrow-tl-name: 'arrow_tl';
+@arrow-tl-x: 813px;
+@arrow-tl-y: 236px;
+@arrow-tl-offset-x: -813px;
+@arrow-tl-offset-y: -236px;
+@arrow-tl-width: 174px;
+@arrow-tl-height: 60px;
+@arrow-tl-total-width: 1224px;
+@arrow-tl-total-height: 582px;
+@arrow-tl-image: '../img/sprites.png';
+@arrow-tl: 813px 236px -813px -236px 174px 60px 1224px 582px '../img/sprites.png' 'arrow_tl';
+@arrow-tl-active-name: 'arrow_tl_active';
+@arrow-tl-active-x: 638px;
+@arrow-tl-active-y: 236px;
+@arrow-tl-active-offset-x: -638px;
+@arrow-tl-active-offset-y: -236px;
+@arrow-tl-active-width: 174px;
+@arrow-tl-active-height: 60px;
+@arrow-tl-active-total-width: 1224px;
+@arrow-tl-active-total-height: 582px;
+@arrow-tl-active-image: '../img/sprites.png';
+@arrow-tl-active: 638px 236px -638px -236px 174px 60px 1224px 582px '../img/sprites.png' 'arrow_tl_active';
+@arrow-tr-name: 'arrow_tr';
+@arrow-tr-x: 117px;
+@arrow-tr-y: 450px;
+@arrow-tr-offset-x: -117px;
+@arrow-tr-offset-y: -450px;
+@arrow-tr-width: 116px;
+@arrow-tr-height: 132px;
+@arrow-tr-total-width: 1224px;
+@arrow-tr-total-height: 582px;
+@arrow-tr-image: '../img/sprites.png';
+@arrow-tr: 117px 450px -117px -450px 116px 132px 1224px 582px '../img/sprites.png' 'arrow_tr';
+@arrow-tr-active-name: 'arrow_tr_active';
+@arrow-tr-active-x: 0px;
+@arrow-tr-active-y: 450px;
+@arrow-tr-active-offset-x: 0px;
+@arrow-tr-active-offset-y: -450px;
+@arrow-tr-active-width: 116px;
+@arrow-tr-active-height: 132px;
+@arrow-tr-active-total-width: 1224px;
+@arrow-tr-active-total-height: 582px;
+@arrow-tr-active-image: '../img/sprites.png';
+@arrow-tr-active: 0px 450px 0px -450px 116px 132px 1224px 582px '../img/sprites.png' 'arrow_tr_active';
+@bell-name: 'bell';
+@bell-x: 557px;
+@bell-y: 189px;
+@bell-offset-x: -557px;
+@bell-offset-y: -189px;
+@bell-width: 26px;
+@bell-height: 28px;
+@bell-total-width: 1224px;
+@bell-total-height: 582px;
+@bell-image: '../img/sprites.png';
+@bell: 557px 189px -557px -189px 26px 28px 1224px 582px '../img/sprites.png' 'bell';
+@checked-name: 'checked';
+@checked-x: 988px;
+@checked-y: 236px;
+@checked-offset-x: -988px;
+@checked-offset-y: -236px;
+@checked-width: 39px;
+@checked-height: 31px;
+@checked-total-width: 1224px;
+@checked-total-height: 582px;
+@checked-image: '../img/sprites.png';
+@checked: 988px 236px -988px -236px 39px 31px 1224px 582px '../img/sprites.png' 'checked';
+@info-name: 'info';
+@info-x: 889px;
+@info-y: 314px;
+@info-offset-x: -889px;
+@info-offset-y: -314px;
+@info-width: 22px;
+@info-height: 41px;
+@info-total-width: 1224px;
+@info-total-height: 582px;
+@info-image: '../img/sprites.png';
+@info: 889px 314px -889px -314px 22px 41px 1224px 582px '../img/sprites.png' 'info';
+@instagram-name: 'instagram';
+@instagram-x: 1059px;
+@instagram-y: 236px;
+@instagram-offset-x: -1059px;
+@instagram-offset-y: -236px;
+@instagram-width: 30px;
+@instagram-height: 30px;
+@instagram-total-width: 1224px;
+@instagram-total-height: 582px;
+@instagram-image: '../img/sprites.png';
+@instagram: 1059px 236px -1059px -236px 30px 30px 1224px 582px '../img/sprites.png' 'instagram';
+@logo-name: 'logo';
+@logo-x: 298px;
+@logo-y: 189px;
+@logo-offset-x: -298px;
+@logo-offset-y: -189px;
+@logo-width: 218px;
+@logo-height: 40px;
+@logo-total-width: 1224px;
+@logo-total-height: 582px;
+@logo-image: '../img/sprites.png';
+@logo: 298px 189px -298px -189px 218px 40px 1224px 582px '../img/sprites.png' 'logo';
+@logo-big-name: 'logo_big';
+@logo-big-x: 0px;
+@logo-big-y: 314px;
+@logo-big-offset-x: 0px;
+@logo-big-offset-y: -314px;
+@logo-big-width: 242px;
+@logo-big-height: 135px;
+@logo-big-total-width: 1224px;
+@logo-big-total-height: 582px;
+@logo-big-image: '../img/sprites.png';
+@logo-big: 0px 314px 0px -314px 242px 135px 1224px 582px '../img/sprites.png' 'logo_big';
+@mlm-name: 'mlm';
+@mlm-x: 298px;
+@mlm-y: 0px;
+@mlm-offset-x: -298px;
+@mlm-offset-y: 0px;
+@mlm-width: 288px;
+@mlm-height: 188px;
+@mlm-total-width: 1224px;
+@mlm-total-height: 582px;
+@mlm-image: '../img/sprites.png';
+@mlm: 298px 0px -298px 0px 288px 188px 1224px 582px '../img/sprites.png' 'mlm';
+@no-checked-name: 'no_checked';
+@no-checked-x: 517px;
+@no-checked-y: 189px;
+@no-checked-offset-x: -517px;
+@no-checked-offset-y: -189px;
+@no-checked-width: 39px;
+@no-checked-height: 31px;
+@no-checked-total-width: 1224px;
+@no-checked-total-height: 582px;
+@no-checked-image: '../img/sprites.png';
+@no-checked: 517px 189px -517px -189px 39px 31px 1224px 582px '../img/sprites.png' 'no_checked';
+@odnoklassniki-name: 'odnoklassniki';
+@odnoklassniki-x: 1028px;
+@odnoklassniki-y: 236px;
+@odnoklassniki-offset-x: -1028px;
+@odnoklassniki-offset-y: -236px;
+@odnoklassniki-width: 30px;
+@odnoklassniki-height: 30px;
+@odnoklassniki-total-width: 1224px;
+@odnoklassniki-total-height: 582px;
+@odnoklassniki-image: '../img/sprites.png';
+@odnoklassniki: 1028px 236px -1028px -236px 30px 30px 1224px 582px '../img/sprites.png' 'odnoklassniki';
+@peoples-name: 'peoples';
+@peoples-x: 0px;
+@peoples-y: 0px;
+@peoples-offset-x: 0px;
+@peoples-offset-y: 0px;
+@peoples-width: 297px;
+@peoples-height: 235px;
+@peoples-total-width: 1224px;
+@peoples-total-height: 582px;
+@peoples-image: '../img/sprites.png';
+@peoples: 0px 0px 0px 0px 297px 235px 1224px 582px '../img/sprites.png' 'peoples';
+@play-name: 'play';
+@play-x: 805px;
+@play-y: 314px;
+@play-offset-x: -805px;
+@play-offset-y: -314px;
+@play-width: 83px;
+@play-height: 80px;
+@play-total-width: 1224px;
+@play-total-height: 582px;
+@play-image: '../img/sprites.png';
+@play: 805px 314px -805px -314px 83px 80px 1224px 582px '../img/sprites.png' 'play';
+@sticker-cyan-name: 'sticker-cyan';
+@sticker-cyan-x: 587px;
+@sticker-cyan-y: 78px;
+@sticker-cyan-offset-x: -587px;
+@sticker-cyan-offset-y: -78px;
+@sticker-cyan-width: 637px;
+@sticker-cyan-height: 77px;
+@sticker-cyan-total-width: 1224px;
+@sticker-cyan-total-height: 582px;
+@sticker-cyan-image: '../img/sprites.png';
+@sticker-cyan: 587px 78px -587px -78px 637px 77px 1224px 582px '../img/sprites.png' 'sticker-cyan';
+@sticker-green-name: 'sticker-green';
+@sticker-green-x: 587px;
+@sticker-green-y: 156px;
+@sticker-green-offset-x: -587px;
+@sticker-green-offset-y: -156px;
+@sticker-green-width: 637px;
+@sticker-green-height: 77px;
+@sticker-green-total-width: 1224px;
+@sticker-green-total-height: 582px;
+@sticker-green-image: '../img/sprites.png';
+@sticker-green: 587px 156px -587px -156px 637px 77px 1224px 582px '../img/sprites.png' 'sticker-green';
+@sticker-orange-name: 'sticker-orange';
+@sticker-orange-x: 0px;
+@sticker-orange-y: 236px;
+@sticker-orange-offset-x: 0px;
+@sticker-orange-offset-y: -236px;
+@sticker-orange-width: 637px;
+@sticker-orange-height: 77px;
+@sticker-orange-total-width: 1224px;
+@sticker-orange-total-height: 582px;
+@sticker-orange-image: '../img/sprites.png';
+@sticker-orange: 0px 236px 0px -236px 637px 77px 1224px 582px '../img/sprites.png' 'sticker-orange';
+@sticker-red-name: 'sticker-red';
+@sticker-red-x: 587px;
+@sticker-red-y: 0px;
+@sticker-red-offset-x: -587px;
+@sticker-red-offset-y: 0px;
+@sticker-red-width: 637px;
+@sticker-red-height: 77px;
+@sticker-red-total-width: 1224px;
+@sticker-red-total-height: 582px;
+@sticker-red-image: '../img/sprites.png';
+@sticker-red: 587px 0px -587px 0px 637px 77px 1224px 582px '../img/sprites.png' 'sticker-red';
+@vkontakte-name: 'vkontakte';
+@vkontakte-x: 1090px;
+@vkontakte-y: 236px;
+@vkontakte-offset-x: -1090px;
+@vkontakte-offset-y: -236px;
+@vkontakte-width: 30px;
+@vkontakte-height: 30px;
+@vkontakte-total-width: 1224px;
+@vkontakte-total-height: 582px;
+@vkontakte-image: '../img/sprites.png';
+@vkontakte: 1090px 236px -1090px -236px 30px 30px 1224px 582px '../img/sprites.png' 'vkontakte';
+@youtube-name: 'youtube';
+@youtube-x: 1121px;
+@youtube-y: 236px;
+@youtube-offset-x: -1121px;
+@youtube-offset-y: -236px;
+@youtube-width: 30px;
+@youtube-height: 30px;
+@youtube-total-width: 1224px;
+@youtube-total-height: 582px;
+@youtube-image: '../img/sprites.png';
+@youtube: 1121px 236px -1121px -236px 30px 30px 1224px 582px '../img/sprites.png' 'youtube';
+@spritesheet-width: 1224px;
+@spritesheet-height: 582px;
+@spritesheet-image: '../img/sprites.png';
+@spritesheet-sprites: @arrow-bl @arrow-bl-active @arrow-br @arrow-br-active @arrow-tl @arrow-tl-active @arrow-tr @arrow-tr-active @bell @checked @info @instagram @logo @logo-big @mlm @no-checked @odnoklassniki @peoples @play @sticker-cyan @sticker-green @sticker-orange @sticker-red @vkontakte @youtube;
+@spritesheet: 1224px 582px '../img/sprites.png' @spritesheet-sprites;
+
+/*
+The provided classes are intended to be used with the array-like variables
+
+.icon-home {
+  .sprite-width(@icon-home);
+}
+.icon-email {
+  .sprite(@icon-email);
+}
+
+Here are example usages in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+`display: inline-block` sprite:
+<img class="icon-home" />
+*/
+.sprite-width(@sprite) {
+  width: extract(@sprite, 5);
+}
+
+.sprite-height(@sprite) {
+  height: extract(@sprite, 6);
+}
+
+.sprite-position(@sprite) {
+  @sprite-offset-x: extract(@sprite, 3);
+  @sprite-offset-y: extract(@sprite, 4);
+  background-position: @sprite-offset-x @sprite-offset-y;
+}
+
+.sprite-image(@sprite) {
+  @sprite-image: extract(@sprite, 9);
+  @sprite-image-bare: ~`"@{sprite-image}".slice(1, -1)`;
+  background-image: url(@sprite-image-bare);
+}
+
+.sprite(@sprite) {
+  .sprite-image(@sprite);
+  .sprite-position(@sprite);
+  .sprite-width(@sprite);
+  .sprite-height(@sprite);
+}
+
+/*
+The `.sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of LESS
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+.sprites(@spritesheet-sprites);
+*/
+.sprites(@sprites, @i: 1) when (@i <= length(@sprites)) {
+  @sprite: extract(@sprites, @i);
+  @sprite-name: e(extract(@sprite, 10));
+  .@{sprite-name} {
+    .sprite(@sprite);
+  }
+  .sprites(@sprites, @i + 1);
+}

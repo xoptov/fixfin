@@ -5,24 +5,23 @@
         <title>FIX FIN</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" href="{{ asset('bundles/app/css/sprites.css') }}"/>
         <link rel="stylesheet" href="{{ asset('bundles/app/css/landing.css') }}"/>
     </head>
     <body>
-        <div class="body__wrapper">
+        <div class="body-wrapper">
             <header>
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-4 left-text logo">
-                            <div class="icon-logo"></div>
+                        <div class="col-lg-4 text-left">
+                            <div class="sprite-logo"></div>
                             <p class="tagline">Справедливая<br>Реферальная<br>Система</p>
                         </div>
-                        <div class="col-lg-4 social right-text">
+                        <div class="col-lg-4 social text-right">
                             <a class="icon-youtube" href="http://www.youtube.com/channel/UCEbXDVRPGDeaXTx-k7hgJpg" target="_blank"></a>
                             <a class="icon-vkontakte" href="https://vk.com/fixfin" target="_blank"></a>
                             <a class="icon-instagram" href="https://www.instagram.com/fixfinref/" target="_blank"></a>
                         </div>
-                        <div class="col-lg-4 right-text">
+                        <div class="col-lg-4 text-right">
                             <a href="{{ path('fos_user_security_login') }}" class="button orange">Авторизация</a>
                             <a href="{{ path('fos_user_registration_register') }}" class="button green">Регистрация</a>
                         </div>
@@ -45,40 +44,43 @@
                                 <div class="tape" id="tape-blue"></div>
                                 <div class="tape" id="tape-red"></div>
                                 <div class="tape" id="tape-green"></div>
-                                <a href="#about" class="link-1 popup">
+                                <a href="#" class="link link-1" data-toggle="modal" data-target="#about">
                                     <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-info"></use></svg>
                                     <span>О нас<br>или почему FiхFin</span>
                                 </a>
-                                <a href="#examples" class="link-2 popup">
+                                <a href="#" class="link link-2" data-toggle="modal" data-target="#examples">
                                     <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-calculator"></use></svg>
                                     <span>Маркетинг и<br>примеры в цифрах</span>
                                 </a>
-                                <a href="#manual" class="link-3 popup">
+                                <a href="#" class="link link-3" data-toggle="modal" data-target="#manual">
                                     <span>Руководство<br>по регистрации</span>
                                     <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-card"></use></svg>
                                 </a>
-                                <a href="https://fixfin.ru/register/" class="link-4">
+                                <a href="{{ path('fos_user_registration_register') }}" class="link link-4">
                                     <span>Начать зарабатывать</span>
                                     <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-dollar"></use></svg>
                                 </a>
-                                <div class="video--wrapper">
+                                <div class="video-wrapper">
                                     <div class="video">
                                         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/hb4u3qwZ6bo" frameborder="0" allowfullscreen></iframe>
                                     </div>
                                 </div>
                             </div>
                             <div class="small--gray">
-                                <a href="#privacy" class="popup">Политика конфиденциальности</a>
+                                <a href="#" data-toggle="modal" data-target="#privacy">Политика конфиденциальности</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="privacy" class="zoom-anim-dialog mfp-hide popup__wrapper">
-            <div class="popup__content">
-                <div class="popup__text">
-                    <h2>Политика конфиденциальности</h2>
+        <div id="privacy" class="modal fade">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Политика конфиденциальности</h2>
+                </div>
+                <div class="modal-body">
                     <p>Администрация сайта <a href="http://fixfin.ru">fixfin.ru</a> (далее Сайт) с уважением относится к правам посетителей Сайта. Мы безоговорочно признаем важность конфиденциальности личной информации посетителей нашего Сайта.</p>
                     <p>Посещая Сайт и регистрируясь на Сайте в качестве пользователя, Вы полностью соглашаетесь с данной Политикой конфиденциальности.</p>
                     <p><b>Основные положения нашей политики конфиденциальности формулируются следующим образом:</b></p>
@@ -122,15 +124,13 @@
                 </div>
             </div>
         </div>
-        <div id="examples" class="zoom-anim-dialog mfp-hide popup__wrapper">
-            <div class="popup__content">
-                <div class="popup__text">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2>Шахматный маркетинг</h2>
-                            <img src="{{ asset('bundles/app/img/schema.png') }}" class="popup__image--full">
-                        </div>
-                    </div>
+        <div id="examples" class="modal fade">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Шахматный маркетинг</h2>
+                </div>
+                <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
                             <p>Маркетинг построен на уникальной шахматной системе реферальных вознаграждений, для интенсивного роста структуры введена система переливов с низу вверх, отдав всего 2х своих реферала спонсору, вы получаете в несколько раз больше новых личных рефералов.</p>
@@ -149,86 +149,84 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="popup__info">
+                            <div class="notice">
                                 <p>
-                                    <span class="popup__info__icon">Совет</span>
+                                    <span class="notice-icon">Совет</span>
                                     Система рекомендует активно приглашать новых рефералов и некогда не останавливаться на достигнутом, а так же важной рекомендацией будет открытия всех столов сразу, так как любой реферал которого вы пригласили может сделать тоже самое и если на этот момент у вас не будут открыты все столы, вы пропустите мимо себя все его реферальные вознаграждения.
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="row mt--20">
-                        <div class="col-sm-12 center">
+                    <div class="row mt-20">
+                        <div class="col-sm-12 text-center">
                             <p><a class="button green" href="{{ path('fos_user_registration_register') }}">Регистрация</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="about" class="zoom-anim-dialog mfp-hide popup__wrapper">
-            <div class="popup__content">
-                <div class="popup__text">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2>О нас или почему FixFin</h2>
-                        </div>
-                    </div>
+        <div id="about" class="modal fade">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">О нас или почему FixFin</h2>
+                </div>
+                <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-8">
-                            <p>Мы рады приветствовать Вас на сайте международной справедливой реферальной системы FixFin, этот маркетинг уже хорошо зарекомендовал себя в международных МЛМ системах. Мы долго думали, как объединить людей которые хотят зарабатывать дополнительный доход, хотя для некоторых, заработок в нашей системе может стать основным доходом, так как у нас вы начинаете зарабатывать с каждым днем все больше и больше и главное стабильно.
-                            </p>
+                            <p>Мы рады приветствовать Вас на сайте международной справедливой реферальной системы FixFin, этот маркетинг уже хорошо зарекомендовал себя в международных МЛМ системах. Мы долго думали, как объединить людей которые хотят зарабатывать дополнительный доход, хотя для некоторых, заработок в нашей системе может стать основным доходом, так как у нас вы начинаете зарабатывать с каждым днем все больше и больше и главное стабильно.</p>
                         </div>
                         <div class="col-sm-4">
-                            <img src="img/mlm.png">
+                            <div class="sprite-mlm"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-8 col-sm-push-4">
-                            <p>Система FixFin  — это не пирамиды или матрицы, где прибыль берется из воздуха, где постоянно нужен поток новых участников иначе все остановится и вы потеряете свои деньги, а главное доверие окружающих.
-                            </p>
+                            <p>Система FixFin  — это не пирамиды или матрицы, где прибыль берется из воздуха, где постоянно нужен поток новых участников иначе все остановится и вы потеряете свои деньги, а главное доверие окружающих.</p>
                         </div>
                         <div class="col-sm-4 col-sm-pull-8">
-                            <div class="icon-logo_big"></div>
+                            <div class="sprite-logo-big"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-8">
-                            <p>FinFix - это программа построенная на системе ежемесячных реферальных выплат от реферала к спонсору, что делает систему невероятно прибыльной и стабильной. Мы не продаем не нужный товар, ради получения своих реферальных, мы вообще убрали из нашей системы товар
-                                как основу, потому что большей части продавцов все равно какой товар они продают, им важны деньги которые они заработают от продажи этого товара, а зачем тогда товар? Если у Вас есть деньги вы можете позволить себе все, что пожелаете.
-                            </p>
+                            <p>FinFix - это программа построенная на системе ежемесячных реферальных выплат от реферала к спонсору, что делает систему невероятно прибыльной и стабильной. Мы не продаем не нужный товар, ради получения своих реферальных, мы вообще убрали из нашей системы товар как основу, потому что большей части продавцов все равно какой товар они продают, им важны деньги которые они заработают от продажи этого товара, а зачем тогда товар? Если у Вас есть деньги вы можете позволить себе все, что пожелаете.</p>
                         </div>
                         <div class="col-sm-4">
-                            <div class="icon-peoples mt--40"></div>
+                            <div class="icon-peoples mt-40"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-8 col-sm-push-4">
-                            <p>Проект оборудован мощным сервером с SSL и АнтиDOS защитой, для более комфортной и стабильной работы. Все транзакции проводятся мгновенно в автоматическом режиме и защищены от злоумышленников.
-                            </p>
+                            <p>Проект оборудован мощным сервером с SSL и АнтиDOS защитой, для более комфортной и стабильной работы. Все транзакции проводятся мгновенно в автоматическом режиме и защищены от злоумышленников.</p>
                         </div>
                         <div class="col-sm-4 col-sm-pull-8">
-                            <img src="img/ddos.png">
+                            <img src="{{ asset('bundles/app/img/ddos.png') }}">
                         </div>
                     </div>
-                    <div class="row mt--20">
-                        <div class="col-sm-12 center">
+                    <div class="row mt-20">
+                        <div class="col-sm-12 text-center">
                             <p><a class="button green" href="{{ path('fos_user_registration_register') }}">Регистрация</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="manual" class="zoom-anim-dialog mfp-hide popup__wrapper">
-            <div class="popup__content">
-                <div class="popup__text">
+        <div id="manual" class="modal fade">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Руководство по регистрации</h2>
+                </div>
+                <div class="modal-body">
                     <div class="row">
-                        <div class="col-sm-12 center popup__video">
-                            <h2 class="mt--40">Видео инструкция по регистрации в FIXFIN</h2>
+                        <div class="col-sm-12 text-center">
+                            <h2 class="mt-40">Видео инструкция по регистрации в FIXFIN</h2>
                             <p><iframe src="https://www.youtube.com/embed/rtcoDijymVQ" frameborder="0" allowfullscreen></iframe></p>
-                            <h2 class="mt--40">Видео инструкция по регистрации в PerfectMoney</h2>
+                            <h2 class="mt-40">Видео инструкция по регистрации в PerfectMoney</h2>
                             <p><iframe src="https://www.youtube.com/embed/-moMqjktPio" frameborder="0" allowfullscreen></iframe></p>
                             <p><a href="https://perfectmoney.is/">perfectmoney.is</a></p>
-                            <h2 class="mt--40">Как пополнить кошелек Perfect Money</h2>
+                            <h2 class="mt-40">Как пополнить кошелек Perfect Money</h2>
                             <p><iframe src="https://www.youtube.com/embed/pM9Nobd_IW0" frameborder="0" allowfullscreen></iframe></p>
                         </div>
                     </div>
@@ -236,6 +234,45 @@
             </div>
         </div>
     </body>
+    <script src="{{ asset('bundles/app/js/jquery.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/bootstrap.js') }}"></script>
+    <script>
+        $(".link-1").hover(
+            function() {
+                $("#tape-orange").addClass('active');
+            },
+            function() {
+                $("#tape-orange").removeClass('active');
+            }
+        );
+
+        $(".link-2").hover(
+            function() {
+                $("#tape-blue").addClass('active');
+            },
+            function() {
+                $("#tape-blue").removeClass('active');
+            }
+        );
+
+        $(".link-3").hover(
+            function() {
+                $("#tape-red").addClass('active');
+            },
+            function() {
+                $("#tape-red").removeClass('active');
+            }
+        );
+
+        $(".link-4").hover(
+            function() {
+                $("#tape-green").addClass('active');
+            },
+            function() {
+                $("#tape-green").removeClass('active');
+            }
+        );
+    </script>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function (d, w, c) {

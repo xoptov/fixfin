@@ -7125,6 +7125,46 @@ button.close {
   -moz-border-radius: 0;
   border-radius: 0;
 }
+/*
+LESS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: @icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
+*/
+/*
+The provided classes are intended to be used with the array-like variables
+
+.icon-home {
+  .sprite-width(@icon-home);
+}
+.icon-email {
+  .sprite(@icon-email);
+}
+
+Here are example usages in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+`display: inline-block` sprite:
+<img class="icon-home" />
+*/
+/*
+The `.sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of LESS
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+.sprites(@spritesheet-sprites);
+*/
 .registration-form .form-group ul {
   list-style-type: square;
   padding-left: 25px;
@@ -7561,4 +7601,34 @@ body {
 .status-unknown,
 .direction-unknown {
   color: #626262;
+}
+.icon-youtube {
+  background-image: url(../img/sprites.png);
+  background-position: -1121px -236px;
+  width: 30px;
+  height: 30px;
+}
+.icon-vkontakte {
+  background-image: url(../img/sprites.png);
+  background-position: -1090px -236px;
+  width: 30px;
+  height: 30px;
+}
+.icon-instagram {
+  background-image: url(../img/sprites.png);
+  background-position: -1059px -236px;
+  width: 30px;
+  height: 30px;
+}
+.icon-logo {
+  background-image: url(../img/sprites.png);
+  background-position: -298px -189px;
+  width: 218px;
+  height: 40px;
+}
+.icon-bell {
+  background-image: url(../img/sprites.png);
+  background-position: -557px -189px;
+  width: 26px;
+  height: 28px;
 }
