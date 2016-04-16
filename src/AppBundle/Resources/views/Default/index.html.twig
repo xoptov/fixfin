@@ -22,8 +22,12 @@
                             <a class="icon-instagram" href="https://www.instagram.com/fixfinref/" target="_blank"></a>
                         </div>
                         <div class="col-lg-4 text-right">
-                            <a href="{{ path('fos_user_security_login') }}" class="button orange">Авторизация</a>
-                            <a href="{{ path('fos_user_registration_register') }}" class="button green">Регистрация</a>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <a href="{{ path('app_profile') }}" class="button green">Личный кабинет</a>
+                            {% else %}
+                                <a href="{{ path('fos_user_security_login') }}" class="button orange">Авторизация</a>
+                                <a href="{{ path('fos_user_registration_register') }}" class="button green">Регистрация</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
