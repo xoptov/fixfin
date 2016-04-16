@@ -8,12 +8,19 @@ html, body {
 }
 
 body {
-  font-size: 22px;
-  color: #1c2840;
-  background-color: #e9eae2;
-  text-align: center;
-  background-image: url("@{image-path}/background_1366.jpg");
-  background-position: top center;
+  background-color: #d2d2cd;
+  @media (max-width: @screen-xs-max) {
+    background-image: url("@{image-path}/background_640.jpg");
+  }
+  @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    background-image: url("@{image-path}/background_800.jpg");
+  }
+  @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    background-image: url("@{image-path}/background_1024.jpg");
+  }
+  @media (min-width: @screen-lg-min) {
+    background-image: url("@{image-path}/background_1920.jpg");
+  }
 }
 
 h1 {
@@ -85,29 +92,8 @@ header {
   padding-left: 10px;
 }
 
-.small--gray {
-  padding: 22px 0 0 0;
-  font-size: 15px;
-}
-
 .social {
   padding-top: 4px;
-
-  p {
-    padding: 0 40px 0 0;
-    margin: 0 0 0 0;
-    text-align: left;
-    display: inline-block;
-    position: relative;
-
-    &:after {
-      content: "|";
-      display: block;
-      position: absolute;
-      right: 20px;
-      top: 0;
-    }
-  }
 }
 
 .wrapper {
@@ -135,6 +121,7 @@ header {
 
 .link {
   position: absolute;
+  font-size: 22px;
   &:after {
     display: block;
     position: absolute;
@@ -314,8 +301,6 @@ header {
     left: 0;
     top: 0;
     .sprite(@info);
-    background-repeat: no-repeat;
-    background-position: left top;
   }
 }
 
@@ -339,6 +324,11 @@ header {
 
 .sprite-mlm {
   .sprite(@mlm);
+  display: inline-block;
+}
+
+.sprite-peoples {
+  .sprite(@peoples);
   display: inline-block;
 }
 
