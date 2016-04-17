@@ -7199,16 +7199,6 @@ h1 {
   padding-top: 30px;
   line-height: 40px;
 }
-header {
-  margin-top: 10px;
-}
-header .sprite-logo {
-  background-image: url(../img/sprites.png);
-  background-position: -298px -189px;
-  width: 218px;
-  height: 40px;
-  display: inline-block;
-}
 .button {
   font-size: 18px;
   height: 38px;
@@ -7440,11 +7430,14 @@ header .sprite-logo {
   height: auto;
   position: relative;
 }
-.mt-40 {
-  margin-top: 40px !important;
+.mt-10 {
+  margin-top: 10px !important;
 }
 .mt-20 {
   margin-top: 20px !important;
+}
+.mt-40 {
+  margin-top: 40px !important;
 }
 .notice-icon {
   font-size: 22px;
@@ -7494,6 +7487,13 @@ header .sprite-logo {
   background-position: 0px 0px;
   width: 297px;
   height: 235px;
+  display: inline-block;
+}
+.sprite-logo {
+  background-image: url(../img/sprites.png);
+  background-position: -298px -189px;
+  width: 218px;
+  height: 40px;
   display: inline-block;
 }
 .sprite-logo-big {

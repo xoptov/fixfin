@@ -9,70 +9,62 @@
     </head>
     <body>
         <div class="body-wrapper">
-            <header>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4 text-left">
-                            <div class="sprite-logo"></div>
-                            <p class="tagline">Справедливая<br>Реферальная<br>Система</p>
-                        </div>
-                        <div class="col-lg-4 social text-right">
-                            <a class="icon-youtube" href="http://www.youtube.com/channel/UCEbXDVRPGDeaXTx-k7hgJpg" target="_blank"></a>
-                            <a class="icon-vkontakte" href="https://vk.com/fixfin" target="_blank"></a>
-                            <a class="icon-instagram" href="https://www.instagram.com/fixfinref/" target="_blank"></a>
-                        </div>
-                        <div class="col-lg-4 text-right">
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <a href="{{ path('app_profile') }}" class="button green">Личный кабинет</a>
-                            {% else %}
-                                <a href="{{ path('fos_user_security_login') }}" class="button orange">Авторизация</a>
-                                <a href="{{ path('fos_user_registration_register') }}" class="button green">Регистрация</a>
-                            {% endif %}
-                        </div>
+            <div class="container">
+                <div class="row mt-10">
+                    <div class="col-lg-4 text-left">
+                        <div class="sprite-logo"></div>
+                        <p class="tagline">Справедливая<br>Реферальная<br>Система</p>
+                    </div>
+                    <div class="col-lg-4 social text-right">
+                        <a class="icon-youtube" href="http://www.youtube.com/channel/UCEbXDVRPGDeaXTx-k7hgJpg" target="_blank"></a>
+                        <a class="icon-vkontakte" href="https://vk.com/fixfin" target="_blank"></a>
+                        <a class="icon-instagram" href="https://www.instagram.com/fixfinref/" target="_blank"></a>
+                    </div>
+                    <div class="col-lg-4 text-right">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{ path('app_profile') }}" class="button green">Личный кабинет</a>
+                        {% else %}
+                            <a href="{{ path('fos_user_security_login') }}" class="button orange">Авторизация</a>
+                            <a href="{{ path('fos_user_registration_register') }}" class="button green">Регистрация</a>
+                        {% endif %}
                     </div>
                 </div>
-            </header>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1>FIXFIN – Международная справедливая<br>реферальная система</h1>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1>FIXFIN – Международная справедливая<br>реферальная система</h1>
+                    </div>
                 </div>
-            </div>
-            <div class="wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="link-base">
-                                <div class="tape" id="tape-orange"></div>
-                                <div class="tape" id="tape-blue"></div>
-                                <div class="tape" id="tape-red"></div>
-                                <div class="tape" id="tape-green"></div>
-                                <a href="#" class="link link-1" data-toggle="modal" data-target="#about">
-                                    <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-info"></use></svg>
-                                    <span>О нас<br>или почему FiхFin</span>
-                                </a>
-                                <a href="#" class="link link-2" data-toggle="modal" data-target="#examples">
-                                    <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-calculator"></use></svg>
-                                    <span>Маркетинг и<br>примеры в цифрах</span>
-                                </a>
-                                <a href="#" class="link link-3" data-toggle="modal" data-target="#manual">
-                                    <span>Руководство<br>по регистрации</span>
-                                    <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-card"></use></svg>
-                                </a>
-                                <a href="{{ path('fos_user_registration_register') }}" class="link link-4">
-                                    <span>Начать зарабатывать</span>
-                                    <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-dollar"></use></svg>
-                                </a>
-                                <div class="video-wrapper">
-                                    <div class="video">
-                                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/hb4u3qwZ6bo" frameborder="0" allowfullscreen></iframe>
-                                    </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="link-base">
+                            <div class="tape" id="tape-orange"></div>
+                            <div class="tape" id="tape-blue"></div>
+                            <div class="tape" id="tape-red"></div>
+                            <div class="tape" id="tape-green"></div>
+                            <a href="#" class="link link-1" data-toggle="modal" data-target="#about">
+                                <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-info"></use></svg>
+                                <span>О нас<br>или почему FiхFin</span>
+                            </a>
+                            <a href="#" class="link link-2" data-toggle="modal" data-target="#examples">
+                                <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-calculator"></use></svg>
+                                <span>Маркетинг и<br>примеры в цифрах</span>
+                            </a>
+                            <a href="#" class="link link-3" data-toggle="modal" data-target="#manual">
+                                <span>Руководство<br>по регистрации</span>
+                                <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-card"></use></svg>
+                            </a>
+                            <a href="{{ path('fos_user_registration_register') }}" class="link link-4">
+                                <span>Начать зарабатывать</span>
+                                <svg class="icon"><use xlink:href="{{ asset('bundles/app/img/icons.svg') }}#icon-dollar"></use></svg>
+                            </a>
+                            <div class="video-wrapper">
+                                <div class="video">
+                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/hb4u3qwZ6bo" frameborder="0" allowfullscreen></iframe>
                                 </div>
                             </div>
-                            <div class="mt-20 text-center">
-                                <a href="#" data-toggle="modal" data-target="#privacy">Политика конфиденциальности</a>
-                            </div>
+                        </div>
+                        <div class="mt-20 text-center">
+                            <a href="#" data-toggle="modal" data-target="#privacy">Политика конфиденциальности</a>
                         </div>
                     </div>
                 </div>
@@ -254,6 +246,7 @@
     <script src="{{ asset('bundles/app/js/jquery.js') }}"></script>
     <script src="{{ asset('bundles/app/js/bootstrap.js') }}"></script>
     <script>
+        'use strict';
         $(".link-1").hover(
             function() {
                 $("#tape-orange").addClass('active');
