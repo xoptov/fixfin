@@ -35,5 +35,28 @@ security:
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:
+            - ROLE_SONATA_ADMIN
+            - ROLE_USER
+            - ROLE_ADMIN_POOL_LIST
+            - ROLE_ADMIN_POOL_VIEW
+            - ROLE_ADMIN_RATE_LIST
+            - ROLE_ADMIN_RATE_VIEW
+            - ROLE_ADMIN_USER_LIST
+            - ROLE_ADMIN_USER_VIEW
+            - ROLE_ADMIN_ACCOUNT_LIST
+            - ROLE_ADMIN_ACCOUNT_VIEW
+            - ROLE_ADMIN_MONEY_TRANSACTION_LIST
+            - ROLE_ADMIN_MONEY_TRANSACTION_VIEW
+            - ROLE_ADMIN_TICKET_LIST
+            - ROLE_ADMIN_TICKET_VIEW
+            - ROLE_ADMIN_INVOICE_LIST
+            - ROLE_ADMIN_INVOICE_VIEW
+            - ROLE_ADMIN_ISSUE_LIST
+            - ROLE_ADMIN_ISSUE_VIEW
+            - ROLE_ADMIN_NEWS_CREATE
+            - ROLE_ADMIN_NEWS_EDIT
+            - ROLE_ADMIN_NEWS_DELETE
+            - ROLE_ADMIN_NEWS_LIST
+            - ROLE_ADMIN_NEWS_VIEW
         ROLE_SUPER_ADMIN: ROLE_ADMIN

@@ -1,0 +1,59 @@
+services:
+    admin.pool:
+        class: AdminBundle\Admin\PoolAdmin
+        arguments: [~, AppBundle\Entity\Pool, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.pool }
+        calls:
+            - [setEntityManager, ["@doctrine.orm.default_entity_manager"]]
+
+    admin.rate:
+        class: AdminBundle\Admin\RateAdmin
+        arguments: [~, AppBundle\Entity\Rate, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.rate }
+
+    admin.user:
+        class: AdminBundle\Admin\UserAdmin
+        arguments: [~, AppBundle\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.user }
+        calls:
+            - [setUserManager, ["@fos_user.user_manager"]]
+            - [setEntityManager, ["@doctrine.orm.default_entity_manager"]]
+
+    admin.account:
+        class: AdminBundle\Admin\AccountAdmin
+        arguments: [~, AppBundle\Entity\Account, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.account }
+
+    admin.money_transaction:
+        class: AdminBundle\Admin\MoneyTransactionAdmin
+        arguments: [~, AppBundle\Entity\MoneyTransaction, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.transaction }
+
+    admin.ticket:
+        class: AdminBundle\Admin\TicketAdmin
+        arguments: [~, AppBundle\Entity\Ticket, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.ticket }
+
+    admin.invoice:
+        class: AdminBundle\Admin\InvoiceAdmin
+        arguments: [~, AppBundle\Entity\Invoice, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.invoice }
+
+    admin.issue:
+        class: AdminBundle\Admin\IssueAdmin
+        arguments: [~, AppBundle\Entity\Issue, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.issue }
+
+    admin.news:
+        class: AdminBundle\Admin\NewsAdmin
+        arguments: [~, AppBundle\Entity\News, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.title.section.news }

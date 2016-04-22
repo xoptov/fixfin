@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Admin;
+namespace AdminBundle\Admin;
 
 use AppBundle\Entity\MoneyTransaction;
 use Sonata\AdminBundle\Admin\Admin;

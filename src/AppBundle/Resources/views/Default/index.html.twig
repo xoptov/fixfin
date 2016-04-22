@@ -15,14 +15,18 @@
                         <div class="sprite-logo"></div>
                         <p class="tagline">Справедливая<br>Реферальная<br>Система</p>
                     </div>
-                    <div class="col-lg-4 social text-right">
+                    <div class="col-lg-3 social text-right">
                         <a class="icon-youtube" href="http://www.youtube.com/channel/UCEbXDVRPGDeaXTx-k7hgJpg" target="_blank"></a>
                         <a class="icon-vkontakte" href="https://vk.com/fixfin" target="_blank"></a>
                         <a class="icon-instagram" href="https://www.instagram.com/fixfinref/" target="_blank"></a>
                     </div>
-                    <div class="col-lg-4 text-right">
+                    <div class="col-lg-5 text-right">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <a href="{{ path('app_profile') }}" class="button green">Личный кабинет</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('sonata_admin_dashboard') }}" class="button blue">Админка</a>
+                            {% endif %}
+                            <a href="{{ path('fos_user_security_logout') }}" class="button orange">Выход</a>
                         {% else %}
                             <a href="{{ path('fos_user_security_login') }}" class="button orange">Авторизация</a>
                             <a href="{{ path('fos_user_registration_register') }}" class="button green">Регистрация</a>
