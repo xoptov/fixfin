@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Admin;
+namespace AdminBundle\Admin;
 
 use AppBundle\Entity\Invoice;
 use Sonata\AdminBundle\Admin\Admin;

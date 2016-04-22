@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Admin;
+namespace AdminBundle\Admin;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\Account;
@@ -8,11 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Doctrine\ORM\Query\Expr\Join;
 
 class UserAdmin extends Admin
 {

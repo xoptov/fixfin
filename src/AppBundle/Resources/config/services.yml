@@ -7,12 +7,12 @@ services:
     app.registration.form.handler:
         class: AppBundle\Form\Handler\RegistrationFormHandler
         arguments:
-            - @fos_user.registration.form
-            - @request
-            - @fos_user.user_manager
-            - @fos_user.mailer
-            - @fos_user.util.token_generator
-            - @sonata.notification.backend
+            - "@fos_user.registration.form"
+            - "@request"
+            - "@fos_user.user_manager"
+            - "@fos_user.mailer"
+            - "@fos_user.util.token_generator"
+            - "@sonata.notification.backend"
         calls:
             - [setDefaultUsername, ["%default_username%"]]
         scope: request
@@ -23,129 +23,69 @@ services:
         arguments:
             - "%fos_user.model.user.class%"
         calls:
-            - [setSession, [@session]]
+            - [setSession, ["@session"]]
         tags:
             - { name: form.type , alias: form_user_registration }
 
     app.form.type.user:
         class: AppBundle\Form\Type\UserType
         arguments:
-            - @doctrine.orm.default_entity_manager
+            - "@doctrine.orm.default_entity_manager"
         tags:
             - { name: form.type }
-
-
-    app.admin.pool:
-        class: AppBundle\Admin\PoolAdmin
-        arguments: [~, AppBundle\Entity\Pool, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.title.section.pool }
-        calls:
-            - [setEntityManager, [@doctrine.orm.default_entity_manager]]
-
-    app.admin.rate:
-        class: AppBundle\Admin\RateAdmin
-        arguments: [~, AppBundle\Entity\Rate, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.title.section.rate }
-
-    app.admin.user:
-        class: AppBundle\Admin\UserAdmin
-        arguments: [~, AppBundle\Entity\User, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.title.section.user }
-        calls:
-            - [setUserManager, [@fos_user.user_manager]]
-            - [setEntityManager, [@doctrine.orm.default_entity_manager]]
-
-    app.admin.account:
-        class: AppBundle\Admin\AccountAdmin
-        arguments: [~, AppBundle\Entity\Account, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.title.section.account }
-
-    app.admin.money_transaction:
-        class: AppBundle\Admin\MoneyTransactionAdmin
-        arguments: [~, AppBundle\Entity\MoneyTransaction, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.title.section.transaction }
-
-    app.admin.ticket:
-        class: AppBundle\Admin\TicketAdmin
-        arguments: [~, AppBundle\Entity\Ticket, SonataAdminBundle:CRUD]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.title.section.ticket }
-
-    app.admin.invoice:
-        class: AppBundle\Admin\InvoiceAdmin
-        arguments: [~, AppBundle\Entity\Invoice, SonataAdminBundle:CRUD]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.title.section.invoice }
-
-    app.admin.issue:
-        class: AppBundle\Admin\IssueAdmin
-        arguments: [~, AppBundle\Entity\Issue, SonataAdminBundle:CRUD]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.title.section.issue }
-
-    app.admin.news:
-        class: AppBundle\Admin\NewsAdmin
-        arguments: [~, AppBundle\Entity\News, SonataAdminBundle:CRUD]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin.title.section.news }
 
     app.form.type.pm_account:
         class: AppBundle\Form\Type\PerfectMoneyAccountType
         arguments:
-            - @doctrine.orm.default_entity_manager
-            - @logger
+            - "@doctrine.orm.default_entity_manager"
+            - "@logger"
         tags:
             - { name: form.type }
 
     app.committee_service:
         class: AppBundle\Service\Committee
         arguments:
-            - @doctrine.orm.default_entity_manager
-            - @property_accessor
+            - "@doctrine.orm.default_entity_manager"
+            - "@property_accessor"
 
     app.cashier_service:
         class: AppBundle\Service\Cashier
         arguments:
-            - @event_dispatcher
-            - @doctrine.orm.default_entity_manager
-            - @app.committee_service
-            - @app.banker_service
-            - @property_accessor
-            - @logger
+            - "@event_dispatcher"
+            - "@doctrine.orm.default_entity_manager"
+            - "@app.committee_service"
+            - "@app.banker_service"
+            - "@property_accessor"
+            - "@logger"
 
     app.banker_service:
         class: AppBundle\Service\Banker
         arguments:
-            - @doctrine.orm.default_entity_manager
-            - @property_accessor
-            - @app.payment_system.perfectmoney
+            - "@doctrine.orm.default_entity_manager"
+            - "@property_accessor"
+            - "@app.payment_system.perfectmoney"
 
     app.payment_system.perfectmoney:
         class: AppBundle\Service\PaymentSystem\PerfectMoney
         arguments:
-            - @property_accessor
-            - @doctrine.orm.default_entity_manager
-            - @router.default
-            - @logger
+            - "@property_accessor"
+            - "@doctrine.orm.default_entity_manager"
+            - "@router.default"
+            - "@logger"
             - "%perfect_money%"
 
     app.payment_subscriber:
         class: AppBundle\EventListener\PaymentSubscriber
         arguments:
-            - @app.cashier_service
-            - @logger
+            - "@app.cashier_service"
+            - "@logger"
         tags:
             - { name: kernel.event_subscriber }
 
     app.filter.transparent_mask:
         class: AppBundle\Imagine\Filter\Loader\TransparentMaskFilterLoader
         arguments:
-            - @liip_imagine
+            - "@liip_imagine"
             - "%kernel.root_dir%"
         tags:
             - { name: liip_imagine.filter.loader, loader: 'transparent_mask' }
@@ -163,22 +103,21 @@ services:
     app.ticket_subscriber:
         class: AppBundle\EventListener\TicketSubscriber
         arguments:
-            - @property_accessor
+            - "@property_accessor"
         tags:
             - { name: kernel.event_subscriber }
 
     app.validator.table_rules:
         class: AppBundle\Validator\Constraints\TableRulesValidator
         arguments:
-            - @property_accessor
+            - "@property_accessor"
         tags:
             - { name: validator.constraint_validator, alias: table_rules_validator }
 
     app.notification.consumer:
         class: AppBundle\Notification\Consumer\NotificationConsumer
         arguments:
-            - @doctrine.orm.default_entity_manager
-            - @property_accessor
+            - "@doctrine.orm.default_entity_manager"
+            - "@property_accessor"
         tags:
             - { name: sonata.notification.consumer, type: notification }
-
