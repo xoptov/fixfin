@@ -31,7 +31,7 @@ form:
         last_name: "Фамилия"
         email: "Email"
         phone: "Телефон"
-        account: "Счёт"
+        account: "Кошелёк"
         referrer: "Пригласивший"
         avatar: "Аватарка"
         locked: "Заблокирован"

@@ -7632,3 +7632,6 @@ body {
   width: 26px;
   height: 28px;
 }
+.account-help {
+  cursor: pointer;
+}
