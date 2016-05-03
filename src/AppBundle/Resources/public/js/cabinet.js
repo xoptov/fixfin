@@ -116,6 +116,11 @@ modulejs.define('notifyPopover', function() {
     };
 });
 
+modulejs.define('accountPopover', function() {
+    var $accountHelp = $('.account-help');
+    $accountHelp.popover({html: true, placement: 'top'});
+});
+
 modulejs.define('privacyModal', function() {
     return {
         start: function() {
