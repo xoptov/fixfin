@@ -292,17 +292,12 @@
                 (function (d, w, c) {
                     (w[c] = w[c] || []).push(function() {
                         try {
-                            var params = null;
-                            {% if app.request.hasSession and app.request.session.has('referrer') %}
-                                params = {referrer: "{{ app.request.session.get('referrer')}}"};
-                            {% endif %}
-
                             w.yaCounter36422275 = new Ya.Metrika({
                                 id: 36422275,
                                 clickmap: true,
                                 trackLinks: true,
                                 accurateTrackBounce: true,
-                                params: params
+                                triggerEvent: true
                             });
                         } catch(e) { }
                     });
@@ -321,6 +316,15 @@
             </script>
             <noscript><div><img src="https://mc.yandex.ru/watch/36422275" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
             <!-- /Yandex.Metrika counter -->
+            {% if app.request.hasSession and app.request.session.has('referrer') %}
+                <script type="text/javascript">
+                    $(document).on('yacounter36422275inited', function() {
+                        yaCounter36422275.params({
+                            referrer: "{{ app.request.session.get('referrer') }}"
+                        });
+                    });
+                </script>
+            {% endif %}
         {% endif %}
     </body>
 </html>
