@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/app/css/landing.css') }}"/>
     </head>
     <body>
-        <div class="body-wrapper">
+        <nav class="navbar">
             <div class="container">
                 <div class="row mt-10">
                     <div class="col-lg-4 text-left">
@@ -33,11 +33,19 @@
                         {% endif %}
                     </div>
                 </div>
+            </div>
+        </nav>
+        <section>
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h1>FIXFIN – Международная справедливая<br>реферальная система</h1>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="link-base">
@@ -73,7 +81,15 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <footer class="navbar navbar-fixed-bottom">
+            <div class="container">
+                <div class="col-lg-12 text-center">
+                    <a href="http://perfectmoney.is" title="Perfect Money - новое поколение платежных систем Интернета"><img hspace="5" src="http://perfectmoney.is/img/banners/ru_RU/88-31-8.jpg" width="88" height="31"></a>
+                    <img src="{{ asset('bundles/app/img/comodo_secure_seal_76x26_transp.png') }}" width="76" height="26">
+                </div>
+            </div>
+        </footer>
         <div id="privacy" class="modal fade">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
