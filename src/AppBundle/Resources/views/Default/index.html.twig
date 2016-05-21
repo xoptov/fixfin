@@ -6,6 +6,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="{{ asset('bundles/app/css/landing.css') }}"/>
+        <script type="text/javascript"> //<![CDATA[
+            var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+            document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+            //]]>
+        </script>
     </head>
     <body>
         <nav class="navbar">
@@ -45,7 +50,7 @@
             </div>
         </section>
         <section>
-            <div class="container">
+            <div class="container wrapper">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="link-base">
@@ -85,8 +90,13 @@
         <footer class="navbar navbar-fixed-bottom">
             <div class="container">
                 <div class="col-lg-12 text-center">
-                    <a href="http://perfectmoney.is" title="Perfect Money - новое поколение платежных систем Интернета"><img hspace="5" src="http://perfectmoney.is/img/banners/ru_RU/88-31-8.jpg" width="88" height="31"></a>
-                    <img src="{{ asset('bundles/app/img/comodo_secure_seal_76x26_transp.png') }}" width="76" height="26">
+                    <a href="http://perfectmoney.is" title="Perfect Money - новое поколение платежных систем Интернета">
+                        <img hspace="5" src="https://perfectmoney.is/img/banners/ru_RU/88-31-8.jpg" width="88" height="31">
+                    </a>
+                    <script language="JavaScript" type="text/javascript">
+                        TrustLogo("https://fixfin.ru/bundles/app/img/comodo_secure_seal_76x26_transp.png", "CL1", "none");
+                    </script>
+                    <a  href="https://ssl.comodo.com" id="comodoTL">SSL Certificates</a>
                 </div>
             </div>
         </footer>
